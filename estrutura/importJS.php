@@ -1,7 +1,7 @@
 <?php
 
 if ($pagina == "sub") {
-    ?>
+?>
 
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -15,11 +15,15 @@ if ($pagina == "sub") {
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../../js/datatables-demo.js"></script>
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
+    
 
-    <?php
+<?php
 
 } else if ($pagina == "sub3") {
-    ?>
+?>
     <script src="../../../vendor/jquery/jquery.min.js"></script>
     <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -34,10 +38,10 @@ if ($pagina == "sub") {
     <script src="../../../js/datatables-demo.js"></script>
 
 
-    <?php
+<?php
 
 } else {
-    ?>
+?>
     <script src="./vendor/jquery/jquery.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -51,7 +55,7 @@ if ($pagina == "sub") {
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="./js/datatables-demo.js"></script>
 
-    <?php
+<?php
 
 }
 ?>
