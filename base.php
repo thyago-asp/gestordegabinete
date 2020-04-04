@@ -3,7 +3,7 @@
     <?php include './estrutura/head.php'; ?>
     <body id="page-top">
         <!-- Page Wrapper -->
-        <div id="wrapper">
+        <div id="wrapper">   
             <!-- Sidebar -->
             <?php include './estrutura/menulateral.php'; ?>
             <!-- End of Sidebar -->
