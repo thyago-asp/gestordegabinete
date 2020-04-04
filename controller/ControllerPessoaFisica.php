@@ -27,8 +27,7 @@ class ControllerPessoaFisica
 {
     public function cadastrar(){
     $pf = new PessoaFisica();
-       
-    $_POST["nome"];
+       $pf->$_POST["nome"];
        $_POST["email"];
        $_POST["telefone"];
        $_POST["sexo"];
