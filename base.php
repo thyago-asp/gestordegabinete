@@ -23,7 +23,7 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div>
-                <!-- End of Main Content -->
+                <!-- End of Main Content -->  
 
                 <!-- Footer -->
                 <?php include './estrutura/footer.php'; ?>
