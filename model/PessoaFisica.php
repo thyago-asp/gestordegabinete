@@ -116,20 +116,5 @@ class PessoaFisica {
     function setCategoria($categoria) {
         $this->categoria = $categoria;
     }
-    //  fim setters
-
-    // private $nome;
-    // private $email;
-    // private $telefone;
-    // private $sexo;
-    // private $datadenascimento;
     
-    // private $cep;
-    // private $logradouro;
-    // private $numero;
-    // private $complemento;
-    // private $bairro;
-    // private $cidade;
-    // private $estado;
-    // private $categoria;
 }
