@@ -11,7 +11,8 @@
  *
  * @author Thyago
  */
-class PessoaFisica {
+class PessoaFisica
+{
     //put your code here
 
     private $nome;
@@ -19,7 +20,7 @@ class PessoaFisica {
     private $telefone;
     private $sexo;
     private $datadenascimento;
-    
+
     private $cep;
     private $logradouro;
     private $numero;
@@ -28,5 +29,15 @@ class PessoaFisica {
     private $cidade;
     private $estado;
     private $categoria;
+
+
+    function __get($atributo)
+    {
+        return $this->$atributo;
+    }
+    function __set($valor, $atributo)
+    {
+        $this->$valor = $atributo;
+    }
 
 }
