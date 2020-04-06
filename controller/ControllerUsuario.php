@@ -119,6 +119,7 @@ class ControllerUsuario
             header("Location:/view/usuariosdosistema/listar/?r=1");
         }
     }
+    
     public function resetarSenha()
     {
         $idUsuario = $_REQUEST["id_usuario"];
