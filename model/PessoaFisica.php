@@ -15,23 +15,30 @@ class PessoaFisica
 {
     //put your code here
 
-    private $nome;
-    private $email;
-    private $telefoneF;
-    private $sexo;
-    private $nascimento;
-
+    // t_endereco
+    private $endereco;
     private $cep;
-    private $logradouro;
-    private $numeroF;
-    private $complemento;
     private $bairroF;
     private $cidadeF;
     private $estado;
+    private $logradouro;
+    private $numeroF;
+    private $complemento;
+
+    // t_pessoa
+    private $nome;
+    private $email;
+    private $telefoneF;
+
+    // t_pessoa_fisica
     private $categoria;
     private $cpf;
-    private $id;
+    private $sexo;
+    private $nascimento;
 
+    // id tabelas
+    private $id;
+  
     // metodos magicos do php
     // __get retorna o atributo
     function __get($atributo)
@@ -50,8 +57,8 @@ class PessoaFisica
         $con = Conexao::abrirConexao();
 
 
-        $query = "INSERT INTO t_endereco(cep, bairro, complemento, numero, cidade, estado)
-                    VALUES (:cep, :bairro, :complemento, :numero, :cidade, :estado);
+        $query = "INSERT INTO t_endereco(endereco, cep, bairro, complemento, numero, cidade, estado)
+                    VALUES (:endereco, :cep, :bairro, :complemento, :numero, :cidade, :estado);
                   INSERT INTO t_pessoa(nome, telefone, t_endereco_idt_endereco) 
                     VALUES (:nome, :telefoneF, LAST_INSERT_ID()); 
                   INSERT INTO t_pessoa_fisica(cpf, sexo, categoria, t_pessoa_idt_pessoa) 
@@ -63,6 +70,7 @@ class PessoaFisica
 
         // tabela t_endereco
         // $stmt->bindValue(':enderecoF', $this->__get('enderecoF'));
+        $stmt->bindValue(':endereco', $this->__get('endereco'));
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':bairro', $this->__get('bairroF'));
         $stmt->bindValue(':complemento', $this->__get('complemento'));
@@ -74,7 +82,7 @@ class PessoaFisica
         // tabela t_pessoa
         $stmt->bindValue(':nome', $this->__get('nome'));
         $stmt->bindValue(':telefoneF', $this->__get('telefoneF'));
-        print_r($this->__get('telefoneF'));
+        
         // // tabela t_pessoaFisica
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':sexo', $this->__get('sexo'));
@@ -87,14 +95,16 @@ class PessoaFisica
     function listarM()
     {
         $con = Conexao::abrirConexao();
-        $query = "SELECT p.*, e.*, pf.* FROM t_pessoa AS p 
-                  INNER JOIN t_endereco AS e 
-                  INNER JOIN t_pessoa_fisica AS pf
+        $query = "SELECT p.*, e.*, pf.* FROM t_pessoa_fisica AS pf
+                    INNER JOIN t_endereco AS e 
+                    INNER JOIN t_pessoa AS p 
+                    on (pf.t_pessoa_idt_pessoa = p.t_endereco_idt_endereco 
+                        AND e.idt_endereco = pf.t_pessoa_idt_pessoa)
                 ";
         $stmt = $con->prepare($query);
         $stmt->execute();
 
-        $objUsuarios = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $objUsuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $objUsuarios;
     }
@@ -102,7 +112,7 @@ class PessoaFisica
     function atualizarM()
     {
         $con = Conexao::abrirConexao();
-        $query = "UPDATE t_endereco SET cep = :cep, bairro = :bairro, 
+        $query = "UPDATE t_endereco SET endereco = :endereco, cep = :cep, bairro = :bairro, 
                     complemento = :complemento, numero = :numero, cidade = :cidade, estado = :estado
                 WHERE idt_endereco = :id;
                     UPDATE t_pessoa SET nome = :nome, telefone = :telefoneF 
@@ -113,7 +123,8 @@ class PessoaFisica
         $stmt = $con->prepare($query);
 
         // tabela t_endereco
-
+        $stmt->bindValue(':endereco', $this->__get('endereco'));
+       
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':bairro', $this->__get('bairroF'));
         $stmt->bindValue(':complemento', $this->__get('complemento'));
@@ -131,7 +142,7 @@ class PessoaFisica
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':sexo', $this->__get('sexo'));
         $stmt->bindValue(':categoria', $this->__get('categoria'));
-
+       
         $stmt->bindValue(':id', $this->__get('id'));
 
         $stmt->execute();

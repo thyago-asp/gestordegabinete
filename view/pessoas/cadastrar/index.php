@@ -8,6 +8,7 @@ require_once("../../../estrutura/controleLogin.php");
 <?php
 $pagina = "sub3";
 include '../../../estrutura/head.php';
+
 ?>
 
 <body id="page-top">
@@ -65,6 +66,13 @@ include '../../../estrutura/head.php';
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <input type="tel" class="form-control" name="telefoneF" required>
+
+                                                </div>
+                                            </div>
+                                            <label class="form-label">CPF</label>
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <input type="tel" class="form-control" name="CPF" required>
 
                                                 </div>
                                             </div>
@@ -162,114 +170,117 @@ include '../../../estrutura/head.php';
                         </div>
 
                     </form>
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Pessoa Juridica
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class="panel-body">
+                    <form method="POST" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Pessoa Juridica
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="panel-body">
 
 
-                                    <label class="form-label">CNPJ</label>
-                                    <div class="form-group">
+                                        <label class="form-label">CNPJ</label>
                                         <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="tel" id="cnpj" class="form-control" placeholder="CNPJ">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label class="form-label">Nome</label>
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="tel" id="nomeJ" class="form-control" placeholder="Nome">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <label class="form-label">Nome Fantasia</label>
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" id="fantasiaJ" class="form-control" placeholder="Nome Fantasia">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <label class="form-label">Telefone</label>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" id="telefoneJ" required placeholder="Telefone">
-
-                                        </div>
-                                    </div>
-
-                                    <label class="form-label">Endereço</label>
-                                    <div class="row clearfix">
-                                        <div class="col-sm-8">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="logradouroJ" class="form-control" id="logradouroJ" placeholder="Logradouro">
+                                                    <input type="tel" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <input type="tel" id="numeroJ" class="form-control" placeholder="N°">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
+                                        <label class="form-label">Nome</label>
                                         <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" id="complementoJ" class="form-control" placeholder="Complemento">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row clearfix">
-                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="bairroJ" class="form-control" placeholder="Bairro">
+                                                    <input type="tel" id="nomeJ" name="nomeJ" class="form-control" placeholder="Nome">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <label class="form-label">Nome Fantasia</label>
+                                        <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="cidadeJ" class="form-control" placeholder="Cidade">
+                                                    <input type="text" id="fantasiaJ" name="fantasiaJ" class="form-control" placeholder="Nome Fantasia">
                                                 </div>
+                                            </div>
+
+                                        </div>
+                                        <label class="form-label">Telefone</label>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" required placeholder="Telefone">
+
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <input type="text" id="estadoJ" class="form-control" placeholder="Estado">
+                                        <label class="form-label">Endereço</label>
+                                        <div class="row clearfix">
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="logradouroJ" name="logradouroJ" class="form-control" id="logradouroJ" placeholder="Logradouro">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="tel" id="numeroJ" name="numeroJ" class="form-control" placeholder="N°">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <label class="form-label">Atividade</label>
-                                    <div class="form-group">
                                         <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" id="atividadeJ" class="form-control" placeholder="Atividade">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="complementoJ" name="complementoJ" class="form-control" placeholder="Complemento">
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="row clearfix">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="bairroJ" name="bairroJ" class="form-control" placeholder="Bairro">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="cidadeJ" name="cidadeJ"class="form-control" placeholder="Cidade">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="estadoJ" name="estadoJ" class="form-control" placeholder="Estado">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="form-label">Atividade</label>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="atividadeJ" name="atividadeJ" class="form-control" placeholder="Atividade">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="submit" class="btn btn-success">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 

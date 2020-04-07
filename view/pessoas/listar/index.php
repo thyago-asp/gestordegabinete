@@ -5,538 +5,458 @@ require_once("../../../estrutura/controleLogin.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt">
-    <?php 
-    $pagina = "sub3";
-    include '../../../estrutura/head.php'; 
-    ?>
-    <body id="page-top">
-        <!-- Page Wrapper -->
-        <div id="wrapper">
-            <!-- Sidebar -->
-            <?php include '../../../estrutura/menulateral.php'; ?>
-            <!-- End of Sidebar -->
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
-                <!-- Main Content -->
-                <div id="content">                    
-                    <?php include '../../../estrutura/barratopo.php'; ?>                   
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid ">
-                        <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                            <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
-                        </div>
-                    </div>
+<?php
+$pagina = "sub3";
+include '../../../estrutura/head.php';
+?>
 
-    b4.
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                    <td>66</td>
-                                    <td>2009/01/12</td>
-                                    <td>$86,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>22</td>
-                                    <td>2012/03/29</td>
-                                    <td>$433,060</td>
-                                </tr>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
-                                <tr>
-                                    <td>Brielle Williamson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>New York</td>
-                                    <td>61</td>
-                                    <td>2012/12/02</td>
-                                    <td>$372,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Herrod Chandler</td>
-                                    <td>Sales Assistant</td>
-                                    <td>San Francisco</td>
-                                    <td>59</td>
-                                    <td>2012/08/06</td>
-                                    <td>$137,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Rhona Davidson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>Tokyo</td>
-                                    <td>55</td>
-                                    <td>2010/10/14</td>
-                                    <td>$327,900</td>
-                                </tr>
-                                <tr>
-                                    <td>Colleen Hurst</td>
-                                    <td>Javascript Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>39</td>
-                                    <td>2009/09/15</td>
-                                    <td>$205,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Sonya Frost</td>
-                                    <td>Software Engineer</td>
-                                    <td>Edinburgh</td>
-                                    <td>23</td>
-                                    <td>2008/12/13</td>
-                                    <td>$103,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Jena Gaines</td>
-                                    <td>Office Manager</td>
-                                    <td>London</td>
-                                    <td>30</td>
-                                    <td>2008/12/19</td>
-                                    <td>$90,560</td>
-                                </tr>
-                                <tr>
-                                    <td>Quinn Flynn</td>
-                                    <td>Support Lead</td>
-                                    <td>Edinburgh</td>
-                                    <td>22</td>
-                                    <td>2013/03/03</td>
-                                    <td>$342,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Charde Marshall</td>
-                                    <td>Regional Director</td>
-                                    <td>San Francisco</td>
-                                    <td>36</td>
-                                    <td>2008/10/16</td>
-                                    <td>$470,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Haley Kennedy</td>
-                                    <td>Senior Marketing Designer</td>
-                                    <td>London</td>
-                                    <td>43</td>
-                                    <td>2012/12/18</td>
-                                    <td>$313,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Tatyana Fitzpatrick</td>
-                                    <td>Regional Director</td>
-                                    <td>London</td>
-                                    <td>19</td>
-                                    <td>2010/03/17</td>
-                                    <td>$385,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Silva</td>
-                                    <td>Marketing Designer</td>
-                                    <td>London</td>
-                                    <td>66</td>
-                                    <td>2012/11/27</td>
-                                    <td>$198,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Paul Byrd</td>
-                                    <td>Chief Financial Officer (CFO)</td>
-                                    <td>New York</td>
-                                    <td>64</td>
-                                    <td>2010/06/09</td>
-                                    <td>$725,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gloria Little</td>
-                                    <td>Systems Administrator</td>
-                                    <td>New York</td>
-                                    <td>59</td>
-                                    <td>2009/04/10</td>
-                                    <td>$237,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Bradley Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>41</td>
-                                    <td>2012/10/13</td>
-                                    <td>$132,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Dai Rios</td>
-                                    <td>Personnel Lead</td>
-                                    <td>Edinburgh</td>
-                                    <td>35</td>
-                                    <td>2012/09/26</td>
-                                    <td>$217,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Jenette Caldwell</td>
-                                    <td>Development Lead</td>
-                                    <td>New York</td>
-                                    <td>30</td>
-                                    <td>2011/09/03</td>
-                                    <td>$345,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Yuri Berry</td>
-                                    <td>Chief Marketing Officer (CMO)</td>
-                                    <td>New York</td>
-                                    <td>40</td>
-                                    <td>2009/06/25</td>
-                                    <td>$675,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Caesar Vance</td>
-                                    <td>Pre-Sales Support</td>
-                                    <td>New York</td>
-                                    <td>21</td>
-                                    <td>2011/12/12</td>
-                                    <td>$106,450</td>
-                                </tr>
-                                <tr>
-                                    <td>Doris Wilder</td>
-                                    <td>Sales Assistant</td>
-                                    <td>Sidney</td>
-                                    <td>23</td>
-                                    <td>2010/09/20</td>
-                                    <td>$85,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Angelica Ramos</td>
-                                    <td>Chief Executive Officer (CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09</td>
-                                    <td>$1,200,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gavin Joyce</td>
-                                    <td>Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>42</td>
-                                    <td>2010/12/22</td>
-                                    <td>$92,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Jennifer Chang</td>
-                                    <td>Regional Director</td>
-                                    <td>Singapore</td>
-                                    <td>28</td>
-                                    <td>2010/11/14</td>
-                                    <td>$357,650</td>
-                                </tr>
-                                <tr>
-                                    <td>Brenden Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>28</td>
-                                    <td>2011/06/07</td>
-                                    <td>$206,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Fiona Green</td>
-                                    <td>Chief Operating Officer (COO)</td>
-                                    <td>San Francisco</td>
-                                    <td>48</td>
-                                    <td>2010/03/11</td>
-                                    <td>$850,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Shou Itou</td>
-                                    <td>Regional Marketing</td>
-                                    <td>Tokyo</td>
-                                    <td>20</td>
-                                    <td>2011/08/14</td>
-                                    <td>$163,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Michelle House</td>
-                                    <td>Integration Specialist</td>
-                                    <td>Sidney</td>
-                                    <td>37</td>
-                                    <td>2011/06/02</td>
-                                    <td>$95,400</td>
-                                </tr>
-                                <tr>
-                                    <td>Suki Burks</td>
-                                    <td>Developer</td>
-                                    <td>London</td>
-                                    <td>53</td>
-                                    <td>2009/10/22</td>
-                                    <td>$114,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Prescott Bartlett</td>
-                                    <td>Technical Author</td>
-                                    <td>London</td>
-                                    <td>27</td>
-                                    <td>2011/05/07</td>
-                                    <td>$145,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gavin Cortez</td>
-                                    <td>Team Leader</td>
-                                    <td>San Francisco</td>
-                                    <td>22</td>
-                                    <td>2008/10/26</td>
-                                    <td>$235,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Martena Mccray</td>
-                                    <td>Post-Sales support</td>
-                                    <td>Edinburgh</td>
-                                    <td>46</td>
-                                    <td>2011/03/09</td>
-                                    <td>$324,050</td>
-                                </tr>
-                                <tr>
-                                    <td>Unity Butler</td>
-                                    <td>Marketing Designer</td>
-                                    <td>San Francisco</td>
-                                    <td>47</td>
-                                    <td>2009/12/09</td>
-                                    <td>$85,675</td>
-                                </tr>
-                                <tr>
-                                    <td>Howard Hatfield</td>
-                                    <td>Office Manager</td>
-                                    <td>San Francisco</td>
-                                    <td>51</td>
-                                    <td>2008/12/16</td>
-                                    <td>$164,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Hope Fuentes</td>
-                                    <td>Secretary</td>
-                                    <td>San Francisco</td>
-                                    <td>41</td>
-                                    <td>2010/02/12</td>
-                                    <td>$109,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Vivian Harrell</td>
-                                    <td>Financial Controller</td>
-                                    <td>San Francisco</td>
-                                    <td>62</td>
-                                    <td>2009/02/14</td>
-                                    <td>$452,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Timothy Mooney</td>
-                                    <td>Office Manager</td>
-                                    <td>London</td>
-                                    <td>37</td>
-                                    <td>2008/12/11</td>
-                                    <td>$136,200</td>
-                                </tr>
-                                <tr>
-                                    <td>Jackson Bradshaw</td>
-                                    <td>Director</td>
-                                    <td>New York</td>
-                                    <td>65</td>
-                                    <td>2008/09/26</td>
-                                    <td>$645,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Olivia Liang</td>
-                                    <td>Support Engineer</td>
-                                    <td>Singapore</td>
-                                    <td>64</td>
-                                    <td>2011/02/03</td>
-                                    <td>$234,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Bruno Nash</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>38</td>
-                                    <td>2011/05/03</td>
-                                    <td>$163,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Sakura Yamamoto</td>
-                                    <td>Support Engineer</td>
-                                    <td>Tokyo</td>
-                                    <td>37</td>
-                                    <td>2009/08/19</td>
-                                    <td>$139,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Thor Walton</td>
-                                    <td>Developer</td>
-                                    <td>New York</td>
-                                    <td>61</td>
-                                    <td>2013/08/11</td>
-                                    <td>$98,540</td>
-                                </tr>
-                                <tr>
-                                    <td>Finn Camacho</td>
-                                    <td>Support Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>47</td>
-                                    <td>2009/07/07</td>
-                                    <td>$87,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Serge Baldwin</td>
-                                    <td>Data Coordinator</td>
-                                    <td>Singapore</td>
-                                    <td>64</td>
-                                    <td>2012/04/09</td>
-                                    <td>$138,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Zenaida Frank</td>
-                                    <td>Software Engineer</td>
-                                    <td>New York</td>
-                                    <td>63</td>
-                                    <td>2010/01/04</td>
-                                    <td>$125,250</td>
-                                </tr>
-                                <tr>
-                                    <td>Zorita Serrano</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>56</td>
-                                    <td>2012/06/01</td>
-                                    <td>$115,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Jennifer Acosta</td>
-                                    <td>Junior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>43</td>
-                                    <td>2013/02/01</td>
-                                    <td>$75,650</td>
-                                </tr>
-                                <tr>
-                                    <td>Cara Stevens</td>
-                                    <td>Sales Assistant</td>
-                                    <td>New York</td>
-                                    <td>46</td>
-                                    <td>2011/12/06</td>
-                                    <td>$145,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Hermione Butler</td>
-                                    <td>Regional Director</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2011/03/21</td>
-                                    <td>$356,250</td>
-                                </tr>
-                                <tr>
-                                    <td>Lael Greer</td>
-                                    <td>Systems Administrator</td>
-                                    <td>London</td>
-                                    <td>21</td>
-                                    <td>2009/02/27</td>
-                                    <td>$103,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Jonas Alexander</td>
-                                    <td>Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>30</td>
-                                    <td>2010/07/14</td>
-                                    <td>$86,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Shad Decker</td>
-                                    <td>Regional Director</td>
-                                    <td>Edinburgh</td>
-                                    <td>51</td>
-                                    <td>2008/11/13</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Bruce</td>
-                                    <td>Javascript Developer</td>
-                                    <td>Singapore</td>
-                                    <td>29</td>
-                                    <td>2011/06/27</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Donna Snider</td>
-                                    <td>Customer Support</td>
-                                    <td>New York</td>
-                                    <td>27</td>
-                                    <td>2011/01/25</td>
-                                    <td>$112,000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.container-fluid -->
+<body id="page-top">
+    <!-- modal inicio -->
+
+    <div class="modal fade" id="modalEdicao" tabindex="-1" role="dialog" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <!-- End of Main Content -->
+                <form action="" id="formularioEnviar" method="post">
+                    <div class="modal-body">
 
-                <!-- Footer -->
-                <?php include '../../../estrutura/footer.php'; ?>
-                <!-- End of Footer -->
+                        <input type="hidden" id="idt_pessoa" name="n_idt_pessoa_editado">
+
+
+                        <!-- <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
+                            <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Telefone:</label>
+                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Endereco:</label>
+                            <input type="text" class="form-control" id="n_endereco_editado" name="n_endereco_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Bairro:</label>
+                            <input type="text" class="form-control" id="n_bairro_editado" name="n_bairro_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Cidade</label>
+                            <input type="text" class="form-control" id="n_cidade_editado" name="n_cidade_editado">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Estado:</label>
+                            <input type="text" class="form-control" id="n_estado_editado" name="n_estado_editado">
+                        </div> 
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="perfil_editado">Perfil</label>
+                                <select id="perfil_editado" class="form-control" name="n_perfil_editado">
+                                    <option value="admin">Administrador</option>
+                                    <option value="basico">Basico</option>
+                                </select>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
             </div>
-            <!-- End of Content Wrapper -->
         </div>
-        <!-- End of Page Wrapper -->
+    </div>
+    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirLabel">Resetar senha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" id="formularioExcluir" method="post">
+                    <div class="modal-body">
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+                        <!-- <input type="hidden" id="idt_pessoa" name="idt_pessoa"> -->
+                        
 
-        <!-- Logout Modal-->
-        <?php
-        include '../../../estrutura/painelLogout.php';
-        ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal fim -->
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <?php include '../../../estrutura/menulateral.php'; ?>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <?php include '../../../estrutura/barratopo.php';
+                ?>
+                <!-- Begin Page Content -->
+                <div class="container-fluid ">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    </div>
+                </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <?php
-        include '../../../estrutura/importJS.php';
-        ?>
-    </body>
+                b4.
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Bairro</th>
+                                <th>Endereço</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>ações</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Bairro</th>
+                                <th>Endereço</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>ações</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <!-- include estrutura da tabela -->
+                            <?php include '../../../estrutura/tabela.php'; ?>
+                            <!-- fim include estrutura da tabela -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <?php include '../../../estrutura/footer.php'; ?>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <?php
+    include '../../../estrutura/painelLogout.php';
+    ?>
+    <!-- bootstrap core JS-->
+    <?php
+    include '../../../estrutura/importJS.php';
+    ?>
+    <script>
+
+        
+        $('#modalEdicao').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            // var idt_pessoa = button.data('idt_pessoa')
+            // Extract info from data-* attributes
+            // pessoa
+            var nome = button.data('nome')
+            var idtPessoa = button.data('idt_pessoa')
+            var email = button.data('email')
+            var telefone = button.data('telefone')
+            var fkIdtEndereco = button.data('t_endereco_idt_endereco')
+
+            // pessoa fisica
+            var cpf = button.data('cpf')
+            var sexo = button.data('sexo')
+            var idtPF = button.data('idt_pessoa_fisica')
+            var categoria = button.data('categoria')
+
+            // pessoa juridica
+
+            var cnpj = button.data('cnpj');
+            var nomeFantasia = button.data('nome_fantasia');
+            var atividade = button.data('atividade');
+
+            
+            // endereco
+            var idtEndereco = button.data('idt_endereco')
+            var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
+            var cep = button.data('cep')
+            var complemento = button.data('complemento')
+            var endereco = button.data('endereco')
+            var logradouro = button.data('logradouro')
+            var bairro = button.data('bairro')
+            var cidade = button.data('cidade')
+            var estado = button.data('estado')
+            var numero = button.data('numero');
+            
+            // pessoa juridica
+            var fantasia = button.data('nome_fantasia');
+            var cnpj = button.data('cnpj');
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+
+            // define o parametro da action para atualizar usuarios
+
+            if (idtPF >= 1) {
+                $("#formularioEnviar .modal-body").html(` 
+                   
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
+                            <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">E-mail:</label>
+                            <input type="text" class="form-control" id="n_email_editado" name="n_email_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Telefone:</label>
+                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
+                        </div>
+                        <label class="form-label">Sexo</label>
+                        <div class="form-group">
+                            <input type="radio" name="n_sexo_editado" value="masculino" id="n_fem_editado" class="with-gap">
+                            <label for="male">Masculino</label>
+                            <input type="radio" name="n_sexo_editado" value="feminino" id="n_masc_editado" class="with-gap">
+                            <label for="female" class="m-l-20">Feminino</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">CPF:</label>
+                            <input type="text" class="form-control" id="n_cpf_editado" name="n_cpf_editado">
+                        </div>
+                        <label class="form-label">Categoria</label>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <select name="n_categoria_editado" id="n_categoria_editado" class="form-control show-tick ">
+                                    <option value="">-- Selecione uma categoria --</option>
+                                    <option value="dep.estadual">Deputados estadual</option>
+                                    <option value="dep.federal">Deputado federal</option>
+                                    <option value="familia">Família</option>
+                                    <option value="lideranca">Liderança</option>
+                                    <option value="geral">Geral</option>
+                                    <option value="prefeito">Prefeito</option>
+                                    <option value="vereador">Vereador</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label>Endereco</label>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Logradouro:</label>
+                            <input type="text" class="form-control" id="n_logradouro_editado" name="n_logradouro_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">CEP:</label>
+                            <input type="text" class="form-control" id="n_cep_editado" name="n_cep_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Bairro:</label>
+                            <input type="text" class="form-control" id="n_bairro_editado" name="n_bairro_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Complemento:</label>
+                            <input type="text" class="form-control" id="n_complemento_editado" name="n_complemento_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">numero:</label>
+                            <input type="text" class="form-control" id="n_numero_editado" name="n_numero_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Cidade:</label>
+                            <input type="text" class="form-control" id="n_cidade_editado" name="n_cidade_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Estado:</label>
+                            <input type="text" class="form-control" id="n_estado_editado" name="n_estado_editado">
+                        </div>
+                        <input type="hidden" id="idtPessoa" name="n_idtPessoa_editado">
+                        <input type="hidden" id="idtEndereco" name="n_idtEndereco_editado">
+                        <input type="hidden" id="fkEndereco" name="n_fkEndereco_editado">
+                        <input type="hidden" id="idtPF" name="n_idtPF_editado">
+                        <input type="hidden" id="fkIdtPessoa" name="n_fkIdtPessoa_editado">
+                `)
+                $('#formularioEnviar').attr('action', '../../../controller/ControllerPessoaFisica.php?acao=alterar')
+
+            } else {
+                $("#formularioEnviar .modal-body").html(`
+                   
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
+                            <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">E-mail:</label>
+                            <input type="text" class="form-control" id="n_email_editado" name="n_email_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome fatasia:</label>
+                            <input type="text" class="form-control" id="n_fantasia_editado" name="n_fantasia_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">CNPJ:</label>
+                            <input type="text" class="form-control" id="n_cnpj_editado" name="n_cnpj_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Telefone:</label>
+                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
+                        </div>
+                        <label>Endereco</label>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Logradouro:</label>
+                            <input type="text" class="form-control" id="n_logradouro_editado" name="n_logradouro_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">CEP:</label>
+                            <input type="text" class="form-control" id="n_cep_editado" name="n_cep_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Bairro:</label>
+                            <input type="text" class="form-control" id="n_bairro_editado" name="n_bairro_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Complemento:</label>
+                            <input type="text" class="form-control" id="n_complemento_editado" name="n_complemento_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">numero:</label>
+                            <input type="text" class="form-control" id="n_numero_editado" name="n_numero_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Cidade:</label>
+                            <input type="text" class="form-control" id="n_cidade_editado" name="n_cidade_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
+                            <input type="text" class="form-control" id="n_estado_editado" name="n_estado_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Atividade:</label>
+                            <input type="text" class="form-control" id="n_atividade_editado" name="n_atividade_editado">
+                        </div>
+                        <input type="hidden" id="idtPessoa" name="idtPessoa">
+                        <input type="hidden" id="idtEndereco" name="idtEndereco">
+                        <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
+                        <input type="hidden" id="fkEndereco" name="fkEndereco">
+                `)
+                $('#formularioEnviar').attr('action', '../../../controller/ControllerPessoaJuridica.php?acao=alterar')
+            }
+            // seta os valores do modal
+            modal.find('.modal-title').text('Editar o pessoa ' + nome);
+            // pessoa
+            modal.find('.modal-title').text('Resetar a senha do ' + nome);
+
+            // pessoa fisica / pessoa
+            modal.find('#n_nome_editado').val(nome);
+            modal.find('#n_email_editado').val(email);
+            modal.find('#n_telefone_editado').val(telefone);
+            modal.find('#n_sexo_editado').val(sexo);
+            modal.find('#n_cpf_editado').val(cpf);
+            modal.find('#n_categoria_editado').val(categoria);
+
+
+            // pessoa Juridica
+            modal.find('#n_cnpj_editado').val(cnpj);
+            modal.find('#n_fantasia_editado').val(nomeFantasia);
+            modal.find('#n_atividade_editado').val(atividade)
+
+            // estado
+            // modal.find('#n_endereco_editado').val(endereco);
+            modal.find('#n_logradouro_editado').val(endereco);
+            modal.find('#n_complemento_editado').val(complemento);
+            modal.find('#n_numero_editado').val(numero);
+            modal.find('#n_cidade_editado').val(cidade);
+            modal.find('#n_bairro_editado').val(bairro);
+            modal.find('#n_cep_editado').val(cep);
+            modal.find('#n_estado_editado').val(estado);
+            modal.find('#idtEndereco').val(idtEndereco)
+            modal.find('#idtPessoa').val(idtPessoa);
+            modal.find('#idtPF').val(idtPF);
+            modal.find('#fkEndereco').val(fkIdtEndereco);
+            console.log(fkIdtPessoa);
+            modal.find('#fkIdtPessoa').val(fkIdtPessoa);
+            
+            
+        });
+
+        $('#modalResetar').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var idusuario = button.data('idusuario') // Extract info from data-* attributes
+            var nome = button.data('nome')
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            
+           
+
+        });
+
+        $('#modalExcluir').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+             // Extract info from data-* attributes
+            var nome = button.data('nome')
+            var idtPessoa = button.data('idt_pessoa')
+            var idtPf = button.data('idt_pessoa_fisica')
+            var fkIdtEndereco = button.data('t_endereco_idt_endereco')
+            var idtEndereco = button.data('idt_endereco')
+            var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            console.log(idtPf)
+            if (idtPf >= 1) {
+                $('#formularioExcluir .modal-body').html(`
+                    <label id="texto_excluir"></label>
+                    <input type="hidden" id="idtPessoa" name="idtPessoa">
+                    <input type="hidden" id="idtPf" name="idtPf">
+                    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
+                    <input type="hidden" id="idtEndereco" name="idtEndereco">
+                    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
+                `);
+                $('#formularioExcluir').attr('action', '../../../controller/ControllerPessoaFisica.php?acao=excluir')
+            } else {
+                $('#formularioExcluir .modal-body').html(`
+                    <label id="texto_excluir"></label>
+                    <input type="hidden" id="idtPessoa" name="idtPessoa">
+                    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
+                    <input type="hidden" id="idtEndereco" name="idtEndereco">
+                    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
+                `);
+                $('#formularioExcluir').attr('action', '../../../controller/ControllerPessoaJuridica.php?acao=excluir')
+            }
+            var modal = $(this)
+            modal.find('.modal-title').text('Confirmar exclusão')
+            modal.find('#texto_excluir').text("Tem certeza que desaja excluir a pessoa: " + nome + " do sistema ?")
+            
+            modal.find('#idtPessoa').val(idtPessoa);
+            modal.find('#idtPf').val(idtPf);
+            modal.find('#fkIdtEndereco').val(fkIdtEndereco);
+            modal.find('#idtEndereco').val(idtEndereco);
+            modal.find('#fkIdtPessoa').val(fkIdtPessoa);
+
+        });
+    </script>
+</body>
 
 </html>

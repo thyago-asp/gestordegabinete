@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . '/model/PessoaFisica.php');
 // require_once($_SERVER['DOCUMENT_ROOT'] . '/')
 // require_once($_SERVER['DOCUMENT_ROOT'] . '/Crud.php');
@@ -17,10 +17,10 @@ if (isset($_REQUEST["acao"])) {
             // (new ControllerPessoa())->alterar();
             break;
         case 'listar':
-            (new ControllerPessoaFisica())->listarTodos();
+            (new ControllerPessoaFisica())->listarTodosFisico();
             break;
 
-        case 'excluirUsuario':
+        case 'excluir':
             (new ControllerPessoaFisica())->excluirUsuario();
             break;
     }
@@ -30,6 +30,9 @@ if (isset($_REQUEST["acao"])) {
 class ControllerPessoaFisica
 {
 
+    public function setUsuarios() {
+
+    }
 
     public function cadastrar()
     {
@@ -40,7 +43,6 @@ class ControllerPessoaFisica
             header('location: /view/pessoas/cadastrar?=erro');
         }
         // setta os valores 
-        print_r($_POST);
         
         $pf->__set('nome', $_POST["nome"]);
         $pf->__set('email', $_POST["email"]);
@@ -56,48 +58,62 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['cidadeF']);
         $pf->__set('estado', $_POST['estado']);
         $pf->__set('categoria', $_POST['categoria']);
-
-       $pf->cadastroM($pf);
-        // header('location: /view/pessoas/cadastrar?=sucesso');
+        
+        $pf->__set('cpf', $_POST['CPF']);
+        $pf->cadastroM($pf);
+        header('location: /view/pessoas/cadastrar?=sucesso');
     }
-    
+
     function atualizarUsuario()
     {
-        echo "teste";
         // instancia model pessoa fisica
         $pf = new PessoaFisica();
+        
 
-        $pf->__set('nome', 'Alana');
-        $pf->__set('email', 'alana@gmail.com');
-        $pf->__set('telefoneF', '98832844');
-        $pf->__set('sexo', 'feminino');
-        $pf->__set('nascimento', '02/03/1998');
-        $pf->__set('cep', '19983-800');
-        $pf->__set('logradouro', 'bananinhas');
-        $pf->__set('numeroF', '199');
-        $pf->__set('complemento', 'casa');
-        $pf->__set('nascimento', '02/03/1990');
-        $pf->__set('bairroF', 'uberaba');
-        $pf->__set('cidadeF', 'curitiba');
-        $pf->__set('estado', 'parana');
-        $pf->__set('categoria', 'dep');
-        $pf->__set('id', 2);
-        print_r($pf);
+        // t_endereco 
+        $pf->__set('cep', $_POST['n_cep_editado']);
+        $pf->__set('logradouro', $_POST['n_logradouro_editado']);
+        $pf->__set('numeroF', $_POST['n_numero_editado']);
+        $pf->__set('complemento', $_POST['n_complemento_editado']);
+        $pf->__set('endereco', $_POST['n_logradouro_editado']);
+        $pf->__set('bairroF', $_POST['n_bairro_editado']);
+        $pf->__set('cidadeF', $_POST['n_cidade_editado']);
+        $pf->__set('estado', $_POST['n_estado_editado']);
+        $pf->__set('idtEndereco', $_POST['n_idtEndereco_editado']);
+       
+        // pessoa fisica
+        $pf->__set('categoria', $_POST['n_categoria_editado']);
+        $pf->__set('cpf', $_POST['n_cpf_editado']);
+        $pf->__set('sexo', $_POST['n_sexo_editado']);
+        $pf->__set('idtPF', $_POST['n_idtPF_editado']);
+        $pf->__set('fkIdtEndereco', $_POST['n_fkEndereco_editado']);
+
+        // t_pessoa
+        $pf->__set('nome', $_POST['n_nome_editado']);
+        $pf->__set('email', $_POST['n_email_editado']);
+        $pf->__set('telefoneF', $_POST['n_telefone_editado']);
+        $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
+        $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
+        
         // setta os valores 
         $pf->atualizarM($pf);
+        header('location: /view/pessoas/listar');
     }
 
-    function listarTodos()
+    function listarTodosFisico()
     {
-        echo "<pre>";
-        print_r(((new PessoaFisica())->listarM()));
+        return ((new PessoaFisica())->listarM());
     }
 
-    function excluirUsuario() {
+    function excluirUsuario()
+    {
         $pf = new PessoaFisica();
-        
-        $pf->__set('id', 2);
+       
+        $pf->__set('idtEndereco', $_POST['idtPessoa']);
+        $pf->__set('idtPF', $_POST['idtPf']);
+        $pf->__set('fkIdtEndereco', $_POST['fkIdtEndereco']);
+        $pf->__set('idtPessoa', $_POST['idtEndereco']);
+        $pf->__set('fkIdtPessoa', $_POST['fkIdtPessoa']);
         $pf->excluirM($pf);
     }
-
 }
