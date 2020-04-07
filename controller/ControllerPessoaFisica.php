@@ -115,5 +115,6 @@ class ControllerPessoaFisica
         $pf->__set('idtPessoa', $_POST['idtEndereco']);
         $pf->__set('fkIdtPessoa', $_POST['fkIdtPessoa']);
         $pf->excluirM($pf);
+        header('location: /view/pessoas/listar');
     }
 }
