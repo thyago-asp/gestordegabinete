@@ -40,8 +40,6 @@ class ControllerPessoaJuridica
         $pf = new PessoaJuridica();
        
         // setta os valores
-        echo "<pre>";
-       print_r($_POST);
        
         $pf->__set('cnpj', $_POST["cnpj"]);
         $pf->__set('nome', $_POST["nomeJ"]);
@@ -57,7 +55,14 @@ class ControllerPessoaJuridica
         $pf->__set('atividade', $_POST['atividadeJ']);
 
         $pf->cadastroM($pf);
-        header('location: /view/pessoas/cadastrar?=sucesso');
+
+        if($pf->cadastroM($pf)) {
+            header('location: /view/pessoas/cadastrar?cad=sucesso');
+        } else {
+            header('location: /view/pessoas/cadastrar?cad=erro');
+        }
+        
+       
     }
 
     function atualizarPJ()
@@ -86,6 +91,7 @@ class ControllerPessoaJuridica
         $pf->__set('fkEndereco', $_POST['fkEndereco']);
         // setta os valores 
         $pf->atualizarM($pf);
+        
         header('location: /view/pessoas/listar');
     }
 

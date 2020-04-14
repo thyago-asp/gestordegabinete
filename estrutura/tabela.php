@@ -6,7 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerPessoaJuridica.php';
 $tabelaJuridica = (new ControllerPessoaJuridica())->listarTodosJuridico();
 
 // instancia do controller de PF
-$tab = (new ControllerPessoaFisica())->listarTodosFisico();
+$tab = (new ControllerPessoaFisica())->listarPF();
 
 // criacao de um array com os dados de ambas as tabelas
 $tabela = [$tabelaJuridica, $tab];
@@ -73,7 +73,7 @@ foreach ($tabela as $chave => $valor) :
                     data-atividade="<?php echo $inf['atividade'] ?>"
                   
                   <?php } ?>
-                  >Editar</button>
+                  ><i class="fa fa-th-list" aria-hidden="true"></i></button>
           <!-- Botão excluir -->
           <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" 
           <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>

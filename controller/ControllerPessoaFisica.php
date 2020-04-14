@@ -17,7 +17,7 @@ if (isset($_REQUEST["acao"])) {
             // (new ControllerPessoa())->alterar();
             break;
         case 'listar':
-            (new ControllerPessoaFisica())->listarTodosFisico();
+            (new ControllerPessoaFisica())->listarPF();
             break;
 
         case 'excluir':
@@ -30,10 +30,7 @@ if (isset($_REQUEST["acao"])) {
 class ControllerPessoaFisica
 {
 
-    public function setUsuarios() {
-
-    }
-
+  
     public function cadastrar()
     {
         // instancia do model PessoaFisica para cadastro
@@ -43,7 +40,7 @@ class ControllerPessoaFisica
             header('location: /view/pessoas/cadastrar?=erro');
         }
         // setta os valores 
-        
+
         $pf->__set('nome', $_POST["nome"]);
         $pf->__set('email', $_POST["email"]);
         $pf->__set('telefoneF', $_POST['telefoneF']);
@@ -58,17 +55,23 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['cidadeF']);
         $pf->__set('estado', $_POST['estado']);
         $pf->__set('categoria', $_POST['categoria']);
-        
+
         $pf->__set('cpf', $_POST['CPF']);
-        $pf->cadastroM($pf);
-        header('location: /view/pessoas/cadastrar?=sucesso');
+
+        $resultado = $pf->cadastroM($pf);
+        
+        if ($resultado = true) {
+            header('location: /view/pessoas/cadastrar?cad=sucesso');
+        } else {
+            header('location: /view/pessoas/cadastrar?cad=erro');
+        }
     }
 
     function atualizarUsuario()
     {
         // instancia model pessoa fisica
         $pf = new PessoaFisica();
-        
+
 
         // t_endereco 
         $pf->__set('cep', $_POST['n_cep_editado']);
@@ -80,7 +83,7 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['n_cidade_editado']);
         $pf->__set('estado', $_POST['n_estado_editado']);
         $pf->__set('idtEndereco', $_POST['n_idtEndereco_editado']);
-       
+
         // pessoa fisica
         $pf->__set('categoria', $_POST['n_categoria_editado']);
         $pf->__set('cpf', $_POST['n_cpf_editado']);
@@ -94,21 +97,20 @@ class ControllerPessoaFisica
         $pf->__set('telefoneF', $_POST['n_telefone_editado']);
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
-        
+
         // setta os valores 
         $pf->atualizarM($pf);
         header('location: /view/pessoas/listar');
     }
-
-    function listarTodosFisico()
-    {
-        return ((new PessoaFisica())->listarM());
+    
+    function listarPF() {
+        return ((new PessoaFisica))->listarM(); 
     }
 
     function excluirUsuario()
     {
         $pf = new PessoaFisica();
-       
+
         $pf->__set('idtEndereco', $_POST['idtPessoa']);
         $pf->__set('idtPF', $_POST['idtPf']);
         $pf->__set('fkIdtEndereco', $_POST['fkIdtEndereco']);
