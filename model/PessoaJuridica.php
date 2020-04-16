@@ -159,6 +159,7 @@ class PessoaJuridica
         $stmt->bindValue(':fkIdtPessoa', $this->__get('fkIdtPessoa'));
 
         $stmt->execute();
+        return true;
     }
 
     function excluirM()
@@ -174,5 +175,6 @@ class PessoaJuridica
         $stmt->bindValue(':fkIdtPessoa', $this->__get('fkIdtPessoa'));
 
         $stmt->execute();
+        return true;
     }
 }

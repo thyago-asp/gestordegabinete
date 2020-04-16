@@ -40,6 +40,8 @@ class PessoaFisica
     private $fkIdtPF;
     private $idtEndereco;
     private $id;
+
+    private $arquivo;
   
     // metodos magicos do php
     // __get retorna o atributo
@@ -53,7 +55,7 @@ class PessoaFisica
         $this->$valor = $atributo;
     }
 
-    function cadastroM($pf)
+    function cadastroM()
     {
         // abre a conexao com o banco de dados
         $con = Conexao::abrirConexao();
@@ -63,15 +65,14 @@ class PessoaFisica
                     VALUES (:logradouro, :cep, :bairro, :complemento, :numero, :cidade, :estado);
                   INSERT INTO t_pessoa(nome, email, telefone, t_endereco_idt_endereco) 
                     VALUES (:nome, :email, :telefoneF, LAST_INSERT_ID()); 
-                  INSERT INTO t_pessoa_fisica(cpf, sexo, categoria, t_pessoa_idt_pessoa) 
-                    VALUES(:cpf, :sexo, :categoria, LAST_INSERT_ID());
+                  INSERT INTO t_pessoa_fisica(cpf, sexo, categoria, arquivo, t_pessoa_idt_pessoa) 
+                    VALUES(:cpf, :sexo, :categoria, :arquivo, LAST_INSERT_ID());
                  ";
 
         // prepara a query 
         $stmt = $con->prepare($query);
 
         // tabela t_endereco
-        // $stmt->bindValue(':enderecoF', $this->__get('enderecoF'));
         $stmt->bindValue(':logradouro', $this->__get('logradouro'));
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':bairro', $this->__get('bairroF'));
@@ -92,6 +93,8 @@ class PessoaFisica
         $stmt->bindValue(':sexo', $this->__get('sexo'));
         $stmt->bindValue(':categoria', $this->__get('categoria'));
 
+        $stmt->bindValue(':arquivo', $this->__get('arquivo'));
+       
         // por fim executa a query
         $stmt->execute();
 
@@ -120,11 +123,13 @@ class PessoaFisica
         $con = Conexao::abrirConexao();
         $query = "UPDATE t_endereco SET endereco = :endereco, cep = :cep, bairro = :bairro, 
                     complemento = :complemento, numero = :numero, cidade = :cidade, estado = :estado
-                WHERE idt_endereco = :idtEndereco;
-                    UPDATE t_pessoa SET nome = :nome, telefone = :telefoneF, email = :email 
-                WHERE idt_pessoa = :idtPessoa AND t_endereco_idt_endereco = :fkidtEndereco;
-                    UPDATE t_pessoa_fisica SET cpf = :cpf, sexo = :sexo, categoria = :categoria 
-                WHERE idt_pessoa_fisica = :idtPF AND t_pessoa_idt_pessoa = :fkIdtPessoa";
+                    WHERE idt_endereco = :idtEndereco;
+                  UPDATE t_pessoa SET nome = :nome, telefone = :telefoneF, email = :email 
+                    WHERE idt_pessoa = :idtPessoa AND t_endereco_idt_endereco = :fkidtEndereco;
+                  UPDATE t_pessoa_fisica SET cpf = :cpf, sexo = :sexo, categoria = :categoria,
+                    arquivo = :arquivo
+                    WHERE idt_pessoa_fisica = :idtPF AND t_pessoa_idt_pessoa = :fkIdtPessoa
+                 ";
 
         $stmt = $con->prepare($query);
         
@@ -151,10 +156,17 @@ class PessoaFisica
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':sexo', $this->__get('sexo'));
         $stmt->bindValue(':categoria', $this->__get('categoria'));
+        $stmt->bindValue(':arquivo', $this->__get('arquivo'));
+
         $stmt->bindValue(':idtPF', $this->__get('idtPF'));
         $stmt->bindValue(':fkIdtPessoa', $this->__get('fkIdtPessoa'));
+
         
+
         $stmt->execute();
+
+        return true;
+
     }
 
     function excluirM()
@@ -175,11 +187,9 @@ class PessoaFisica
         $stmt->bindValue(':fkIdtEndereco', $this->__get('fkIdtEndereco'));
 
         $stmt->bindValue(':idtEndereco', $this->__get('idtEndereco'));
-        
-        
-        
-        // $stmt->bindValue(':fkIdtPF', $this->__get('fkIdtPF'));
 
         $stmt->execute();
+
+        return true;
     }
 }

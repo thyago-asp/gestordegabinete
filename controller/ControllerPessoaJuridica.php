@@ -1,8 +1,6 @@
 <?php
-// session_start();
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/model/PessoaJuridica.php');
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/')
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/Crud.php');
 
 
 if (isset($_REQUEST["acao"])) {
@@ -54,13 +52,15 @@ class ControllerPessoaJuridica
         $pf->__set('estado', $_POST['estadoJ']);
         $pf->__set('atividade', $_POST['atividadeJ']);
 
-        $pf->cadastroM($pf);
+       
 
-        if($pf->cadastroM($pf)) {
-            header('location: /view/pessoas/cadastrar?cad=sucesso');
-        } else {
-            header('location: /view/pessoas/cadastrar?cad=erro');
-        }
+        // $result = $pf->cadastroM($pf);
+
+        // if($result) {
+        //     header('location: /view/pessoas/cadastrar?cad=sucesso');
+        // } else {
+        //     header('location: /view/pessoas/cadastrar?cad=erro');
+        // }
         
        
     }
@@ -90,9 +90,13 @@ class ControllerPessoaJuridica
         $pf->__set('idtEndereco', $_POST['fkIdtPessoa']);
         $pf->__set('fkEndereco', $_POST['fkEndereco']);
         // setta os valores 
-        $pf->atualizarM($pf);
-        
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->atualizarM($pf);
+        print_r($resultado);
+        if($resultado == true) {
+            header('location: /view/pessoas/listar?atualizar=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?atualizar=erro');
+        }
     }
 
     function listarTodosJuridico()
@@ -110,7 +114,12 @@ class ControllerPessoaJuridica
         $pf->__set('fkEndereco', $_POST['fkIdtEndereco']);
 
 
-        $pf->excluirM($pf);
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->excluirM($pf);
+        if($resultado == true) {
+            header('location: /view/pessoas/listar?excluir=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?excluir=erro');
+        }
+        // header('location: /view/pessoas/listar');
     }
 }

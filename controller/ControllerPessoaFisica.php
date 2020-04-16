@@ -1,8 +1,6 @@
 <?php
-// session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . '/model/PessoaFisica.php');
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/')
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/Crud.php');
+
 
 
 if (isset($_REQUEST["acao"])) {
@@ -14,8 +12,8 @@ if (isset($_REQUEST["acao"])) {
 
         case 'alterar':
             (new ControllerPessoaFisica())->atualizarUsuario();
-            // (new ControllerPessoa())->alterar();
             break;
+
         case 'listar':
             (new ControllerPessoaFisica())->listarPF();
             break;
@@ -30,7 +28,18 @@ if (isset($_REQUEST["acao"])) {
 class ControllerPessoaFisica
 {
 
-  
+
+    function caminhoImagem($imgSrc) {
+        $dir = "../bancodedados/img/";
+        $imgExtencao = (pathinfo($imgSrc['imagem']['name'], PATHINFO_EXTENSION));
+       
+        $temp = ($imgSrc['imagem']['tmp_name']);
+        $novoNome = uniqid() . ".$imgExtencao";
+        $dirImg =  $dir . $novoNome;
+        move_uploaded_file($temp, $dir . $novoNome);
+        return $dirImg;
+    }
+
     public function cadastrar()
     {
         // instancia do model PessoaFisica para cadastro
@@ -39,6 +48,7 @@ class ControllerPessoaFisica
         if (empty($_POST)) {
             header('location: /view/pessoas/cadastrar?=erro');
         }
+        
         // setta os valores 
 
         $pf->__set('nome', $_POST["nome"]);
@@ -55,12 +65,16 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['cidadeF']);
         $pf->__set('estado', $_POST['estado']);
         $pf->__set('categoria', $_POST['categoria']);
+        $pf->__set('arquivo', $this->caminhoImagem($_FILES));
+
 
         $pf->__set('cpf', $_POST['CPF']);
 
+       
+
         $resultado = $pf->cadastroM($pf);
-        
-        if ($resultado = true) {
+
+        if ($resultado == true) {
             header('location: /view/pessoas/cadastrar?cad=sucesso');
         } else {
             header('location: /view/pessoas/cadastrar?cad=erro');
@@ -72,7 +86,7 @@ class ControllerPessoaFisica
         // instancia model pessoa fisica
         $pf = new PessoaFisica();
 
-
+        
         // t_endereco 
         $pf->__set('cep', $_POST['n_cep_editado']);
         $pf->__set('logradouro', $_POST['n_logradouro_editado']);
@@ -98,13 +112,21 @@ class ControllerPessoaFisica
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
 
+        $pf->__set('arquivo', $this->caminhoImagem($_FILES));
+       
         // setta os valores 
-        $pf->atualizarM($pf);
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->atualizarM($pf);
+        if($resultado) {
+            header('location: /view/pessoas/listar?atualizar=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?atualizar=erro');
+        }
+
     }
-    
-    function listarPF() {
-        return ((new PessoaFisica))->listarM(); 
+
+    function listarPF()
+    {
+        return ((new PessoaFisica))->listarM();
     }
 
     function excluirUsuario()
@@ -116,7 +138,12 @@ class ControllerPessoaFisica
         $pf->__set('fkIdtEndereco', $_POST['fkIdtEndereco']);
         $pf->__set('idtPessoa', $_POST['idtEndereco']);
         $pf->__set('fkIdtPessoa', $_POST['fkIdtPessoa']);
-        $pf->excluirM($pf);
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->excluirM($pf);
+
+        if ($resultado == true) {
+            header('location: /view/pessoas/listar?excluir=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?excluir=erro');
+        }
     }
 }

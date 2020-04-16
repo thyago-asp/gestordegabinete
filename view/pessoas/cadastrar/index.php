@@ -46,7 +46,7 @@ include '../../../estrutura/head.php';
                 <?php endif; ?>
 
                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                    <form id="formF" action="../../../controller/controllerPessoaFisica.php?acao=cad" method="post">
+                    <form id="formF" enctype="multipart/form-data" action="../../../controller/controllerPessoaFisica.php?acao=cad" method="post">
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
@@ -176,10 +176,24 @@ include '../../../estrutura/head.php';
                                                 </div>
 
                                             </div>
+
+                                            <div class="pt-3">
+                                                <div class="form-group">
+
+                                                    <div class="form-line">
+                                                        <input type="file" name="imagem" id="imagemPF">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <input type="submit" class="btn btn-success">
+
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
 

@@ -2,6 +2,18 @@
 session_start();
 require_once("../../../estrutura/controleLogin.php");
 
+$status = "";
+
+if(isset($_GET['atualizar'])){
+    $msg = "atualizar";
+    $status = $_GET['atualizar'];
+}
+if(isset($_GET['excluir'])) {
+    $msg = "excluir";
+    $status = $_GET['excluir'];
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -22,46 +34,13 @@ include '../../../estrutura/head.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" id="formularioEnviar" method="post">
+                <form action="" enctype="multipart/form-data" id="formularioEnviar" method="post">
                     <div class="modal-body">
 
                         <input type="hidden" id="idt_pessoa" name="n_idt_pessoa_editado">
 
 
-                        <!-- <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
-                            <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Telefone:</label>
-                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Endereco:</label>
-                            <input type="text" class="form-control" id="n_endereco_editado" name="n_endereco_editado">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Bairro:</label>
-                            <input type="text" class="form-control" id="n_bairro_editado" name="n_bairro_editado">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Cidade</label>
-                            <input type="text" class="form-control" id="n_cidade_editado" name="n_cidade_editado">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Estado:</label>
-                            <input type="text" class="form-control" id="n_estado_editado" name="n_estado_editado">
-                        </div> 
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="perfil_editado">Perfil</label>
-                                <select id="perfil_editado" class="form-control" name="n_perfil_editado">
-                                    <option value="admin">Administrador</option>
-                                    <option value="basico">Basico</option>
-                                </select>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -84,7 +63,7 @@ include '../../../estrutura/head.php';
                     <div class="modal-body">
 
                         <!-- <input type="hidden" id="idt_pessoa" name="idt_pessoa"> -->
-                        
+
 
                     </div>
                     <div class="modal-footer">
@@ -109,7 +88,22 @@ include '../../../estrutura/head.php';
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
+
                     <!-- Page Heading -->
+                    <!-- mensagem de sucesso e erro -->
+                    <?php if ($status == "sucesso") : ?>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
+                        </div>
+                    <?php elseif ($status == "erro") : ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
+                        </div>
+                    <?php endif; ?>
+                    <!-- Fim mensagem sucesso e erro -->
+
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
                         <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
                     </div>
@@ -174,8 +168,6 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
-
-        
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // var idt_pessoa = button.data('idt_pessoa')
@@ -190,6 +182,7 @@ include '../../../estrutura/head.php';
             // pessoa fisica
             var cpf = button.data('cpf')
             var sexo = button.data('sexo')
+            
             var idtPF = button.data('idt_pessoa_fisica')
             var categoria = button.data('categoria')
 
@@ -199,7 +192,7 @@ include '../../../estrutura/head.php';
             var nomeFantasia = button.data('nome_fantasia');
             var atividade = button.data('atividade');
 
-            
+
             // endereco
             var idtEndereco = button.data('idt_endereco')
             var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
@@ -211,10 +204,12 @@ include '../../../estrutura/head.php';
             var cidade = button.data('cidade')
             var estado = button.data('estado')
             var numero = button.data('numero');
-            
+
             // pessoa juridica
             var fantasia = button.data('nome_fantasia');
             var cnpj = button.data('cnpj');
+
+            var img = button.data('arquivo');
 
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -230,6 +225,12 @@ include '../../../estrutura/head.php';
                             <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
                         </div>
                         <div class="form-group">
+                            <div class="pb-3 w-25">
+                                <img class="w-100" id="imagem">
+                            </div>
+                            <input type="file" class="form-control" id="n_arquivo_editado" name="imagem">
+                        </div>
+                        <div class="form-group">
                             <label for="recipient-name" class="col-form-label">E-mail:</label>
                             <input type="text" class="form-control" id="n_email_editado" name="n_email_editado">
                         </div>
@@ -239,9 +240,9 @@ include '../../../estrutura/head.php';
                         </div>
                         <label class="form-label">Sexo</label>
                         <div class="form-group">
-                            <input type="radio" name="n_sexo_editado" value="masculino" id="n_fem_editado" class="with-gap">
+                            <input type="radio" name="n_sexo_editado" value="masculino" id="n_masc_editado" class="with-gap">
                             <label for="male">Masculino</label>
-                            <input type="radio" name="n_sexo_editado" value="feminino" id="n_masc_editado" class="with-gap">
+                            <input type="radio" name="n_sexo_editado" value="feminino" id="n_fem_editado" class="with-gap">
                             <label for="female" class="m-l-20">Feminino</label>
                         </div>
                         <div class="form-group">
@@ -368,14 +369,24 @@ include '../../../estrutura/head.php';
             // pessoa
             modal.find('.modal-title').text('Resetar a senha do ' + nome);
 
+            var idSexo = "";
             // pessoa fisica / pessoa
+            console.log(sexo);
+            if(sexo == "masculino"){
+                console.log('teste');
+                idSexo = "masc"; 
+            } else {
+                idSexo = "fem";
+            }
+            console.log(idSexo);
             modal.find('#n_nome_editado').val(nome);
             modal.find('#n_email_editado').val(email);
             modal.find('#n_telefone_editado').val(telefone);
-            modal.find('#n_sexo_editado').val(sexo);
+            modal.find(`#n_${idSexo}_editado`).prop('checked', true);
             modal.find('#n_cpf_editado').val(cpf);
             modal.find('#n_categoria_editado').val(categoria);
-
+            modal.find('#imagem').attr('src', img);
+            // modal.find('#n_arquivo_editado').val(img);
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
@@ -383,7 +394,7 @@ include '../../../estrutura/head.php';
             modal.find('#n_atividade_editado').val(atividade)
 
             // estado
-            // modal.find('#n_endereco_editado').val(endereco);
+            
             modal.find('#n_logradouro_editado').val(endereco);
             modal.find('#n_complemento_editado').val(complemento);
             modal.find('#n_numero_editado').val(numero);
@@ -395,10 +406,10 @@ include '../../../estrutura/head.php';
             modal.find('#idtPessoa').val(idtPessoa);
             modal.find('#idtPF').val(idtPF);
             modal.find('#fkEndereco').val(fkIdtEndereco);
-            console.log(fkIdtPessoa);
+            
             modal.find('#fkIdtPessoa').val(fkIdtPessoa);
-            
-            
+
+
         });
 
         $('#modalResetar').on('show.bs.modal', function(event) {
@@ -408,14 +419,14 @@ include '../../../estrutura/head.php';
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
-            
-           
+
+
 
         });
 
         $('#modalExcluir').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-             // Extract info from data-* attributes
+            // Extract info from data-* attributes
             var nome = button.data('nome')
             var idtPessoa = button.data('idt_pessoa')
             var idtPf = button.data('idt_pessoa_fisica')
@@ -424,7 +435,7 @@ include '../../../estrutura/head.php';
             var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            console.log(idtPf)
+           
             if (idtPf >= 1) {
                 $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
@@ -448,7 +459,7 @@ include '../../../estrutura/head.php';
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que desaja excluir a pessoa: " + nome + " do sistema ?")
-            
+
             modal.find('#idtPessoa').val(idtPessoa);
             modal.find('#idtPf').val(idtPf);
             modal.find('#fkIdtEndereco').val(fkIdtEndereco);
