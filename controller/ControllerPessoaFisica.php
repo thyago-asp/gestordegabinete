@@ -32,11 +32,12 @@ class ControllerPessoaFisica
     function caminhoImagem($imgSrc) {
         $dir = "../bancodedados/img/";
         $imgExtencao = (pathinfo($imgSrc['imagem']['name'], PATHINFO_EXTENSION));
-       
+        
         $temp = ($imgSrc['imagem']['tmp_name']);
         $novoNome = uniqid() . ".$imgExtencao";
         $dirImg =  $dir . $novoNome;
         move_uploaded_file($temp, $dir . $novoNome);
+
         return $dirImg;
     }
 
@@ -111,8 +112,17 @@ class ControllerPessoaFisica
         $pf->__set('telefoneF', $_POST['n_telefone_editado']);
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
-
-        $pf->__set('arquivo', $this->caminhoImagem($_FILES));
+    
+        if($_FILES['imagem']['error'] == 4) {
+            $arquivo = str_replace("../", "", $_POST['manterImg']);
+            $arquivo = $arquivo;
+            
+        } else {
+            $arquivo = $this->caminhoImagem($_FILES);
+            
+        }
+        
+        $pf->__set('arquivo', $arquivo);
        
         // setta os valores 
         $resultado = $pf->atualizarM($pf);

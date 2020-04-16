@@ -228,6 +228,7 @@ include '../../../estrutura/head.php';
                             <div class="pb-3 w-25">
                                 <img class="w-100" id="imagem">
                             </div>
+                            <input type="hidden" id="manterImg" name="manterImg"> 
                             <input type="file" class="form-control" id="n_arquivo_editado" name="imagem">
                         </div>
                         <div class="form-group">
@@ -365,20 +366,16 @@ include '../../../estrutura/head.php';
                 $('#formularioEnviar').attr('action', '../../../controller/ControllerPessoaJuridica.php?acao=alterar')
             }
             // seta os valores do modal
-            modal.find('.modal-title').text('Editar o pessoa ' + nome);
-            // pessoa
-            modal.find('.modal-title').text('Resetar a senha do ' + nome);
 
             var idSexo = "";
             // pessoa fisica / pessoa
-            console.log(sexo);
+            
             if(sexo == "masculino"){
-                console.log('teste');
                 idSexo = "masc"; 
             } else {
                 idSexo = "fem";
             }
-            console.log(idSexo);
+            
             modal.find('#n_nome_editado').val(nome);
             modal.find('#n_email_editado').val(email);
             modal.find('#n_telefone_editado').val(telefone);
@@ -386,7 +383,8 @@ include '../../../estrutura/head.php';
             modal.find('#n_cpf_editado').val(cpf);
             modal.find('#n_categoria_editado').val(categoria);
             modal.find('#imagem').attr('src', img);
-            // modal.find('#n_arquivo_editado').val(img);
+            
+            modal.find('#manterImg').val(img);
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
