@@ -2,7 +2,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/main">
-        <img style="width: 100%"src="https://deputadoguerra.com.br/wp-content/uploads/2019/05/Logo-Luiz-Fernando-Guerra-branca-pequeno.png"/>
+        <img style="width: 100%" src="https://deputadoguerra.com.br/wp-content/uploads/2019/05/Logo-Luiz-Fernando-Guerra-branca-pequeno.png" />
     </a>
 
     <!-- Divider -->
@@ -52,24 +52,25 @@
 
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
+        <a class="nav-link collapsed" href="/view/requerimentos" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
             <i class="fas fa-fw fa-folder"></i>
             <span>Requerimentos</span>
         </a>
         <div id="collapseReq" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
+            <div id="requerimentos" class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Pedidos de informações</a>
-                <a class="collapse-item" href="#">Envio de expediente</a>
-                <a class="collapse-item" href="#">Voto de louvor e pesar</a>
-                <a class="collapse-item" href="#">Diversos</a>
-                <a class="collapse-item" href="#">Declarações de presenças</a>
-                <div class="collapse-divider "></div>
+                <a class="collapse-item link" value="pedidos" href="/view/requerimentos?pg=pedidos">Pedidos de informações</a>
+                <a class="collapse-item link" value="envio" href="/view/requerimentos?pg=envio">Envio de expediente</a>
+                <a class="collapse-item link" value="voto" href="/view/requerimentos?pg=voto">Voto de louvor e pesar</a>
+                <a class="collapse-item link" value="diversos" href="/view/requerimentos?pg=diversos">Diversos</a>
+                <a class="collapse-item link" value="declaracoes" href="/view/requerimentos?pg=declaracoes">Declarações de presenças</a>
+                <div class="collapse-divider"></div>
                 <a class="collapse-item" href="#">Listar</a>
 
             </div>
         </div>
     </li>
+
 
 
     <li class="nav-item">

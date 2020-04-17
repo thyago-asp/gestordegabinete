@@ -45,22 +45,21 @@ class ControllerPessoaJuridica
         $pf->__set('telefone', $_POST['telefoneJ']);
         $pf->__set('logradouro', $_POST['logradouroJ']);
         $pf->__set('numero', $_POST['numeroJ']);
-        // $pf->__set('logradouro', $_POST['logradouro']);
         $pf->__set('complemento', $_POST['complementoJ']);
         $pf->__set('bairro', $_POST['bairroJ']);
         $pf->__set('cidade', $_POST['cidadeJ']);
         $pf->__set('estado', $_POST['estadoJ']);
         $pf->__set('atividade', $_POST['atividadeJ']);
-
+        $pf->__set('email', $_POST['email']);
        
 
-        // $result = $pf->cadastroM($pf);
+        $result = $pf->cadastroM($pf);
 
-        // if($result) {
-        //     header('location: /view/pessoas/cadastrar?cad=sucesso');
-        // } else {
-        //     header('location: /view/pessoas/cadastrar?cad=erro');
-        // }
+        if($result) {
+            header('location: /view/pessoas/cadastrar?cad=sucesso');
+        } else {
+            header('location: /view/pessoas/cadastrar?cad=erro');
+        }
         
        
     }

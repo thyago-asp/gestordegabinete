@@ -52,6 +52,7 @@ foreach ($tabela as $chave => $valor) :
                     data-cidade="<?php echo $inf['cidade'] ?>"
                     data-estado="<?php echo $inf['estado'] ?>"
                     data-arquivo="../../<?php echo $inf['arquivo'] ?>"
+
                   <?php } else { ?>
                     
                     data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>"

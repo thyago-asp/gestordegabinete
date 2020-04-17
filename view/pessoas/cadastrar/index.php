@@ -238,6 +238,13 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
+                                        <label class="form-label">E-mail</label>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="E-mail">
+
+                                            </div>
+                                        </div>
                                         <label class="form-label">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
