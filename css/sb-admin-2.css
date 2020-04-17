@@ -73,6 +73,35 @@ body {
     outline: 0 !important;
 }
 
+.fundo_login{
+    background-image: url('../img/fundo.jpg');
+    background-repeat: no-repeat;
+    background-size:100%;
+    bottom: 0;
+    color: black;
+    left: 0;
+    overflow: auto;
+    
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    background-size: cover;
+}
+
+@media (min-width: 1024px) {
+    .card-login{
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px) {
+    .card-login{
+        width: 100%;
+    }
+    
+}
+
 hr {
     box-sizing: content-box;
     height: 0;
@@ -3335,6 +3364,11 @@ input[type="button"].btn-block {
     margin-left: -1px;
 }
 
+.icon-login{
+    color: white;
+}
+
+
 .input-group-text {
     display: flex;
     align-items: center;
@@ -3346,10 +3380,26 @@ input[type="button"].btn-block {
     color: #6e707e;
     text-align: center;
     white-space: nowrap;
-    background-color: #eaecf4;
+    background: transparent;
     border: 1px solid #d1d3e2;
+    border-radius: .25rem;
     
 }
+.card-login-img{
+background-color:rgba(0, 0, 0, 1);
+}
+
+.card-login{
+
+    filter:alpha(opacity=0.85);
+    opacity: 0.85;
+    -moz-opacity:0.85;
+    -webkit-opacity:0.85;
+    background-color: rgba(6, 3, 3, 0.72) !important;
+   
+}
+
+
 
 .input-group-text input[type="radio"],
 .input-group-text input[type="checkbox"] {
@@ -4079,6 +4129,7 @@ input[type="button"].btn-block {
         padding-left: 0;
     }
 }
+
 
 @media (min-width: 768px) {
     .navbar-expand-md {
@@ -6263,7 +6314,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-    background-color: #f8f9fc !important;
+    
 }
 
 a.bg-light:hover, a.bg-light:focus,
@@ -10585,7 +10636,7 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+    background: url("../img/fundo.jpg");
     background-position: center;
     background-size: cover;
 }
