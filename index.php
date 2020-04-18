@@ -37,9 +37,9 @@ if (isset($_REQUEST["r"])) {
 </head>
 
 <body class="fundo_login">
-    <div class=" justify-content-center">
+    <div class="justify-content-center div-gestor-gabinete">
         
-            <img src="../img/gg.jpeg" width="30%" />
+            <img src="../img/Logo-GestorDeGabinete.png" id="img-gestor-gabinete"/>
         
     </div>
     <div class="container">

@@ -91,7 +91,7 @@ body {
 
 @media (min-width: 1024px) {
     .card-login{
-        width: 60%;
+        width: 40%;
     }
 }
 
@@ -102,6 +102,27 @@ body {
     
 }
 
+#img-gestor-gabinete{
+    width: 20%;
+}
+
+.div-gestor-gabinete{
+    background-color: rgba(255, 255, 255, 0.51);
+}
+
+.card-login-img{
+    background-color:rgba(0, 0, 0, 1);
+}
+    
+.card-login{
+
+    filter:alpha(opacity=0.85);
+    opacity: 0.85;
+    -moz-opacity:0.85;
+    -webkit-opacity:0.85;
+    background-color: rgba(6, 3, 3, 0.72) !important;
+    
+}
 hr {
     box-sizing: content-box;
     height: 0;
@@ -3385,19 +3406,7 @@ input[type="button"].btn-block {
     border-radius: .25rem;
     
 }
-.card-login-img{
-background-color:rgba(0, 0, 0, 1);
-}
 
-.card-login{
-
-    filter:alpha(opacity=0.85);
-    opacity: 0.85;
-    -moz-opacity:0.85;
-    -webkit-opacity:0.85;
-    background-color: rgba(6, 3, 3, 0.72) !important;
-   
-}
 
 
 
