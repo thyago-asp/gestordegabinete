@@ -59,13 +59,13 @@
         <div id="collapseReq" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div id="requerimentos" class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item link" value="pedidos" href="/view/requerimentos?pg=pedidos">Pedidos de informações</a>
-                <a class="collapse-item link" value="envio" href="/view/requerimentos?pg=envio">Envio de expediente</a>
-                <a class="collapse-item link" value="voto" href="/view/requerimentos?pg=voto">Voto de louvor e pesar</a>
-                <a class="collapse-item link" value="diversos" href="/view/requerimentos?pg=diversos">Diversos</a>
-                <a class="collapse-item link" value="declaracoes" href="/view/requerimentos?pg=declaracoes">Declarações de presenças</a>
+                <a class="collapse-item link" value="pedidos" href="/view/requerimentos/cadastrar?pg=pedidos">Pedidos de informações</a>
+                <a class="collapse-item link" value="envio" href="/view/requerimentos/cadastrar?pg=envio">Envio de expediente</a>
+                <a class="collapse-item link" value="voto" href="/view/requerimentos/cadastrar?pg=voto">Voto de louvor e pesar</a>
+                <a class="collapse-item link" value="diversos" href="/view/requerimentos/cadastrar?pg=diversos">Diversos</a>
+                <a class="collapse-item link" value="declaracoes" href="/view/requerimentos/cadastrar?pg=declaracoes">Declarações de presenças</a>
                 <div class="collapse-divider"></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/requerimentos/listar">Listar</a>
 
             </div>
         </div>

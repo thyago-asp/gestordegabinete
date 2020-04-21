@@ -28,7 +28,7 @@ if ($url == "declaracoes") {
     <h1><?php echo $titulo ?></h1>
 </div>
 <div class="card-body">
-    <form action="" method="post">
+    <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" method="post">
 
         <div class="card-body">
             <div class="panel-body">
@@ -38,7 +38,7 @@ if ($url == "declaracoes") {
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="tel" id="documento" name="document" class="form-control" placeholder="DOCUMENTO">
+                            <input type="tel" id="documento" name="documento" class="form-control" placeholder="DOCUMENTO">
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ if ($url == "declaracoes") {
                         <option value="concluido">Concluido</option>
                     </select>
                 </div>
-                <input type="hidden" value="<?php echo $input ?>">
+                <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
                 </div>

@@ -119,6 +119,6 @@ class ControllerPessoaJuridica
         } else {
             header('location: /view/pessoas/listar?excluir=erro');
         }
-        // header('location: /view/pessoas/listar');
+        
     }
 }

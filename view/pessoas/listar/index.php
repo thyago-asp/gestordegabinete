@@ -137,7 +137,7 @@ include '../../../estrutura/head.php';
                         </tfoot>
                         <tbody>
                             <!-- include estrutura da tabela -->
-                            <?php include '../../../estrutura/tabela.php'; ?>
+                            <?php include '../../../estrutura/tabelaPessoas.php'; ?>
                             <!-- fim include estrutura da tabela -->
                         </tbody>
                     </table>
