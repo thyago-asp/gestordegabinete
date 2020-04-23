@@ -73,6 +73,10 @@ body {
     outline: 0 !important;
 }
 
+.accordion-pessoas{
+    width: 15%;
+}
+
 .fundo_login{
     background-image: url('../img/fundo.jpg');
     background-repeat: no-repeat;
