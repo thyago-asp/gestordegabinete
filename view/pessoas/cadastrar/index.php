@@ -46,7 +46,7 @@ include '../../../estrutura/head.php';
                 <?php endif; ?>
 
                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                    <form id="formF" enctype="multipart/form-data" action="../../../controller/controllerPessoaFisica.php?acao=cad" method="post">
+                    <form id="formF" enctype="multipart/form-data" action="../../../controller/ControllerPessoaFisica.php?acao=cad" method="post">
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
