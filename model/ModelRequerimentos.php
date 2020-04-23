@@ -73,7 +73,7 @@ class ModelRequerimentos
 
         $stmt = $con->prepare($query);
 
-        print_r($this->__get('data'));
+        //print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
