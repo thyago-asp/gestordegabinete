@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <?php
     if ($pagina == "sub") {
         ?>
@@ -15,7 +16,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <!-- Custom styles for this template-->
         <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-
+        <link rel="shortcut icon" href="../../favicon.png" />
         <?php
     } else if ($pagina == "sub3") {
         ?>

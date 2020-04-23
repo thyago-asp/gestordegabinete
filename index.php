@@ -25,7 +25,7 @@ if (isset($_REQUEST["r"])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Deputado - Login</title>
+    <title>Gestor de Gabinete</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,14 +33,23 @@ if (isset($_REQUEST["r"])) {
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet" type="text/css">
-
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png" />
 </head>
 
 <body class="fundo_login">
     <div class="justify-content-center div-gestor-gabinete">
-        
-            <img src="../img/Logo-GestorDeGabinete.png" id="img-gestor-gabinete"/>
-        
+
+        <img src="../img/Logo-GestorDeGabinete.png" id="img-gestor-gabinete" />
+
     </div>
     <div class="container">
 
