@@ -1,4 +1,8 @@
 <?php
+$status = '';
+if (isset($_GET['cadastrar'])) {
+    $status = $_GET['cadastrar'];
+}
 
 $url = strtolower($_GET['pg']);
 if ($url == "pedidos") {
@@ -23,6 +27,17 @@ if ($url == "declaracoes") {
 }
 
 ?>
+<?php if ($status == "sucesso") : ?>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Sucesso ao cadastrar!</strong>
+    </div>
+<?php elseif ($status == "erro") : ?>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erro no cadastro verifique os campos!</strong>
+    </div>
+<?php endif; ?>
 
 <div id="pagina" class="card-header text-center h5">
     <h1><?php echo $titulo ?></h1>
@@ -96,6 +111,7 @@ if ($url == "declaracoes") {
                         <option value="concluido">Concluido</option>
                     </select>
                 </div>
+
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
