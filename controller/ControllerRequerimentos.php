@@ -27,7 +27,7 @@ class ControllerRequerimentos
     function salvarRequerimentos()
     {
         $salvar = new ModelRequerimentos();
-
+        print_r($_POST['tipo']);
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
@@ -39,8 +39,8 @@ class ControllerRequerimentos
         $salvar->__set('tipo', $_POST['tipo']);
 
         $result = $salvar->salvarModel($salvar);
-
-        header('location: /view/requerimentos/cadastrar');
+        
+        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         
 
     }
@@ -61,7 +61,7 @@ class ControllerRequerimentos
         $atualizar->__set('idt', $_POST['idtReq']);
         
         $atualizar->atualizarModel();
-        header('location: /view/requerimentos/listar');
+        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
     
     }
     function listarRequerimentos()
@@ -77,6 +77,6 @@ class ControllerRequerimentos
         $deletar->__set('tipo', $_POST['tipo']);
 
         $deletar->deletarModel($deletar);
-        header('location: /view/requerimentos/listar');
+        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }

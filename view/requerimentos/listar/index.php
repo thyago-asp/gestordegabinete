@@ -85,7 +85,7 @@ include '../../../estrutura/head.php';
                     <?php if ($status == "sucesso") : ?>
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
+                            <strong>Sucesso ao <?php echo $msg ?>!</strong>
                         </div>
                     <?php elseif ($status == "erro") : ?>
                         <div class="alert alert-danger alert-dismissible">
