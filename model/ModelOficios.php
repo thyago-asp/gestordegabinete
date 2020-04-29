@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/bancodedados/Conexao.php');
 
-class ModelRequerimentos
+class ModelOficios
 {
     private $idt;
     private $documento;
@@ -28,7 +28,7 @@ class ModelRequerimentos
     {
 
         $con = Conexao::abrirConexao();
-        $query = "INSERT INTO t_requerimentos(numDoc, solicitante, instituicao, 
+        $query = "INSERT INTO t_oficios(numDoc, solicitante, instituicao, 
                     nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
                     :data_cad_doc, :tipo, :titulo, :descricao, :status)";
@@ -56,7 +56,7 @@ class ModelRequerimentos
         $query = "SELECT idt_oficios, numDoc, solicitante, instituicao, nome_de_contato,
                     DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc, 
                     tipo, titulo, descricao, status 
-                  FROM t_requerimentos";
+                  FROM t_oficios";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -68,7 +68,7 @@ class ModelRequerimentos
     {
 
         $con = Conexao::abrirConexao();
-        $query = "UPDATE t_requerimentos 
+        $query = "UPDATE t_oficios 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
@@ -76,7 +76,6 @@ class ModelRequerimentos
 
         $stmt = $con->prepare($query);
 
-        print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
@@ -95,7 +94,7 @@ class ModelRequerimentos
     {
         $con = Conexao::abrirConexao();
 
-        $query = "DELETE FROM `t_requerimentos` WHERE idt_oficios = :idt AND tipo = :tipo";
+        $query = "DELETE FROM `t_oficios` WHERE idt_oficios = :idt AND tipo = :tipo";
         
         $stmt = $con->prepare($query);
 

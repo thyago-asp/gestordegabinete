@@ -81,11 +81,11 @@
         <div id="collapseOficios" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Informações</a>
-                <a class="collapse-item" href="#">Pedidos</a>
-                <a class="collapse-item" href="#">Respostas</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=informacoes">Informações</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=pedidos">Pedidos</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=respostas">Respostas</a>
                 <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/oficios/listar">Listar</a>
             </div>
         </div>
     </li>
