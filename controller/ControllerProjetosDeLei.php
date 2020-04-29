@@ -1,33 +1,32 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelOficios.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelProjetosDeLei.php');
 
 if (isset($_GET['acao'])) {
     switch ($_GET['acao']) {
 
         case 'salvar':
-            (new ControllerOficios())->salvarOficios();
+            (new ControllerProjetosDeLei())->salvarProjetosDeLei();
             break;
         case 'atualizar':
-            (new ControllerOficios())->atualizarOficios();
+            (new ControllerProjetosDeLei())->atualizarProjetosDeLei();
             break;
-
         case 'listar':
-            (new ControllerOficios())->listarOficios();
+            (new ControllerProjetosDeLei())->listarProjetosDeLei();
             break;
 
         case 'deletar':
-            (new ControllerOficios())->deletarOficios();
+            (new ControllerProjetosDeLei())->deletarProjetosDeLei();
             break;
     }
 }
 
-class ControllerOficios
+class ControllerProjetosDeLei
 {
 
-    function salvarOficios()
+    function salvarProjetosDeLei()
     {
         
-        $salvar = new ModelOficios();
+        $salvar = new ModelProjetosDeLei();
        
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
@@ -41,14 +40,14 @@ class ControllerOficios
 
         $result = $salvar->salvarModel($salvar);
         
-        header("location: /view/oficios/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
+        header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
         
 
     }
-    function atualizarOficios()
+    function atualizarProjetosDeLei()
     {
         
-        $atualizar = new ModelOficios();
+        $atualizar = new ModelProjetosDeLei();
 
         $atualizar->__set('documento', $_POST['documento']);
         $atualizar->__set('solicitante', $_POST['solicitante']);
@@ -62,22 +61,22 @@ class ControllerOficios
         $atualizar->__set('idt', $_POST['idtReq']);
         
         $atualizar->atualizarModel();
-        header("location: /view/oficios/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
     
     }
-    function listarOficios()
+    function listarProjetosDeLei()
     {
-        return (new ModelOficios())->listarModel();
+        return (new ModelProjetosDeLei())->listarModel();
     }
-    function deletarOficios()
+    function deletarProjetosDeLei()
     {
         print_r($_POST);
-        $deletar = new ModelOficios();
+        $deletar = new ModelProjetosDeLei();
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
 
         $deletar->deletarModel($deletar);
-        header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }
