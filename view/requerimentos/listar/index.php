@@ -213,7 +213,7 @@ include '../../../estrutura/head.php';
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Data do documento:</label>
-                    <input type="text" class="form-control" id="dataDocumento" name="dataDocumento">
+                    <input type="date" class="form-control" id="dataDocumento" name="dataDocumento">
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Descrição:</label>
@@ -239,7 +239,8 @@ include '../../../estrutura/head.php';
             modal.find('#instituicao').val(instituicao);
             modal.find(`#nomeContato`).val(nomeContato);
             modal.find('#titulo').val(titulo);
-            modal.find('#dataDocumento').val(dataDoc);
+            var dataFormatada = dataDoc.split('/').reverse().join('-');
+            modal.find('#dataDocumento').val(dataFormatada);
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
             modal.find('#idtReq').val(idtReq);

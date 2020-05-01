@@ -65,7 +65,7 @@ class PessoaFisica
                     VALUES (:logradouro, :cep, :bairro, :complemento, :numero, :cidade, :estado);
                   INSERT INTO t_pessoa(nome, email, telefone, t_endereco_idt_endereco) 
                     VALUES (:nome, :email, :telefoneF, LAST_INSERT_ID()); 
-                  INSERT INTO t_pessoa_fisica(cpf, sexo, categoria, arquivo, t_pessoa_idt_pessoa) 
+                  INSERT INTO t_pessoa_fisica(cpf, sexo, data_nascimento, categoria, arquivo, t_pessoa_idt_pessoa) 
                     VALUES(:cpf, :sexo, :categoria, :arquivo, LAST_INSERT_ID());
                  ";
 
@@ -91,6 +91,7 @@ class PessoaFisica
         
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':sexo', $this->__get('sexo'));
+        $stmt->bindValue(':data_nascimento', $this->__get('nascimento'));
         $stmt->bindValue(':categoria', $this->__get('categoria'));
 
         $stmt->bindValue(':arquivo', $this->__get('arquivo'));
@@ -104,7 +105,7 @@ class PessoaFisica
     function listarM()
     {
         $con = Conexao::abrirConexao();
-        $query = "SELECT p.*, e.*, pf.* FROM t_pessoa_fisica AS pf
+        $query = "SELECT p.*, e.*, pf.*, DATE_FORMAT(pf.data_nascimento, '%d/%m/%Y') AS data_nascimento FROM t_pessoa_fisica AS pf
                     INNER JOIN t_endereco AS e 
                     INNER JOIN t_pessoa AS p 
                     on (pf.t_pessoa_idt_pessoa = p.t_endereco_idt_endereco 
@@ -126,7 +127,7 @@ class PessoaFisica
                     WHERE idt_endereco = :idtEndereco;
                   UPDATE t_pessoa SET nome = :nome, telefone = :telefoneF, email = :email 
                     WHERE idt_pessoa = :idtPessoa AND t_endereco_idt_endereco = :fkidtEndereco;
-                  UPDATE t_pessoa_fisica SET cpf = :cpf, sexo = :sexo, categoria = :categoria,
+                  UPDATE t_pessoa_fisica SET cpf = :cpf, sexo = :sexo, data_nascimento = :data_nascimento, categoria = :categoria,
                     arquivo = :arquivo
                     WHERE idt_pessoa_fisica = :idtPF AND t_pessoa_idt_pessoa = :fkIdtPessoa
                  ";
@@ -155,6 +156,7 @@ class PessoaFisica
         // // tabela t_pessoaFisica
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':sexo', $this->__get('sexo'));
+        $stmt->bindValue(':data_nascimento', $this->__get('nascimento'));
         $stmt->bindValue(':categoria', $this->__get('categoria'));
         $stmt->bindValue(':arquivo', $this->__get('arquivo'));
 
