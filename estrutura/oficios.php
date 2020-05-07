@@ -6,15 +6,15 @@ if (isset($_GET['cadastrar'])) {
 
 $url = strtolower($_GET['pg']);
 if ($url == "pedidos") {
-    $titulo = "PEDIDOS";
+    $titulo = "Pedidos";
     $input = "pedidos";
 }
 if ($url == "informacoes") {
-    $titulo = "INFORMAÇÕES";
+    $titulo = "Informações";
     $input = "informacoes";
 }
 if ($url == "respostas") {
-    $titulo = "RESPOSTAS";
+    $titulo = "Respostas";
     $input = "respostas";
 }
 

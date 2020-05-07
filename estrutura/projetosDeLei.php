@@ -6,25 +6,25 @@ if (isset($_GET['cadastrar'])) {
 
 $url = strtolower($_GET['pg']);
 if ($url == "projetosdelei") {
-    $titulo = "PROJETOS DE LEI";
+    $titulo = "Projetos de lei";
     $input = "projetosDeLei";
 }
 if ($url == "projetosderesolucao") {
-    $titulo = "PROJETOS DE RESOLUÇÃO";
+    $titulo = "Projetos de resolução";
     $input = "projetosDeResolucao";
 }
 if ($url == "projetosdeleicomplementar") {
-    $titulo = "PROJETOS DE LEI COMPLEMENTAR";
+    $titulo = "Projetos de lei complementar";
     $input = "projetosDeLeiComplementar";
 }
 
 if ($url == "emendalegislativa") {
-    $titulo = "EMENDA LEGISLATIVA";
+    $titulo = "Emenda legislativa";
     $input = "emendaLegislativa";
 }
 
 if ($url == "emendaconstitucional") {
-    $titulo = "EMENDA CONSTITUCIONAL";
+    $titulo = "Emenda constitucional";
     $input = "emendaConstitucional";
 }
 
