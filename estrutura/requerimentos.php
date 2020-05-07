@@ -43,7 +43,7 @@ if ($url == "declaracoes") {
     <h1><?php echo $titulo ?></h1>
 </div>
 <div class="card-body">
-    <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" method="post">
+    <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" enctype="multipart/form-data" method="post">
 
         <div class="card-body">
             <div class="panel-body">
@@ -111,7 +111,13 @@ if ($url == "declaracoes") {
                         <option value="concluido">Concluido</option>
                     </select>
                 </div>
+                <label>Arquivos</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="file" class="form-control" name="arquivos[]" multiple id="arquivos">
 
+                    </div>
+                </div>
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>

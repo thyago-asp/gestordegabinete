@@ -2,8 +2,10 @@
 
 require "{$_SERVER['DOCUMENT_ROOT']}/Controller/ControllerOficios.php";
 $lista = (new ControllerOficios())->listarOficios();
-echo "<pre>";
-print_r($lista);
+$i = 0;
+
+if(array_key_exists(0, $lista[0]))
+    $totArq = count($lista[0][0]['arquivos']['nome']);
 foreach ($lista as $key => $valor) :
 ?>
         
@@ -17,6 +19,27 @@ foreach ($lista as $key => $valor) :
             <td><?php echo $valor['status'] ?></td>
             <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos"
+                    <?php if(isset($valor[0])):
+                            foreach($valor[0] as $chave => $inf):
+                                    
+                                while ($i < $totArq) {
+                                    if(array_key_exists($i, $inf['nome'])){
+                                        echo "data-nome$i='{$inf['nome'][$i]}'";
+                                        echo "data-idArq$i='{$inf['idArquivo'][$i]}'"; 
+                                        echo "data-fkOficioss$i='{$inf['fkArquivo'][$i]}'";
+                                        echo "data-linkArq$i='{$inf['linkArq'][$i]}'";
+                                    }
+                                    $i++;          
+                                }
+                                
+                                $totArq = count($inf['nome']);
+                                $i = 0; 
+                            endforeach;
+                          endif; 
+                    ?>
+                
+                ><i class="fa fa-folder-open" aria-hidden="true"></i>
                 <!-- Botão editar -->
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" 
                 

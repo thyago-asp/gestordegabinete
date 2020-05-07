@@ -45,6 +45,27 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalArquivos" tabindex="-1" role="dialog" aria-labelledby="modalArquivosLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="modalExcluirLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -159,6 +180,25 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
+          $('#modalArquivos').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+
+            var arquivo = button.data('arquivo');
+            var nomeArq = button.data('nomearquivo');
+
+            console.log(arquivo);
+            console.log(nomeArq);
+
+            $("#formularioArquivos").html(`
+
+                <a id="arq" target="_blank"></a>
+
+            `)
+            var modal = $(this);
+            modal.find("#arq").text(nomeArq);
+            modal.find("#arq").attr('href', arquivo);
+        });
+        
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
@@ -233,7 +273,7 @@ include '../../../estrutura/head.php';
             `)
 
             // seta os valores do modal
-            console.log(numDoc);
+            
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
             modal.find('#instituicao').val(instituicao);

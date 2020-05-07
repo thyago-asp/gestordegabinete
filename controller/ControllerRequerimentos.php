@@ -24,10 +24,49 @@ if (isset($_GET['acao'])) {
 class ControllerRequerimentos
 {
 
+    function arquivos($arq)
+    {
+
+        $extencoes = [
+            'pdf',
+            'doc',
+            'docx',
+            'png'
+        ];
+
+        $dir = "../bancodedados/arq/";
+
+        $arqNome = [];
+        $arqLocal = [];
+        $tdsArquivos = [];
+        $qtdArquivos = count($arq['arquivos']['name']);
+
+        $cont = 0;
+        while ($cont < $qtdArquivos) {
+
+            $arqExtencao = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_EXTENSION);
+            $arqNome[] = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_FILENAME);
+            if (in_array($arqExtencao, $extencoes)) {
+
+                $temp = $arq['arquivos']['tmp_name'][$cont];
+                $novoNome = uniqid() . ".$arqExtencao";
+                $dirImg = $dir . $novoNome;
+                move_uploaded_file($temp, $dirImg);
+                $arqLocal[] = $dirImg;
+
+                $cont++;
+            } else {
+
+                return "arquivo invalido";
+            }
+        }
+        return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
+    }
+
     function salvarRequerimentos()
     {
         $salvar = new ModelRequerimentos();
-        print_r($_POST['tipo']);
+
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
@@ -38,15 +77,25 @@ class ControllerRequerimentos
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
 
-        $result = $salvar->salvarModel($salvar);
-        
-        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
-        
+        $salvar->__set('arquivos', $this->arquivos($_FILES));
+        $salvar->salvarModel($salvar);
+        $ciclo = count($salvar->arquivos['local']);
+        $contador = 0;
+        while ($contador < $ciclo) {
 
+            $arquivos[] = [$salvar->arquivos['local'][$contador], $salvar->arquivos['nome'][$contador]];
+
+            $salvar->__set('localArquivos', $arquivos[$contador][0]);
+            $salvar->__set('nomeArquivos', $arquivos[$contador][1]);
+            $salvar->salvarArquivos();
+            $contador++;
+        }
+
+        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
     }
     function atualizarRequerimentos()
     {
-        
+
         $atualizar = new ModelRequerimentos();
 
         $atualizar->__set('documento', $_POST['documento']);
@@ -59,14 +108,35 @@ class ControllerRequerimentos
         $atualizar->__set('status', $_POST['status']);
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtReq']);
-        
+
         $atualizar->atualizarModel();
         header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
-    
     }
     function listarRequerimentos()
     {
-        return (new ModelRequerimentos())->listarModel();
+        $lista = (new ModelRequerimentos())->listarModel();
+       
+        if (isset($lista[0]['nomearquivo'])) {
+           
+            foreach ($lista as $key => $value) {
+                
+                $nome = explode(',', $value['nomearquivo']);
+                $idarquivo = explode(',', $value['idarquivo']);
+                $fkprojetosdelei = explode(',', $value['fkrequerimentos']);
+                $link = explode(',', $value['caminho_arquivo']);
+                $a['arquivos'] = [
+                    "nome" => $nome,
+                    "idArquivo" => $idarquivo,
+                    "fkArquivo" => $fkprojetosdelei,
+                    "linkArq" => $link
+                ];
+
+                array_push($lista[$key], $a);
+            }   
+            return $lista;
+        } else {
+            return $lista;
+        }
     }
     function deletarRequerimentos()
     {
