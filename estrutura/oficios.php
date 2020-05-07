@@ -6,25 +6,18 @@ if (isset($_GET['cadastrar'])) {
 
 $url = strtolower($_GET['pg']);
 if ($url == "pedidos") {
-    $titulo = "Pedidos de informações";
+    $titulo = "PEDIDOS";
     $input = "pedidos";
 }
-if ($url == "envio") {
-    $titulo = "Envio de expedientes";
-    $input = "envio";
+if ($url == "informacoes") {
+    $titulo = "INFORMAÇÕES";
+    $input = "informacoes";
 }
-if ($url == "voto") {
-    $titulo = "VOTO DE LOUVOR E PESAR";
-    $input = "voto";
+if ($url == "respostas") {
+    $titulo = "RESPOSTAS";
+    $input = "respostas";
 }
-if ($url == "diversos") {
-    $titulo = "DIVERSOS";
-    $input = "diversos";
-}
-if ($url == "declaracoes") {
-    $titulo = "DECLARAÇÕES DE PRESENÇA";
-    $input = "declaracoes";
-}
+
 
 ?>
 <?php if ($status == "sucesso") : ?>
@@ -43,7 +36,7 @@ if ($url == "declaracoes") {
     <h1><?php echo $titulo ?></h1>
 </div>
 <div class="card-body">
-    <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" method="post">
+    <form action="../../../controller/ControllerOficios.php?acao=salvar" method="post">
 
         <div class="card-body">
             <div class="panel-body">
@@ -112,7 +105,7 @@ if ($url == "declaracoes") {
                     </select>
                 </div>
 
-                <input type="hidden" name="tipo" value="<?php echo $input ?>">
+                <input type="hidden" name="pagina" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
                 </div>

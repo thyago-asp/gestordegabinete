@@ -1,33 +1,34 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelRequerimentos.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelOficios.php');
 
 if (isset($_GET['acao'])) {
     switch ($_GET['acao']) {
 
         case 'salvar':
-            (new ControllerRequerimentos())->salvarRequerimentos();
+            (new ControllerOficios())->salvarOficios();
             break;
         case 'atualizar':
-            (new ControllerRequerimentos())->atualizarRequerimentos();
+            (new ControllerOficios())->atualizarOficios();
             break;
 
         case 'listar':
-            (new ControllerRequerimentos())->listarRequerimentos();
+            (new ControllerOficios())->listarOficios();
             break;
 
         case 'deletar':
-            (new ControllerRequerimentos())->deletarRequerimentos();
+            (new ControllerOficios())->deletarOficios();
             break;
     }
 }
 
-class ControllerRequerimentos
+class ControllerOficios
 {
 
-    function salvarRequerimentos()
+    function salvarOficios()
     {
-        $salvar = new ModelRequerimentos();
-        //print_r($_POST['tipo']);
+        
+        $salvar = new ModelOficios();
+       
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
@@ -36,18 +37,18 @@ class ControllerRequerimentos
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
-        $salvar->__set('tipo', $_POST['tipo']);
+        $salvar->__set('tipo', $_POST['pagina']);
 
         $result = $salvar->salvarModel($salvar);
         
-        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+        header("location: /view/oficios/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
         
 
     }
-    function atualizarRequerimentos()
+    function atualizarOficios()
     {
         
-        $atualizar = new ModelRequerimentos();
+        $atualizar = new ModelOficios();
 
         $atualizar->__set('documento', $_POST['documento']);
         $atualizar->__set('solicitante', $_POST['solicitante']);
@@ -61,22 +62,22 @@ class ControllerRequerimentos
         $atualizar->__set('idt', $_POST['idtReq']);
         
         $atualizar->atualizarModel();
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        header("location: /view/oficios/listar?pg={$_POST['tipo']}&atualizar=sucesso");
     
     }
-    function listarRequerimentos()
+    function listarOficios()
     {
-        return (new ModelRequerimentos())->listarModel();
+        return (new ModelOficios())->listarModel();
     }
-    function deletarRequerimentos()
+    function deletarOficios()
     {
-        //print_r($_POST);
-        $deletar = new ModelRequerimentos();
+        print_r($_POST);
+        $deletar = new ModelOficios();
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
 
         $deletar->deletarModel($deletar);
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }

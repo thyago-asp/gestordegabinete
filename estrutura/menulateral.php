@@ -81,11 +81,11 @@
         <div id="collapseOficios" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Informações</a>
-                <a class="collapse-item" href="#">Pedidos</a>
-                <a class="collapse-item" href="#">Respostas</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=informacoes">Informações</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=pedidos">Pedidos</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=respostas">Respostas</a>
                 <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/oficios/listar">Listar</a>
             </div>
         </div>
     </li>
@@ -99,13 +99,13 @@
         <div id="collapsePL" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Projetos de lei</a>
-                <a class="collapse-item" href="#">Projetos de resolução</a>
-                <a class="collapse-item" href="#">Projetos de lei complementar</a>
-                <a class="collapse-item" href="#">Emenda legislativa</a>
-                <a class="collapse-item" href="#">Emenda constitucional</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeLei">Projetos de lei</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeResolucao">Projetos de resolução</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeLeiComplementar">Projetos de lei complementar</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=emendaLegislativa">Emenda legislativa</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=emendaConstitucional">Emenda constitucional</a>
                 <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/projetosDeLei/listar">Listar</a>
 
             </div>
         </div>

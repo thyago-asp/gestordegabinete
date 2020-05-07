@@ -5,26 +5,29 @@ if (isset($_GET['cadastrar'])) {
 }
 
 $url = strtolower($_GET['pg']);
-if ($url == "pedidos") {
-    $titulo = "Pedidos de informações";
-    $input = "pedidos";
+if ($url == "projetosdelei") {
+    $titulo = "PROJETOS DE LEI";
+    $input = "projetosDeLei";
 }
-if ($url == "envio") {
-    $titulo = "Envio de expedientes";
-    $input = "envio";
+if ($url == "projetosderesolucao") {
+    $titulo = "PROJETOS DE RESOLUÇÃO";
+    $input = "projetosDeResolucao";
 }
-if ($url == "voto") {
-    $titulo = "VOTO DE LOUVOR E PESAR";
-    $input = "voto";
+if ($url == "projetosdeleicomplementar") {
+    $titulo = "PROJETOS DE LEI COMPLEMENTAR";
+    $input = "projetosDeLeiComplementar";
 }
-if ($url == "diversos") {
-    $titulo = "DIVERSOS";
-    $input = "diversos";
+
+if ($url == "emendalegislativa") {
+    $titulo = "EMENDA LEGISLATIVA";
+    $input = "emendaLegislativa";
 }
-if ($url == "declaracoes") {
-    $titulo = "DECLARAÇÕES DE PRESENÇA";
-    $input = "declaracoes";
+
+if ($url == "emendaconstitucional") {
+    $titulo = "EMENDA CONSTITUCIONAL";
+    $input = "emendaConstitucional";
 }
+
 
 ?>
 <?php if ($status == "sucesso") : ?>
@@ -43,7 +46,7 @@ if ($url == "declaracoes") {
     <h1><?php echo $titulo ?></h1>
 </div>
 <div class="card-body">
-    <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" method="post">
+    <form action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">
 
         <div class="card-body">
             <div class="panel-body">
@@ -112,7 +115,7 @@ if ($url == "declaracoes") {
                     </select>
                 </div>
 
-                <input type="hidden" name="tipo" value="<?php echo $input ?>">
+                <input type="hidden" name="pagina" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
                 </div>

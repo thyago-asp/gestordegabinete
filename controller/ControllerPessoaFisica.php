@@ -71,7 +71,7 @@ class ControllerPessoaFisica
 
         $pf->__set('cpf', $_POST['CPF']);
 
-       
+        
 
         $resultado = $pf->cadastroM($pf);
 
@@ -103,6 +103,7 @@ class ControllerPessoaFisica
         $pf->__set('categoria', $_POST['n_categoria_editado']);
         $pf->__set('cpf', $_POST['n_cpf_editado']);
         $pf->__set('sexo', $_POST['n_sexo_editado']);
+        $pf->__set('nascimento', $_POST['n_nascimento_editado']);
         $pf->__set('idtPF', $_POST['n_idtPF_editado']);
         $pf->__set('fkIdtEndereco', $_POST['n_fkEndereco_editado']);
 
@@ -112,6 +113,8 @@ class ControllerPessoaFisica
         $pf->__set('telefoneF', $_POST['n_telefone_editado']);
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
+        echo "<pre>";
+        print_r($_POST);
     
         if($_FILES['imagem']['error'] == 4) {
             $arquivo = str_replace("../", "", $_POST['manterImg']);

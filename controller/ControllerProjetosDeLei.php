@@ -1,33 +1,33 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelRequerimentos.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelProjetosDeLei.php');
 
 if (isset($_GET['acao'])) {
     switch ($_GET['acao']) {
 
         case 'salvar':
-            (new ControllerRequerimentos())->salvarRequerimentos();
+            (new ControllerProjetosDeLei())->salvarProjetosDeLei();
             break;
         case 'atualizar':
-            (new ControllerRequerimentos())->atualizarRequerimentos();
+            (new ControllerProjetosDeLei())->atualizarProjetosDeLei();
             break;
-
         case 'listar':
-            (new ControllerRequerimentos())->listarRequerimentos();
+            (new ControllerProjetosDeLei())->listarProjetosDeLei();
             break;
 
         case 'deletar':
-            (new ControllerRequerimentos())->deletarRequerimentos();
+            (new ControllerProjetosDeLei())->deletarProjetosDeLei();
             break;
     }
 }
 
-class ControllerRequerimentos
+class ControllerProjetosDeLei
 {
 
-    function salvarRequerimentos()
+    function salvarProjetosDeLei()
     {
-        $salvar = new ModelRequerimentos();
-        //print_r($_POST['tipo']);
+        
+        $salvar = new ModelProjetosDeLei();
+       
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
@@ -36,18 +36,18 @@ class ControllerRequerimentos
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
-        $salvar->__set('tipo', $_POST['tipo']);
+        $salvar->__set('tipo', $_POST['pagina']);
 
         $result = $salvar->salvarModel($salvar);
         
-        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+        header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
         
 
     }
-    function atualizarRequerimentos()
+    function atualizarProjetosDeLei()
     {
         
-        $atualizar = new ModelRequerimentos();
+        $atualizar = new ModelProjetosDeLei();
 
         $atualizar->__set('documento', $_POST['documento']);
         $atualizar->__set('solicitante', $_POST['solicitante']);
@@ -61,22 +61,22 @@ class ControllerRequerimentos
         $atualizar->__set('idt', $_POST['idtReq']);
         
         $atualizar->atualizarModel();
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
     
     }
-    function listarRequerimentos()
+    function listarProjetosDeLei()
     {
-        return (new ModelRequerimentos())->listarModel();
+        return (new ModelProjetosDeLei())->listarModel();
     }
-    function deletarRequerimentos()
+    function deletarProjetosDeLei()
     {
-        //print_r($_POST);
-        $deletar = new ModelRequerimentos();
+        print_r($_POST);
+        $deletar = new ModelProjetosDeLei();
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
 
         $deletar->deletarModel($deletar);
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }

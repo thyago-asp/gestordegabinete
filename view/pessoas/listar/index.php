@@ -117,10 +117,10 @@ include '../../../estrutura/head.php';
                             <tr>
                                 <th>Nome</th>
                                 <th>Telefone</th>
-                                <th>Bairro</th>
-                                <th>Endereço</th>
+                                <th>Data de nascimento</th>
                                 <th>Cidade</th>
                                 <th>Estado</th>
+                                <th>Categoria</th>
                                 <th>ações</th>
                             </tr>
                         </thead>
@@ -173,18 +173,18 @@ include '../../../estrutura/head.php';
             // var idt_pessoa = button.data('idt_pessoa')
             // Extract info from data-* attributes
             // pessoa
-            var nome = button.data('nome')
-            var idtPessoa = button.data('idt_pessoa')
+            var nome = button.data('nome');
+            var idtPessoa = button.data('idt_pessoa');
             var email = button.data('email')
-            var telefone = button.data('telefone')
-            var fkIdtEndereco = button.data('t_endereco_idt_endereco')
-
+            var telefone = button.data('telefone');
+            var fkIdtEndereco = button.data('t_endereco_idt_endereco');
             // pessoa fisica
-            var cpf = button.data('cpf')
-            var sexo = button.data('sexo')
+            var cpf = button.data('cpf');
+            var sexo = button.data('sexo');
+            var nascimento = button.data('nascimento');
             
-            var idtPF = button.data('idt_pessoa_fisica')
-            var categoria = button.data('categoria')
+            var idtPF = button.data('idt_pessoa_fisica');
+            var categoria = button.data('categoria');
 
             // pessoa juridica
 
@@ -194,15 +194,15 @@ include '../../../estrutura/head.php';
 
 
             // endereco
-            var idtEndereco = button.data('idt_endereco')
-            var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
-            var cep = button.data('cep')
-            var complemento = button.data('complemento')
-            var endereco = button.data('endereco')
-            var logradouro = button.data('logradouro')
-            var bairro = button.data('bairro')
-            var cidade = button.data('cidade')
-            var estado = button.data('estado')
+            var idtEndereco = button.data('idt_endereco');
+            var fkIdtPessoa = button.data('t_pessoa_idt_pessoa');
+            var cep = button.data('cep');
+            var complemento = button.data('complemento');
+            var endereco = button.data('endereco');
+            var logradouro = button.data('logradouro');
+            var bairro = button.data('bairro');
+            var cidade = button.data('cidade');
+            var estado = button.data('estado');
             var numero = button.data('numero');
 
             // pessoa juridica
@@ -249,6 +249,10 @@ include '../../../estrutura/head.php';
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">CPF:</label>
                             <input type="text" class="form-control" id="n_cpf_editado" name="n_cpf_editado">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Data de nascimento:</label>
+                            <input type="date" class="form-control" id="n_nascimento_editado" name="n_nascimento_editado">
                         </div>
                         <label class="form-label">Categoria</label>
                         <div class="row clearfix">
@@ -385,14 +389,20 @@ include '../../../estrutura/head.php';
             modal.find('#imagem').attr('src', img);
             
             modal.find('#manterImg').val(img);
+            
+            var data = (nascimento);
+            var dataFormatada = data.split("/").reverse().join('-')
+           
+
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
             modal.find('#n_fantasia_editado').val(nomeFantasia);
             modal.find('#n_atividade_editado').val(atividade)
+          
 
             // estado
-            
+            modal.find('#n_nascimento_editado').val(dataFormatada);
             modal.find('#n_logradouro_editado').val(endereco);
             modal.find('#n_complemento_editado').val(complemento);
             modal.find('#n_numero_editado').val(numero);
