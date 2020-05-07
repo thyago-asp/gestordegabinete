@@ -1,6 +1,6 @@
 <?php
 
-require "{$_SERVER['DOCUMENT_ROOT']}/Controller/ControllerProjetosDeLei.php";
+require "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerProjetosDeLei.php";
 $lista = (new ControllerProjetosDeLei())->listarProjetosDeLei();
 
 foreach ($lista as $key => $valor) :
