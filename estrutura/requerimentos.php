@@ -14,15 +14,15 @@ if ($url == "envio") {
     $input = "envio";
 }
 if ($url == "voto") {
-    $titulo = "VOTO DE LOUVOR E PESAR";
+    $titulo = "Voto de louvor e pesar";
     $input = "voto";
 }
 if ($url == "diversos") {
-    $titulo = "DIVERSOS";
+    $titulo = "Diversos";
     $input = "diversos";
 }
 if ($url == "declaracoes") {
-    $titulo = "DECLARAÇÕES DE PRESENÇA";
+    $titulo = "Declarações de presença";
     $input = "declaracoes";
 }
 

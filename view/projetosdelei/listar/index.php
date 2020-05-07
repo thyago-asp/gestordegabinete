@@ -98,7 +98,7 @@ include '../../../estrutura/head.php';
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Lista de projetos de lei</h1>
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@ include '../../../estrutura/head.php';
                                 <th>Número do documento</th>
                                 <th>Solicitante</th>
                                 <th>Instituição</th>
-                                <th>Nome do contato</th>
+                                <th>Tipo</th>
                                 <th>Data de cadastro</th>
                                 <th>Titulo</th>
                                 <th>Status</th>
@@ -123,7 +123,7 @@ include '../../../estrutura/head.php';
                                 <th>Número do documento</th>
                                 <th>Solicitante</th>
                                 <th>Instituição</th>
-                                <th>Nome do contato</th>
+                                <th>Tipo</th>
                                 <th>Data de cadastro</th>
                                 <th>Titulo</th>
                                 <th>Status</th>

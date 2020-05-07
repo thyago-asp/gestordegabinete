@@ -77,6 +77,20 @@ body {
     width: 15%;
 }
 
+.menulateral .nav-item.active .nav-link {
+    color: #fff;
+    
+}
+
+.menulateral .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.menulateral .sidebar-heading {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
 .fundo_login{
     background-image: url('../img/fundo.jpg');
     background-repeat: no-repeat;

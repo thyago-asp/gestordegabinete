@@ -96,34 +96,34 @@ include '../../../estrutura/head.php';
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Lista de requerimentos</h1>
                     </div>
                 </div>
 
-               
+
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
                         <thead>
                             <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
+                                <th>Solicitante</th>
+                                <th>Instituicao</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Titulo</th>
+                                <th>Numero do documento</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
+                                <th>Solicitante</th>
+                                <th>Instituicao</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Titulo</th>
+                                <th>Numero do documento</th>
+                                <th>Ações</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -177,7 +177,7 @@ include '../../../estrutura/head.php';
             var status = button.data('status');
 
             var atividade = button.data('atividade');
-            
+
 
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -269,12 +269,12 @@ include '../../../estrutura/head.php';
 
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
-            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: "+ numDoc +"  do sistema ?")
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
 
             // modal.find('#idtReq').val(numdoc);
             modal.find('#idtReq').val(idtReq);
             modal.find('#tipo').val(tipo);
-            
+
 
         });
     </script>

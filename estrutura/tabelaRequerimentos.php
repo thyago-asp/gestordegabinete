@@ -14,7 +14,7 @@ foreach ($req as $chave => $valor) :
     <tr>
         <td><?php echo $valor['solicitante'] ?></td>
         <td><?php echo $valor['instituicao'] ?></td>
-        <td><?php echo $valor['nome_de_contato'] ?></td>
+        <td><?php echo $valor['tipo'] ?></td>
         <td><?php echo $valor['data_cad_doc'] ?></td>
         <td><?php echo $valor['titulo'] ?></td>
         <td><?php echo $valor['numDoc'] ?></td>
@@ -27,7 +27,7 @@ foreach ($req as $chave => $valor) :
                         data-numDoc="<?php echo $valor['numDoc'] ?>" 
                         data-solicitante="<?php echo $valor['solicitante'] ?>" 
                         data-instituicao="<?php echo $valor['instituicao'] ?>" 
-                        data-nomeContato="<?php echo $valor['nome_de_contato'] ?>" 
+                        data-nomeContato="<?php echo $valor['tipo'] ?>" 
                         data-dataDoc="<?php echo $valor['data_cad_doc'] ?>" 
                         data-tipo="<?php echo $valor['tipo'] ?>" 
                         data-titulo="<?php echo $valor['titulo'] ?>" 

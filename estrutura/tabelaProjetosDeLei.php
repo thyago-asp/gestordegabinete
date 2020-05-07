@@ -10,7 +10,7 @@ foreach ($lista as $key => $valor) :
         <td><?php echo $valor['numDoc'] ?></td>
         <td><?php echo $valor['solicitante'] ?></td>
         <td><?php echo $valor['instituicao'] ?></td>
-        <td><?php echo $valor['nome_de_contato'] ?></td>
+        <td><?php echo $valor['tipo'] ?></td>
         <td><?php echo $valor['data_cad_doc'] ?></td>
         <td><?php echo $valor['titulo'] ?></td>
         <td><?php echo $valor['status'] ?></td>

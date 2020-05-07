@@ -66,7 +66,7 @@ class PessoaFisica
                   INSERT INTO t_pessoa(nome, email, telefone, t_endereco_idt_endereco) 
                     VALUES (:nome, :email, :telefoneF, LAST_INSERT_ID()); 
                   INSERT INTO t_pessoa_fisica(cpf, sexo, data_nascimento, categoria, arquivo, t_pessoa_idt_pessoa) 
-                    VALUES(:cpf, :sexo, :categoria, :arquivo, LAST_INSERT_ID());
+                    VALUES(:cpf, :sexo, :data_nascimento, :categoria, :arquivo, LAST_INSERT_ID());
                  ";
 
         // prepara a query 
