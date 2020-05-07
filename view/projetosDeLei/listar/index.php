@@ -34,8 +34,9 @@ include '../../../estrutura/head.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioEnviar" method="post">
+                <form action="../../../controller/ControllerProjetosDeLei.php?acao=atualizar" enctype="multipart/form-data" id="formularioEnviar" method="post">
                     <div class="modal-body">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -49,13 +50,14 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalExcluirLabel">Excluir Requerimento</h5>
+                    <h5 class="modal-title" id="modalExcluirLabel">Resetar senha</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerRequerimentos.php?acao=deletar" id="formularioExcluir" method="post">
+                <form action="../../../controller/ControllerProjetosDeLei.php?acao=deletar" id="formularioExcluir" method="post">
                     <div class="modal-body">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -85,7 +87,7 @@ include '../../../estrutura/head.php';
                     <?php if ($status == "sucesso") : ?>
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?>!</strong>
+                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
                         </div>
                     <?php elseif ($status == "erro") : ?>
                         <div class="alert alert-danger alert-dismissible">
@@ -106,29 +108,31 @@ include '../../../estrutura/head.php';
 
                         <thead>
                             <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
+                                <th>Número do documento</th>
+                                <th>Solicitante</th>
+                                <th>Instituição</th>
+                                <th>Nome do contato</th>
+                                <th>Data de cadastro</th>
+                                <th>Titulo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
+                                <th>Número do documento</th>
+                                <th>Solicitante</th>
+                                <th>Instituição</th>
+                                <th>Nome do contato</th>
+                                <th>Data de cadastro</th>
+                                <th>Titulo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <!-- include estrutura da tabela -->
-                            <?php include '../../../estrutura/tabelaRequerimentos.php'; ?>
+                            <?php include '../../../estrutura/tabelaProjetosDeLei.php'; ?>
                             <!-- fim include estrutura da tabela -->
                         </tbody>
                     </table>
@@ -177,7 +181,7 @@ include '../../../estrutura/head.php';
             var status = button.data('status');
 
             var atividade = button.data('atividade');
-            
+
 
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -269,12 +273,12 @@ include '../../../estrutura/head.php';
 
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
-            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: "+ numDoc +"  do sistema ?")
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
 
             // modal.find('#idtReq').val(numdoc);
             modal.find('#idtReq').val(idtReq);
             modal.find('#tipo').val(tipo);
-            
+
 
         });
     </script>
