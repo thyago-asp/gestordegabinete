@@ -1,12 +1,10 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerRequerimentos.php';
 
-
-// instancia do controller de PJ
 $req = (new ControllerRequerimentos())->listarRequerimentos();
+$i = 0;
+$totArq = count($req[0][0]['arquivos']['nome']);
 
-// foreach dentro de outro para remover o primeiro indice do array
-// e deixar percorrer a partir das informacoes que interessam
 
 foreach ($req as $chave => $valor) :
 ?>
@@ -21,6 +19,25 @@ foreach ($req as $chave => $valor) :
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos"
+                        <?php foreach($valor[0] as $chave => $inf):
+                                
+                                while ($i < $totArq) {
+                                    if(array_key_exists($i, $inf['nome'])){
+                                        echo "data-nome$i='{$inf['nome'][$i]}'";
+                                        echo "data-idArq$i='{$inf['idArquivo'][$i]}'"; 
+                                        echo "data-fkrequerimentos$i='{$inf['fkArquivo'][$i]}'";
+                                        echo "data-linkArq$i='{$inf['linkArq'][$i]}'";
+                                    }
+                                    $i++;          
+                                }
+                                
+                                $totArq = count($inf['nome']);
+                                $i = 0; 
+                            endforeach; ?>
+                    
+                ><i class="fa fa-folder-open" aria-hidden="true"></i>
+                </button>
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" 
                 
                         data-idtReq="<?php echo $valor['idt_oficios'] ?>" 
