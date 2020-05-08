@@ -204,7 +204,7 @@ include '../../../estrutura/head.php';
                 button.data('fkrprojetosdelei0'),
             ]
 
-            var idArq = [
+            var idtArq = [
                 button.data('idarq0'),
                 button.data('idarq1'),
                 button.data('idarq2'),
@@ -217,23 +217,39 @@ include '../../../estrutura/head.php';
                 arq: {
                     "nome": arquivo,
                     "link": link,
-                    "idtArq": idArq
+                    "idtArq": idtArq
                 }
             }
 
             var i = 0;
-            var cont = 0;
+            var tot = arq.arq.idtArq
+            var a = 0;
+            for (let index = 0; index < tot.length; index++) {
+                const element = tot[index];
+                if (element == undefined) {
+                    var tamValido = a++;
+                    console.log(tamValido)
+                }
+
+            }
             var tamanho = (arq.arq.nome.length);
 
+            var cont = tamanho - tamValido - 1;
+
+            $("#formularioArquivos .modal-body").html('');
 
             $.each(arq, (chave, valor) => {
-                $("#formularioArquivos .modal-body").html(() => {
-                    return `
-                        <a href="../../${valor.link[i]}" target="_blank">${valor.nome[i]}</a>   
-                    `
-                    i++;
-                })
 
+                while (i < cont) {
+
+                    $('#formularioArquivos .modal-body').append(`
+                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><input type="text  "><br>   
+                    `)
+                    i++;
+
+                }
+
+                i = 0;
             })
 
         });
