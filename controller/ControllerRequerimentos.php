@@ -40,7 +40,7 @@ class ControllerRequerimentos
         $arqLocal = [];
         $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
-
+        
         $cont = 0;
         while ($cont < $qtdArquivos) {
 
@@ -53,14 +53,15 @@ class ControllerRequerimentos
                 $dirImg = $dir . $novoNome;
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
-
+               
                 $cont++;
             } else {
-
+                 
                 return "arquivo invalido";
             }
         }
-        return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
+        
+        return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);
     }
 
     function salvarRequerimentos()

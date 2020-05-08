@@ -3,7 +3,10 @@
 require "{$_SERVER['DOCUMENT_ROOT']}/Controller/ControllerProjetosDeLei.php";
 
 $lista = (new ControllerProjetosDeLei())->listarProjetosDeLei();
-$totArq = count($lista[0][0]['arquivos']['nome']);
+if(!isset($lista[0][0]['arquivo']['nome']))
+    $totArq = 1;
+else
+    $totArq = count($lista[0][0]['arquivos']['nome']);
 $i = 0;
 
 foreach ($lista as $key => $valor) :

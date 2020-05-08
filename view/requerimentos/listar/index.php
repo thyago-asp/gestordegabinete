@@ -182,21 +182,72 @@ include '../../../estrutura/head.php';
     <script>
           $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
+            var arquivo = [
+                button.data('nome0'),
+                button.data('nome1'),
+                button.data('nome2'),
+                button.data('nome3'),
+                button.data('nome4'),
+            ];
+            var link = [
+                button.data('linkarq0'),
+                button.data('linkarq1'),
+                button.data('linkarq2'),
+                button.data('linkarq3'),
+                button.data('linkarq4'),
+            ]
+            var fkidt = [
+                button.data('fkrprojetosdelei0'),
+            ]
 
-            var arquivo = button.data('arquivo');
-            var nomeArq = button.data('nomearquivo');
+            var idtArq = [
+                button.data('idarq0'),
+                button.data('idarq1'),
+                button.data('idarq2'),
+                button.data('idarq3'),
+                button.data('idarq4'),
+            ]
 
-            console.log(arquivo);
-            console.log(nomeArq);
 
-            $("#formularioArquivos").html(`
+            var arq = {
+                arq: {
+                    "nome": arquivo,
+                    "link": link,
+                    "idtArq": idtArq
+                }
+            }
 
-                <a id="arq" target="_blank"></a>
+            var i = 0;
+            var tot = arq.arq.idtArq
+            var a = 0;
+            for (let index = 0; index < tot.length; index++) {
+                const element = tot[index];
+                if (element == undefined) {
+                    var tamValido = a++;
+                    console.log(tamValido)
+                }
 
-            `)
-            var modal = $(this);
-            modal.find("#arq").text(nomeArq);
-            modal.find("#arq").attr('href', arquivo);
+            }
+            var tamanho = (arq.arq.nome.length);
+
+            var cont = tamanho - tamValido - 1;
+
+            $("#formularioArquivos .modal-body").html('');
+
+            $.each(arq, (chave, valor) => {
+
+                while (i < cont) {
+
+                    $('#formularioArquivos .modal-body').append(`
+                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><br>   
+                    `)
+                    i++;
+
+                }
+
+                i = 0;
+            })
+
         });
         
         $('#modalEdicao').on('show.bs.modal', function(event) {
