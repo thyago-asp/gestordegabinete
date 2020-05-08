@@ -46,6 +46,27 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalArquivos" tabindex="-1" role="dialog" aria-labelledby="modalArquivosLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerProjetosDeLei.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="modalExcluirLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -163,6 +184,76 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
+        $('#modalArquivos').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var arquivo = [
+                button.data('nome0'),
+                button.data('nome1'),
+                button.data('nome2'),
+                button.data('nome3'),
+                button.data('nome4'),
+            ];
+            var link = [
+                button.data('linkarq0'),
+                button.data('linkarq1'),
+                button.data('linkarq2'),
+                button.data('linkarq3'),
+                button.data('linkarq4'),
+            ]
+            var fkidt = [
+                button.data('fkrprojetosdelei0'),
+            ]
+
+            var idtArq = [
+                button.data('idarq0'),
+                button.data('idarq1'),
+                button.data('idarq2'),
+                button.data('idarq3'),
+                button.data('idarq4'),
+            ]
+
+
+            var arq = {
+                arq: {
+                    "nome": arquivo,
+                    "link": link,
+                    "idtArq": idtArq
+                }
+            }
+
+            var i = 0;
+            var tot = arq.arq.idtArq
+            var a = 0;
+            for (let index = 0; index < tot.length; index++) {
+                const element = tot[index];
+                if (element == undefined) {
+                    var tamValido = a++;
+                    console.log(tamValido)
+                }
+
+            }
+            var tamanho = (arq.arq.nome.length);
+
+            var cont = tamanho - tamValido - 1;
+
+            $("#formularioArquivos .modal-body").html('');
+
+            $.each(arq, (chave, valor) => {
+
+                while (i < cont) {
+
+                    $('#formularioArquivos .modal-body').append(`
+                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><input type="text  "><br>   
+                    `)
+                    i++;
+
+                }
+
+                i = 0;
+            })
+
+        });
+
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 

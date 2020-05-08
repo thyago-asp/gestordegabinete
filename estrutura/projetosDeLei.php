@@ -46,7 +46,7 @@ if ($url == "emendaconstitucional") {
     <h1><?php echo $titulo ?></h1>
 </div>
 <div class="card-body">
-    <form action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">
+    <form enctype="multipart/form-data" action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">
 
         <div class="card-body">
             <div class="panel-body">
@@ -114,7 +114,13 @@ if ($url == "emendaconstitucional") {
                         <option value="concluido">Concluido</option>
                     </select>
                 </div>
+                <label>Arquivos</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="file" class="form-control" name="arquivos[]" multiple id="arquivos">
 
+                    </div>
+                </div>
                 <input type="hidden" name="pagina" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>

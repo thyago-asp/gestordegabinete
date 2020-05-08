@@ -13,6 +13,8 @@ class ModelOficios
     private $data;
     private $descricao;
     private $status;
+    private $localArquivos;
+    private $nomeArquivos;
 
     function __set($valor, $atributo)
     {
@@ -22,6 +24,34 @@ class ModelOficios
     function __get($atributo)
     {
         return $this->$atributo;
+    }
+
+    function salvarArquivos() {
+    
+        $con = Conexao::abrirConexao();
+
+        $query = "INSERT INTO t_arquivos_oficios(arquivo_caminho, nome_arquivo, t_oficios_idt_oficios) 
+                    VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':arquivo_caminho', $this->__get('localArquivos'));
+        $stmt->bindValue(':nome_arquivo', $this->__get('nomeArquivos'));
+        $stmt->bindValue(':ultimoid', $this->selecionarId());
+        
+        $stmt->execute();
+
+    } 
+
+    function selecionarId() {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT MAX(idt_oficios) AS ultimoid FROM t_oficios";
+        
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        return  $result['ultimoid'];
     }
 
     function salvarModel()
@@ -48,15 +78,26 @@ class ModelOficios
         $stmt->execute();
     }
 
+   
 
     function listarModel()
     {
 
         $con = Conexao::abrirConexao();
-        $query = "SELECT idt_oficios, numDoc, solicitante, instituicao, nome_de_contato,
-                    DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc, 
-                    tipo, titulo, descricao, status 
-                  FROM t_oficios";
+        $query = "SELECT p.idt_oficios, p.numDoc, p.solicitante, p.instituicao, p.nome_de_contato,
+                    DATE_FORMAT(p.data_cad_doc, '%d/%m/%Y') AS data_cad_doc,
+                    p.tipo, p.titulo, p.descricao, p.status,
+                    GROUP_CONCAT(a.idarquivos SEPARATOR ',')
+                    AS idarquivo,
+                    GROUP_CONCAT(a.nome_arquivo SEPARATOR ',')
+                    AS nomearquivo,
+                    GROUP_CONCAT(a.t_oficios_idt_oficios SEPARATOR ',')
+                    AS fkoficios,
+                    GROUP_CONCAT(a.arquivo_caminho SEPARATOR ',')
+                    AS caminho_arquivo
+                    FROM t_oficios AS p
+                    LEFT JOIN t_arquivos_oficios as a
+                    ON (a.t_oficios_idt_oficios = p.idt_oficios) GROUP BY p.idt_oficios";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
