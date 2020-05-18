@@ -243,7 +243,7 @@ include '../../../estrutura/head.php';
                 while (i < cont) {
 
                     $('#formularioArquivos .modal-body').append(`
-                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><input type="text  "><br>   
+                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><br>   
                     `)
                     i++;
 

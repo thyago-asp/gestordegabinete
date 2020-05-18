@@ -2,8 +2,13 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerRequerimentos.php';
 
 $req = (new ControllerRequerimentos())->listarRequerimentos();
+
+if(!isset($req[0][0]['arquivo']['nome']))
+    $totArq = 1;
+else
+    $totArq = count($req[0][0]['arquivos']['nome']);
+
 $i = 0;
-$totArq = count($req[0][0]['arquivos']['nome']);
 
 
 foreach ($req as $chave => $valor) :

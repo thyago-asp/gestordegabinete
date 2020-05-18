@@ -32,7 +32,7 @@ class ControllerOficios
             'docx',
             'png'
         ];
-
+        print_r($arq);
         $dir = "../bancodedados/arq/";
 
         $arqNome = [];
