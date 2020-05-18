@@ -40,7 +40,7 @@ class ControllerProjetosDeLei
         $arqLocal = [];
         $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
-
+        print_r($arq);
         $cont = 0;
         while ($cont < $qtdArquivos) {
 

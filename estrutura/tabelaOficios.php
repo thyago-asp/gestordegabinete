@@ -3,9 +3,11 @@
 require "{$_SERVER['DOCUMENT_ROOT']}/Controller/ControllerOficios.php";
 $lista = (new ControllerOficios())->listarOficios();
 $i = 0;
-
-if(array_key_exists(0, $lista[0]))
+if(!isset($lista[0][0]['arquivo']['nome']))
+    $totArq = 1;
+else
     $totArq = count($lista[0][0]['arquivos']['nome']);
+    
 foreach ($lista as $key => $valor) :
 ?>
         
