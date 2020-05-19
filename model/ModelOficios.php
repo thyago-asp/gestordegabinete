@@ -131,6 +131,26 @@ class ModelOficios
         $stmt->execute();
     }
 
+    function arqExcluir($idt)
+    {
+    
+        $con = Conexao::abrirConexao();
+        $query = "SELECT * FROM t_arquivos_oficios WHERE t_oficios_idt_oficios = :fkidt";
+
+        $stmt = $con->prepare($query);
+        $stmt->bindValue('fkidt', $idt);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($result as $chave => $valor) {
+            unlink($valor['arquivo_caminho']);    
+        }
+        
+
+    }
+
+
     function deletarModel()
     {
         $con = Conexao::abrirConexao();
