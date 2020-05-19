@@ -15,6 +15,7 @@ class ModelRequerimentos
     private $status;
     private $localArquivos;
     private $nomeArquivos;
+    private $idtArq;
 
     function __set($valor, $atributo)
     {
@@ -111,11 +112,10 @@ class ModelRequerimentos
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
-                  WHERE tipo = :tipo AND idt_oficios = :idt";
+                  WHERE tipo = :tipo AND idt_requerimentos = :idt";
 
         $stmt = $con->prepare($query);
 
-        print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
@@ -134,8 +134,9 @@ class ModelRequerimentos
     {
         $con = Conexao::abrirConexao();
 
-        $query = "DELETE FROM `t_requerimentos` WHERE idt_oficios = :idt AND tipo = :tipo";
-        
+        $query = "DELETE FROM t_requerimentos
+                    WHERE idt_requerimentos = :idt AND tipo = :tipo";
+      
         $stmt = $con->prepare($query);
 
         $stmt->bindValue(':idt', $this->__get('idt'));

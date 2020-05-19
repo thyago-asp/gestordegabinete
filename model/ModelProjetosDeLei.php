@@ -30,7 +30,7 @@ class ModelProjetosDeLei
     
         $con = Conexao::abrirConexao();
 
-        $query = "INSERT INTO t_arquivos_projetosdelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
+        $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
                     VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
 
         $stmt = $con->prepare($query);
@@ -58,7 +58,7 @@ class ModelProjetosDeLei
     {
 
         $con = Conexao::abrirConexao();
-        $query = "INSERT INTO t_projetosDeLei(numDoc, solicitante, instituicao, 
+        $query = "INSERT INTO t_projetosdelei(numDoc, solicitante, instituicao, 
                     nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
                     :data_cad_doc, :tipo, :titulo, :descricao, :status)";
@@ -95,7 +95,7 @@ class ModelProjetosDeLei
                     AS fkprojetosdelei,
                     GROUP_CONCAT(a.arquivo_caminho SEPARATOR ',')
                     AS caminho_arquivo
-                    FROM t_projetosDeLei AS p
+                    FROM t_projetosdelei AS p
                     LEFT JOIN t_arquivos_projetodelei as a
                     ON (a.t_projetosdelei_idt_projetosdelei = p.idt_projetosdelei) GROUP BY p.idt_projetosdelei";
                   
@@ -110,15 +110,14 @@ class ModelProjetosDeLei
     {
 
         $con = Conexao::abrirConexao();
-        $query = "UPDATE t_projetosDeLei 
+        $query = "UPDATE t_projetosdelei 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
-                  WHERE tipo = :tipo AND idt_oficios = :idt";
+                  WHERE tipo = :tipo AND idt_projetosdelei = :idt";
 
         $stmt = $con->prepare($query);
 
-        print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
@@ -137,7 +136,7 @@ class ModelProjetosDeLei
     {
         $con = Conexao::abrirConexao();
 
-        $query = "DELETE FROM `t_projetosDeLei` WHERE idt_oficios = :idt AND tipo = :tipo";
+        $query = "DELETE FROM `t_projetosdelei` WHERE idt_projetosdelei = :idt AND tipo = :tipo";
         
         $stmt = $con->prepare($query);
 

@@ -62,18 +62,18 @@ class PessoaFisica
 
 
         $query = "INSERT INTO t_endereco(endereco, cep, bairro, complemento, numero, cidade, estado)
-                    VALUES (:logradouro, :cep, :bairro, :complemento, :numero, :cidade, :estado);
+                    VALUES (:endereco, :cep, :bairro, :complemento, :numero, :cidade, :estado);
                   INSERT INTO t_pessoa(nome, email, telefone, t_endereco_idt_endereco) 
                     VALUES (:nome, :email, :telefoneF, LAST_INSERT_ID()); 
                   INSERT INTO t_pessoa_fisica(cpf, sexo, data_nascimento, categoria, arquivo, t_pessoa_idt_pessoa) 
-                    VALUES(:cpf, :sexo, :categoria, :arquivo, LAST_INSERT_ID());
+                    VALUES(:cpf, :sexo, :data_nascimento, :categoria, :arquivo, LAST_INSERT_ID());
                  ";
 
         // prepara a query 
         $stmt = $con->prepare($query);
 
         // tabela t_endereco
-        $stmt->bindValue(':logradouro', $this->__get('logradouro'));
+        $stmt->bindValue(':endereco', $this->__get('logradouro'));
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':bairro', $this->__get('bairroF'));
         $stmt->bindValue(':complemento', $this->__get('complemento'));

@@ -141,12 +141,12 @@ class ControllerRequerimentos
     }
     function deletarRequerimentos()
     {
-        print_r($_POST);
+        
         $deletar = new ModelRequerimentos();
-
+        
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
-
+        
         $deletar->deletarModel($deletar);
         header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
