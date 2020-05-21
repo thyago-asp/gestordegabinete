@@ -39,7 +39,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/view/emendasOrcamentarias/">
             <i class="fas fa-th-list"></i>
             <span>Emendas orçamentarias</span></a>
     </li>

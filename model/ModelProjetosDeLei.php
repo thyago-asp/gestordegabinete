@@ -84,12 +84,7 @@ class ModelProjetosDeLei
     {
 
         $con = Conexao::abrirConexao();
-<<<<<<< HEAD
-        $query = "SELECT idt_oficios, numDoc, solicitante, instituicao, nome_de_contato,
-                    DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc, 
-                    tipo, titulo, descricao, status 
-                  FROM t_projetosdelei";
-=======
+
         $query = "SELECT p.idt_projetosdelei, p.numDoc, p.solicitante, p.instituicao, p.nome_de_contato,
                     DATE_FORMAT(p.data_cad_doc, '%d/%m/%Y') AS data_cad_doc,
                     p.tipo, p.titulo, p.descricao, p.status,
@@ -104,8 +99,6 @@ class ModelProjetosDeLei
                     FROM t_projetosDeLei AS p
                     LEFT JOIN t_arquivos_projetodelei as a
                     ON (a.t_projetosdelei_idt_projetosdelei = p.idt_projetosdelei) GROUP BY p.idt_projetosdelei";
-                  
->>>>>>> edenilson
 
         $stmt = $con->prepare($query);
         $stmt->execute();
