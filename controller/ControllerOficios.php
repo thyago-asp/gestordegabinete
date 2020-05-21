@@ -32,7 +32,7 @@ class ControllerOficios
             'docx',
             'png'
         ];
-        print_r($arq);
+        
         $dir = "../bancodedados/arq/";
 
         $arqNome = [];
@@ -142,7 +142,7 @@ class ControllerOficios
     }
     function deletarOficios()
     {
-        print_r($_POST);
+        
         $deletar = new ModelOficios();
 
         $deletar->__set('idt', $_POST['idtReq']);

@@ -32,6 +32,12 @@ class Conexao
                 $password = "123123";
                 $dbname = "fesper35_deputados";
                 break;
+            case 'teste':
+                $servername = "br12.hostgator.com.br";
+                $username = "fesper35_teste";
+                $password = "fesper@123";
+                $dbname = "fesper35_deputados_teste";
+                break;
             default:
                 # code...
                 break;

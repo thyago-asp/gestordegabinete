@@ -15,6 +15,7 @@ class ModelRequerimentos
     private $status;
     private $localArquivos;
     private $nomeArquivos;
+    private $idtArq;
 
     function __set($valor, $atributo)
     {
@@ -26,8 +27,9 @@ class ModelRequerimentos
         return $this->$atributo;
     }
 
-    function salvarArquivos() {
-    
+    function salvarArquivos()
+    {
+
         $con = Conexao::abrirConexao();
 
         $query = "INSERT INTO t_arquivos_requerimentos(arquivo_caminho, nome_arquivo, t_requerimentos_idt_requerimentos) 
@@ -38,18 +40,18 @@ class ModelRequerimentos
         $stmt->bindValue(':arquivo_caminho', $this->__get('localArquivos'));
         $stmt->bindValue(':nome_arquivo', $this->__get('nomeArquivos'));
         $stmt->bindValue(':ultimoid', $this->selecionarId());
-        
-        $stmt->execute();
 
-    } 
-    function selecionarId() {
+        $stmt->execute();
+    }
+    function selecionarId()
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT MAX(idt_requerimentos) AS ultimoid FROM t_requerimentos";
-        
+
         $stmt = $con->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return  $result['ultimoid'];
     }
 
@@ -111,11 +113,10 @@ class ModelRequerimentos
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
-                  WHERE tipo = :tipo AND idt_oficios = :idt";
+                  WHERE tipo = :tipo AND idt_requerimentos = :idt";
 
         $stmt = $con->prepare($query);
 
-        //print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
@@ -129,19 +130,36 @@ class ModelRequerimentos
 
         $stmt->execute();
     }
+    function arqExcluir($idt)
+    {
+    
+        $con = Conexao::abrirConexao();
+        $query = "SELECT * FROM t_arquivos_requerimentos WHERE t_requerimentos_idt_requerimentos = :fkidt";
 
+        $stmt = $con->prepare($query);
+        $stmt->bindValue('fkidt', $idt);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($result as $chave => $valor) {
+            unlink($valor['arquivo_caminho']);    
+        }
+        
+
+    }
     function deletarModel()
     {
         $con = Conexao::abrirConexao();
+        $this->arqExcluir($this->__get('idt'));
+        $query = "DELETE FROM t_requerimentos
+                    WHERE idt_requerimentos = :idt AND tipo = :tipo";
 
-        $query = "DELETE FROM `t_requerimentos` WHERE idt_oficios = :idt AND tipo = :tipo";
-        
         $stmt = $con->prepare($query);
 
         $stmt->bindValue(':idt', $this->__get('idt'));
         $stmt->bindValue(':tipo', $this->__get('tipo'));
-
+        
         $stmt->execute();
-
     }
 }

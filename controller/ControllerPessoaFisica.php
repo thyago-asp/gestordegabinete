@@ -113,8 +113,7 @@ class ControllerPessoaFisica
         $pf->__set('telefoneF', $_POST['n_telefone_editado']);
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
-        echo "<pre>";
-        print_r($_POST);
+        
     
         if($_FILES['imagem']['error'] == 4) {
             $arquivo = str_replace("../", "", $_POST['manterImg']);

@@ -1,6 +1,7 @@
 <?php
+$url = '';
+require_once "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerOficios.php";
 
-require "{$_SERVER['DOCUMENT_ROOT']}/Controller/ControllerOficios.php";
 $lista = (new ControllerOficios())->listarOficios();
 $i = 0;
 if(!isset($lista[0][0]['arquivo']['nome']))
