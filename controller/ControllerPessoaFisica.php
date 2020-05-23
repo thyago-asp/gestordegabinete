@@ -1,8 +1,6 @@
 <?php
-// session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . '/model/PessoaFisica.php');
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/')
-// require_once($_SERVER['DOCUMENT_ROOT'] . '/Crud.php');
+
 
 
 if (isset($_REQUEST["acao"])) {
@@ -14,10 +12,10 @@ if (isset($_REQUEST["acao"])) {
 
         case 'alterar':
             (new ControllerPessoaFisica())->atualizarUsuario();
-            // (new ControllerPessoa())->alterar();
             break;
+
         case 'listar':
-            (new ControllerPessoaFisica())->listarTodosFisico();
+            (new ControllerPessoaFisica())->listarPF();
             break;
 
         case 'excluir':
@@ -30,8 +28,17 @@ if (isset($_REQUEST["acao"])) {
 class ControllerPessoaFisica
 {
 
-    public function setUsuarios() {
 
+    function caminhoImagem($imgSrc) {
+        $dir = "../bancodedados/img/";
+        $imgExtencao = (pathinfo($imgSrc['imagem']['name'], PATHINFO_EXTENSION));
+        
+        $temp = ($imgSrc['imagem']['tmp_name']);
+        $novoNome = uniqid() . ".$imgExtencao";
+        $dirImg =  $dir . $novoNome;
+        move_uploaded_file($temp, $dir . $novoNome);
+
+        return $dirImg;
     }
 
     public function cadastrar()
@@ -42,8 +49,9 @@ class ControllerPessoaFisica
         if (empty($_POST)) {
             header('location: /view/pessoas/cadastrar?=erro');
         }
-        // setta os valores 
         
+        // setta os valores 
+
         $pf->__set('nome', $_POST["nome"]);
         $pf->__set('email', $_POST["email"]);
         $pf->__set('telefoneF', $_POST['telefoneF']);
@@ -58,18 +66,28 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['cidadeF']);
         $pf->__set('estado', $_POST['estado']);
         $pf->__set('categoria', $_POST['categoria']);
-        
+        $pf->__set('arquivo', $this->caminhoImagem($_FILES));
+
+
         $pf->__set('cpf', $_POST['CPF']);
-        $pf->cadastroM($pf);
-        header('location: /view/pessoas/cadastrar?=sucesso');
+
+        
+
+        $resultado = $pf->cadastroM($pf);
+
+        if ($resultado == true) {
+            header('location: /view/pessoas/cadastrar?cad=sucesso');
+        } else {
+            header('location: /view/pessoas/cadastrar?cad=erro');
+        }
     }
 
     function atualizarUsuario()
     {
         // instancia model pessoa fisica
         $pf = new PessoaFisica();
-        
 
+        
         // t_endereco 
         $pf->__set('cep', $_POST['n_cep_editado']);
         $pf->__set('logradouro', $_POST['n_logradouro_editado']);
@@ -80,11 +98,12 @@ class ControllerPessoaFisica
         $pf->__set('cidadeF', $_POST['n_cidade_editado']);
         $pf->__set('estado', $_POST['n_estado_editado']);
         $pf->__set('idtEndereco', $_POST['n_idtEndereco_editado']);
-       
+
         // pessoa fisica
         $pf->__set('categoria', $_POST['n_categoria_editado']);
         $pf->__set('cpf', $_POST['n_cpf_editado']);
         $pf->__set('sexo', $_POST['n_sexo_editado']);
+        $pf->__set('nascimento', $_POST['n_nascimento_editado']);
         $pf->__set('idtPF', $_POST['n_idtPF_editado']);
         $pf->__set('fkIdtEndereco', $_POST['n_fkEndereco_editado']);
 
@@ -95,26 +114,48 @@ class ControllerPessoaFisica
         $pf->__set('idtPessoa', $_POST['n_idtPessoa_editado']);
         $pf->__set('fkIdtPessoa', $_POST['n_fkIdtPessoa_editado']);
         
+    
+        if($_FILES['imagem']['error'] == 4) {
+            $arquivo = str_replace("../", "", $_POST['manterImg']);
+            $arquivo = $arquivo;
+            
+        } else {
+            $arquivo = $this->caminhoImagem($_FILES);
+            
+        }
+        
+        $pf->__set('arquivo', $arquivo);
+       
         // setta os valores 
-        $pf->atualizarM($pf);
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->atualizarM($pf);
+        if($resultado) {
+            header('location: /view/pessoas/listar?atualizar=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?atualizar=erro');
+        }
+
     }
 
-    function listarTodosFisico()
+    function listarPF()
     {
-        return ((new PessoaFisica())->listarM());
+        return ((new PessoaFisica))->listarM();
     }
 
     function excluirUsuario()
     {
         $pf = new PessoaFisica();
-       
+
         $pf->__set('idtEndereco', $_POST['idtPessoa']);
         $pf->__set('idtPF', $_POST['idtPf']);
         $pf->__set('fkIdtEndereco', $_POST['fkIdtEndereco']);
         $pf->__set('idtPessoa', $_POST['idtEndereco']);
         $pf->__set('fkIdtPessoa', $_POST['fkIdtPessoa']);
-        $pf->excluirM($pf);
-        header('location: /view/pessoas/listar');
+        $resultado = $pf->excluirM($pf);
+
+        if ($resultado == true) {
+            header('location: /view/pessoas/listar?excluir=sucesso');
+        } else {
+            header('location: /view/pessoas/listar?excluir=erro');
+        }
     }
 }

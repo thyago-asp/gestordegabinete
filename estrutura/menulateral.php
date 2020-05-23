@@ -2,7 +2,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/main">
-        <img style="width: 100%"src="https://deputadoguerra.com.br/wp-content/uploads/2019/05/Logo-Luiz-Fernando-Guerra-branca-pequeno.png"/>
+        <img style="width: 100%" src="https://deputadoguerra.com.br/wp-content/uploads/2019/05/Logo-Luiz-Fernando-Guerra-branca-pequeno.png" />
     </a>
 
     <!-- Divider -->
@@ -33,6 +33,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu pessoas</h6>
                 <a class="collapse-item" href="/view/pessoas/cadastrar">Cadastrar</a>
+                <a class="collapse-item" href="/view/pessoas/visitas">Visitas</a>
                 <a class="collapse-item" href="/view/pessoas/listar">Listar</a>
             </div>
         </div>
@@ -52,24 +53,25 @@
 
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
+        <a class="nav-link collapsed" href="/view/requerimentos" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
             <i class="fas fa-fw fa-folder"></i>
             <span>Requerimentos</span>
         </a>
         <div id="collapseReq" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
+            <div id="requerimentos" class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Pedidos de informações</a>
-                <a class="collapse-item" href="#">Envio de expediente</a>
-                <a class="collapse-item" href="#">Voto de louvor e pesar</a>
-                <a class="collapse-item" href="#">Diversos</a>
-                <a class="collapse-item" href="#">Declarações de presenças</a>
-                <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item link" value="pedidos" href="/view/requerimentos/cadastrar?pg=pedidos">Pedidos de informações</a>
+                <a class="collapse-item link" value="envio" href="/view/requerimentos/cadastrar?pg=envio">Envio de expediente</a>
+                <a class="collapse-item link" value="voto" href="/view/requerimentos/cadastrar?pg=voto">Voto de louvor e pesar</a>
+                <a class="collapse-item link" value="diversos" href="/view/requerimentos/cadastrar?pg=diversos">Diversos</a>
+                <a class="collapse-item link" value="declaracoes" href="/view/requerimentos/cadastrar?pg=declaracoes">Declarações de presenças</a>
+                <div class="collapse-divider"></div>
+                <a class="collapse-item" href="/view/requerimentos/listar">Listar</a>
 
             </div>
         </div>
     </li>
+
 
 
     <li class="nav-item">
@@ -80,11 +82,11 @@
         <div id="collapseOficios" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Informações</a>
-                <a class="collapse-item" href="#">Pedidos</a>
-                <a class="collapse-item" href="#">Respostas</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=informacoes">Informações</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=pedidos">Pedidos</a>
+                <a class="collapse-item" href="/view/oficios/cadastrar?pg=respostas">Respostas</a>
                 <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/oficios/listar">Listar</a>
             </div>
         </div>
     </li>
@@ -98,13 +100,13 @@
         <div id="collapsePL" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Cadastros</h6>
-                <a class="collapse-item" href="#">Projetos de lei</a>
-                <a class="collapse-item" href="#">Projetos de resolução</a>
-                <a class="collapse-item" href="#">Projetos de lei complementar</a>
-                <a class="collapse-item" href="#">Emenda legislativa</a>
-                <a class="collapse-item" href="#">Emenda constitucional</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeLei">Projetos de lei</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeResolucao">Projetos de resolução</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=projetosDeLeiComplementar">Projetos de lei complementar</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=emendaLegislativa">Emenda legislativa</a>
+                <a class="collapse-item" href="/view/projetosDeLei/cadastrar?pg=emendaConstitucional">Emenda constitucional</a>
                 <div class="collapse-divider "></div>
-                <a class="collapse-item" href="#">Listar</a>
+                <a class="collapse-item" href="/view/projetosDeLei/listar">Listar</a>
 
             </div>
         </div>

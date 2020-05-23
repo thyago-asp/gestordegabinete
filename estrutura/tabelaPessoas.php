@@ -1,12 +1,12 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerPessoaFisica.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerPessoaJuridica.php';
+require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaFisica.php";
+require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaJuridica.php";
 
 // instancia do controller de PJ
 $tabelaJuridica = (new ControllerPessoaJuridica())->listarTodosJuridico();
 
 // instancia do controller de PF
-$tab = (new ControllerPessoaFisica())->listarTodosFisico();
+$tab = (new ControllerPessoaFisica())->listarPF();
 
 // criacao de um array com os dados de ambas as tabelas
 $tabela = [$tabelaJuridica, $tab];
@@ -23,10 +23,10 @@ foreach ($tabela as $chave => $valor) :
     <tr>
       <td><?php echo $inf['nome'] ?></td>
       <td><?php echo $inf['telefone'] ?></td>
-      <td><?php echo $inf['bairro'] ?></td>
-      <td><?php echo $inf['endereco'] ?></td>
+      <td><?php echo $inf['data_nascimento'] ?></td>
       <td><?php echo $inf['cidade'] ?></td>
       <td><?php echo $inf['estado'] ?></td>
+      <td><?php echo $inf['categoria'] ?></td>
       <td class="text-center">
         <div class="btn-group text-center" role="group" aria-label="Button group">
           <!-- Botão editar -->
@@ -42,6 +42,7 @@ foreach ($tabela as $chave => $valor) :
                     data-complemento="<?php echo $inf['complemento'] ?>"
                     data-idt_pessoa_fisica="<?php echo $inf['idt_pessoa_fisica'] ?>"
                     data-cpf="<?php echo $inf['cpf'] ?>" 
+                    data-nascimento="<?php echo $inf['data_nascimento']?>"
                     data-sexo="<?php echo $inf['sexo'] ?>" 
                     data-categoria="<?php echo $inf['categoria'] ?>"
                     data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>"  
@@ -51,7 +52,8 @@ foreach ($tabela as $chave => $valor) :
                     data-bairro="<?php echo $inf['bairro'] ?>" 
                     data-cidade="<?php echo $inf['cidade'] ?>"
                     data-estado="<?php echo $inf['estado'] ?>"
-                    
+                    data-arquivo="../../<?php echo $inf['arquivo'] ?>"
+
                   <?php } else { ?>
                     
                     data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>"
@@ -73,7 +75,7 @@ foreach ($tabela as $chave => $valor) :
                     data-atividade="<?php echo $inf['atividade'] ?>"
                   
                   <?php } ?>
-                  >Editar</button>
+                  ><i class="fa fa-th-list" aria-hidden="true"></i></button>
           <!-- Botão excluir -->
           <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" 
           <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>

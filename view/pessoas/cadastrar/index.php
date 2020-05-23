@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once("../../../estrutura/controleLogin.php");
+$status = '';
+if (isset($_GET['cad'])) {
+    $status = $_GET['cad'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -29,10 +33,20 @@ include '../../../estrutura/head.php';
                         <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
                     </div>
                 </div>
-
+                <?php if ($status == "sucesso") : ?>
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Sucesso ao cadastrar pessoa!</strong>
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro ao cadastrar verifique os campos!</strong>
+                    </div>
+                <?php endif; ?>
 
                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                    <form action="../../../controller/controllerPessoaFisica.php?acao=cad" method="post">
+                    <form id="formF" enctype="multipart/form-data" action="../../../controller/ControllerPessoaFisica.php?acao=cad" method="post">
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
@@ -162,15 +176,29 @@ include '../../../estrutura/head.php';
                                                 </div>
 
                                             </div>
+
+                                            <div class="pt-3">
+                                                <div class="form-group">
+
+                                                    <div class="form-line">
+                                                        <input type="file" name="imagem" id="imagemPF">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <input type="submit" class="btn btn-success">
+
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
 
                     </form>
-                    <form method="POST" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
+                    <form method="POST" id="formJ" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
@@ -210,6 +238,13 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
+                                        <label class="form-label">E-mail</label>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="E-mail">
+
+                                            </div>
+                                        </div>
                                         <label class="form-label">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
@@ -219,50 +254,59 @@ include '../../../estrutura/head.php';
                                         </div>
 
                                         <label class="form-label">Endereço</label>
-                                        <div class="row clearfix">
-                                            <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" id="logradouroJ" name="logradouroJ" class="form-control" id="logradouroJ" placeholder="Logradouro">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="tel" id="numeroJ" name="numeroJ" class="form-control" placeholder="N°">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
+                                        <div id="endereco">
                                             <div class="form-group">
-                                                <div class="form-line">
-                                                    <input type="text" id="complementoJ" name="complementoJ" class="form-control" placeholder="Complemento">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="text" id="bairroJ" name="bairroJ" class="form-control" placeholder="Bairro">
+                                                        <input type="tel" id="cepJ" name="cep" class="form-control" placeholder="Cep">
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <input type="text" id="cidadeJ" name="cidadeJ"class="form-control" placeholder="Cidade">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" id="logradouroJ" name="logradouroJ" class="form-control" id="logradouroJ" placeholder="Logradouro">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="tel" id="numeroJ" name="numeroJ" class="form-control" placeholder="N°">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
+                                            <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="text" id="estadoJ" name="estadoJ" class="form-control" placeholder="Estado">
+                                                        <input type="text" id="complementoJ" name="complementoJ" class="form-control" placeholder="Complemento">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" id="bairroJ" name="bairroJ" class="form-control" placeholder="Bairro">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" id="cidadeJ" name="cidadeJ" class="form-control" placeholder="Cidade">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" id="estadoJ" name="estadoJ" class="form-control" placeholder="Estado">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -312,6 +356,62 @@ include '../../../estrutura/head.php';
     <?php
     include '../../../estrutura/importJS.php';
     ?>
+    <script>
+        $(document).ready(() => {
+
+            $("#cepF").blur(function() {
+                var cep = $(this).val().replace(/\D/g, "");
+
+                if (cep != "") {
+                    console.log(cep);
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+                        // console.log(dados);
+                        if (!("erro" in dados)) {
+
+
+                            $('#logradouroF').val(dados.logradouro);
+                            // $('#logradouroF').val(dados.bairro);
+                            $('#bairroF').val(dados.bairro);
+                            $('#cidadeF').val(dados.localidade);
+                            $('#ufF').val(dados.uf);
+
+                        }
+
+                    }).fail((e) => {
+                        alert("CEP NÃO ENCONTRADO");
+                    });
+
+                }
+
+            });
+
+            $("#cepJ").blur(function() {
+                var cep = $(this).val().replace(/\D/g, "");
+
+                if (cep != "") {
+                    console.log(cep);
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+
+                        if (!("erro" in dados)) {
+
+                            $('#logradouroJ').val(dados.logradouro);
+                            $('#bairroJ').val(dados.bairro);
+                            $('#cidadeJ').val(dados.localidade);
+                            $('#estadoJ').val(dados.uf);
+
+                        }
+
+
+
+                    }).fail((e) => {
+                        alert("CEP NÃO ENCONTRADO");
+                    });
+
+                }
+
+            });
+        });
+    </script>
 </body>
 
 </html>
