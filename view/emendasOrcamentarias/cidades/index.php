@@ -88,7 +88,28 @@ include '../../../estrutura/head.php';
 
                     <div class="row">
                         <div class="col-sm">
-
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"> </h5>
+                                    <p class="card-text">Content</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Title</h5>
+                                    <p class="card-text">Content</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Title</h5>
+                                    <p class="card-text">Content</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerEmendasOrcamentarias.php');
 //require_once("../../estrutura/controleLogin.php");
 $primeiro_acesso = "";
 $retorno_alterarSenha = "";
@@ -83,6 +84,13 @@ include '../../estrutura/head.php';
                 include '../../estrutura/barratopo.php';
                 ?>
 
+
+                <?php
+                $emendas = new ControllerEmendasOrcamentarias();
+
+                $listaEmendas = $emendas->listarCidades();
+
+                ?>
                 <!-- CONTEUDO PRINCIPAL DA PAGINA -->
                 <div class="container-fluid">
 
@@ -102,17 +110,27 @@ include '../../estrutura/head.php';
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm">
-                                                    <a href="/view/emendasOrcamentarias/cidades/">Maringa</a> <br/>
-                                                    <a href="#">Campo Mourão</a><br/>
-                                                    <a href="#">Paranavaí</a><br/>
-                                                    <a href="#">Umuarama</a><br/>
+                                                    <a href="/view/emendasOrcamentarias/cidades/">Maringa</a> <br />
+
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if ($cidade->regiao == "noroeste") {
+                                                           // print_r($cidade);
+                                                    ?>
+
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
                                                 </div>
                                                 <div class="col-sm">
-                                                    <a href="#">Marialva</a> <br/>
-                                                    <a href="#">Goierê</a><br/>
-                                                    <a href="#">Porto Rico</a><br/>
-                                                    <a href="#">Paiçandu</a><br/>
-                                                    <a href="#">Astorga</a><br/>
+                                                    <a href="#">Marialva</a> <br />
+                                                    <a href="#">Goierê</a><br />
+                                                    <a href="#">Porto Rico</a><br />
+                                                    <a href="#">Paiçandu</a><br />
+                                                    <a href="#">Astorga</a><br />
                                                 </div>
                                             </div>
                                         </div>
