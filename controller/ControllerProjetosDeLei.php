@@ -40,7 +40,7 @@ class ControllerProjetosDeLei
         $arqLocal = [];
         $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
-        print_r($arq);
+       
         $cont = 0;
         while ($cont < $qtdArquivos) {
 
@@ -93,10 +93,9 @@ class ControllerProjetosDeLei
             $salvar->salvarArquivos();
             $contador++;
         }
+        // "C:\Program Files\Microsoft VS Code\Code.exe"
+        header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
 
-
-
-        header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
     }
     function atualizarProjetosDeLei()
     {
@@ -143,13 +142,14 @@ class ControllerProjetosDeLei
     }
     function deletarProjetosDeLei()
     {
-        print_r($_POST);
+       
         $deletar = new ModelProjetosDeLei();
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
 
         $deletar->deletarModel($deletar);
-        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+       
+        header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }

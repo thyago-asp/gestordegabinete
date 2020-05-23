@@ -23,27 +23,29 @@ foreach ($lista as $key => $valor) :
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos"
-                        <?php foreach($valor[0] as $chave => $inf):
-                                
-                                while ($i < $totArq) {
-                                    if(array_key_exists($i, $inf['nome'])){
-                                        echo "data-nome$i='{$inf['nome'][$i]}'";
-                                        echo "data-idArq$i='{$inf['idArquivo'][$i]}'"; 
-                                        echo "data-fkrprojetosdelei$i='{$inf['fkArquivo'][$i]}'";
-                                        echo "data-linkArq$i='{$inf['linkArq'][$i]}'";
+                        <?php 
+                        if(isset($valor[0]))
+                            foreach($valor[0] as $chave => $inf):
+                                    
+                                    while ($i < $totArq) {
+                                        if(array_key_exists($i, $inf['nome'])){
+                                            echo "data-nome$i='{$inf['nome'][$i]}'";
+                                            echo "data-idArq$i='{$inf['idArquivo'][$i]}'"; 
+                                            echo "data-fkrprojetosdelei$i='{$inf['fkArquivo'][$i]}'";
+                                            echo "data-linkArq$i='{$inf['linkArq'][$i]}'";
+                                        }
+                                        $i++;          
                                     }
-                                    $i++;          
-                                }
-                                
-                                $totArq = count($inf['nome']);
-                                $i = 0; 
-                              endforeach; 
+                                    
+                                    $totArq = count($inf['nome']);
+                                    $i = 0; 
+                                endforeach; 
                         ?>
                     
                 ><i class="fa fa-folder-open" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" 
-                    data-idtReq="<?php echo $valor['idt_oficios'] ?>" 
+                    data-idtReq="<?php echo $valor['idt_projetosdelei'] ?>" 
                     data-numDoc="<?php echo $valor['numDoc'] ?>" 
                     data-solicitante="<?php echo $valor['solicitante'] ?>" 
                     data-instituicao="<?php echo $valor['instituicao'] ?>" 
@@ -57,7 +59,10 @@ foreach ($lista as $key => $valor) :
                     <i class="fa fa-th-list" aria-hidden="true"></i>
                 </button>
                 <!-- Botão excluir -->
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $valor['numDoc'] ?>" data-idtreq="<?php echo $valor['idt_oficios'] ?>" data-tipo="<?php echo $valor['tipo'] ?>">Excluir</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" 
+                    data-numDoc="<?php echo $valor['numDoc'] ?>" 
+                    data-idtreq="<?php echo $valor['idt_projetosdelei'] ?>" 
+                    data-tipo="<?php echo $valor['tipo'] ?>">Excluir</button>
 
             </div>
         </td>

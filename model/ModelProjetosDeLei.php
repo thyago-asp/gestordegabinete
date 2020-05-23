@@ -30,7 +30,7 @@ class ModelProjetosDeLei
     
         $con = Conexao::abrirConexao();
 
-        $query = "INSERT INTO t_arquivos_projetosdelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
+        $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
                     VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
 
         $stmt = $con->prepare($query);
@@ -96,7 +96,7 @@ class ModelProjetosDeLei
                     AS fkprojetosdelei,
                     GROUP_CONCAT(a.arquivo_caminho SEPARATOR ',')
                     AS caminho_arquivo
-                    FROM t_projetosDeLei AS p
+                    FROM t_projetosdelei AS p
                     LEFT JOIN t_arquivos_projetodelei as a
                     ON (a.t_projetosdelei_idt_projetosdelei = p.idt_projetosdelei) GROUP BY p.idt_projetosdelei";
 
@@ -114,11 +114,10 @@ class ModelProjetosDeLei
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
-                  WHERE tipo = :tipo AND idt_oficios = :idt";
+                  WHERE tipo = :tipo AND idt_projetosdelei = :idt";
 
         $stmt = $con->prepare($query);
 
-        print_r($this->__get('data'));
         $stmt->bindValue(':numDoc', $this->__get('documento'));
         $stmt->bindValue(':solicitante', $this->__get('solicitante'));
         $stmt->bindValue(':instituicao', $this->__get('instituicao'));
@@ -133,11 +132,30 @@ class ModelProjetosDeLei
         $stmt->execute();
     }
 
+    function arqExcluir($idt)
+    {
+    
+        $con = Conexao::abrirConexao();
+        $query = "SELECT * FROM t_arquivos_projetodelei WHERE t_projetosdelei_idt_projetosdelei = :fkidt";
+
+        $stmt = $con->prepare($query);
+        $stmt->bindValue('fkidt', $idt);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($result as $chave => $valor) {
+            unlink($valor['arquivo_caminho']);    
+        }
+        
+
+    }
+
     function deletarModel()
     {
         $con = Conexao::abrirConexao();
-
-        $query = "DELETE FROM `t_projetosdelei` WHERE idt_oficios = :idt AND tipo = :tipo";
+        $this->arqExcluir($this->__get('idt'));
+        $query = "DELETE FROM `t_projetosdelei` WHERE idt_projetosdelei = :idt AND tipo = :tipo";
         
         $stmt = $con->prepare($query);
 

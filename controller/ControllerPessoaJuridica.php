@@ -90,7 +90,7 @@ class ControllerPessoaJuridica
         $pf->__set('fkEndereco', $_POST['fkEndereco']);
         // setta os valores 
         $resultado = $pf->atualizarM($pf);
-        print_r($resultado);
+        
         if($resultado == true) {
             header('location: /view/pessoas/listar?atualizar=sucesso');
         } else {

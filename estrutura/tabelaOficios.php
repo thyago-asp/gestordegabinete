@@ -1,6 +1,7 @@
 <?php
+$url = '';
+require_once "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerOficios.php";
 
-require "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerOficios.php";
 $lista = (new ControllerOficios())->listarOficios();
 echo "<pre>";
 //print_r($lista);

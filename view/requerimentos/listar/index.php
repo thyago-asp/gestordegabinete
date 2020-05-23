@@ -347,17 +347,19 @@ include '../../../estrutura/head.php';
             var idtReq = button.data('idtreq')
             var tipo = button.data('tipo');
             var numDoc = button.data('numdoc');
+            var idtArq = button.data('fkrequerimentos0')
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            console.log(idtReq);
+            // console.log(idtReq);
             $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
                     <input type="hidden" id="idtReq" name="idtReq">
                     <input type="hidden" id="tipo" name="tipo">
+                    <input type="hidden" id="idtArq" name="idtArq">
                     
                 `);
 
-
+            console.log(idtArq)
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
@@ -365,7 +367,8 @@ include '../../../estrutura/head.php';
             // modal.find('#idtReq').val(numdoc);
             modal.find('#idtReq').val(idtReq);
             modal.find('#tipo').val(tipo);
-
+            modal.find('#idtArq').val(idtArq)
+            
 
         });
     </script>

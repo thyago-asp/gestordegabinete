@@ -1,6 +1,6 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerPessoaFisica.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerPessoaJuridica.php';
+require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaFisica.php";
+require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaJuridica.php";
 
 // instancia do controller de PJ
 $tabelaJuridica = (new ControllerPessoaJuridica())->listarTodosJuridico();
