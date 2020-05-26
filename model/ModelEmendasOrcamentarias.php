@@ -35,13 +35,15 @@ class ModelEmendasOrcamentarias
         return $result;
     }
 
-    public function buscarCidade()
+    public function buscarCidade($id)
     {
         $con = Conexao::abrirConexao();
 
-        $query = "SELECT idt_emendas_orcamentarias, cidade, regiao FROM t_emendas_orcamentarias";
+        $query = "SELECT * FROM t_emendas_orcamentarias WHERE idt_emendas_orcamentarias = :id";
 
         $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
 
         $result = $stmt->execute();
 
@@ -50,6 +52,73 @@ class ModelEmendasOrcamentarias
         return $result;
     }
 
+    public function buscarRecursos($id)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_recursos WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function buscarApoiadores($id)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_apoiadores WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function buscarEstruturaPartido($id)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_estrutura_partido WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function buscarVisitas($id)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_visitas WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
     /**
      * Get the value of id
      */

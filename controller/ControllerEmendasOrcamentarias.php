@@ -32,7 +32,7 @@ if (isset($_REQUEST["acao"])) {
 }
 
 /**
- * Description of ControlUsuario
+ * Description of ControllerEmendasOrcamentarias
  *
  * @author Thyago
  */
@@ -54,6 +54,14 @@ class ControllerEmendasOrcamentarias
         return $listaEmendas;
     }
 
+    public function buscarCidades($id)
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+        
+        $listaEmendas = $emendas->listar();
+        
+        return $listaEmendas;
+    }
     public function alterar()
     {
 
