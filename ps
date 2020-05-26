@@ -1,0 +1,17 @@
+[33mcommit 11159cacd0e3fa8d5d1032399123212f086cf18e[m[33m ([m[1;36mHEAD -> [m[1;32mpf[m[33m, [m[1;31morigin/pf[m[33m)[m
+Author: Edenilson Dias <ededias4@gmail.com>
+Date:   Tue Apr 7 16:51:57 2020 -0300
+
+    adicao header excluirPessoafisica.php
+
+[1mdiff --git a/controller/ControllerPessoaFisica.php b/controller/ControllerPessoaFisica.php[m
+[1mindex 7f8efb9..bcd7521 100644[m
+[1m--- a/controller/ControllerPessoaFisica.php[m
+[1m+++ b/controller/ControllerPessoaFisica.php[m
+[36m@@ -115,5 +115,6 @@[m [mclass ControllerPessoaFisica[m
+         $pf->__set('idtPessoa', $_POST['idtEndereco']);[m
+         $pf->__set('fkIdtPessoa', $_POST['fkIdtPessoa']);[m
+         $pf->excluirM($pf);[m
+[32m+[m[32m        header('location: /view/pessoas/listar');[m
+     }[m
+ }[m

@@ -26,8 +26,9 @@ class ModelProjetosDeLei
         return $this->$atributo;
     }
 
-    function salvarArquivos() {
-    
+    function salvarArquivos()
+    {
+
         $con = Conexao::abrirConexao();
 
         $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
@@ -38,19 +39,19 @@ class ModelProjetosDeLei
         $stmt->bindValue(':arquivo_caminho', $this->__get('localArquivos'));
         $stmt->bindValue(':nome_arquivo', $this->__get('nomeArquivos'));
         $stmt->bindValue(':ultimoid', $this->selecionarId());
-        
+
         $stmt->execute();
+    }
 
-    } 
-
-    function selecionarId() {
+    function selecionarId()
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT MAX(idt_projetosdelei) AS ultimoid FROM t_projetosdelei";
-        
+
         $stmt = $con->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return  $result['ultimoid'];
     }
 
@@ -74,9 +75,8 @@ class ModelProjetosDeLei
         $stmt->bindValue(':titulo', $this->__get('titulo'));
         $stmt->bindValue(':descricao', $this->__get('descricao'));
         $stmt->bindValue(':status', $this->__get('status'));
-        
-        $stmt->execute();
 
+        $stmt->execute();
     }
 
 
@@ -98,7 +98,7 @@ class ModelProjetosDeLei
                     FROM t_projetosdelei AS p
                     LEFT JOIN t_arquivos_projetodelei as a
                     ON (a.t_projetosdelei_idt_projetosdelei = p.idt_projetosdelei) GROUP BY p.idt_projetosdelei";
-                  
+
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -134,7 +134,7 @@ class ModelProjetosDeLei
 
     function arqExcluir($idt)
     {
-    
+
         $con = Conexao::abrirConexao();
         $query = "SELECT * FROM t_arquivos_projetodelei WHERE t_projetosdelei_idt_projetosdelei = :fkidt";
 
@@ -143,12 +143,14 @@ class ModelProjetosDeLei
 
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($result as $chave => $valor) {
-            unlink($valor['arquivo_caminho']);    
-        }
-        
 
+        if (empty($result)) {
+            return;
+        } else {
+            foreach ($result as $chave => $valor) {
+                unlink($valor['arquivo_caminho']);
+            }
+        }
     }
 
     function deletarModel()
@@ -156,13 +158,12 @@ class ModelProjetosDeLei
         $con = Conexao::abrirConexao();
         $this->arqExcluir($this->__get('idt'));
         $query = "DELETE FROM `t_projetosdelei` WHERE idt_projetosdelei = :idt AND tipo = :tipo";
-        
+
         $stmt = $con->prepare($query);
 
         $stmt->bindValue(':idt', $this->__get('idt'));
         $stmt->bindValue(':tipo', $this->__get('tipo'));
 
         $stmt->execute();
-
     }
 }

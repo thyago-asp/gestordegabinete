@@ -26,8 +26,9 @@ class ModelOficios
         return $this->$atributo;
     }
 
-    function salvarArquivos() {
-    
+    function salvarArquivos()
+    {
+
         $con = Conexao::abrirConexao();
 
         $query = "INSERT INTO t_arquivos_oficios(arquivo_caminho, nome_arquivo, t_oficios_idt_oficios) 
@@ -38,19 +39,19 @@ class ModelOficios
         $stmt->bindValue(':arquivo_caminho', $this->__get('localArquivos'));
         $stmt->bindValue(':nome_arquivo', $this->__get('nomeArquivos'));
         $stmt->bindValue(':ultimoid', $this->selecionarId());
-        
+
         $stmt->execute();
+    }
 
-    } 
-
-    function selecionarId() {
+    function selecionarId()
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT MAX(idt_oficios) AS ultimoid FROM t_oficios";
-        
+
         $stmt = $con->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return  $result['ultimoid'];
     }
 
@@ -78,7 +79,7 @@ class ModelOficios
         $stmt->execute();
     }
 
-   
+
 
     function listarModel()
     {
@@ -133,7 +134,7 @@ class ModelOficios
 
     function arqExcluir($idt)
     {
-    
+
         $con = Conexao::abrirConexao();
         $query = "SELECT * FROM t_arquivos_oficios WHERE t_oficios_idt_oficios = :fkidt";
 
@@ -142,12 +143,14 @@ class ModelOficios
 
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($result as $chave => $valor) {
-            unlink($valor['arquivo_caminho']);    
-        }
-        
 
+        if (empty($result)) {
+            return;
+        } else {
+            foreach ($result as $chave => $valor) {
+                unlink($valor['arquivo_caminho']);
+            }
+        }
     }
 
 
@@ -156,13 +159,12 @@ class ModelOficios
         $con = Conexao::abrirConexao();
 
         $query = "DELETE FROM `t_oficios` WHERE idt_oficios = :idt AND tipo = :tipo";
-        
+
         $stmt = $con->prepare($query);
 
         $stmt->bindValue(':idt', $this->__get('idt'));
         $stmt->bindValue(':tipo', $this->__get('tipo'));
 
         $stmt->execute();
-
     }
 }

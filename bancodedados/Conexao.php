@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-Conexao::abrirConexao();
 class Conexao
 {
 
@@ -48,7 +47,7 @@ class Conexao
 
             $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            
+           
         } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();
         }

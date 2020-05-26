@@ -148,6 +148,6 @@ class ControllerRequerimentos
         $deletar->__set('tipo', $_POST['tipo']);
         
         $deletar->deletarModel($deletar);
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        // header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }

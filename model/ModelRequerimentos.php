@@ -142,10 +142,13 @@ class ModelRequerimentos
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        foreach ($result as $chave => $valor) {
-            unlink($valor['arquivo_caminho']);    
+        if(empty($result)){
+           return ;
+        } else {
+            foreach ($result as $chave => $valor) {
+                unlink($valor['arquivo_caminho']);    
+            }
         }
-        
 
     }
     function deletarModel()
