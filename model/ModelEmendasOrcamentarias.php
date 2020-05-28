@@ -68,6 +68,23 @@ class ModelEmendasOrcamentarias
 
         return $result;
     }
+    
+
+    public function buscarItensRecursos($id){
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_recursos as r inner join t_itens_recurso as it on it.t_recursos_idt_recursos = r.idt_recursos where r.idt_recursos = :id;";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
 
     public function buscarApoiadores($id)
     {

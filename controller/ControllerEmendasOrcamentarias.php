@@ -18,16 +18,7 @@ if (isset($_REQUEST["acao"])) {
 
             (new ControllerEmendasOrcamentarias())->alterar();
             break;
-        case 'resetar':
 
-            (new ControllerEmendasOrcamentarias())->resetarSenha();
-            break;
-        case 'alterarSenha':
-            (new ControllerEmendasOrcamentarias())->altararSenha();
-            break;
-        case 'excluirUsuario':
-                (new ControllerEmendasOrcamentarias())->excluirUsuario();
-                break;
     }
 }
 
@@ -38,12 +29,7 @@ if (isset($_REQUEST["acao"])) {
  */
 class ControllerEmendasOrcamentarias
 {
-    //put your code here
-
-    function cadastrar()
-    {
-
-    }
+   
 
     public function listarCidades()
     {
@@ -58,10 +44,45 @@ class ControllerEmendasOrcamentarias
     {
         $emendas = new ModelEmendasOrcamentarias();
         
-        $listaEmendas = $emendas->listar();
+        $listaEmendas = $emendas->buscarCidade($id);
         
         return $listaEmendas;
     }
+
+    public function buscarRecursos($id)
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+        
+        $listaRecursos = $emendas->buscarRecursos($id);
+        
+        return $listaRecursos;
+    }
+
+    public function buscarVisitas($id)
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+        
+        $listaVisitas = $emendas->buscarVisitas($id);
+        
+        return $listaVisitas;
+    }
+
+    public function buscarEstruturaPartido($id)
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+        
+        $listaVisitas = $emendas->buscarEstruturaPartido($id);
+        
+        return $listaVisitas;
+    }
+    public function buscarItensRecursos($id){
+        $emendas = new ModelEmendasOrcamentarias();
+        
+        $listaItensRecursos = $emendas->buscarItensRecursos($id);
+        
+        return $listaItensRecursos;
+    }
+
     public function alterar()
     {
 
@@ -85,50 +106,4 @@ class ControllerEmendasOrcamentarias
         }
     }
     
-    public function resetarSenha()
-    {
-        $idUsuario = $_REQUEST["id_usuario"];
-
-        $usuario = new Usuario();
-
-        $retorno = $usuario->resetarSenha($idUsuario);
-
-        if ($retorno > 0) {
-            header("Location:/view/usuariosdosistema/listar/?r=2");
-        }
-    }
-
-    public function altararSenha()
-    {
-        $idUsuario = $_SESSION["id_usuario"];
-        $senha = $_REQUEST["senha1"];
-
-        $usuario = new Usuario();
-
-        $usuario->setId_usuario($idUsuario);
-        $usuario->setSenha(md5($senha));
-
-        $retorno = $usuario->alterarSenha($usuario);
-
-        if ($retorno > 0) {
-            $_SESSION["primeiro_acesso"] = "0";
-            header("Location:/view/main?r=1");
-        }
-    }
-
-    public function excluirUsuario(){
-
-        $idUsuario = $_REQUEST["id_usuario"];
-
-        $usuario = new Usuario();
-
-        $usuario->setId_usuario($idUsuario);
-
-        $retorno = $usuario->excluirUsuario($usuario);
-
-        if ($retorno > 0) {
-            header("Location:/view/usuariosdosistema/listar/?r=3");
-        }
-
-    }
 }

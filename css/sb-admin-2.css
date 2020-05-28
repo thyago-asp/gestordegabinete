@@ -73,6 +73,45 @@ body {
     outline: 0 !important;
 }
 
+#conteudo_body{
+    text-align: center;
+}
+
+#campo_regiao{
+    margin-top: -10px;
+}
+
+.descricao{
+    color: #1c9b52;
+    font-weight: bold;
+}
+
+.cartao-recursos{
+    background-color: #1c9b52 !important;
+}
+
+.titulo-data-visita{
+    text-align: center;
+    background-color: #1c9b52;
+    color: white;
+
+}
+
+.texto-cartao-recursos{
+    color: white !important;
+    text-align: center;
+}
+
+#distancia_capital{
+    color: #1c9b52;
+    font-size: 15px;
+}
+
+.nome_cidade{
+    font-size: 35px;
+    color: #1c9b52;
+    font-weight: bold;
+}
 .accordion-pessoas{
     width: 15%;
 }
@@ -4421,7 +4460,7 @@ input[type="button"].btn-block {
 
 .card-body {
     flex: 1 1 auto;
-    padding: 1.25rem;
+    /*padding: 1.25rem;*/
 }
 
 .card-title {

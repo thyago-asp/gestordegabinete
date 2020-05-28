@@ -98,9 +98,9 @@ include '../../estrutura/head.php';
                         <div class="col-sm">
                             <div id="accordion">
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingOne">
+                                    <div class="card-header cartao-recursos" id="headingOne">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseNoroeste" aria-expanded="true" aria-controls="collapseOne">
+                                            <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapseNoroeste" aria-expanded="true" aria-controls="collapseOne">
                                                 Noroeste
                                             </button>
                                         </h5>
@@ -114,8 +114,8 @@ include '../../estrutura/head.php';
 
                                                     <?php
                                                     foreach ($listaEmendas as $cidade) {
-                                                        if ($cidade->regiao == "noroeste") {
-                                                           // print_r($cidade);
+                                                        if ($cidade->regiao == "Noroeste") {
+                                                    
                                                     ?>
 
                                                             <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
@@ -137,9 +137,9 @@ include '../../estrutura/head.php';
                                     </div>
                                 </div>
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingTwo">
+                                    <div class="card-header cartao-recursos" id="headingTwo">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOeste" aria-expanded="false" aria-controls="collapseOeste">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseOeste" aria-expanded="false" aria-controls="collapseOeste">
                                                 Oeste
                                             </button>
                                         </h5>
@@ -151,9 +151,9 @@ include '../../estrutura/head.php';
                                     </div>
                                 </div>
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingThree">
+                                    <div class="card-header cartao-recursos" id="headingThree">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSudoeste" aria-expanded="false" aria-controls="collapseSudoeste">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseSudoeste" aria-expanded="false" aria-controls="collapseSudoeste">
                                                 Sudoeste
                                             </button>
                                         </h5>
@@ -166,9 +166,9 @@ include '../../estrutura/head.php';
                                 </div>
 
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingThree">
+                                    <div class="card-header cartao-recursos" id="headingThree">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSudeste" aria-expanded="false" aria-controls="collapseSudeste">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseSudeste" aria-expanded="false" aria-controls="collapseSudeste">
                                                 Sudeste
                                             </button>
                                         </h5>
@@ -184,9 +184,9 @@ include '../../estrutura/head.php';
                         <div class="col-sm">
                             <div id="accordion">
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingOne">
+                                    <div class="card-header cartao-recursos" id="headingOne">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseNorte" aria-expanded="true" aria-controls="collapseNorte">
+                                            <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapseNorte" aria-expanded="true" aria-controls="collapseNorte">
                                                 Norte pioneiro
                                             </button>
                                         </h5>
@@ -199,9 +199,9 @@ include '../../estrutura/head.php';
                                     </div>
                                 </div>
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingTwo">
+                                    <div class="card-header cartao-recursos" id="headingTwo">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseCentro" aria-expanded="false" aria-controls="collapseCentro">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseCentro" aria-expanded="false" aria-controls="collapseCentro">
                                                 Centro ocidental
                                             </button>
                                         </h5>
@@ -213,9 +213,9 @@ include '../../estrutura/head.php';
                                     </div>
                                 </div>
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingThree">
+                                    <div class="card-header cartao-recursos" id="headingThree">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseCentrosul" aria-expanded="false" aria-controls="collapseCentrosul">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseCentrosul" aria-expanded="false" aria-controls="collapseCentrosul">
                                                 Centro sul
                                             </button>
                                         </h5>
@@ -227,9 +227,9 @@ include '../../estrutura/head.php';
                                     </div>
                                 </div>
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingThree">
+                                    <div class="card-header cartao-recursos" id="headingThree">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseCentroOriental" aria-expanded="false" aria-controls="collapseCentroOriental">
+                                            <button class="btn btn-link collapsed texto-cartao-recursos" data-toggle="collapse" data-target="#collapseCentroOriental" aria-expanded="false" aria-controls="collapseCentroOriental">
                                                 Centro Oriental
                                             </button>
                                         </h5>
@@ -247,9 +247,9 @@ include '../../estrutura/head.php';
                         <div class="col-sm">
                             <div id="accordion">
                                 <div class="card card_accordion">
-                                    <div class="card-header" id="headingOne">
+                                    <div class="card-header cartao-recursos" id="headingOne">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseRegiaoMetropolitana" aria-expanded="true" aria-controls="collapseRegiaoMetropolitana">
+                                            <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapseRegiaoMetropolitana" aria-expanded="true" aria-controls="collapseRegiaoMetropolitana">
                                                 Região metropolitana de Curitiba
                                             </button>
                                         </h5>
