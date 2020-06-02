@@ -107,7 +107,7 @@ class ModelRequerimentos
 
     function atualizarModel()
     {
-
+        try{
         $con = Conexao::abrirConexao();
         $query = "UPDATE t_requerimentos 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
@@ -128,7 +128,10 @@ class ModelRequerimentos
         $stmt->bindValue(':status', $this->__get('status'));
         $stmt->bindValue(':idt', $this->__get('idt'));
 
-        $stmt->execute();
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        print_r($e->getCode());
+    }
     }
     function arqExcluir($idt)
     {

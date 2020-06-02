@@ -46,11 +46,11 @@ foreach ($req as $chave => $valor) :
                 </button>
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" 
                 
-                        data-idtReq="<?php echo $valor['idt_oficios'] ?>" 
+                        data-idtReq="<?php echo $valor['idt_requerimentos'] ?>" 
                         data-numDoc="<?php echo $valor['numDoc'] ?>" 
                         data-solicitante="<?php echo $valor['solicitante'] ?>" 
                         data-instituicao="<?php echo $valor['instituicao'] ?>" 
-                        data-nomeContato="<?php echo $valor['tipo'] ?>" 
+                        data-nomeContato="<?php echo $valor['nome_de_contato'] ?>" 
                         data-dataDoc="<?php echo $valor['data_cad_doc'] ?>" 
                         data-tipo="<?php echo $valor['tipo'] ?>" 
                         data-titulo="<?php echo $valor['titulo'] ?>" 

@@ -98,14 +98,9 @@ include '../../../estrutura/head.php';
             <div id="content">
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
-                <!-- Begin Page Content -->
-                <div class="container-fluid ">
-
-                    <!-- Page Heading -->
-                    <!-- mensagem de sucesso e erro -->
-                    <?php if ($status == "sucesso") : ?>
+                <?php if ($status == "sucesso") : ?>
                         <div class="alert alert-success text-center" role="alert">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            
                             Sucesso ao <?php echo $msg ?>
                         </div>
                     <?php elseif ($status == "erro") : ?>
@@ -114,6 +109,12 @@ include '../../../estrutura/head.php';
                             <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
                         </div>
                     <?php endif; ?>
+                <!-- Begin Page Content -->
+                <div class="container-fluid ">
+
+                    <!-- Page Heading -->
+                    <!-- mensagem de sucesso e erro -->
+                    
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="card-header text-center ">
@@ -265,9 +266,9 @@ include '../../../estrutura/head.php';
             var tipo = button.data('tipo')
             var titulo = button.data('titulo')
             var descricao = button.data('descricao')
-            console.log(idtReq);
-            var status = button.data('status');
-
+            
+            var status = button.data('status')
+            //console.log(status);
             var atividade = button.data('atividade');
 
 
@@ -296,9 +297,7 @@ include '../../../estrutura/head.php';
                     <label for="recipient-name" class="col-form-label">Nome do contato:</label>
                     <input type="text" class="form-control" id="nomeContato" name="nomeContato">
                 </div>
-                <label class="form-label">Categoria</label>
-                
-                <label>Endereco</label>
+            
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Titulo:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
@@ -315,7 +314,7 @@ include '../../../estrutura/head.php';
                     <div class="col-sm-12">
                         <select name="status" id="status" class="form-control show-tick ">
                             <option value="aberto">Aberto</option>
-                            <option value="aguardando informações">Aguardando informações</option>
+                            <option value="aguardando">Aguardando informações</option>
                             <option value="concluido">Concluido</option>
                         </select>
                     </div>
@@ -336,7 +335,8 @@ include '../../../estrutura/head.php';
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
             modal.find('#idtReq').val(idtReq);
-            modal.find('#status').val(status);
+           
+            modal.find('#status option[value='+status+']').attr('selected','selected');
 
 
 

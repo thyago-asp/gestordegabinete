@@ -40,7 +40,7 @@ class ControllerRequerimentos
         $arqLocal = [];
         $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
-        
+
         $cont = 0;
         while ($cont < $qtdArquivos) {
 
@@ -53,14 +53,14 @@ class ControllerRequerimentos
                 $dirImg = $dir . $novoNome;
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
-               
+
                 $cont++;
             } else {
-                 
+
                 return "arquivo invalido";
             }
         }
-        
+
         return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);
     }
 
@@ -110,17 +110,20 @@ class ControllerRequerimentos
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtReq']);
 
-        $atualizar->atualizarModel();
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        $retorno = $atualizar->atualizarModel();
+
+        if ($retorno == 1) {
+            header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        }
     }
     function listarRequerimentos()
     {
         $lista = (new ModelRequerimentos())->listarModel();
-       
+
         if (isset($lista[0]['nomearquivo'])) {
-           
+
             foreach ($lista as $key => $value) {
-                
+
                 $nome = explode(',', $value['nomearquivo']);
                 $idarquivo = explode(',', $value['idarquivo']);
                 $fkprojetosdelei = explode(',', $value['fkrequerimentos']);
@@ -133,7 +136,7 @@ class ControllerRequerimentos
                 ];
 
                 array_push($lista[$key], $a);
-            }   
+            }
             return $lista;
         } else {
             return $lista;
@@ -143,10 +146,10 @@ class ControllerRequerimentos
     {
 
         $deletar = new ModelRequerimentos();
-        
+
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
-        
+
         $deletar->deletarModel($deletar);
         header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
