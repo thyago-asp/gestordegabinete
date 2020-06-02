@@ -31,9 +31,8 @@ if ($url == "emendaconstitucional") {
 
 ?>
 <?php if ($status == "sucesso") : ?>
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Sucesso ao cadastrar!</strong>
+    <div class="alert alert-success text-center" role="alert">
+        Cadastro realizado com sucesso.
     </div>
 <?php elseif ($status == "erro") : ?>
     <div class="alert alert-danger alert-dismissible">
@@ -42,8 +41,8 @@ if ($url == "emendaconstitucional") {
     </div>
 <?php endif; ?>
 
-<div id="pagina" class="card-header text-center h5">
-    <h1><?php echo $titulo ?></h1>
+<div id="pagina" class="card-header text-center ">
+    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
 </div>
 <div class="card-body">
     <form enctype="multipart/form-data" action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">

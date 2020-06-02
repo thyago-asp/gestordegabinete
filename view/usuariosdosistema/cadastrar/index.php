@@ -34,27 +34,27 @@ include '../../../estrutura/head.php';
                 <?php include '../../../estrutura/barratopo.php'; ?>
                 <!-- Begin Page Content -->
 
-                <div class="card">
-                    <?php
-                    if ($retorno_cadastro == "sucesso") {
-                    ?>
-                        <div class="alert alert-success text-center" role="alert">
-                           Cadastro realizado com sucesso.
-                        </div>
-                    <?php
-                    } else if ($retorno_cadastro == "email_cadastrado") {
-                    ?>
-                        <div class="alert alert-danger text-center" role="alert">
-                            Não foi possivel cadastrar. E-mail já está sendo utilizado.
-                        </div>
-                    <?php
-                    }
-
-                    ?>
-                    <div class="card-header text-center h5">
-                        Cadastrar usuarios no sistema
+                <?php
+                if ($retorno_cadastro == "sucesso") {
+                ?>
+                    <div class="alert alert-success text-center" role="alert">
+                        Cadastro realizado com sucesso.
                     </div>
-                    <div class="card-body">
+                <?php
+                } else if ($retorno_cadastro == "email_cadastrado") {
+                ?>
+                    <div class="alert alert-danger text-center" role="alert">
+                        Não foi possivel cadastrar. E-mail já está sendo utilizado.
+                    </div>
+                <?php
+                }
+
+                ?>
+                <div class="card-header text-center ">
+                    <h5 class="cabecalho_paginas"> Cadastrar usuários no sistema</h5>
+                </div>
+                <div class="card-body">
+                    <div class="panel-body">
                         <form action="../../../controller/ControllerUsuario.php?acao=cad" method="post">
                             <label class="form-label">Nome completo</label>
                             <input type="text" class="form-control" name="n_nome" required>
@@ -80,8 +80,9 @@ include '../../../estrutura/head.php';
                         </form>
                     </div>
                 </div>
-
             </div>
+
+
 
 
             <!-- Footer -->

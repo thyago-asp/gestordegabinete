@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar requerimentos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -49,7 +49,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos de requerimentos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -104,9 +104,9 @@ include '../../../estrutura/head.php';
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
                     <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
+                        <div class="alert alert-success text-center" role="alert">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?>!</strong>
+                            Sucesso ao <?php echo $msg ?>
                         </div>
                     <?php elseif ($status == "erro") : ?>
                         <div class="alert alert-danger alert-dismissible">
@@ -116,43 +116,44 @@ include '../../../estrutura/head.php';
                     <?php endif; ?>
                     <!-- Fim mensagem sucesso e erro -->
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Lista de requerimentos</h1>
+                    <div class="card-header text-center ">
+                        <h5 class="cabecalho_paginas">Lista dos requerimentos</h5>
                     </div>
                 </div>
 
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                        <thead>
-                            <tr>
-                                <th>Solicitante</th>
-                                <th>Instituicao</th>
-                                <th>Tipo</th>
-                                <th>Data</th>
-                                <th>Titulo</th>
-                                <th>Numero do documento</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Solicitante</th>
-                                <th>Instituicao</th>
-                                <th>Tipo</th>
-                                <th>Data</th>
-                                <th>Titulo</th>
-                                <th>Numero do documento</th>
-                                <th>Ações</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <!-- include estrutura da tabela -->
-                            <?php include '../../../estrutura/tabelaRequerimentos.php'; ?>
-                            <!-- fim include estrutura da tabela -->
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    <th>Solicitante</th>
+                                    <th>Instituicao</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                    <th>Titulo</th>
+                                    <th>Numero do documento</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Solicitante</th>
+                                    <th>Instituicao</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                    <th>Titulo</th>
+                                    <th>Numero do documento</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- include estrutura da tabela -->
+                                <?php include '../../../estrutura/tabelaRequerimentos.php'; ?>
+                                <!-- fim include estrutura da tabela -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -180,7 +181,7 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
-          $('#modalArquivos').on('show.bs.modal', function(event) {
+        $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var arquivo = [
                 button.data('nome0'),
@@ -249,7 +250,7 @@ include '../../../estrutura/head.php';
             })
 
         });
-        
+
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
@@ -324,7 +325,7 @@ include '../../../estrutura/head.php';
             `)
 
             // seta os valores do modal
-            
+
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
             modal.find('#instituicao').val(instituicao);
@@ -368,7 +369,7 @@ include '../../../estrutura/head.php';
             modal.find('#idtReq').val(idtReq);
             modal.find('#tipo').val(tipo);
             modal.find('#idtArq').val(idtArq)
-            
+
 
         });
     </script>

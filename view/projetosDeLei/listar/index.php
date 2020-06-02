@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar projetos de lei</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,7 +50,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <h5 class="modal-title" id="modalArquivosLabel">Editar projetos de lei</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,57 +106,58 @@ include '../../../estrutura/head.php';
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
                     <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
+                        <div class="alert alert-success text-center" role="alert">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
+                            Sucesso ao <?php echo $msg ?> pessoa!.
                         </div>
                     <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
+                        <div class="alert alert-danger text-center" role="alert">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
+                            Erro ao <?php echo $msg ?>, verifique os campos.
                         </div>
                     <?php endif; ?>
                     <!-- Fim mensagem sucesso e erro -->
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Lista de projetos de lei</h1>
+                    <div class="card-header text-center ">
+                        <h5 class="cabecalho_paginas">Lista dos projetos de lei</h5>
                     </div>
                 </div>
 
-             
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                        <thead>
-                            <tr>
-                                <th>Número do documento</th>
-                                <th>Solicitante</th>
-                                <th>Instituição</th>
-                                <th>Tipo</th>
-                                <th>Data de cadastro</th>
-                                <th>Titulo</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Número do documento</th>
-                                <th>Solicitante</th>
-                                <th>Instituição</th>
-                                <th>Tipo</th>
-                                <th>Data de cadastro</th>
-                                <th>Titulo</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <!-- include estrutura da tabela -->
-                            <?php include '../../../estrutura/tabelaProjetosDeLei.php'; ?>
-                            <!-- fim include estrutura da tabela -->
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    <th>Número do documento</th>
+                                    <th>Solicitante</th>
+                                    <th>Instituição</th>
+                                    <th>Tipo</th>
+                                    <th>Data de cadastro</th>
+                                    <th>Titulo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Número do documento</th>
+                                    <th>Solicitante</th>
+                                    <th>Instituição</th>
+                                    <th>Tipo</th>
+                                    <th>Data de cadastro</th>
+                                    <th>Titulo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- include estrutura da tabela -->
+                                <?php include '../../../estrutura/tabelaProjetosDeLei.php'; ?>
+                                <!-- fim include estrutura da tabela -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>

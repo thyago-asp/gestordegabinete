@@ -29,8 +29,8 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    <div id="pagina" class="card-header text-center h5 col-sm-12">
+                        <h5 class="cabecalho_paginas">Registrar visitas</h5>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>

@@ -29,8 +29,8 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    <div id="pagina" class="card-header text-center h5 col-sm-12">
+                        <h5 class="cabecalho_paginas">Cadastro de pessoas</h5>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
@@ -50,10 +50,11 @@ include '../../../estrutura/head.php';
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header cartao-recursos" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <img src="../../../img/ICON PF.png" class="accordion-pessoas"/>
+                                        <button class="btn btn-link texto-cartao-recursos" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          <!--  <img src="../../../img/ICON PF.png" class="accordion-pessoas" /> -->
+                                            <label > Pessoas física </label>
                                         </button>
                                     </h2>
                                 </div>
@@ -188,7 +189,7 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
-                                        <input type="submit" class="btn btn-success">
+                                        <input type="submit" class="btn btn-primary btn-cadastrar" value="Cadastrar">
 
                                     </div>
 
@@ -200,10 +201,11 @@ include '../../../estrutura/head.php';
                     </form>
                     <form method="POST" id="formJ" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
                         <div class="card">
-                            <div class="card-header" id="headingTwo">
+                            <div class="card-header cartao-recursos" id="headingTwo">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link collapsed text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <img src="../../../img/ICON PJ.png" class="accordion-pessoas"/>
+                                    <button class="btn btn-link collapsed text-center texto-cartao-recursos" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <!--<img src="../../../img/ICON PJ.png" class="accordion-pessoas" />-->
+                                        <label> Pessoa juridica </label>
                                     </button>
                                 </h2>
                             </div>
@@ -319,7 +321,7 @@ include '../../../estrutura/head.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="submit" class="btn btn-success">
+                                        <input type="submit" class="btn btn-primary btn-cadastrar" value="Cadastrar">
                                     </div>
                                 </div>
                             </div>

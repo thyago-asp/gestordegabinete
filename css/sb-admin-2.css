@@ -86,6 +86,10 @@ body {
     font-weight: bold;
 }
 
+.panel-body{
+    margin: 15px;
+}
+
 .cartao-recursos{
     background-color: #1c9b52 !important;
 }
@@ -102,6 +106,14 @@ body {
     text-align: center;
 }
 
+#formF{
+    margin-bottom: 20px;
+}
+
+.btn-cadastrar{
+    width: 100%;
+}
+
 #distancia_capital{
     color: #1c9b52;
     font-size: 15px;
@@ -111,6 +123,13 @@ body {
     font-size: 35px;
     color: #1c9b52;
     font-weight: bold;
+}
+
+.cabecalho_paginas{
+    font-size: 35px;
+    color: #858796;
+    font-weight: bold;
+    margin-top: -20px;
 }
 .accordion-pessoas{
     width: 15%;
@@ -1834,7 +1853,7 @@ pre code {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #d1d3e2;
-    
+    border-radius: .25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
