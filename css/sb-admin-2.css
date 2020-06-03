@@ -82,7 +82,7 @@ body {
 }
 
 .descricao{
-    color: #1c9b52;
+    color: #6e707e;
     font-weight: bold;
 }
 
@@ -91,12 +91,12 @@ body {
 }
 
 .cartao-recursos{
-    background-color: #1c9b52 !important;
+    background-color: #6e707e !important;
 }
 
 .titulo-data-visita{
     text-align: center;
-    background-color: #1c9b52;
+    background-color: #6e707e;
     color: white;
 
 }
@@ -115,13 +115,13 @@ body {
 }
 
 #distancia_capital{
-    color: #1c9b52;
+    color: #6e707e;
     font-size: 15px;
 }
 
 .nome_cidade{
     font-size: 35px;
-    color: #1c9b52;
+    color: #6e707e;
     font-weight: bold;
 }
 

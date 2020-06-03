@@ -29,19 +29,18 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div id="pagina" class="card-header text-center h5 col-sm-12">
+                    <div id="pagina" class="card-header text-center ">
                         <h5 class="cabecalho_paginas">Cadastro de pessoas</h5>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Sucesso ao cadastrar pessoa!</strong>
+                    <div class="alert alert-success text-center" role="alert">
+                        Cadastro realizado com sucesso.
                     </div>
                 <?php elseif ($status == "erro") : ?>
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Erro ao cadastrar verifique os campos!</strong>
+                        <strong>Erro no cadastro verifique os campos!</strong>
                     </div>
                 <?php endif; ?>
 
@@ -53,14 +52,15 @@ include '../../../estrutura/head.php';
                                 <div class="card-header cartao-recursos" id="headingOne">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link texto-cartao-recursos" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          <!--  <img src="../../../img/ICON PF.png" class="accordion-pessoas" /> -->
-                                            <label > Pessoas física </label>
+                                            <!--  <img src="../../../img/ICON PF.png" class="accordion-pessoas" /> -->
+                                            <label> Pessoas física </label>
                                         </button>
                                     </h2>
                                 </div>
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
+                                        
                                         <div class="panel-body">
                                             <label class="form-label">Nome completo</label>
                                             <div class="form-group form-float">
@@ -199,7 +199,7 @@ include '../../../estrutura/head.php';
                         </div>
 
                     </form>
-                    <form method="POST" id="formJ" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
+                    <form method="POST" id="formJ" action="../../../controller/ControllerPessoaJuridica.php?acao=cad">
                         <div class="card">
                             <div class="card-header cartao-recursos" id="headingTwo">
                                 <h2 class="mb-0">
@@ -243,7 +243,7 @@ include '../../../estrutura/head.php';
                                         <label class="form-label">E-mail</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="E-mail">
+                                                <input type="text" class="form-control" name="email" id="emailJ" required placeholder="E-mail">
 
                                             </div>
                                         </div>

@@ -31,8 +31,10 @@ class ControllerRequerimentos
             'pdf',
             'doc',
             'docx',
-            'png',
-            'jpg'
+            'png', 
+            'jpg',
+            'xlsx',
+            'xls'
         ];
 
         $dir = "../arq/";
@@ -55,8 +57,9 @@ class ControllerRequerimentos
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
 
-                $cont++;
+                
             }
+            $cont++;
         }
 
         return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);

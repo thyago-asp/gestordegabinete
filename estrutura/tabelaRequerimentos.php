@@ -13,15 +13,46 @@ $i = 0;
 */
 
 foreach ($lista as $requerimento) {
+    switch ($requerimento['status']) {
+        case "aguardando":
+            $status = "Aguardando informações";
+            break;
+        case "concluido":
+            $status = "Concluído";
+            break;
+        case "aberto":
+            $status = "Aberto";
+            break;
+    }
+    switch ($requerimento['tipo']) {
+        case "pedidos":
+            $tipo = "Pedidos de informações";
+            break;
+        case "envio":
+            $tipo = "Envio de expediente";
+            break;
+        case "voto":
+            $tipo = "Voto de louvor e pesar";
+            break;
+        case "diverso":
+            $tipo = "Diversos";
+            break;
+        case "declaracoes":
+            $tipo = "Declarações de presença";
+            break;
+    }
+
+
 ?>
 
     <tr>
+        <td><?php echo $requerimento['numDoc'] ?></td>
         <td><?php echo $requerimento['solicitante'] ?></td>
         <td><?php echo $requerimento['instituicao'] ?></td>
-        <td><?php echo $requerimento['tipo'] ?></td>
+        <td><?php echo $tipo ?></td>
         <td><?php echo $requerimento['data_cad_doc'] ?></td>
         <td><?php echo $requerimento['titulo'] ?></td>
-        <td><?php echo $requerimento['numDoc'] ?></td>
+        <td><?php echo $status ?></td>
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->

@@ -12,16 +12,38 @@ else
     $totArq = count($lista[0][0]['arquivos']['nome']);
   */
 foreach ($lista as $oficio) :
+    switch ($oficio['status']) {
+        case "aguardando":
+            $status = "Aguardando informações";
+            break;
+        case "concluido":
+            $status = "Concluído";
+            break;
+        case "aberto":
+            $status = "Aberto";
+            break;
+    }
+    switch ($oficio['tipo']) {
+        case "pedido":
+            $tipo = "Pedido";
+            break;
+        case "informacoes":
+            $tipo = "Informações";
+            break;
+        case "respostas":
+            $tipo = "Respostas";
+            break;
+    }
 ?>
 
     <tr>
         <td><?php echo $oficio['numDoc'] ?></td>
         <td><?php echo $oficio['solicitante'] ?></td>
         <td><?php echo $oficio['instituicao'] ?></td>
-        <td><?php echo $oficio['tipo'] ?></td>
+        <td><?php echo $tipo ?></td>
         <td><?php echo $oficio['data_cad_doc'] ?></td>
         <td><?php echo $oficio['titulo'] ?></td>
-        <td><?php echo $oficio['status'] ?></td>
+        <td><?php echo $status ?></td>
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos" data-idtofi="<?php echo $oficio['idt_oficios'] ?>">

@@ -57,16 +57,17 @@ class PessoaJuridica
         $this->$valor = $atributo;
     }
 
-    function cadastroM($pf)
+    function cadastroM($pj)
     {
-        // abre a conexao com o banco de dados
+        try{
+                // abre a conexao com o banco de dados
         $con = Conexao::abrirConexao();
 
 
         $query = "INSERT INTO t_endereco(endereco, cep, bairro, complemento, numero, cidade, estado)
                     VALUES (:logradouro, :cep, :bairro, :complemento, :numero, :cidade, :estado);
-                  INSERT INTO t_pessoa(nome, telefone, t_endereco_idt_endereco) 
-                    VALUES (:nome, :telefone, LAST_INSERT_ID()); 
+                  INSERT INTO t_pessoa(nome, telefone, email, t_endereco_idt_endereco) 
+                    VALUES (:nome, :telefone, :email, LAST_INSERT_ID()); 
                   INSERT INTO t_pessoa_juridica (t_pessoa_idt_pessoa, cnpj, nome_fantasia, atividade) 
                     VALUES (LAST_INSERT_ID(), :cnpj, :nome_fantasia, :atividade);
                  ";
@@ -88,6 +89,7 @@ class PessoaJuridica
         // tabela t_pessoa
         $stmt->bindValue(':nome', $this->__get('nome'));
         $stmt->bindValue(':telefone', $this->__get('telefone'));
+        $stmt->bindValue(':email', $this->__get('email'));
         
         // // tabela t_pessoa_uridica
         $stmt->bindValue(':cnpj', $this->__get('cnpj'));
@@ -95,9 +97,11 @@ class PessoaJuridica
         $stmt->bindValue(':atividade', $this->__get('atividade'));
 
         // por fim executa a query
-        $stmt->execute();
+        return $stmt->execute();
+    } catch (PDOException $e) {
+       print_r($e->getMessage());
+   }
 
-        return true;
     }
 
     function listarM()

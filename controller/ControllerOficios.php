@@ -31,7 +31,9 @@ class ControllerOficios
             'doc',
             'docx',
             'png', 
-            'jpg'
+            'jpg',
+            'xlsx',
+            'xls'
         ];
 
         $dir = "../arq/";
@@ -43,10 +45,10 @@ class ControllerOficios
 
         $cont = 0;
         while ($cont < $qtdArquivos) {
-
+           //echo $arq['arquivos']['name'][$cont];
             $arqExtencao = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_EXTENSION);
             $arqNome[] = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_FILENAME);
-            if (in_array($arqExtencao, $extencoes)) {
+           if (in_array($arqExtencao, $extencoes)) {
 
                 $temp = $arq['arquivos']['tmp_name'][$cont];
                 $novoNome = uniqid() . ".$arqExtencao";
@@ -54,8 +56,8 @@ class ControllerOficios
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
 
-                $cont++;
             }
+            $cont++;
         }
         return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
     }

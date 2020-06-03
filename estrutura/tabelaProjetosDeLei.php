@@ -10,16 +10,44 @@ else
 $i = 0;
 */
 foreach ($lista_projetodelei as $projetodelei) :
+    switch ($projetodelei['status']) {
+        case "aguardando":
+            $status = "Aguardando informações";
+            break;
+        case "concluido":
+            $status = "Concluído";
+            break;
+        case "aberto":
+            $status = "Aberto";
+            break;
+    }
+    switch ($projetodelei['tipo']) {
+        case "projetosDeLei":
+            $tipo = "Projeto de lei";
+            break;
+        case "projetosDeResolucao":
+            $tipo = "Projetos de resolução";
+            break;
+        case "projetosDeLeiComplementar":
+            $tipo = "Projetos de lei complementar";
+            break;
+        case "emendaLegislativa":
+            $tipo = "Emenda Legistativa";
+            break;
+        case "emendaConstitucional":
+            $tipo = "Emenda constitucional";
+            break;
+    }
 ?>
 
     <tr>
         <td><?php echo $projetodelei['numDoc'] ?></td>
         <td><?php echo $projetodelei['solicitante'] ?></td>
         <td><?php echo $projetodelei['instituicao'] ?></td>
-        <td><?php echo $projetodelei['tipo'] ?></td>
+        <td><?php echo $tipo ?></td>
         <td><?php echo $projetodelei['data_cad_doc'] ?></td>
         <td><?php echo $projetodelei['titulo'] ?></td>
-        <td><?php echo $projetodelei['status'] ?></td>
+        <td><?php echo $status?></td>
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->

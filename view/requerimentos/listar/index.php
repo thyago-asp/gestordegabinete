@@ -36,7 +36,7 @@ include '../../../estrutura/head.php';
                 </div>
                 <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioEnviar" method="post">
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -128,23 +128,25 @@ include '../../../estrutura/head.php';
 
                             <thead>
                                 <tr>
+                                    <th>Numero do documento</th>
                                     <th>Solicitante</th>
                                     <th>Instituicao</th>
                                     <th>Tipo</th>
                                     <th>Data</th>
                                     <th>Titulo</th>
-                                    <th>Numero do documento</th>
+                                    <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>Numero do documento</th>
                                     <th>Solicitante</th>
                                     <th>Instituicao</th>
                                     <th>Tipo</th>
                                     <th>Data</th>
                                     <th>Titulo</th>
-                                    <th>Numero do documento</th>
+                                    <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>
@@ -196,15 +198,15 @@ include '../../../estrutura/head.php';
 
                 $.each(JSON.parse(data), function(index, value) {
                     // alert(value.arquivo_caminho);
-                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo +"</a><br/>";
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo + "</a><br/>";
                     cont++;
                 });
-                if(link != ""){
-                $("#modalArquivos #link_arquivos").html(link);
-                }else{
+                if (link != "") {
+                    $("#modalArquivos #link_arquivos").html(link);
+                } else {
                     $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
                 }
-               
+
             });
 
         });
@@ -315,7 +317,7 @@ include '../../../estrutura/head.php';
                     
                 `);
 
-          //  console.log(idtArq)
+            //  console.log(idtArq)
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")

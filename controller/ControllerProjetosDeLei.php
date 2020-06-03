@@ -31,8 +31,10 @@ class ControllerProjetosDeLei
             'pdf',
             'doc',
             'docx',
-            'png',
-            'jpg'
+            'png', 
+            'jpg',
+            'xlsx',
+            'xls'
         ];
 
         $dir = "../arq/";
@@ -55,8 +57,9 @@ class ControllerProjetosDeLei
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
 
-                $cont++;
+                
             }
+            $cont++;
         }
         return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
     }
@@ -74,13 +77,13 @@ class ControllerProjetosDeLei
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
-        $salvar->__set('tipo', $_POST['pagina']);
+        $salvar->__set('tipo', $_POST['tipo']);
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
         $retorno = $salvar->salvarModel($salvar);
         if ($retorno == 1) {
-            header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+            header("location: /view/projetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
     }
     function atualizarProjetosDeLei()
@@ -102,7 +105,7 @@ class ControllerProjetosDeLei
         $retorno = $atualizar->atualizarModel();
 
         if ($retorno == 1) {
-            header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+            header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
         }
     }
     function listarProjetosDeLei()
