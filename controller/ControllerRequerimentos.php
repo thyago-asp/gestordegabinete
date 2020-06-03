@@ -31,7 +31,8 @@ class ControllerRequerimentos
             'pdf',
             'doc',
             'docx',
-            'png'
+            'png',
+            'txt'
         ];
 
         $dir = "../bancodedados/arq/";
@@ -57,7 +58,7 @@ class ControllerRequerimentos
                 $cont++;
             } else {
                  
-                return "arquivo invalido";
+                return false;
             }
         }
         
@@ -77,14 +78,22 @@ class ControllerRequerimentos
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
+        $arq = $this->arquivos($_FILES);
+        if($arq == false) {
+            header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+        }
+        $salvar->__set('arquivos', $arq);
 
-        $salvar->__set('arquivos', $this->arquivos($_FILES));
         $salvar->salvarModel($salvar);
         $ciclo = count($salvar->arquivos['local']);
+       
         $contador = 0;
         while ($contador < $ciclo) {
 
-            $arquivos[] = [$salvar->arquivos['local'][$contador], $salvar->arquivos['nome'][$contador]];
+            $arquivos[] = [
+                            $salvar->arquivos['local'][$contador], 
+                            $salvar->arquivos['nome'][$contador]
+                        ];
 
             $salvar->__set('localArquivos', $arquivos[$contador][0]);
             $salvar->__set('nomeArquivos', $arquivos[$contador][1]);
@@ -92,7 +101,7 @@ class ControllerRequerimentos
             $contador++;
         }
 
-        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+        // header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
     }
     function atualizarRequerimentos()
     {
