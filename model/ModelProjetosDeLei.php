@@ -26,8 +26,9 @@ class ModelProjetosDeLei
         return $this->$atributo;
     }
 
-    function salvarArquivos() {
-    
+    function salvarArquivos()
+    {
+
         $con = Conexao::abrirConexao();
 
         $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
@@ -38,47 +39,79 @@ class ModelProjetosDeLei
         $stmt->bindValue(':arquivo_caminho', $this->__get('localArquivos'));
         $stmt->bindValue(':nome_arquivo', $this->__get('nomeArquivos'));
         $stmt->bindValue(':ultimoid', $this->selecionarId());
-        
+
         $stmt->execute();
+    }
 
-    } 
-
-    function selecionarId() {
+    function selecionarId()
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT MAX(idt_projetosdelei) AS ultimoid FROM t_projetosdelei";
-        
+
         $stmt = $con->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return  $result['ultimoid'];
     }
 
     function salvarModel()
     {
-
-        $con = Conexao::abrirConexao();
-        $query = "INSERT INTO t_projetosdelei(numDoc, solicitante, instituicao, 
+        try {
+            $con = Conexao::abrirConexao();
+            $query = "INSERT INTO t_projetosdelei(numDoc, solicitante, instituicao, 
                     nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
                     :data_cad_doc, :tipo, :titulo, :descricao, :status)";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':numDoc', $this->__get('documento'));
-        $stmt->bindValue(':solicitante', $this->__get('solicitante'));
-        $stmt->bindValue(':instituicao', $this->__get('instituicao'));
-        $stmt->bindValue(':data_cad_doc', $this->__get('data'));
-        $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
-        $stmt->bindValue(':titulo', $this->__get('titulo'));
-        $stmt->bindValue(':descricao', $this->__get('descricao'));
-        $stmt->bindValue(':status', $this->__get('status'));
-        
-        $stmt->execute();
+            $stmt->bindValue(':numDoc', $this->__get('documento'));
+            $stmt->bindValue(':solicitante', $this->__get('solicitante'));
+            $stmt->bindValue(':instituicao', $this->__get('instituicao'));
+            $stmt->bindValue(':data_cad_doc', $this->__get('data'));
+            $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
+            $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->bindValue(':status', $this->__get('status'));
 
+            $retorno = $stmt->execute();
+
+            if ($retorno > 0) {
+                $ultimoId = $con->lastInsertId();
+
+                for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
+                    $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
+                    VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
+
+                    $stmt = $con->prepare($query);
+
+                    $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':ultimoid', $ultimoId);
+
+                    $stmt->execute();
+                }
+            }
+            return 1;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
     }
 
+    function listarProjetodelei()
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "select * from t_projetosdelei";
+
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
 
     function listarModel()
     {
@@ -108,33 +141,36 @@ class ModelProjetosDeLei
 
     function atualizarModel()
     {
-
-        $con = Conexao::abrirConexao();
-        $query = "UPDATE t_projetosdelei 
+        try {
+            $con = Conexao::abrirConexao();
+            $query = "UPDATE t_projetosdelei 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
-                  WHERE tipo = :tipo AND idt_projetosdelei = :idt";
+                  WHERE idt_projetosdelei = :idt";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':numDoc', $this->__get('documento'));
-        $stmt->bindValue(':solicitante', $this->__get('solicitante'));
-        $stmt->bindValue(':instituicao', $this->__get('instituicao'));
-        $stmt->bindValue(':data_cad_doc', $this->__get('data'));
-        $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
-        $stmt->bindValue(':titulo', $this->__get('titulo'));
-        $stmt->bindValue(':descricao', $this->__get('descricao'));
-        $stmt->bindValue(':status', $this->__get('status'));
-        $stmt->bindValue(':idt', $this->__get('idt'));
+            $stmt->bindValue(':numDoc', $this->__get('documento'));
+            $stmt->bindValue(':solicitante', $this->__get('solicitante'));
+            $stmt->bindValue(':instituicao', $this->__get('instituicao'));
+            $stmt->bindValue(':data_cad_doc', $this->__get('data'));
+            $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
+        
+            $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->bindValue(':status', $this->__get('status'));
+            $stmt->bindValue(':idt', $this->__get('idt'));
 
-        $stmt->execute();
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
     }
 
     function arqExcluir($idt)
     {
-    
+
         $con = Conexao::abrirConexao();
         $query = "SELECT * FROM t_arquivos_projetodelei WHERE t_projetosdelei_idt_projetosdelei = :fkidt";
 
@@ -143,26 +179,27 @@ class ModelProjetosDeLei
 
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($result as $chave => $valor) {
-            unlink($valor['arquivo_caminho']);    
-        }
-        
 
+        foreach ($result as $chave => $valor) {
+            unlink($valor['arquivo_caminho']);
+        }
     }
 
     function deletarModel()
     {
-        $con = Conexao::abrirConexao();
-        $this->arqExcluir($this->__get('idt'));
-        $query = "DELETE FROM `t_projetosdelei` WHERE idt_projetosdelei = :idt AND tipo = :tipo";
-        
-        $stmt = $con->prepare($query);
+        try {
+            $con = Conexao::abrirConexao();
+            $this->arqExcluir($this->__get('idt'));
+            $query = "DELETE FROM `t_projetosdelei` WHERE idt_projetosdelei = :idt";
 
-        $stmt->bindValue(':idt', $this->__get('idt'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt = $con->prepare($query);
 
-        $stmt->execute();
+            $stmt->bindValue(':idt', $this->__get('idt'));
+         
 
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
     }
 }

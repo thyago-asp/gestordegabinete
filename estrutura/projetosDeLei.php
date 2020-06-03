@@ -120,7 +120,7 @@ if ($url == "emendaconstitucional") {
 
                     </div>
                 </div>
-                <input type="hidden" name="pagina" value="<?php echo $input ?>">
+                <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
                 </div>

@@ -31,10 +31,11 @@ class ControllerRequerimentos
             'pdf',
             'doc',
             'docx',
-            'png'
+            'png',
+            'jpg'
         ];
 
-        $dir = "../bancodedados/arq/";
+        $dir = "../arq/";
 
         $arqNome = [];
         $arqLocal = [];
@@ -55,9 +56,6 @@ class ControllerRequerimentos
                 $arqLocal[] = $dirImg;
 
                 $cont++;
-            } else {
-
-                return "arquivo invalido";
             }
         }
 
@@ -79,24 +77,14 @@ class ControllerRequerimentos
         $salvar->__set('tipo', $_POST['tipo']);
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
-        $salvar->salvarModel($salvar);
-        $ciclo = count($salvar->arquivos['local']);
-        $contador = 0;
-        while ($contador < $ciclo) {
 
-            $arquivos[] = [$salvar->arquivos['local'][$contador], $salvar->arquivos['nome'][$contador]];
-
-            $salvar->__set('localArquivos', $arquivos[$contador][0]);
-            $salvar->__set('nomeArquivos', $arquivos[$contador][1]);
-            $salvar->salvarArquivos();
-            $contador++;
+        $retorno = $salvar->salvarModel($salvar);
+        if ($retorno == 1) {
+            header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
-
-        header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
     }
     function atualizarRequerimentos()
     {
-
         $atualizar = new ModelRequerimentos();
 
         $atualizar->__set('documento', $_POST['documento']);
@@ -118,29 +106,9 @@ class ControllerRequerimentos
     }
     function listarRequerimentos()
     {
-        $lista = (new ModelRequerimentos())->listarModel();
+        $lista_requerimentos = (new ModelRequerimentos())->listarRequerimentos();
 
-        if (isset($lista[0]['nomearquivo'])) {
-
-            foreach ($lista as $key => $value) {
-
-                $nome = explode(',', $value['nomearquivo']);
-                $idarquivo = explode(',', $value['idarquivo']);
-                $fkprojetosdelei = explode(',', $value['fkrequerimentos']);
-                $link = explode(',', $value['caminho_arquivo']);
-                $a['arquivos'] = [
-                    "nome" => $nome,
-                    "idArquivo" => $idarquivo,
-                    "fkArquivo" => $fkprojetosdelei,
-                    "linkArq" => $link
-                ];
-
-                array_push($lista[$key], $a);
-            }
-            return $lista;
-        } else {
-            return $lista;
-        }
+        return $lista_requerimentos;
     }
     function deletarRequerimentos()
     {
@@ -149,8 +117,10 @@ class ControllerRequerimentos
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
+        $retorno = $deletar->deletarModel($deletar);
 
-        $deletar->deletarModel($deletar);
-        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        if ($retorno == 1) {
+            header("Location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
     }
 }

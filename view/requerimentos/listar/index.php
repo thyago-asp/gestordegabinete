@@ -36,6 +36,7 @@ include '../../../estrutura/head.php';
                 </div>
                 <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioEnviar" method="post">
                     <div class="modal-body">
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -54,15 +55,14 @@ include '../../../estrutura/head.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
-                    <div class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <div id="link_arquivos"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -99,22 +99,22 @@ include '../../../estrutura/head.php';
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
                 <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success text-center" role="alert">
-                            
-                            Sucesso ao <?php echo $msg ?>
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
-                        </div>
-                    <?php endif; ?>
+                    <div class="alert alert-success text-center" role="alert">
+
+                        Sucesso ao <?php echo $msg ?>
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
+                    </div>
+                <?php endif; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
 
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
-                    
+
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="card-header text-center ">
@@ -184,78 +184,33 @@ include '../../../estrutura/head.php';
     <script>
         $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-            var arquivo = [
-                button.data('nome0'),
-                button.data('nome1'),
-                button.data('nome2'),
-                button.data('nome3'),
-                button.data('nome4'),
-            ];
-            var link = [
-                button.data('linkarq0'),
-                button.data('linkarq1'),
-                button.data('linkarq2'),
-                button.data('linkarq3'),
-                button.data('linkarq4'),
-            ]
-            var fkidt = [
-                button.data('fkrprojetosdelei0'),
-            ]
 
-            var idtArq = [
-                button.data('idarq0'),
-                button.data('idarq1'),
-                button.data('idarq2'),
-                button.data('idarq3'),
-                button.data('idarq4'),
-            ]
+            var idtreq = button.data('idtreq')
 
+            $.post('/view/requerimentos/call_requerimentos.php', {
+                idrequerimento: idtreq
+            }, function(data) {
+                img = "";
+                var cont = 1;
+                var link = "";
 
-            var arq = {
-                arq: {
-                    "nome": arquivo,
-                    "link": link,
-                    "idtArq": idtArq
+                $.each(JSON.parse(data), function(index, value) {
+                    // alert(value.arquivo_caminho);
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo +"</a><br/>";
+                    cont++;
+                });
+                if(link != ""){
+                $("#modalArquivos #link_arquivos").html(link);
+                }else{
+                    $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
                 }
-            }
-
-            var i = 0;
-            var tot = arq.arq.idtArq
-            var a = 0;
-            for (let index = 0; index < tot.length; index++) {
-                const element = tot[index];
-                if (element == undefined) {
-                    var tamValido = a++;
-                    console.log(tamValido)
-                }
-
-            }
-            var tamanho = (arq.arq.nome.length);
-
-            var cont = tamanho - tamValido - 1;
-
-            $("#formularioArquivos .modal-body").html('');
-
-            $.each(arq, (chave, valor) => {
-
-                while (i < cont) {
-
-                    $('#formularioArquivos .modal-body').append(`
-                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><br>   
-                    `)
-                    i++;
-
-                }
-
-                i = 0;
-            })
+               
+            });
 
         });
 
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-
-
             // data parametros
             var idtReq = button.data('idtreq')
             var numDoc = button.data('numdoc')
@@ -266,7 +221,7 @@ include '../../../estrutura/head.php';
             var tipo = button.data('tipo')
             var titulo = button.data('titulo')
             var descricao = button.data('descricao')
-            
+
             var status = button.data('status')
             //console.log(status);
             var atividade = button.data('atividade');
@@ -335,8 +290,8 @@ include '../../../estrutura/head.php';
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
             modal.find('#idtReq').val(idtReq);
-           
-            modal.find('#status option[value='+status+']').attr('selected','selected');
+
+            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
 
 
 
@@ -360,7 +315,7 @@ include '../../../estrutura/head.php';
                     
                 `);
 
-            console.log(idtArq)
+          //  console.log(idtArq)
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")

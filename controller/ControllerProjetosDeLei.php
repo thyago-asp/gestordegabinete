@@ -31,16 +31,17 @@ class ControllerProjetosDeLei
             'pdf',
             'doc',
             'docx',
-            'png'
+            'png',
+            'jpg'
         ];
 
-        $dir = "../bancodedados/arq/";
+        $dir = "../arq/";
 
         $arqNome = [];
         $arqLocal = [];
         $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
-       
+
         $cont = 0;
         while ($cont < $qtdArquivos) {
 
@@ -55,9 +56,6 @@ class ControllerProjetosDeLei
                 $arqLocal[] = $dirImg;
 
                 $cont++;
-            } else {
-
-                return "arquivo invalido";
             }
         }
         return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
@@ -80,22 +78,10 @@ class ControllerProjetosDeLei
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
-        $salvar->salvarModel($salvar);
-
-        $ciclo = count($salvar->arquivos['local']);
-        $contador = 0;
-        while ($contador < $ciclo) {
-
-            $arquivos[] = [$salvar->arquivos['local'][$contador], $salvar->arquivos['nome'][$contador]];
-
-            $salvar->__set('localArquivos', $arquivos[$contador][0]);
-            $salvar->__set('nomeArquivos', $arquivos[$contador][1]);
-            $salvar->salvarArquivos();
-            $contador++;
+        $retorno = $salvar->salvarModel($salvar);
+        if ($retorno == 1) {
+            header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
-        // "C:\Program Files\Microsoft VS Code\Code.exe"
-        header("location: /view/ProjetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
-
     }
     function atualizarProjetosDeLei()
     {
@@ -111,45 +97,31 @@ class ControllerProjetosDeLei
         $atualizar->__set('descricao', $_POST['descricao']);
         $atualizar->__set('status', $_POST['status']);
         $atualizar->__set('tipo', $_POST['tipo']);
-        $atualizar->__set('idt', $_POST['idtReq']);
+        $atualizar->__set('idt', $_POST['idtpro']);
 
-        $atualizar->atualizarModel();
-        header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        $retorno = $atualizar->atualizarModel();
+
+        if ($retorno == 1) {
+            header("location: /view/ProjetosDeLei/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        }
     }
     function listarProjetosDeLei()
     {
-        $lista = (new ModelProjetosDeLei())->listarModel();
-        if (isset($lista[0]['nomearquivo'])) {
+        $lista_projetodelei = (new ModelProjetosDeLei())->listarProjetodelei();
 
-            foreach ($lista as $key => $value) {
-                $nome = explode(',', $value['nomearquivo']);
-                $idarquivo = explode(',', $value['idarquivo']);
-                $fkprojetosdelei = explode(',', $value['fkprojetosdelei']);
-                $link = explode(',', $value['caminho_arquivo']);
-                $a['arquivos'] = [
-                    "nome" => $nome,
-                    "idArquivo" => $idarquivo,
-                    "fkArquivo" => $fkprojetosdelei,
-                    "linkArq" => $link
-                ];
-
-                array_push($lista[$key], $a);
-            }
-            return $lista;
-        } else {
-            return $lista;
-        }
+        return $lista_projetodelei;
     }
     function deletarProjetosDeLei()
     {
-       
+
         $deletar = new ModelProjetosDeLei();
 
-        $deletar->__set('idt', $_POST['idtReq']);
+        $deletar->__set('idt', $_POST['idtpro']);
         $deletar->__set('tipo', $_POST['tipo']);
 
-        $deletar->deletarModel($deletar);
-       
-        header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        $retorno = $deletar->deletarModel($deletar);
+        if ($retorno == 1) {
+            header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
     }
 }
