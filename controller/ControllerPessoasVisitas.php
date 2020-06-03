@@ -59,14 +59,21 @@ class ControllerPessoasVisitas
     function atualizar()
     {
         $visita = new ModelPessoaVisita();
+        if (
+            empty($_POST['nome']) || empty($_POST['cidade']) ||
+            empty($_POST['dataVisita']) || empty($_POST['comentario'])
+        ) {
+            header('location: /view/pessoas/visitalistar?cad=erro');
+        } else {
+            $visita->__set('idVisitas', $_POST['idVisitas']);
+            $visita->__set('nome', $_POST['nome']);
+            $visita->__set('cidade', $_POST['cidade']);
+            $visita->__set('data', $_POST['data']);
+            $visita->__set('comentario', $_POST['comentario']);
 
-        $visita->__set('idVisitas', $_POST['idVisitas']);
-        $visita->__set('nome', $_POST['nome']);
-        $visita->__set('cidade', $_POST['cidade']);
-        $visita->__set('data', $_POST['data']);
-        $visita->__set('comentario', $_POST['comentario']);
-
-        $visita->atualizar($visita);
+            $visita->atualizar($visita);
+            header('location: /view/pessoas/visitalistar?cad=sucesso');
+        }
     }
     function listar()
     {
