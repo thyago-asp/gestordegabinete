@@ -68,7 +68,7 @@ class ControllerRequerimentos
     function salvarRequerimentos()
     {
         $salvar = new ModelRequerimentos();
-
+        //print_r($_POST['tipo']);
         $salvar->__set('documento', $_POST['documento']);
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
@@ -150,7 +150,7 @@ class ControllerRequerimentos
     }
     function deletarRequerimentos()
     {
-        
+
         $deletar = new ModelRequerimentos();
         
         $deletar->__set('idt', $_POST['idtReq']);
