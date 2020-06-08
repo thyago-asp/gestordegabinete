@@ -78,6 +78,11 @@ class ControllerRequerimentos
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
+        $arq = $this->arquivos($_FILES);
+        if($arq == false) {
+            header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
+        }
+        $salvar->__set('arquivos', $arq);
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
