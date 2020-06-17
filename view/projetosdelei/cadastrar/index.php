@@ -22,10 +22,11 @@ include '../../../estrutura/head.php';
                 <?php include '../../../estrutura/barratopo.php'; ?>
                 <!-- Begin Page Content -->
 
-               
+                <div class="card" id="conteudo">
+
                    <?php include '../../../estrutura/projetosDeLei.php'; ?>
 
-                
+                </div>
 
             </div>
 
