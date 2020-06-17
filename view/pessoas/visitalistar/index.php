@@ -101,11 +101,10 @@ include '../../../estrutura/head.php';
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Lista de visitantes</h1>
                     </div>
                 </div>
 
-                b4.
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 

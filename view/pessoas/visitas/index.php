@@ -32,7 +32,7 @@ include '../../../estrutura/head.php';
                 <div class="container-fluid ">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Cadastrar visita</h1>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>

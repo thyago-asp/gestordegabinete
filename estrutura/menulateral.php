@@ -32,7 +32,7 @@
         <div id="collapsePessoas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu pessoas</h6>
-                <a class="collapse-item" href="/view/pessoas/cadastrar">Cadastrar</a>
+                <a class="collapse-item" href="/view/pessoas/cadastrar">Cadastrar pessoa</a>
                 <a class="collapse-item" href="/view/pessoas/listar">Listar pessoas</a>
                 <a class="collapse-item" href="/view/pessoas/visitas">Cadastrar visitas</a>
                 <a class="collapse-item" href="/view/pessoas/visitalistar">Listar visitas</a>

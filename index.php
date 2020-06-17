@@ -15,7 +15,7 @@ if (isset($_REQUEST["r"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
 

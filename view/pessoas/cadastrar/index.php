@@ -8,7 +8,7 @@ if (isset($_GET['cad'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <?php
 $pagina = "sub3";
 include '../../../estrutura/head.php';
@@ -30,7 +30,7 @@ include '../../../estrutura/head.php';
                 <div class="container-fluid ">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                        <h1 class="h3 mb-0 text-gray-800 text-center">Cadastrar pessoas</h1>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
@@ -61,32 +61,32 @@ include '../../../estrutura/head.php';
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="panel-body">
-                                            <label class="form-label">Nome completo</label>
+                                            <label class="form-label" for="nome">Nome completo</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="nome" required>
+                                                    <input type="text" id="nome" class="form-control" name="nome" required>
 
                                                 </div>
                                             </div>
 
-                                            <label class="form-label">Email</label>
+                                            <label class="form-label" for="email">Email</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="email" class="form-control" name="email" required>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com" required>
 
                                                 </div>
                                             </div>
-                                            <label class="form-label">Telefone</label>
+                                            <label class="form-label" for="telefoneF">Telefone</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" name="telefoneF" required>
+                                                    <input type="tel" class="form-control" id="telefoneF"  maxlength="14" name="telefoneF" placeholder="00 9999-9999" required>
 
                                                 </div>
                                             </div>
-                                            <label class="form-label">CPF</label>
+                                            <label class="form-label" for="cpf">CPF</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" name="CPF" required>
+                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="13" name="CPF" required>
 
                                                 </div>
                                             </div>
@@ -97,13 +97,13 @@ include '../../../estrutura/head.php';
                                                 <input type="radio" name="sexo" value="feminino" id="female" class="with-gap">
                                                 <label for="female" class="m-l-20">Feminino</label>
                                             </div>
-                                            <label class="form-label">Data de nascimento</label>
+                                            <label class="form-label" for="nascimento">Data de nascimento</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="date" class="form-control date" name="nascimento" required placeholder="Ex: 30/07/2016">
+                                                    <input type="date" class="form-control date" id="nascimento" name="nascimento" required placeholder="Ex: 30/07/2016">
                                                 </div>
                                             </div>
-                                            <label class="form-label">Endereço</label>
+                                            <label class="form-label" for="cepF">Endereço</label>
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-line">
@@ -160,10 +160,10 @@ include '../../../estrutura/head.php';
                                                 </div>
 
                                             </div>
-                                            <label class="form-label">Categoria</label>
+                                            <label class="form-label" for="categoria">Categoria</label>
                                             <div class="row clearfix">
                                                 <div class="col-sm-12">
-                                                    <select name="categoria" class="form-control show-tick ">
+                                                    <select name="categoria" id="categoria" class="form-control show-tick ">
                                                         <option value="">-- Selecione uma categoria --</option>
                                                         <option value="dep.estadual">Deputados estadual</option>
                                                         <option value="dep.federal">Deputado federal</option>
@@ -212,7 +212,7 @@ include '../../../estrutura/head.php';
                                     <div class="panel-body">
 
 
-                                        <label class="form-label">CNPJ</label>
+                                        <label class="form-label" for="cnpj">CNPJ</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -220,7 +220,7 @@ include '../../../estrutura/head.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <label class="form-label">Nome</label>
+                                        <label class="form-label" for="nomeJ">Nome</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -229,7 +229,7 @@ include '../../../estrutura/head.php';
                                             </div>
                                         </div>
 
-                                        <label class="form-label">Nome Fantasia</label>
+                                        <label class="form-label" for="fantasiaJ">Nome Fantasia</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -238,22 +238,22 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
-                                        <label class="form-label">E-mail</label>
+                                        <label class="form-label" for="emailJ">E-mail</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="E-mail">
+                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="email@email.com">
 
                                             </div>
                                         </div>
-                                        <label class="form-label">Telefone</label>
+                                        <label class="form-label" for="telefoneJ">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" required placeholder="Telefone">
+                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="14" required placeholder="00 9999-9999">
 
                                             </div>
                                         </div>
 
-                                        <label class="form-label">Endereço</label>
+                                        <label class="form-label" for="cepJ">Endereço</label>
                                         <div id="endereco">
                                             <div class="form-group">
                                                 <div class="form-group">
