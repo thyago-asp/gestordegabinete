@@ -4,11 +4,11 @@ require_once("../../../estrutura/controleLogin.php");
 
 $status = "";
 
-if(isset($_GET['atualizar'])){
+if (isset($_GET['atualizar'])) {
     $msg = "atualizar";
     $status = $_GET['atualizar'];
 }
-if(isset($_GET['excluir'])) {
+if (isset($_GET['excluir'])) {
     $msg = "excluir";
     $status = $_GET['excluir'];
 }
@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar pessoas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -86,22 +86,22 @@ include '../../../estrutura/head.php';
             <div id="content">
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
+                <?php if ($status == "sucesso") : ?>
+                    <div class="alert alert-success text-center" role="alert">
+                        Registro atualizado com sucesso.
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro no cadastro verifique os campos.</strong>
+                    </div>
+                <?php endif; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
 
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
-                    <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
-                        </div>
-                    <?php endif; ?>
+
                     <!-- Fim mensagem sucesso e erro -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
@@ -181,7 +181,7 @@ include '../../../estrutura/head.php';
             var cpf = button.data('cpf');
             var sexo = button.data('sexo');
             var nascimento = button.data('nascimento');
-            
+
             var idtPF = button.data('idt_pessoa_fisica');
             var categoria = button.data('categoria');
 
@@ -372,13 +372,13 @@ include '../../../estrutura/head.php';
 
             var idSexo = "";
             // pessoa fisica / pessoa
-            
-            if(sexo == "masculino"){
-                idSexo = "masc"; 
+
+            if (sexo == "masculino") {
+                idSexo = "masc";
             } else {
                 idSexo = "fem";
             }
-            
+
             modal.find('#n_nome_editado').val(nome);
             modal.find('#n_email_editado').val(email);
             modal.find('#n_telefone_editado').val(telefone);
@@ -386,22 +386,22 @@ include '../../../estrutura/head.php';
             modal.find('#n_cpf_editado').val(cpf);
             modal.find('#n_categoria_editado').val(categoria);
             modal.find('#imagem').attr('src', img);
-            
+
             modal.find('#manterImg').val(img);
-            
+
             var data = (nascimento);
-            var dataFormatada = data.split("/").reverse().join('-')
-           
+            //    var dataFormatada = data.split("/").reverse().join('-')
+
 
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
             modal.find('#n_fantasia_editado').val(nomeFantasia);
             modal.find('#n_atividade_editado').val(atividade)
-          
+
 
             // estado
-            modal.find('#n_nascimento_editado').val(dataFormatada);
+            modal.find('#n_nascimento_editado').val(data);
             modal.find('#n_logradouro_editado').val(endereco);
             modal.find('#n_complemento_editado').val(complemento);
             modal.find('#n_numero_editado').val(numero);
@@ -413,7 +413,7 @@ include '../../../estrutura/head.php';
             modal.find('#idtPessoa').val(idtPessoa);
             modal.find('#idtPF').val(idtPF);
             modal.find('#fkEndereco').val(fkIdtEndereco);
-            
+
             modal.find('#fkIdtPessoa').val(fkIdtPessoa);
 
 
@@ -442,7 +442,7 @@ include '../../../estrutura/head.php';
             var fkIdtPessoa = button.data('t_pessoa_idt_pessoa')
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-           
+
             if (idtPf >= 1) {
                 $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>

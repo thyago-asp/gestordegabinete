@@ -34,14 +34,13 @@ include '../../../estrutura/head.php';
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Sucesso ao cadastrar pessoa!</strong>
+                    <div class="alert alert-success text-center" role="alert">
+                        Cadastro realizado com sucesso.
                     </div>
                 <?php elseif ($status == "erro") : ?>
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Erro ao cadastrar verifique os campos!</strong>
+                        <strong>Erro no cadastro verifique os campos!</strong>
                     </div>
                 <?php endif; ?>
 
@@ -50,16 +49,18 @@ include '../../../estrutura/head.php';
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header cartao-recursos" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Pessoa Fisica
+                                        <button class="btn btn-link texto-cartao-recursos" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <!--  <img src="../../../img/ICON PF.png" class="accordion-pessoas" /> -->
+                                            <label> Pessoas física </label>
                                         </button>
                                     </h2>
                                 </div>
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
+                                        
                                         <div class="panel-body">
                                             <label class="form-label" for="nome">Nome completo</label>
                                             <div class="form-group form-float">
@@ -188,7 +189,7 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
-                                        <input type="submit" class="btn btn-success">
+                                        <input type="submit" class="btn btn-primary btn-cadastrar" value="Cadastrar">
 
                                     </div>
 
@@ -198,12 +199,13 @@ include '../../../estrutura/head.php';
                         </div>
 
                     </form>
-                    <form method="POST" id="formJ" action="../../../controller/controllerPessoaJuridica.php?acao=cad">
+                    <form method="POST" id="formJ" action="../../../controller/ControllerPessoaJuridica.php?acao=cad">
                         <div class="card">
-                            <div class="card-header" id="headingTwo">
+                            <div class="card-header cartao-recursos" id="headingTwo">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link collapsed text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Pessoa Juridica
+                                    <button class="btn btn-link collapsed text-center texto-cartao-recursos" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <!--<img src="../../../img/ICON PJ.png" class="accordion-pessoas" />-->
+                                        <label> Pessoa juridica </label>
                                     </button>
                                 </h2>
                             </div>
@@ -319,7 +321,7 @@ include '../../../estrutura/head.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="submit" class="btn btn-success">
+                                        <input type="submit" class="btn btn-primary btn-cadastrar" value="Cadastrar">
                                     </div>
                                 </div>
                             </div>

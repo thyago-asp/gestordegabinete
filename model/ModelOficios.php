@@ -57,28 +57,60 @@ class ModelOficios
 
     function salvarModel()
     {
-
-        $con = Conexao::abrirConexao();
-        $query = "INSERT INTO t_oficios(numDoc, solicitante, instituicao, 
+        try {
+            $con = Conexao::abrirConexao();
+            $query = "INSERT INTO t_oficios(numDoc, solicitante, instituicao, 
                     nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
                     :data_cad_doc, :tipo, :titulo, :descricao, :status)";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':numDoc', $this->__get('documento'));
-        $stmt->bindValue(':solicitante', $this->__get('solicitante'));
-        $stmt->bindValue(':instituicao', $this->__get('instituicao'));
-        $stmt->bindValue(':data_cad_doc', $this->__get('data'));
-        $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
-        $stmt->bindValue(':titulo', $this->__get('titulo'));
-        $stmt->bindValue(':descricao', $this->__get('descricao'));
-        $stmt->bindValue(':status', $this->__get('status'));
+            $stmt->bindValue(':numDoc', $this->__get('documento'));
+            $stmt->bindValue(':solicitante', $this->__get('solicitante'));
+            $stmt->bindValue(':instituicao', $this->__get('instituicao'));
+            $stmt->bindValue(':data_cad_doc', $this->__get('data'));
+            $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
+            $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->bindValue(':status', $this->__get('status'));
 
-        $stmt->execute();
+            $retorno = $stmt->execute();
+
+            if ($retorno > 0) {
+                $ultimoId = $con->lastInsertId();
+
+                for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
+                    $query = "INSERT INTO t_arquivos_oficios(arquivo_caminho, nome_arquivo, t_oficios_idt_oficios) 
+                VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
+
+                    $stmt = $con->prepare($query);
+
+                    $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':ultimoid', $ultimoId);
+
+                    $stmt->execute();
+                }
+            }
+            return 1;
+        } catch (PDOException $e) {
+            print_r($e->getCode());
+        }
     }
+    function listarOficios()
+    {
+        $con = Conexao::abrirConexao();
 
+        $query = "select * from t_oficios";
+
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
 
 
     function listarModel()
@@ -108,28 +140,31 @@ class ModelOficios
 
     function atualizarModel()
     {
-
-        $con = Conexao::abrirConexao();
-        $query = "UPDATE t_oficios 
+        try {
+            $con = Conexao::abrirConexao();
+            $query = "UPDATE t_oficios 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
                       descricao = :descricao, status = :status  
                   WHERE tipo = :tipo AND idt_oficios = :idt";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':numDoc', $this->__get('documento'));
-        $stmt->bindValue(':solicitante', $this->__get('solicitante'));
-        $stmt->bindValue(':instituicao', $this->__get('instituicao'));
-        $stmt->bindValue(':data_cad_doc', $this->__get('data'));
-        $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
-        $stmt->bindValue(':titulo', $this->__get('titulo'));
-        $stmt->bindValue(':descricao', $this->__get('descricao'));
-        $stmt->bindValue(':status', $this->__get('status'));
-        $stmt->bindValue(':idt', $this->__get('idt'));
+            $stmt->bindValue(':numDoc', $this->__get('documento'));
+            $stmt->bindValue(':solicitante', $this->__get('solicitante'));
+            $stmt->bindValue(':instituicao', $this->__get('instituicao'));
+            $stmt->bindValue(':data_cad_doc', $this->__get('data'));
+            $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
+            $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->bindValue(':status', $this->__get('status'));
+            $stmt->bindValue(':idt', $this->__get('idt'));
 
-        $stmt->execute();
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getCode());
+        }
     }
 
     function arqExcluir($idt)
@@ -144,27 +179,27 @@ class ModelOficios
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (empty($result)) {
-            return;
-        } else {
-            foreach ($result as $chave => $valor) {
-                unlink($valor['arquivo_caminho']);
-            }
+        foreach ($result as $chave => $valor) {
+            unlink($valor['arquivo_caminho']);
         }
     }
 
 
     function deletarModel()
     {
-        $con = Conexao::abrirConexao();
+        try {
+            $con = Conexao::abrirConexao();
 
-        $query = "DELETE FROM `t_oficios` WHERE idt_oficios = :idt AND tipo = :tipo";
+            $query = "DELETE FROM `t_oficios` WHERE idt_oficios = :idt AND tipo = :tipo";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':idt', $this->__get('idt'));
-        $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt->bindValue(':idt', $this->__get('idt'));
+            $stmt->bindValue(':tipo', $this->__get('tipo'));
 
-        $stmt->execute();
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
     }
 }

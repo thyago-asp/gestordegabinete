@@ -73,6 +73,85 @@ body {
     outline: 0 !important;
 }
 
+#conteudo_body{
+    text-align: center;
+}
+
+#campo_regiao{
+    margin-top: -10px;
+}
+
+.descricao{
+    color: #6e707e;
+    font-weight: bold;
+}
+
+.panel-body{
+    margin: 15px;
+}
+
+.cartao-recursos{
+    background-color: #6e707e !important;
+}
+
+.titulo-data-visita{
+    text-align: center;
+    background-color: #6e707e;
+    color: white;
+
+}
+
+.texto-cartao-recursos{
+    color: white !important;
+    text-align: center;
+}
+
+#formF{
+    margin-bottom: 20px;
+}
+
+.btn-cadastrar{
+    width: 100%;
+}
+
+#distancia_capital{
+    color: #6e707e;
+    font-size: 15px;
+}
+
+.nome_cidade{
+    font-size: 35px;
+    color: #6e707e;
+    font-weight: bold;
+}
+
+.cabecalho_paginas{
+    font-size: 35px;
+    color: #858796;
+    font-weight: bold;
+    margin-top: -20px;
+}
+.accordion-pessoas{
+    width: 15%;
+}
+
+.menulateral .nav-item.active .nav-link {
+    color: #fff;
+    
+}
+
+.menulateral .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.menulateral .sidebar-heading {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.card_accordion{
+    margin-bottom: 20px;
+    text-align: center;
+}
 .fundo_login{
     background-image: url('../img/fundo.jpg');
     background-repeat: no-repeat;
@@ -1774,7 +1853,7 @@ pre code {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #d1d3e2;
-    
+    border-radius: .25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -4400,7 +4479,7 @@ input[type="button"].btn-block {
 
 .card-body {
     flex: 1 1 auto;
-    padding: 1.25rem;
+    /*padding: 1.25rem;*/
 }
 
 .card-title {

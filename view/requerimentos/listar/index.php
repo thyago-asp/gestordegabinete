@@ -29,13 +29,14 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar requerimentos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioEnviar" method="post">
                     <div class="modal-body">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -49,20 +50,19 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos de requerimentos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerRequerimentos.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
-                    <div class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <div id="link_arquivos"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -98,29 +98,31 @@ include '../../../estrutura/head.php';
             <div id="content">
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
+                <?php if ($status == "sucesso") : ?>
+                    <div class="alert alert-success text-center" role="alert">
+
+                        Sucesso ao <?php echo $msg ?>
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
+                    </div>
+                <?php endif; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
 
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
-                    <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?>!</strong>
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
-                        </div>
-                    <?php endif; ?>
+
                     <!-- Fim mensagem sucesso e erro -->
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    <div class="card-header text-center ">
+                        <h5 class="cabecalho_paginas">Lista dos requerimentos</h5>
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
@@ -152,6 +154,43 @@ include '../../../estrutura/head.php';
                             <!-- fim include estrutura da tabela -->
                         </tbody>
                     </table>
+=======
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                            <thead>
+                                <tr>
+                                    <th>Numero do documento</th>
+                                    <th>Solicitante</th>
+                                    <th>Instituicao</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                    <th>Titulo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Numero do documento</th>
+                                    <th>Solicitante</th>
+                                    <th>Instituicao</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                    <th>Titulo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- include estrutura da tabela -->
+                                <?php include '../../../estrutura/tabelaRequerimentos.php'; ?>
+                                <!-- fim include estrutura da tabela -->
+                            </tbody>
+                        </table>
+                    </div>
+>>>>>>> 7084f63315ee8bf6975857905363e959243290ae
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -179,80 +218,35 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
-          $('#modalArquivos').on('show.bs.modal', function(event) {
+        $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-            var arquivo = [
-                button.data('nome0'),
-                button.data('nome1'),
-                button.data('nome2'),
-                button.data('nome3'),
-                button.data('nome4'),
-            ];
-            var link = [
-                button.data('linkarq0'),
-                button.data('linkarq1'),
-                button.data('linkarq2'),
-                button.data('linkarq3'),
-                button.data('linkarq4'),
-            ]
-            var fkidt = [
-                button.data('fkrprojetosdelei0'),
-            ]
 
-            var idtArq = [
-                button.data('idarq0'),
-                button.data('idarq1'),
-                button.data('idarq2'),
-                button.data('idarq3'),
-                button.data('idarq4'),
-            ]
+            var idtreq = button.data('idtreq')
 
+            $.post('/view/requerimentos/call_requerimentos.php', {
+                idrequerimento: idtreq
+            }, function(data) {
+                img = "";
+                var cont = 1;
+                var link = "";
 
-            var arq = {
-                arq: {
-                    "nome": arquivo,
-                    "link": link,
-                    "idtArq": idtArq
-                }
-            }
-
-            var i = 0;
-            var tot = arq.arq.idtArq
-            var a = 0;
-            for (let index = 0; index < tot.length; index++) {
-                const element = tot[index];
-                if (element == undefined) {
-                    var tamValido = a++;
-                    console.log(tamValido)
+                $.each(JSON.parse(data), function(index, value) {
+                    // alert(value.arquivo_caminho);
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo + "</a><br/>";
+                    cont++;
+                });
+                if (link != "") {
+                    $("#modalArquivos #link_arquivos").html(link);
+                } else {
+                    $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
                 }
 
-            }
-            var tamanho = (arq.arq.nome.length);
-
-            var cont = tamanho - tamValido - 1;
-
-            $("#formularioArquivos .modal-body").html('');
-
-            $.each(arq, (chave, valor) => {
-
-                while (i < cont) {
-
-                    $('#formularioArquivos .modal-body').append(`
-                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><br>   
-                    `)
-                    i++;
-
-                }
-
-                i = 0;
-            })
+            });
 
         });
-        
+
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
-
-
             // data parametros
             var idtReq = button.data('idtreq')
             var numDoc = button.data('numdoc')
@@ -263,11 +257,11 @@ include '../../../estrutura/head.php';
             var tipo = button.data('tipo')
             var titulo = button.data('titulo')
             var descricao = button.data('descricao')
-            console.log(idtReq);
-            var status = button.data('status');
 
+            var status = button.data('status')
+            //console.log(status);
             var atividade = button.data('atividade');
-            
+
 
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -294,9 +288,7 @@ include '../../../estrutura/head.php';
                     <label for="recipient-name" class="col-form-label">Nome do contato:</label>
                     <input type="text" class="form-control" id="nomeContato" name="nomeContato">
                 </div>
-                <label class="form-label">Categoria</label>
-                
-                <label>Endereco</label>
+            
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Titulo:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
@@ -313,7 +305,7 @@ include '../../../estrutura/head.php';
                     <div class="col-sm-12">
                         <select name="status" id="status" class="form-control show-tick ">
                             <option value="aberto">Aberto</option>
-                            <option value="aguardando informações">Aguardando informações</option>
+                            <option value="aguardando">Aguardando informações</option>
                             <option value="concluido">Concluido</option>
                         </select>
                     </div>
@@ -323,7 +315,7 @@ include '../../../estrutura/head.php';
             `)
 
             // seta os valores do modal
-            
+
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
             modal.find('#instituicao').val(instituicao);
@@ -334,7 +326,8 @@ include '../../../estrutura/head.php';
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
             modal.find('#idtReq').val(idtReq);
-            modal.find('#status').val(status);
+
+            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
 
 
 
@@ -358,16 +351,16 @@ include '../../../estrutura/head.php';
                     
                 `);
 
-            console.log(idtArq)
+            //  console.log(idtArq)
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
-            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: "+ numDoc +"  do sistema ?")
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
 
             // modal.find('#idtReq').val(numdoc);
             modal.find('#idtReq').val(idtReq);
             modal.find('#tipo').val(tipo);
             modal.find('#idtArq').val(idtArq)
-            
+
 
         });
     </script>

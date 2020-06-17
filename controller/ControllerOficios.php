@@ -30,10 +30,13 @@ class ControllerOficios
             'pdf',
             'doc',
             'docx',
-            'png'
+            'png', 
+            'jpg',
+            'xlsx',
+            'xls'
         ];
-        
-        $dir = "../bancodedados/arq/";
+
+        $dir = "../arq/";
 
         $arqNome = [];
         $arqLocal = [];
@@ -42,10 +45,10 @@ class ControllerOficios
 
         $cont = 0;
         while ($cont < $qtdArquivos) {
-
+           //echo $arq['arquivos']['name'][$cont];
             $arqExtencao = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_EXTENSION);
             $arqNome[] = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_FILENAME);
-            if (in_array($arqExtencao, $extencoes)) {
+           if (in_array($arqExtencao, $extencoes)) {
 
                 $temp = $arq['arquivos']['tmp_name'][$cont];
                 $novoNome = uniqid() . ".$arqExtencao";
@@ -53,11 +56,8 @@ class ControllerOficios
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
 
-                $cont++;
-            } else {
-
-                return "arquivo invalido";
             }
+            $cont++;
         }
         return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
     }
@@ -79,23 +79,12 @@ class ControllerOficios
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
-        $salvar->salvarModel($salvar);
 
-        $ciclo = count($salvar->arquivos['local']);
-        $contador = 0;
-        while ($contador < $ciclo) {
-
-            $arquivos[] = [$salvar->arquivos['local'][$contador], $salvar->arquivos['nome'][$contador]];
-
-            $salvar->__set('localArquivos', $arquivos[$contador][0]);
-            $salvar->__set('nomeArquivos', $arquivos[$contador][1]);
-            $salvar->salvarArquivos();
-            $contador++;
-        }
-
+        $retorno = $salvar->salvarModel($salvar);
         
-
-        header("location: /view/oficios/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
+        if ($retorno == 1) {
+            header("location: /view/oficios/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
+        }
     }
     function atualizarOficios()
     {
@@ -111,14 +100,20 @@ class ControllerOficios
         $atualizar->__set('descricao', $_POST['descricao']);
         $atualizar->__set('status', $_POST['status']);
         $atualizar->__set('tipo', $_POST['tipo']);
-        $atualizar->__set('idt', $_POST['idtReq']);
+        $atualizar->__set('idt', $_POST['idtofi']);
 
-        $atualizar->atualizarModel();
-        header("location: /view/oficios/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        $retorno = $atualizar->atualizarModel();
+
+        if ($retorno == 1) {
+            header("location: /view/oficios/listar?pg={$_POST['tipo']}&atualizar=sucesso");
+        }
     }
     function listarOficios()
     {
-        $lista = (new ModelOficios())->listarModel();
+        $lista_oficios = (new ModelOficios())->listarOficios();
+
+        return $lista_oficios;
+        /* $lista = (new ModelOficios())->listarModel();
         if (isset($lista[0]['nomearquivo'])) {
 
             foreach ($lista as $key => $value) {
@@ -138,17 +133,20 @@ class ControllerOficios
             return $lista;
         } else {
             return $lista;
-        }
+        }*/
     }
     function deletarOficios()
     {
-        
+
         $deletar = new ModelOficios();
 
-        $deletar->__set('idt', $_POST['idtReq']);
+        $deletar->__set('idt', $_POST['idtofi']);
         $deletar->__set('tipo', $_POST['tipo']);
 
-        $deletar->deletarModel($deletar);
-        header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        $retorno = $deletar->deletarModel($deletar);
+
+        if ($retorno == 1) {
+            header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
     }
 }

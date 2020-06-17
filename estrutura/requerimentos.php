@@ -14,23 +14,22 @@ if ($url == "envio") {
     $input = "envio";
 }
 if ($url == "voto") {
-    $titulo = "VOTO DE LOUVOR E PESAR";
+    $titulo = "Voto de louvor e pesar";
     $input = "voto";
 }
 if ($url == "diversos") {
-    $titulo = "DIVERSOS";
+    $titulo = "Diversos";
     $input = "diversos";
 }
 if ($url == "declaracoes") {
-    $titulo = "DECLARAÇÕES DE PRESENÇA";
+    $titulo = "Declarações de presença";
     $input = "declaracoes";
 }
 
 ?>
 <?php if ($status == "sucesso") : ?>
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Sucesso ao cadastrar!</strong>
+    <div class="alert alert-success text-center" role="alert">
+        Cadastro realizado com sucesso.
     </div>
 <?php elseif ($status == "erro") : ?>
     <div class="alert alert-danger alert-dismissible">
@@ -39,16 +38,14 @@ if ($url == "declaracoes") {
     </div>
 <?php endif; ?>
 
-<div id="pagina" class="card-header text-center h5">
-    <h1><?php echo $titulo ?></h1>
+<div id="pagina" class="card-header text-center ">
+    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
 </div>
 <div class="card-body">
     <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" enctype="multipart/form-data" method="post">
 
         <div class="card-body">
             <div class="panel-body">
-
-
                 <label class="form-label">Numero documento solicitado</label>
                 <div class="form-group">
                     <div class="form-group">

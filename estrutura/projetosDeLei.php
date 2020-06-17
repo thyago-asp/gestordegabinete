@@ -6,34 +6,33 @@ if (isset($_GET['cadastrar'])) {
 
 $url = strtolower($_GET['pg']);
 if ($url == "projetosdelei") {
-    $titulo = "PROJETOS DE LEI";
+    $titulo = "Projetos de lei";
     $input = "projetosDeLei";
 }
 if ($url == "projetosderesolucao") {
-    $titulo = "PROJETOS DE RESOLUÇÃO";
+    $titulo = "Projetos de resolução";
     $input = "projetosDeResolucao";
 }
 if ($url == "projetosdeleicomplementar") {
-    $titulo = "PROJETOS DE LEI COMPLEMENTAR";
+    $titulo = "Projetos de lei complementar";
     $input = "projetosDeLeiComplementar";
 }
 
 if ($url == "emendalegislativa") {
-    $titulo = "EMENDA LEGISLATIVA";
+    $titulo = "Emenda legislativa";
     $input = "emendaLegislativa";
 }
 
 if ($url == "emendaconstitucional") {
-    $titulo = "EMENDA CONSTITUCIONAL";
+    $titulo = "Emenda constitucional";
     $input = "emendaConstitucional";
 }
 
 
 ?>
 <?php if ($status == "sucesso") : ?>
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Sucesso ao cadastrar!</strong>
+    <div class="alert alert-success text-center" role="alert">
+        Cadastro realizado com sucesso.
     </div>
 <?php elseif ($status == "erro") : ?>
     <div class="alert alert-danger alert-dismissible">
@@ -42,8 +41,8 @@ if ($url == "emendaconstitucional") {
     </div>
 <?php endif; ?>
 
-<div id="pagina" class="card-header text-center h5">
-    <h1><?php echo $titulo ?></h1>
+<div id="pagina" class="card-header text-center ">
+    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
 </div>
 <div class="card-body">
     <form enctype="multipart/form-data" action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">
@@ -121,7 +120,7 @@ if ($url == "emendaconstitucional") {
 
                     </div>
                 </div>
-                <input type="hidden" name="pagina" value="<?php echo $input ?>">
+                <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>
                 </div>

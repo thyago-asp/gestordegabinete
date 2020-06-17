@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar oficios</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -71,20 +71,18 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos oficios</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerProjetosDeLei.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <div id="link_arquivos"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -100,26 +98,27 @@ include '../../../estrutura/head.php';
             <div id="content">
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
+                <?php if ($status == "sucesso") : ?>
+                    <div class="alert alert-success text-center" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Sucesso ao <?php echo $msg ?>.
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger text-center" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Erro ao <?php echo $msg ?>, verifique os campos.
+                    </div>
+                <?php endif; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
 
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
-                    <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
-                        </div>
-                    <?php endif; ?>
+
                     <!-- Fim mensagem sucesso e erro -->
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    <div class="card-header text-center ">
+                        <h5 class="cabecalho_paginas">Lista dos oficios</h5>
                     </div>
                 </div>
 
@@ -157,10 +156,8 @@ include '../../../estrutura/head.php';
                         </tbody>
                     </table>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
             </div>
-            <!-- End of Main Content -->
-
             <!-- Footer -->
             <?php include '../../../estrutura/footer.php'; ?>
             <!-- End of Footer -->
@@ -185,79 +182,32 @@ include '../../../estrutura/head.php';
     <script>
         $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-            var arquivo = [
-                button.data('nome0'),
-                button.data('nome1'),
-                button.data('nome2'),
-                button.data('nome3'),
-                button.data('nome4'),
-            ];
-            var link = [
-                button.data('linkarq0'),
-                button.data('linkarq1'),
-                button.data('linkarq2'),
-                button.data('linkarq3'),
-                button.data('linkarq4'),
-            ]
-            var fkidt = [
-                button.data('fkrprojetosdelei0'),
-            ]
+            var idtofi = button.data('idtofi')
+            $.post('/view/oficios/call_oficios.php', {
+                idoficios: idtofi
+            }, function(data) {
+                img = "";
+                var cont = 1;
+                var link = "";
 
-            var idtArq = [
-                button.data('idarq0'),
-                button.data('idarq1'),
-                button.data('idarq2'),
-                button.data('idarq3'),
-                button.data('idarq4'),
-            ]
-
-
-            var arq = {
-                arq: {
-                    "nome": arquivo,
-                    "link": link,
-                    "idtArq": idtArq
+                $.each(JSON.parse(data), function(index, value) {
+                    // alert(value.arquivo_caminho);
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo + "</a><br/>";
+                    cont++;
+                });
+                if (link != "") {
+                    $("#modalArquivos #link_arquivos").html(link);
+                } else {
+                    $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
                 }
-            }
-
-            var i = 0;
-            var tot = arq.arq.idtArq
-            var a = 0;
-            for (let index = 0; index < tot.length; index++) {
-                const element = tot[index];
-                if (element == undefined) {
-                    var tamValido = a++;
-                    console.log(tamValido)
-                }
-
-            }
-            var tamanho = (arq.arq.nome.length);
-
-            var cont = tamanho - tamValido - 1;
-
-            $("#formularioArquivos .modal-body").html('');
-
-            $.each(arq, (chave, valor) => {
-
-                while (i < cont) {
-
-                    $('#formularioArquivos .modal-body').append(`
-                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}<br>   
-                    `)
-                    i++;
-
-                }
-
-                i = 0;
-            })
-
+            });
         });
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
 
             // data parametros
-            var idtReq = button.data('idtreq')
+            var idtofi = button.data('idtofi')
             var numDoc = button.data('numdoc')
             var solicitante = button.data('solicitante')
             var instituicao = button.data('instituicao')
@@ -266,7 +216,7 @@ include '../../../estrutura/head.php';
             var tipo = button.data('tipo')
             var titulo = button.data('titulo')
             var descricao = button.data('descricao')
-            console.log(idtReq);
+            console.log(idtofi);
             var status = button.data('status');
 
             var atividade = button.data('atividade');
@@ -297,9 +247,7 @@ include '../../../estrutura/head.php';
                     <label for="recipient-name" class="col-form-label">Nome do contato:</label>
                     <input type="text" class="form-control" id="nomeContato" name="nomeContato">
                 </div>
-                <label class="form-label">Categoria</label>
-                
-                <label>Endereco</label>
+               
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Titulo:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
@@ -316,13 +264,13 @@ include '../../../estrutura/head.php';
                     <div class="col-sm-12">
                         <select name="status" id="status" class="form-control show-tick ">
                             <option value="aberto">Aberto</option>
-                            <option value="aguardando informações">Aguardando informações</option>
+                            <option value="aguardando">Aguardando informações</option>
                             <option value="concluido">Concluido</option>
                         </select>
                     </div>
                 </div>
                 <input type="hidden" id="tipo" name="tipo">
-                <input type="hidden" id="idtReq" name="idtReq">
+                <input type="hidden" id="idtofi" name="idtofi">
             `)
 
             // seta os valores do modal
@@ -336,25 +284,24 @@ include '../../../estrutura/head.php';
             modal.find('#dataDocumento').val(dataFormatada);
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
-            modal.find('#idtReq').val(idtReq);
-            modal.find('#status').val(status);
-
-
+            modal.find('#idtofi').val(idtofi);
+       
+            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
 
         });
 
         $('#modalExcluir').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // Extract info from data-* attributes
-            var idtReq = button.data('idtreq')
+            var idtofi = button.data('idtofi')
             var tipo = button.data('tipo');
             var numDoc = button.data('numdoc');
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            console.log(idtReq);
+            console.log(idtofi);
             $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
-                    <input type="hidden" id="idtReq" name="idtReq">
+                    <input type="hidden" id="idtofi" name="idtofi">
                     <input type="hidden" id="tipo" name="tipo">
                     
                 `);
@@ -364,8 +311,8 @@ include '../../../estrutura/head.php';
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
 
-            // modal.find('#idtReq').val(numdoc);
-            modal.find('#idtReq').val(idtReq);
+            // modal.find('#idtofi').val(numdoc);
+            modal.find('#idtofi').val(idtofi);
             modal.find('#tipo').val(tipo);
 
 

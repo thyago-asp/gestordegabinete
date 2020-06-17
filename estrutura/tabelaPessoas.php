@@ -23,10 +23,18 @@ foreach ($tabela as $chave => $valor) :
     <tr>
       <td><?php echo $inf['nome'] ?></td>
       <td><?php echo $inf['telefone'] ?></td>
+      <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
       <td><?php echo $inf['data_nascimento'] ?></td>
+      <?php } else { ?>
+        <td class="text-center"><?php echo " PJ - Não tem data de nascimento" ?></td>
+      <?php } ?>
       <td><?php echo $inf['cidade'] ?></td>
       <td><?php echo $inf['estado'] ?></td>
+      <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
       <td><?php echo $inf['categoria'] ?></td>
+      <?php } else { ?>
+        <td class="text-center"><?php echo " PJ - Não tem categoria " ?></td>
+      <?php } ?>
       <td class="text-center">
         <div class="btn-group text-center" role="group" aria-label="Button group">
           <!-- Botão editar -->

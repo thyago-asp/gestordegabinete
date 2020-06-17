@@ -35,25 +35,25 @@ class ControllerPessoaJuridica
     public function cadastrar()
     {
         // instancia do model PessoaFisica para cadastro
-        $pf = new PessoaJuridica();
+        $pj = new PessoaJuridica();
        
         // setta os valores
        
-        $pf->__set('cnpj', $_POST["cnpj"]);
-        $pf->__set('nome', $_POST["nomeJ"]);
-        $pf->__set('fantasia', $_POST['fantasiaJ']);
-        $pf->__set('telefone', $_POST['telefoneJ']);
-        $pf->__set('logradouro', $_POST['logradouroJ']);
-        $pf->__set('numero', $_POST['numeroJ']);
-        $pf->__set('complemento', $_POST['complementoJ']);
-        $pf->__set('bairro', $_POST['bairroJ']);
-        $pf->__set('cidade', $_POST['cidadeJ']);
-        $pf->__set('estado', $_POST['estadoJ']);
-        $pf->__set('atividade', $_POST['atividadeJ']);
-        $pf->__set('email', $_POST['email']);
+        $pj->__set('cnpj', $_POST["cnpj"]);
+        $pj->__set('nome', $_POST["nomeJ"]);
+        $pj->__set('fantasia', $_POST['fantasiaJ']);
+        $pj->__set('telefone', $_POST['telefoneJ']);
+        $pj->__set('logradouro', $_POST['logradouroJ']);
+        $pj->__set('numero', $_POST['numeroJ']);
+        $pj->__set('complemento', $_POST['complementoJ']);
+        $pj->__set('bairro', $_POST['bairroJ']);
+        $pj->__set('cidade', $_POST['cidadeJ']);
+        $pj->__set('estado', $_POST['estadoJ']);
+        $pj->__set('atividade', $_POST['atividadeJ']);
+        $pj->__set('email', $_POST['email']);
        
 
-        $result = $pf->cadastroM($pf);
+        $result = $pj->cadastroM($pj);
 
         if($result) {
             header('location: /view/pessoas/cadastrar?cad=sucesso');
