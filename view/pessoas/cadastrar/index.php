@@ -29,8 +29,8 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Cadastrar pessoas</h1>
+                    <div id="pagina" class="card-header text-center">
+                        <h3 class="cabecalho_paginas">Cadastrar pessoas</h3>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
@@ -87,7 +87,7 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="cpf">CPF</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="13" name="CPF" required>
+                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="14" name="CPF" required>
 
                                                 </div>
                                             </div>
@@ -260,7 +260,7 @@ include '../../../estrutura/head.php';
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="tel" id="cepJ" name="cep" class="form-control" placeholder="Cep">
+                                                        <input type="tel" id="cepJ" name="cep" maxlength="10" class="form-control" placeholder="Cep">
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,9 +358,14 @@ include '../../../estrutura/head.php';
     <?php
     include '../../../estrutura/importJS.php';
     ?>
+    <script src="../../../js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(() => {
-
+            $("#telefoneF").mask('(##)# ####-####');
+            $("#cpf").mask("###.###.###-##");
+            $("#cepF").mask("#####-###")
+            $("#telefoneJ").mask('(##)# ####-####');
+            $("#cepJ").mask('#####-###');
             $("#cepF").blur(function() {
                 var cep = $(this).val().replace(/\D/g, "");
 

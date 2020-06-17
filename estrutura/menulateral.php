@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center card-login-img" href="/view/main">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/main">
         <img style="width: 100%" src="/img/Logo-GestorDeGabinete.png" />
     </a>
 

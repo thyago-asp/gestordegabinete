@@ -31,8 +31,8 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Cadastrar visita</h1>
+                    <div class="card-header text-center">
+                        <h1 class="cabecalho_paginas">Cadastrar visita</h1>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
@@ -59,11 +59,11 @@ include '../../../estrutura/head.php';
                                         <div id="pessoasInput">
                                             <!-- input cidades / nomes -->
                                         </div>
-                                        <label class="form-label">Nome completo</label>
+                                        <!-- <label class="form-label">Nome completo</label> -->
                                         <label class="form-label">Data</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="date" class="form-control" name="dataVisita" required>
+                                                <input type="date" class="form-control" id="data" name="dataVisita" required>
 
                                             </div>
                                         </div>
@@ -74,9 +74,10 @@ include '../../../estrutura/head.php';
                                                 <input type="text" class="form-control" name="comentario" required>
                                             </div>
                                         </div>
-
+                                        
+                                        <input type="submit" class="btn btn-primary btn-cadastrar">
                                     </div>
-                                    <input type="submit" class="btn btn-success">
+                                    
 
                                 </div>
 
@@ -119,6 +120,21 @@ include '../../../estrutura/head.php';
     <script>
         $(document).ready(() => {
             
+            $("#data").on('click',() =>{ 
+                dia = new Date().getDate().toString();
+                mes = new Date().getMonth().toString();
+                ano = new Date().getFullYear();
+                
+                if(mes.length == 1){
+                    mes = '0' + mes
+                }
+                if(dia.length == 1) {
+                    dia = '0' + dia;
+                }
+                data = `${ano}-${mes}-${dia}`
+                $("#data").val(data);
+            });
+
             $.ajax({
                 url: "../../../estrutura/controleVisitas.php",
                 type: "GET",

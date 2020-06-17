@@ -47,7 +47,7 @@ class ModelPessoaVisita
 
         $con = Conexao::abrirConexao();
         $query = "UPDATE t_visitas SET nome = :nome, data = :data, cidade = 
-                    :cidade, comentario = :comentario WHERE idVisitas = :idVisitas";
+                    :cidade, comentario = :comentario WHERE idvisitas = :idVisitas";
         $stmt = $con->prepare($query);
 
         $stmt->bindValue(':nome', $this->__get('nome'));

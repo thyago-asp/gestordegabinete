@@ -2,6 +2,11 @@
 
 require_once "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoasVisitas.php";
 $result = (new ControllerPessoasVisitas())->listar();
+
+if (empty($result)) {
+    $result = [];
+}
+  
 foreach ($result as $chave => $valor) : ?>
 
     <tr>
