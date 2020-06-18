@@ -14,7 +14,11 @@ $pagina = "sub3";
 include '../../../estrutura/head.php';
 
 ?>
-
+<style>
+   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+        content: "Selecione um arquivo" !important;
+    }
+</style>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -60,7 +64,7 @@ include '../../../estrutura/head.php';
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
-                                        
+
                                         <div class="panel-body">
                                             <label class="form-label" for="nome">Nome completo</label>
                                             <div class="form-group form-float">
@@ -73,14 +77,14 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="email">Email</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com" required>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
 
                                                 </div>
                                             </div>
                                             <label class="form-label" for="telefoneF">Telefone</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" id="telefoneF"  maxlength="14" name="telefoneF" placeholder="00 9999-9999" required>
+                                                    <input type="tel" class="form-control" id="telefoneF" maxlength="14" name="telefoneF" placeholder="00 9999-9999" required>
 
                                                 </div>
                                             </div>
@@ -178,14 +182,24 @@ include '../../../estrutura/head.php';
 
                                             </div>
 
+
                                             <div class="pt-3">
-                                                <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="imagem" id="imagemPF" class="custom-file-input">
+                                                        <label placeholder="teste" class="custom-file-label" for="imagemPF" aria-describedby="imagemPF">Selecione um arquivo</label>
+                                                    </div>
+                                                    <!-- <div class="input-group-append">
+                        <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
+                    </div> -->
+                                                </div>
+                                                <!-- <div class="form-group">
 
                                                     <div class="form-line">
-                                                        <input type="file" name="imagem" id="imagemPF">
+                                                        <input type="file">
                                                     </div>
 
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                         </div>
@@ -243,7 +257,7 @@ include '../../../estrutura/head.php';
                                         <label class="form-label" for="emailJ">E-mail</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="emailJ" id="emailJ" required placeholder="email@email.com">
+                                                <input type="email" class="form-control" name="emailJ" id="emailJ" required placeholder="exemplo@email.com">
 
                                             </div>
                                         </div>
