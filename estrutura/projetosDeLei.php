@@ -116,7 +116,8 @@ if ($url == "emendaconstitucional") {
                 <label>Arquivos</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <input type="file" class="form-control" name="arquivos[]" multiple id="arquivos">
+                        <label for="arquivos">Selecione um arquivo</label>
+                        <input type="file" class="form-control"  name="arquivos[]" placeholder="teste" multiple id="arquivos">
 
                     </div>
                 </div>
