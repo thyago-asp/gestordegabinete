@@ -93,7 +93,17 @@ include '../../estrutura/head.php';
                 ?>
                 <!-- CONTEUDO PRINCIPAL DA PAGINA -->
                 <div class="container-fluid">
-
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Pesquise a cidade: </span>
+                                </div>
+                                <input type="text" class="form-control" id="campo_cidade" aria-describedby="basic-addon1">
+                            </div>
+                            <div id="cidadesEncontradas"></div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
                             <div id="accordion">
@@ -115,7 +125,7 @@ include '../../estrutura/head.php';
                                                     <?php
                                                     foreach ($listaEmendas as $cidade) {
                                                         if ($cidade->regiao == "Noroeste") {
-                                                    
+
                                                     ?>
 
                                                             <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
@@ -296,32 +306,59 @@ include '../../estrutura/head.php';
         include '../../estrutura/importJS.php';
         ?>
 
-        <?php
-        if ($primeiro_acesso == "1") {
+
+        <script>
+            $('#campo_cidade').on('keyup', function() {
+                var cidade = $('#campo_cidade').val();
+                if (cidade != "") {
+                    $.post('/controller/ControllerEmendasOrcamentarias.php', {
+                        acao: "buscarCidade",
+                        cidade: "%" + cidade + "%"
+                    }, function(event) {
+                        var obj1 = JSON.parse(event);
+
+                        if (!isEmpty(obj1)) {
+                            var cod = "";
+                            cod += "<div class=\"alert alert-info text-center\" role=\"alert\">";
+                            cod += "<label style=\"text-align: center\"> <strong>Cidades encontradas</strong></label></br>";
+                            obj1.forEach(function(o, index) {
+
+                                var id = o.idt_emendas_orcamentarias;
+                                var nomeCidade = o.cidade;
+                                cod += "<a href=\" /view/emendasOrcamentarias/cidades/?id=" + id + "   \" > " + nomeCidade + "</a> <br />";
+
+                                cod += "</br>";
+
+                            });
+                            cod += "</div>";
+
+                            $("#cidadesEncontradas").html(cod);
+                        } else {
+                            var cod = "";
+                            cod += "<div class=\"alert alert-danger text-center\" role=\"alert\">";
+                            cod += "<label style=\"text-align: center\"> <strong>Nenhuma cidade encontrada com \"" + cidade + "\"</strong></label></br>";
+                            cod += "</div>";
+                            $("#cidadesEncontradas").html(cod);
+                        }
 
 
-        ?>
-
-            <script>
-                $('#modalPrimeiroAcesso').modal('show');
-
-                document.getElementById("btn_salvarSenha").disabled = true;
-
-                function validarSenha() {
-                    var senha1 = document.getElementById("senha1").value;
-                    var senha2 = document.getElementById("senha2").value;
-
-                    if (senha1 == senha2) {
-                        document.getElementById("btn_salvarSenha").disabled = false;
-                    } else {
-                        document.getElementById("btn_salvarSenha").disabled = true;
-                    }
+                    });
+                }else{
+                    $("#cidadesEncontradas").html("");
                 }
-            </script>
-        <?php
-        }
+            });
 
-        ?>
+           
+            function isEmpty(obj) {
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        return false;
+                }
+
+                return true;
+            }
+        </script>
+
 </body>
 
 </html>

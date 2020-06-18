@@ -10,7 +10,7 @@ class Conexao
 
     public static function abrirConexao()
     {
-        $ambiente = "prd";
+        $ambiente = "dev";
 
         switch ($ambiente) {
             case 'dev':

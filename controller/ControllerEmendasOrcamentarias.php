@@ -6,19 +6,22 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/model/ModelEmendasOrcamentarias.php')
 if (isset($_REQUEST["acao"])) {
 
     switch ($_REQUEST["acao"]) {
-        case 'cad':
-            (new ControllerUsuario())->cadastrar();
-            break;
-        case 'log':
 
-            (new ControllerUsuario())->login();
-            break;
 
         case 'alterar':
 
             (new ControllerEmendasOrcamentarias())->alterar();
             break;
 
+        case 'buscarCidade':
+
+            (new ControllerEmendasOrcamentarias())->buscarCidade();
+            break;
+
+            case 'registrarVisita':
+
+                (new ControllerEmendasOrcamentarias())->registrarVisita();
+                break;
     }
 }
 
@@ -29,57 +32,78 @@ if (isset($_REQUEST["acao"])) {
  */
 class ControllerEmendasOrcamentarias
 {
-   
+    public function buscarCidade()
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+
+        $listaEmendas = $emendas->pesquisarCidade($_REQUEST["cidade"]);
+
+        echo json_encode($listaEmendas);
+        return;
+    }
+
+    public function registrarVisita()
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+
+        $resultado = $emendas->registrarVisita($_REQUEST["idDataVisita"], $_REQUEST["idCidadeHidden"]);
+
+        if($resultado){
+                header('location: /view/emendasOrcamentarias/cidades/?id=1&cad=sucesso');
+        }
+        
+    }
 
     public function listarCidades()
     {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaEmendas = $emendas->listar();
-        
+
         return $listaEmendas;
     }
 
     public function buscarCidades($id)
     {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaEmendas = $emendas->buscarCidade($id);
-        
+
         return $listaEmendas;
     }
 
     public function buscarRecursos($id)
     {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaRecursos = $emendas->buscarRecursos($id);
-        
+
         return $listaRecursos;
     }
 
     public function buscarVisitas($id)
     {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaVisitas = $emendas->buscarVisitas($id);
-        
+
         return $listaVisitas;
     }
 
     public function buscarEstruturaPartido($id)
     {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaVisitas = $emendas->buscarEstruturaPartido($id);
-        
+
         return $listaVisitas;
     }
-    public function buscarItensRecursos($id){
+    public function buscarItensRecursos($id)
+    {
         $emendas = new ModelEmendasOrcamentarias();
-        
+
         $listaItensRecursos = $emendas->buscarItensRecursos($id);
-        
+
         return $listaItensRecursos;
     }
 
@@ -105,5 +129,4 @@ class ControllerEmendasOrcamentarias
             header("Location:/view/usuariosdosistema/listar/?r=1");
         }
     }
-    
 }

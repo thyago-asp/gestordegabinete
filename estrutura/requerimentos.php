@@ -50,7 +50,7 @@ if ($url == "declaracoes") {
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="tel" id="documento" name="documento" class="form-control" placeholder="DOCUMENTO">
+                            <input type="tel" id="documento" name="documento" class="form-control" >
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ if ($url == "declaracoes") {
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="tel" id="solicitante" name="solicitante" class="form-control" placeholder="SOLICITANTE">
+                            <input type="tel" id="solicitante" name="solicitante" class="form-control" >
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ if ($url == "declaracoes") {
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" id="instituicao" name="instituicao" class="form-control" placeholder="INSTITUIÇÃO">
+                            <input type="text" id="instituicao" name="instituicao" class="form-control" >
                         </div>
                     </div>
 
@@ -75,14 +75,14 @@ if ($url == "declaracoes") {
                 <label class="form-label">Nome do contato</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <input type="text" class="form-control" name="nomeContato" id="nomeContato" required placeholder="NOME DO CONTATO">
+                        <input type="text" class="form-control" name="nomeContato" id="nomeContato" required >
 
                     </div>
                 </div>
                 <label class="form-label">Titulo</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <input type="text" class="form-control" name="titulo" id="titulo" required placeholder="titulo">
+                        <input type="text" class="form-control" name="titulo" id="titulo" required>
 
                     </div>
                 </div>
@@ -96,7 +96,7 @@ if ($url == "declaracoes") {
                 <label>Descrição</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <textarea class="form-control" rows="3" id="descricao" name="descricao" placeholder="Descrição"></textarea>
+                        <textarea class="form-control" rows="3" id="descricao" name="descricao" ></textarea>
 
                     </div>
                 </div>

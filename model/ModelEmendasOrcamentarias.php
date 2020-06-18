@@ -35,6 +35,41 @@ class ModelEmendasOrcamentarias
         return $result;
     }
 
+    public function pesquisarCidade($cidade)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT idt_emendas_orcamentarias, cidade FROM t_emendas_orcamentarias WHERE cidade LIKE :cidade";
+
+        $stmt = $con->prepare($query);
+        $stmt->bindValue(':cidade', $cidade);
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function registrarVisita($data, $id)
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "INSERT INTO t_visita_cidade (data, t_emendas_orcamentarias_idt_emendas_orcamentarias) 
+                    VALUES (:data, :t_emendas_orcamentarias_idt_emendas_orcamentarias)";
+
+            $stmt = $con->prepare($query);
+            $stmt->bindValue(':data', date("d/m/Y", strtotime($data)));
+            $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $id);
+            $result = $stmt->execute();
+
+          
+            return $result;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
+
     public function buscarCidade($id)
     {
         $con = Conexao::abrirConexao();
@@ -68,9 +103,10 @@ class ModelEmendasOrcamentarias
 
         return $result;
     }
-    
 
-    public function buscarItensRecursos($id){
+
+    public function buscarItensRecursos($id)
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT * FROM t_recursos as r inner join t_itens_recurso as it on it.t_recursos_idt_recursos = r.idt_recursos where r.idt_recursos = :id;";
@@ -124,7 +160,7 @@ class ModelEmendasOrcamentarias
     {
         $con = Conexao::abrirConexao();
 
-        $query = "SELECT * FROM t_visitas WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+        $query = "SELECT * FROM t_visita_cidade WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id ORDER BY data ASC";
 
         $stmt = $con->prepare($query);
 
