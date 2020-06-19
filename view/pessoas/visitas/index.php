@@ -30,22 +30,23 @@ include '../../../estrutura/head.php';
                 <?php include '../../../estrutura/barratopo.php'; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
+                    <?php if ($status == "sucesso") : ?>
+                        <div class="alert alert-success text-center" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Sucesso ao cadastrar pessoa!</strong>
+                        </div>
+                    <?php elseif ($status == "erro") : ?>
+                        <div class="alert alert-danger text-center" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Erro ao cadastrar verifique os campos!</strong>
+                        </div>
+                    <?php endif; ?>
                     <!-- Page Heading -->
                     <div class="card-header text-center">
                         <h1 class="cabecalho_paginas">Cadastrar visita</h1>
                     </div>
                 </div>
-                <?php if ($status == "sucesso") : ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Sucesso ao cadastrar pessoa!</strong>
-                    </div>
-                <?php elseif ($status == "erro") : ?>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Erro ao cadastrar verifique os campos!</strong>
-                    </div>
-                <?php endif; ?>
+
 
                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
                     <form id="formPessoas" enctype="multipart/form-data" action="../../../controller/ControllerPessoasVisitas.php?acao=salvar" method="post">
@@ -67,17 +68,17 @@ include '../../../estrutura/head.php';
 
                                             </div>
                                         </div>
-                                       
+
                                         <label class="form-label">Comentario</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="comentario" required>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
                                             </div>
                                         </div>
-                                        
+
                                         <input type="submit" class="btn btn-primary btn-cadastrar">
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -119,16 +120,16 @@ include '../../../estrutura/head.php';
     ?>
     <script>
         $(document).ready(() => {
-            
-            $("#data").on('click',() =>{ 
+
+            $("#data").on('click', () => {
                 dia = new Date().getDate().toString();
-                mes = new Date().getMonth().toString();
+                mes = ((new Date().getMonth()) + 1).toString();
                 ano = new Date().getFullYear();
-                
-                if(mes.length == 1){
+
+                if (mes.length == 1) {
                     mes = '0' + mes
                 }
-                if(dia.length == 1) {
+                if (dia.length == 1) {
                     dia = '0' + dia;
                 }
                 data = `${ano}-${mes}-${dia}`

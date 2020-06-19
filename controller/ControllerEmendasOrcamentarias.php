@@ -18,10 +18,14 @@ if (isset($_REQUEST["acao"])) {
             (new ControllerEmendasOrcamentarias())->buscarCidade();
             break;
 
-            case 'registrarVisita':
+        case 'registrarVisita':
 
-                (new ControllerEmendasOrcamentarias())->registrarVisita();
-                break;
+            (new ControllerEmendasOrcamentarias())->registrarVisita();
+            break;
+        case 'comentario':
+
+            (new ControllerEmendasOrcamentarias())->addComentarios();
+            break;
     }
 }
 
@@ -32,6 +36,29 @@ if (isset($_REQUEST["acao"])) {
  */
 class ControllerEmendasOrcamentarias
 {
+
+    public function addComentarios()
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+
+        $retorno = $emendas->addComentario($_REQUEST["comentario"], $_REQUEST["idEmenda"]);
+        
+        if ($retorno) {
+            header('location: /view/emendasOrcamentarias/cidades/?id='.$_REQUEST["idEmenda"].'&r=comentarioSucesso');
+        }
+        return $retorno;
+    }
+
+    public function listarComentarios($id)
+    {
+        $emendas = new ModelEmendasOrcamentarias();
+
+        $retorno = $emendas->listarComentarios($id);
+        
+       
+        return $retorno;
+    }
+    
     public function buscarCidade()
     {
         $emendas = new ModelEmendasOrcamentarias();
@@ -48,10 +75,9 @@ class ControllerEmendasOrcamentarias
 
         $resultado = $emendas->registrarVisita($_REQUEST["idDataVisita"], $_REQUEST["idCidadeHidden"]);
 
-        if($resultado){
-                header('location: /view/emendasOrcamentarias/cidades/?id=1&cad=sucesso');
+        if ($resultado) {
+            header('location: /view/emendasOrcamentarias/cidades/?id='.$_REQUEST["idCidadeHidden"].'&cad=sucesso');
         }
-        
     }
 
     public function listarCidades()

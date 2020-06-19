@@ -13,6 +13,10 @@ if (isset($_REQUEST["id"])) {
 if (isset($_REQUEST["cad"])) {
     $status = $_REQUEST["cad"];
 }
+if (isset($_REQUEST["r"])) {
+    $status = $_REQUEST["r"];
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +87,10 @@ include '../../../estrutura/head.php';
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>Erro no registro verifique os campos!</strong>
+                        </div>
+                    <?php elseif ($status == "comentarioSucesso") : ?>
+                        <div class="alert alert-success text-center" role="alert">
+                            Comentario adicionado com sucesso
                         </div>
                     <?php endif; ?>
                     <?php
@@ -201,10 +209,65 @@ include '../../../estrutura/head.php';
                                             </div>
                                         </div>
                                     </div>
+
                                 <?php
                                 }
 
                                 ?>
+                                <div id="accordion">
+                                    <div class="card card_accordion">
+                                        <div class="card-header cartao-recursos" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapseComentario" aria-expanded="true" aria-controls="collapseOne">
+                                                    Comentarios
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseComentario" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Data</th>
+                                                            <th>Comentario</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $emendas = new ControllerEmendasOrcamentarias();
+
+                                                        $lista = $emendas->listarComentarios($idCidade);
+
+                                                        for ($i = 0; $i < sizeof($lista); $i++) {
+                                                        ?>
+                                                        <tr>
+                                                            <td><label><?php echo date('d-m-Y', strtotime($lista[$i]["data"])) ?></label></td>
+                                                       
+                                                       
+                                                            <td><label><?php echo $lista[$i]["comentario"] ?></label></td>
+                                                      </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                    </tbody>
+                                                </table>
+                                                <hr />
+                                                <form method="post" action="/controller/ControllerEmendasOrcamentarias.php?acao=comentario">
+                                                    <input type="hidden" name="idEmenda" value="<?php echo $idCidade ?>">
+                                                    <label class="form-label">Adicionar um comentario</label>
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line">
+                                                            <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-cadastrar">Adicionar comentario</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-2">
                                 <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#modalRegistrar" data-cidade="<?php echo $idCidade ?>" id="registrarVisita"> Registrar visita</button>
@@ -292,6 +355,20 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
+        $("#idDataVisita").on('click', () => {
+            dia = new Date().getDate().toString();
+            mes = ((new Date().getMonth()) + 1).toString();
+            ano = new Date().getFullYear();
+
+            if (mes.length == 1) {
+                mes = '0' + mes
+            }
+            if (dia.length == 1) {
+                dia = '0' + dia;
+            }
+            data = `${ano}-${mes}-${dia}`
+            $("#idDataVisita").val(data);
+        });
         $("#modalRegistrar").on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // Extract info from data-* attributes

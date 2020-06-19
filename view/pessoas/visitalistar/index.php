@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Detalhe da visita</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -186,12 +186,12 @@ include '../../../estrutura/head.php';
                     <input type="date" class="form-control" id="data" name="data">
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
+                    <label for="recipient-name" class="col-form-label">Cidade:</label>
                     <input type="text" class="form-control" id="cidade" name="cidade">
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label" for="comentario">Nome pessoa:</label>
-                    <input type="text" class="form-control" id="comentario" name="comentario">
+                    <label for="recipient-name" class="col-form-label" for="comentario">Comentario:</label>
+                    <textarea class="form-control" id="comentario" name="comentario" rows="3">
                 </div>
                 <input type="hidden" id="idVisitas" name="idVisitas">
                 <input type="hidden" id="fkEndereco" name="fkEndereco">

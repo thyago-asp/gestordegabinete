@@ -35,6 +35,20 @@ class ModelEmendasOrcamentarias
         return $result;
     }
 
+    public function listarComentarios($id)
+    {
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_comentarios_emenda where t_emendas_orcamentarias_idt_emendas_orcamentarias = :id";
+
+        $stmt = $con->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $result = $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
     public function pesquisarCidade($cidade)
     {
         $con = Conexao::abrirConexao();
@@ -63,7 +77,29 @@ class ModelEmendasOrcamentarias
             $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $id);
             $result = $stmt->execute();
 
+
+            return $result;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
+
+    public function addComentario($comentario, $id)
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "INSERT INTO t_comentarios_emenda (comentario, data, t_emendas_orcamentarias_idt_emendas_orcamentarias) 
+                    VALUES (:comentario, :data, :t_emendas_orcamentarias_idt_emendas_orcamentarias)";
           
+            $stmt = $con->prepare($query);
+            $stmt->bindValue(':comentario', $comentario);
+            date_default_timezone_set('America/Sao_Paulo');
+            $stmt->bindValue(':data', date('Y-m-d'));
+            $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $id);
+
+            $result = $stmt->execute();
+
             return $result;
         } catch (PDOException $e) {
             print_r($e->getMessage());

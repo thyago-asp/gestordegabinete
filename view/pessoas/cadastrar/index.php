@@ -84,7 +84,7 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="telefoneF">Telefone</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" id="telefoneF" maxlength="14" name="telefoneF" placeholder="00 9999-9999" required>
+                                                    <input type="tel" class="form-control" id="telefoneF" maxlength="15" name="telefoneF" placeholder="00 99999-9999" required>
 
                                                 </div>
                                             </div>
@@ -375,7 +375,7 @@ include '../../../estrutura/head.php';
     <script src="../../../js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(() => {
-            $("#telefoneF").mask('(##)# ####-####');
+            $("#telefoneF").mask('(##)# ####-#####');
             $("#cpf").mask("###.###.###-##");
             $("#cepF").mask("#####-###")
             $("#telefoneJ").mask('(##)# ####-####');
