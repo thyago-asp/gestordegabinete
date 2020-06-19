@@ -187,7 +187,7 @@ include '../../../estrutura/head.php';
                                                 <div class="input-group mb-3">
                                                     <div class="custom-file">
                                                         <input type="file" name="imagem" id="imagemPF" class="custom-file-input">
-                                                        <label placeholder="teste" class="custom-file-label" for="imagemPF" aria-describedby="imagemPF">Selecione um arquivo</label>
+                                                        <span class="custom-file-label" for="imagemPF" id="nomeArq" aria-describedby="imagemPF">Selecione um arquivo</span>
                                                     </div>
                                                     <!-- <div class="input-group-append">
                         <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
@@ -375,6 +375,14 @@ include '../../../estrutura/head.php';
     <script src="../../../js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(() => {
+
+            $('#imagemPF').on('change', function() {
+                var nomeArq = $(this)[0].files[0].name;
+                
+                $('#nomeArq').text(nomeArq);
+            });
+            // let a = $("#imagemPF").change().val();
+            // console.log(a);
             $("#telefoneF").mask('(##)# ####-####');
             $("#cpf").mask("###.###.###-##");
             $("#cepF").mask("#####-###")
