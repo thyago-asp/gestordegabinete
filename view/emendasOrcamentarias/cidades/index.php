@@ -220,7 +220,7 @@ include '../../../estrutura/head.php';
                                         for ($j = 0; $j < count($listaVisitas); $j++) {
                                         ?>
                                             <tr>
-                                                <td style="text-align: center"><?php echo $listaVisitas[$j]->data ?></td>
+                                                <td style="text-align: center"><?php echo date('d-m-Y', strtotime($listaVisitas[$j]->data)) ?></td>
 
                                             </tr>
                                         <?php

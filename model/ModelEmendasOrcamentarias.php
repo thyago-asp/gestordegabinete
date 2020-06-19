@@ -59,7 +59,7 @@ class ModelEmendasOrcamentarias
                     VALUES (:data, :t_emendas_orcamentarias_idt_emendas_orcamentarias)";
 
             $stmt = $con->prepare($query);
-            $stmt->bindValue(':data', date("d/m/Y", strtotime($data)));
+            $stmt->bindValue(':data', $data);
             $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $id);
             $result = $stmt->execute();
 
@@ -160,7 +160,8 @@ class ModelEmendasOrcamentarias
     {
         $con = Conexao::abrirConexao();
 
-        $query = "SELECT * FROM t_visita_cidade WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id ORDER BY data ASC";
+
+        $query = "SELECT * FROM t_visita_cidade WHERE t_emendas_orcamentarias_idt_emendas_orcamentarias = :id ORDER BY DATE(data) DESC";
 
         $stmt = $con->prepare($query);
 
