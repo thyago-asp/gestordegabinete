@@ -8,13 +8,17 @@ if (isset($_GET['cad'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <?php
 $pagina = "sub3";
 include '../../../estrutura/head.php';
 
 ?>
-
+<style>
+   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+        content: "Selecione um arquivo" !important;
+    }
+</style>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -29,8 +33,8 @@ include '../../../estrutura/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
                     <!-- Page Heading -->
-                    <div id="pagina" class="card-header text-center ">
-                        <h5 class="cabecalho_paginas">Cadastro de pessoas</h5>
+                    <div id="pagina" class="card-header text-center">
+                        <h3 class="cabecalho_paginas">Cadastrar pessoas</h3>
                     </div>
                 </div>
                 <?php if ($status == "sucesso") : ?>
@@ -60,34 +64,34 @@ include '../../../estrutura/head.php';
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
-                                        
+
                                         <div class="panel-body">
-                                            <label class="form-label">Nome completo</label>
+                                            <label class="form-label" for="nome">Nome completo</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="nome" required>
+                                                    <input type="text" id="nome" class="form-control" name="nome" required>
 
                                                 </div>
                                             </div>
 
-                                            <label class="form-label">Email</label>
+                                            <label class="form-label" for="email">Email</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="email" class="form-control" name="email" required>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
 
                                                 </div>
                                             </div>
-                                            <label class="form-label">Telefone</label>
+                                            <label class="form-label" for="telefoneF">Telefone</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" name="telefoneF" required>
+                                                    <input type="tel" class="form-control" id="telefoneF" maxlength="14" name="telefoneF" placeholder="00 9999-9999" required>
 
                                                 </div>
                                             </div>
-                                            <label class="form-label">CPF</label>
+                                            <label class="form-label" for="cpf">CPF</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" name="CPF" required>
+                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="14" name="CPF" required>
 
                                                 </div>
                                             </div>
@@ -98,13 +102,13 @@ include '../../../estrutura/head.php';
                                                 <input type="radio" name="sexo" value="feminino" id="female" class="with-gap">
                                                 <label for="female" class="m-l-20">Feminino</label>
                                             </div>
-                                            <label class="form-label">Data de nascimento</label>
+                                            <label class="form-label" for="nascimento">Data de nascimento</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="date" class="form-control date" name="nascimento" required placeholder="Ex: 30/07/2016">
+                                                    <input type="date" class="form-control date" id="nascimento" name="nascimento" required placeholder="Ex: 30/07/2016">
                                                 </div>
                                             </div>
-                                            <label class="form-label">Endereço</label>
+                                            <label class="form-label" for="cepF">Endereço</label>
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-line">
@@ -161,10 +165,10 @@ include '../../../estrutura/head.php';
                                                 </div>
 
                                             </div>
-                                            <label class="form-label">Categoria</label>
+                                            <label class="form-label" for="categoria">Categoria</label>
                                             <div class="row clearfix">
                                                 <div class="col-sm-12">
-                                                    <select name="categoria" class="form-control show-tick ">
+                                                    <select name="categoria" id="categoria" class="form-control show-tick ">
                                                         <option value="">-- Selecione uma categoria --</option>
                                                         <option value="dep.estadual">Deputados estadual</option>
                                                         <option value="dep.federal">Deputado federal</option>
@@ -178,14 +182,24 @@ include '../../../estrutura/head.php';
 
                                             </div>
 
+
                                             <div class="pt-3">
-                                                <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="imagem" id="imagemPF" class="custom-file-input">
+                                                        <label placeholder="teste" class="custom-file-label" for="imagemPF" aria-describedby="imagemPF">Selecione um arquivo</label>
+                                                    </div>
+                                                    <!-- <div class="input-group-append">
+                        <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
+                    </div> -->
+                                                </div>
+                                                <!-- <div class="form-group">
 
                                                     <div class="form-line">
-                                                        <input type="file" name="imagem" id="imagemPF">
+                                                        <input type="file">
                                                     </div>
 
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                         </div>
@@ -214,7 +228,7 @@ include '../../../estrutura/head.php';
                                     <div class="panel-body">
 
 
-                                        <label class="form-label">CNPJ</label>
+                                        <label class="form-label" for="cnpj">CNPJ</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -222,7 +236,7 @@ include '../../../estrutura/head.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <label class="form-label">Nome</label>
+                                        <label class="form-label" for="nomeJ">Nome</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -231,7 +245,7 @@ include '../../../estrutura/head.php';
                                             </div>
                                         </div>
 
-                                        <label class="form-label">Nome Fantasia</label>
+                                        <label class="form-label" for="fantasiaJ">Nome Fantasia</label>
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -240,27 +254,27 @@ include '../../../estrutura/head.php';
                                             </div>
 
                                         </div>
-                                        <label class="form-label">E-mail</label>
+                                        <label class="form-label" for="emailJ">E-mail</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="email" id="emailJ" required placeholder="E-mail">
+                                                <input type="email" class="form-control" name="emailJ" id="emailJ" required placeholder="exemplo@email.com">
 
                                             </div>
                                         </div>
-                                        <label class="form-label">Telefone</label>
+                                        <label class="form-label" for="telefoneJ">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" required placeholder="Telefone">
+                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="14" required placeholder="00 9999-9999">
 
                                             </div>
                                         </div>
 
-                                        <label class="form-label">Endereço</label>
+                                        <label class="form-label" for="cepJ">Endereço</label>
                                         <div id="endereco">
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="tel" id="cepJ" name="cep" class="form-control" placeholder="Cep">
+                                                        <input type="tel" id="cepJ" name="cep" maxlength="10" class="form-control" placeholder="Cep">
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,9 +372,14 @@ include '../../../estrutura/head.php';
     <?php
     include '../../../estrutura/importJS.php';
     ?>
+    <script src="../../../js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(() => {
-
+            $("#telefoneF").mask('(##)# ####-####');
+            $("#cpf").mask("###.###.###-##");
+            $("#cepF").mask("#####-###")
+            $("#telefoneJ").mask('(##)# ####-####');
+            $("#cepJ").mask('#####-###');
             $("#cepF").blur(function() {
                 var cep = $(this).val().replace(/\D/g, "");
 

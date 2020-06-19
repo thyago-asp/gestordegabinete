@@ -5,7 +5,7 @@ $lista = (new ControllerPessoasVisitas())->autoCompleteListagem();
 ?>
 <div>
     <label for="nome">Nome visitante</label>
-    <select class="form-control" name="nome">
+    <select class="form-control" id="visitas" name="nome">
         <option value=""></option>
         <?php
         foreach ($lista[0] as $key => $value) : ?>

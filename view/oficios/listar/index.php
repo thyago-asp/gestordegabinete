@@ -122,42 +122,39 @@ include '../../../estrutura/head.php';
                     </div>
                 </div>
 
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                            <thead>
-                                <tr>
-                                    <th>Número do documento</th>
-                                    <th>Solicitante</th>
-                                    <th>Instituição</th>
-                                    <th>Tipo</th>
-                                    <th>Data de cadastro</th>
-                                    <th>Titulo</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Número do documento</th>
-                                    <th>Solicitante</th>
-                                    <th>Instituição</th>
-                                    <th>Tipo</th>
-                                    <th>Data de cadastro</th>
-                                    <th>Titulo</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <!-- include estrutura da tabela -->
-                                <?php include '../../../estrutura/tabelaOficios.php'; ?>
-                                <!-- fim include estrutura da tabela -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.container-fluid -->
+                        <thead>
+                            <tr>
+                                <th>Número do documento</th>
+                                <th>Solicitante</th>
+                                <th>Instituição</th>
+                                <th>Nome do contato</th>
+                                <th>Data de cadastro</th>
+                                <th>Titulo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Número do documento</th>
+                                <th>Solicitante</th>
+                                <th>Instituição</th>
+                                <th>Nome do contato</th>
+                                <th>Data de cadastro</th>
+                                <th>Titulo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <!-- include estrutura da tabela -->
+                            <?php include '../../../estrutura/tabelaOficios.php'; ?>
+                            <!-- fim include estrutura da tabela -->
+                        </tbody>
+                    </table>
                 </div>
                 <!-- End of Main Content -->
             </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
     <?php include './estrutura/head.php'; ?>
     <body id="page-top">
         <!-- Page Wrapper -->

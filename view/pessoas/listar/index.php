@@ -104,44 +104,42 @@ include '../../../estrutura/head.php';
 
                     <!-- Fim mensagem sucesso e erro -->
 
-                    <div id="pagina" class="card-header text-center ">
-                        <h5 class="cabecalho_paginas">Lista de pessoas</h5>
+                    <div class="card-header text-center">
+                        <h1 class="cabecalho_paginas">Listar Pessoas</h1>
                     </div>
                 </div>
 
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Telefone</th>
-                                    <th>Data de nascimento</th>
-                                    <th>Cidade</th>
-                                    <th>Estado</th>
-                                    <th>Categoria</th>
-                                    <th>ações</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Telefone</th>
-                                    <th>Bairro</th>
-                                    <th>Endereço</th>
-                                    <th>Cidade</th>
-                                    <th>Estado</th>
-                                    <th>ações</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <!-- include estrutura da tabela -->
-                                <?php include '../../../estrutura/tabelaPessoas.php'; ?>
-                                <!-- fim include estrutura da tabela -->
-                            </tbody>
-                        </table>
-                    </div>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Data de nascimento</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>Categoria</th>
+                                <th>ações</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Bairro</th>
+                                <th>Endereço</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>ações</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <!-- include estrutura da tabela -->
+                            <?php include '../../../estrutura/tabelaPessoas.php'; ?>
+                            <!-- fim include estrutura da tabela -->
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.container-fluid -->
             </div>
