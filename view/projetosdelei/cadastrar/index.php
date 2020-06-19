@@ -55,5 +55,19 @@ include '../../../estrutura/head.php';
     ?>
 
 </body>
+<script>
+    
+    $('#arquivos').on('change', function() {
+               
+                i = 0
+                var a = [];
+                while(i < $(this)[0].files.length){
+                    a[i] = ($(this)[0].files[i].name)
+                    i++;
+                }
+                
+                $('#nomeArq').text(a);
+            });
+</script>
 
 </html>
