@@ -39,11 +39,11 @@ if ($url == "declaracoes") {
 <?php endif; ?>
 
 <div id="pagina" class="card-header text-center ">
-    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <h5 aria-describedby="aviso" class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <small id="aviso" class="form-text text-muted">Requerimentos</small>
 </div>
 <div class="card-body">
     <form action="../../../controller/ControllerRequerimentos.php?acao=salvar" enctype="multipart/form-data" method="post">
-
         <div class="card-body">
             <div class="panel-body">
                 <label class="form-label">Numero documento solicitado</label>

@@ -13,7 +13,10 @@ if (isset($_GET['excluir'])) {
     $status = $_GET['excluir'];
 }
 
-
+if (isset($_GET['r'])) {
+    
+    $status = $_GET['r'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -88,9 +91,9 @@ include '../../../estrutura/head.php';
                     <!-- Page Heading -->
                     <!-- mensagem de sucesso e erro -->
                     <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
+                        <div class="alert alert-success text-center" role="alert">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
+                            Visita excluida com sucesso.
                         </div>
                     <?php elseif ($status == "erro") : ?>
                         <div class="alert alert-danger alert-dismissible">

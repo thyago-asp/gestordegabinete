@@ -32,7 +32,8 @@ if ($url == "respostas") {
 <?php endif; ?>
 
 <div id="pagina" class="card-header text-center ">
-    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <h5 aria-describedby="aviso" class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <small id="aviso" class="form-text text-muted">Oficios</small>
 </div>
 <div class="card-body">
     <form action="../../../controller/ControllerOficios.php?acao=salvar" enctype="multipart/form-data" method="post">

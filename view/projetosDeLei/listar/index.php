@@ -5,7 +5,7 @@ require_once("../../../estrutura/controleLogin.php");
 $status = "";
 
 if (isset($_GET['atualizar'])) {
-    $msg = "atualizar";
+    $msg = "atualizado";
     $status = $_GET['atualizar'];
 }
 if (isset($_GET['excluir'])) {
@@ -100,30 +100,29 @@ include '../../../estrutura/head.php';
             <div id="content">
                 <?php include '../../../estrutura/barratopo.php';
                 ?>
+
+                <!-- Page Heading -->
+                <!-- mensagem de sucesso e erro -->
+                <?php if ($status == "sucesso") : ?>
+                    <div class="alert alert-success text-center" role="alert">
+
+                        <strong>Projeto de lei <?php echo $msg ?> com sucesso.</strong>
+                    </div>
+                <?php elseif ($status == "erro") : ?>
+                    <div class="alert alert-danger text-center" role="alert">
+
+                        <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
+                    </div>
+                <?php endif; ?>
+                <!-- Fim mensagem sucesso e erro -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid ">
 
-                    <!-- Page Heading -->
-                    <!-- mensagem de sucesso e erro -->
-                    <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Sucesso ao <?php echo $msg ?> pessoa!</strong>
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Erro ao <?php echo $msg ?>, verifique os campos!</strong>
-                        </div>
-                    <?php endif; ?>
-                    <!-- Fim mensagem sucesso e erro -->
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 text-center">
-                        <h1 class="h3 mb-0 text-gray-800 text-center">Pessoas</h1>
+                    <div class="card-header text-center ">
+                        <h5 class="cabecalho_paginas">Lista dos projetos de lei</h5>
                     </div>
                 </div>
 
-                b4.
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
@@ -257,9 +256,9 @@ include '../../../estrutura/head.php';
         $('#modalEdicao').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
 
-
             // data parametros
-            var idtReq = button.data('idtreq')
+            var idtpro = button.data('idtpro')
+            console.log(idtpro);
             var numDoc = button.data('numdoc')
             var solicitante = button.data('solicitante')
             var instituicao = button.data('instituicao')
@@ -268,7 +267,7 @@ include '../../../estrutura/head.php';
             var tipo = button.data('tipo')
             var titulo = button.data('titulo')
             var descricao = button.data('descricao')
-            console.log(idtReq);
+
             var status = button.data('status');
 
             var atividade = button.data('atividade');
@@ -324,11 +323,14 @@ include '../../../estrutura/head.php';
                     </div>
                 </div>
                 <input type="hidden" id="tipo" name="tipo">
-                <input type="hidden" id="idtReq" name="idtReq">
+                <input type="hidden" id="idtpro" name="idtpro">
             `)
 
             // seta os valores do modal
-            console.log(numDoc);
+
+
+
+
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
             modal.find('#instituicao').val(instituicao);
@@ -338,7 +340,7 @@ include '../../../estrutura/head.php';
             modal.find('#dataDocumento').val(dataFormatada);
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
-            modal.find('#idtReq').val(idtReq);
+            modal.find('#idtpro').val(idtpro);
             modal.find('#status').val(status);
 
 
@@ -348,17 +350,16 @@ include '../../../estrutura/head.php';
         $('#modalExcluir').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // Extract info from data-* attributes
-            var idtReq = button.data('idtreq')
+            var idtpro = button.data('idtpro')
             var tipo = button.data('tipo');
             var numDoc = button.data('numdoc');
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            console.log(idtReq);
+           
             $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
-                    <input type="hidden" id="idtReq" name="idtReq">
+                    <input type="hidden" id="idtpro" name="idtpro">
                     <input type="hidden" id="tipo" name="tipo">
-                    
                 `);
 
 
@@ -366,8 +367,8 @@ include '../../../estrutura/head.php';
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o documento: " + numDoc + "  do sistema ?")
 
-            // modal.find('#idtReq').val(numdoc);
-            modal.find('#idtReq').val(idtReq);
+           
+            modal.find('#idtpro').val(idtpro);
             modal.find('#tipo').val(tipo);
 
 

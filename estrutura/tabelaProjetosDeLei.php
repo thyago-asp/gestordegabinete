@@ -37,7 +37,10 @@ foreach ($lista_projetodelei as $projetodelei) :
         case "emendaConstitucional":
             $tipo = "Emenda constitucional";
             break;
-    }
+
+        }
+
+       
 ?>
 
     <tr>

@@ -1,3 +1,8 @@
+<style>
+   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+        content: "Selecione um arquivo" !important;
+    }
+</style>
 <?php
 $status = '';
 if (isset($_GET['cadastrar'])) {
@@ -40,21 +45,15 @@ if ($url == "emendaconstitucional") {
         <strong>Erro no cadastro verifique os campos!</strong>
     </div>
 <?php endif; ?>
-<style>
-   .custom-file-input:lang(pt) ~ .custom-file-label::after {
-        content: "Selecione um arquivo" !important;
-    }
-</style>
+
 <div id="pagina" class="card-header text-center ">
-    <h5 class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <h5 aria-describedby="aviso" class="cabecalho_paginas"><?php echo $titulo ?></h5>
+    <small id="aviso" class="form-text text-muted">Projetos de lei</small>
 </div>
 <div class="card-body">
     <form enctype="multipart/form-data" action="../../../controller/ControllerProjetosDeLei.php?acao=salvar" method="post">
-
         <div class="card-body">
             <div class="panel-body">
-
-
                 <label class="form-label">Numero documento solicitado</label>
                 <div class="form-group">
                     <div class="form-group">

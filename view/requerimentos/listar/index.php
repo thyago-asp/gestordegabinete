@@ -122,39 +122,6 @@ include '../../../estrutura/head.php';
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                        <thead>
-                            <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>solicitante</th>
-                                <th>instituicao</th>
-                                <th>nome do contato</th>
-                                <th>data</th>
-                                <th>titulo</th>
-                                <th>numero do documento</th>
-                                <th>ações</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <!-- include estrutura da tabela -->
-                            <?php include '../../../estrutura/tabelaRequerimentos.php'; ?>
-                            <!-- fim include estrutura da tabela -->
-                        </tbody>
-                    </table>
-=======
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -190,7 +157,6 @@ include '../../../estrutura/head.php';
                             </tbody>
                         </table>
                     </div>
->>>>>>> 7084f63315ee8bf6975857905363e959243290ae
                 </div>
                 <!-- /.container-fluid -->
             </div>

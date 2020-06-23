@@ -86,6 +86,6 @@ class ControllerPessoasVisitas
 
         $visita->__set('idVisitas', $_POST['idVisitas']);
         $visita->excluir();
-        header('location: /view/pessoas/visitalistar');
+        header('location: /view/pessoas/visitalistar?r=sucesso');
     }
 }
