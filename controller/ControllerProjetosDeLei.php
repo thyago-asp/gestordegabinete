@@ -37,7 +37,7 @@ class ControllerProjetosDeLei
             'xls'
         ];
 
-        $dir = "../arq/";
+        $dir = "../bancodedados/arq/";
 
         $arqNome = [];
         $arqLocal = [];
