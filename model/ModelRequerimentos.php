@@ -104,7 +104,7 @@ class ModelRequerimentos
     function listarRequerimentos(){
         $con = Conexao::abrirConexao();
 
-        $query = "select * from t_requerimentos";
+        $query = "SELECT *, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_requerimentos";
 
         $stmt = $con->prepare($query);
         $stmt->execute();

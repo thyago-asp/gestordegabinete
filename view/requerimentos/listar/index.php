@@ -184,6 +184,7 @@ include '../../../estrutura/head.php';
     include '../../../estrutura/importJS.php';
     ?>
     <script>
+         
         $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
 
@@ -198,7 +199,7 @@ include '../../../estrutura/head.php';
 
                 $.each(JSON.parse(data), function(index, value) {
                     // alert(value.arquivo_caminho);
-                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo + "</a><br/>";
+                    link += cont + " - <a href='./../../" + value.arquivo_caminho + "' target='_blank'>" + value.nome_arquivo + "</a><br/>";
                     cont++;
                 });
                 if (link != "") {

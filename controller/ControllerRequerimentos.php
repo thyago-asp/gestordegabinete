@@ -37,11 +37,11 @@ class ControllerRequerimentos
             'xls'
         ];
 
-        $dir = "../arq/";
+        $dir = "../bancodedados/arq/";
 
         $arqNome = [];
         $arqLocal = [];
-        $tdsArquivos = [];
+        $tdsArquivos = null;
         $qtdArquivos = count($arq['arquivos']['name']);
 
         $cont = 0;
@@ -54,15 +54,21 @@ class ControllerRequerimentos
                 $temp = $arq['arquivos']['tmp_name'][$cont];
                 $novoNome = uniqid() . ".$arqExtencao";
                 $dirImg = $dir . $novoNome;
+                
                 move_uploaded_file($temp, $dirImg);
-                $arqLocal[] = $dirImg;
+                
 
                 
             }
+            $arqLocal[] = $dirImg;
             $cont++;
         }
-
-        return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);
+        echo "<pre>";
+        print_r($arqLocal);
+        print_r($arqNome);
+         ($tdsArquivos = ["local" => $arqLocal, "nome" => $arqNome]);
+        
+         return $tdsArquivos;
     }
 
     function salvarRequerimentos()
@@ -82,9 +88,8 @@ class ControllerRequerimentos
         if($arq == false) {
             header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
+    
         $salvar->__set('arquivos', $arq);
-
-        $salvar->__set('arquivos', $this->arquivos($_FILES));
 
         $retorno = $salvar->salvarModel($salvar);
         if ($retorno == 1) {
