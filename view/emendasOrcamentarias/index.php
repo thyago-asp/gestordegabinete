@@ -120,14 +120,10 @@ include '../../estrutura/head.php';
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm">
-                                                    <a href="/view/emendasOrcamentarias/cidades/">Maringa</a> <br />
-
                                                     <?php
                                                     foreach ($listaEmendas as $cidade) {
-                                                        if ($cidade->regiao == "Noroeste") {
-
+                                                        if (trim($cidade->regiao) == "Noroeste") {
                                                     ?>
-
                                                             <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
                                                     <?php
                                                         }
@@ -135,13 +131,7 @@ include '../../estrutura/head.php';
 
                                                     ?>
                                                 </div>
-                                                <div class="col-sm">
-                                                    <a href="#">Marialva</a> <br />
-                                                    <a href="#">Goierê</a><br />
-                                                    <a href="#">Porto Rico</a><br />
-                                                    <a href="#">Paiçandu</a><br />
-                                                    <a href="#">Astorga</a><br />
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +146,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseOeste" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Oeste") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +174,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseSudoeste" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Sudoeste") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,7 +203,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseSudeste" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Sudeste") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +236,21 @@ include '../../estrutura/head.php';
 
                                     <div id="collapseNorte" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Norte Pioneiro") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +264,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseCentro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Centro ocidental") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +292,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseCentrosul" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Centro sul") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +320,21 @@ include '../../estrutura/head.php';
                                     </div>
                                     <div id="collapseCentroOriental" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Centro Oriental") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +355,21 @@ include '../../estrutura/head.php';
 
                                     <div id="collapseRegiaoMetropolitana" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <?php
+                                                    foreach ($listaEmendas as $cidade) {
+                                                        if (trim($cidade->regiao) == "Região metropolitana de Curitiba") {
+                                                    ?>
+                                                            <a href="/view/emendasOrcamentarias/cidades/?id=<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></a> <br />
+                                                    <?php
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -343,12 +445,12 @@ include '../../estrutura/head.php';
 
 
                     });
-                }else{
+                } else {
                     $("#cidadesEncontradas").html("");
                 }
             });
 
-           
+
             function isEmpty(obj) {
                 for (var prop in obj) {
                     if (obj.hasOwnProperty(prop))
