@@ -111,13 +111,11 @@ if ($url == "declaracoes") {
                 <label>Arquivos</label>
                 <div class="input-group mb-3">
                     <div class="custom-file" lang="pt">
-                        <input type="file"name="arquivos[]" placeholder="teste" multiple id="arquivos" class="custom-file-input">
+                        <input type="file"name="arquivos[]" multiple id="arquivos" class="custom-file-input">
                         
-                        <label  class="custom-file-label" for="arquivos"  id="nomeArq"aria-describedby="inputGroupFileAddon02">Selecione um arquivo</label>
+                        <label  class="custom-file-label" for="arquivos"  id="nomeArq" aria-describedby="inputGroupFileAddon02">Selecione um arquivo</label>
                     </div>
-                    <!-- <div class="input-group-append">
-                        <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
-                    </div> -->
+                    
                 </div>
                 
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">

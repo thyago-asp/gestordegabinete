@@ -184,72 +184,27 @@ include '../../../estrutura/head.php';
     ?>
     <script>
         $('#modalArquivos').on('show.bs.modal', function(event) {
+            
             var button = $(event.relatedTarget);
-            var arquivo = [
-                button.data('nome0'),
-                button.data('nome1'),
-                button.data('nome2'),
-                button.data('nome3'),
-                button.data('nome4'),
-            ];
-            var link = [
-                button.data('linkarq0'),
-                button.data('linkarq1'),
-                button.data('linkarq2'),
-                button.data('linkarq3'),
-                button.data('linkarq4'),
-            ]
-            var fkidt = [
-                button.data('fkrprojetosdelei0'),
-            ]
-
-            var idtArq = [
-                button.data('idarq0'),
-                button.data('idarq1'),
-                button.data('idarq2'),
-                button.data('idarq3'),
-                button.data('idarq4'),
-            ]
-
-
-            var arq = {
-                arq: {
-                    "nome": arquivo,
-                    "link": link,
-                    "idtArq": idtArq
+            var idtProj = button.data('idtpro')
+            $.post('/view/projetosDeLei/call_projetosdelei.php', {
+                idprojetosdelei: idtProj
+            }, function(data) {
+                img = "";
+                var cont = 1;
+                var link = "";
+                
+                $.each(JSON.parse(data), function(index, value) {
+                    // alert(value.arquivo_caminho);
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\" target='_blank'>" + value.nome_arquivo + "</a><br/>";
+                    cont++;
+                });
+                if (link != "") {
+                    $("#formularioArquivos .modal-body").html(link);
+                } else {
+                    $("#formularioArquivos .modal-body").html("Nenhum documento cadastrado.");
                 }
-            }
-
-            var i = 0;
-            var tot = arq.arq.idtArq
-            var a = 0;
-            for (let index = 0; index < tot.length; index++) {
-                const element = tot[index];
-                if (element == undefined) {
-                    var tamValido = a++;
-                    console.log(tamValido)
-                }
-
-            }
-            var tamanho = (arq.arq.nome.length);
-
-            var cont = tamanho - tamValido - 1;
-
-            $("#formularioArquivos .modal-body").html('');
-
-            $.each(arq, (chave, valor) => {
-
-                while (i < cont) {
-
-                    $('#formularioArquivos .modal-body').append(`
-                            <a href="../../${valor.link[i]}" id="${valor.idtArq[i]}" class="" value="${valor.idtArq[i]}" name="arquivos" target="_blank">${valor.nome[i]}</a><br>   
-                    `)
-                    i++;
-
-                }
-
-                i = 0;
-            })
+            });
 
         });
 

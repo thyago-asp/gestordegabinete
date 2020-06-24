@@ -8,7 +8,12 @@ require_once("../../../estrutura/controleLogin.php");
 $pagina = "sub3";
 include '../../../estrutura/head.php';
 ?>
-
+<style>
+    
+   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+        content: "Selecione um arquivo" !important;
+    }
+</style>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -54,5 +59,20 @@ include '../../../estrutura/head.php';
     ?>
 
 </body>
+<script>
+    $('#arquivos').on('change', function() {
+        var nomeArq = $(this)[0].files[0].name;
+
+        var i = 0;
+        var a = [];
+        while (i < $(this)[0].files.length) {
+            a[i] = $(this)[0].files[i].name;
+            i++
+
+        }
+
+        $('#nomeArq').text(a);
+    });
+</script>
 
 </html>
