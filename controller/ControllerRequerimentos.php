@@ -56,19 +56,33 @@ class ControllerRequerimentos
                 $dirImg = $dir . $novoNome;
                 
                 move_uploaded_file($temp, $dirImg);
+<<<<<<< Updated upstream
                 
 
                 
+=======
+                $arqLocal[] = $dirImg;
+
+                $cont++;
+            } else {
+
+                return "arquivo invalido";
+>>>>>>> Stashed changes
             }
             $arqLocal[] = $dirImg;
             $cont++;
         }
+<<<<<<< Updated upstream
         echo "<pre>";
         print_r($arqLocal);
         print_r($arqNome);
          ($tdsArquivos = ["local" => $arqLocal, "nome" => $arqNome]);
         
          return $tdsArquivos;
+=======
+
+        return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);
+>>>>>>> Stashed changes
     }
 
     function salvarRequerimentos()
@@ -119,9 +133,35 @@ class ControllerRequerimentos
     }
     function listarRequerimentos()
     {
+<<<<<<< Updated upstream
         $lista_requerimentos = (new ModelRequerimentos())->listarRequerimentos();
 
         return $lista_requerimentos;
+=======
+        $lista = (new ModelRequerimentos())->listarModel();
+
+        if (isset($lista[0]['nomearquivo'])) {
+
+            foreach ($lista as $key => $value) {
+
+                $nome = explode(',', $value['nomearquivo']);
+                $idarquivo = explode(',', $value['idarquivo']);
+                $fkprojetosdelei = explode(',', $value['fkrequerimentos']);
+                $link = explode(',', $value['caminho_arquivo']);
+                $a['arquivos'] = [
+                    "nome" => $nome,
+                    "idArquivo" => $idarquivo,
+                    "fkArquivo" => $fkprojetosdelei,
+                    "linkArq" => $link
+                ];
+
+                array_push($lista[$key], $a);
+            }
+            return $lista;
+        } else {
+            return $lista;
+        }
+>>>>>>> Stashed changes
     }
     function deletarRequerimentos()
     {
@@ -130,10 +170,16 @@ class ControllerRequerimentos
 
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
+<<<<<<< Updated upstream
         $retorno = $deletar->deletarModel($deletar);
 
         if ($retorno == 1) {
             header("Location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
         }
+=======
+
+        $deletar->deletarModel($deletar);
+        header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+>>>>>>> Stashed changes
     }
 }
