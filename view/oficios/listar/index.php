@@ -132,7 +132,7 @@ include '../../../estrutura/head.php';
                                 <th>Instituição</th>
                                 <th>Nome do contato</th>
                                 <th>Data de cadastro</th>
-                                <th>Titulo</th>
+                                <th>Assunto</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -144,7 +144,7 @@ include '../../../estrutura/head.php';
                                 <th>Instituição</th>
                                 <th>Nome do contato</th>
                                 <th>Data de cadastro</th>
-                                <th>Titulo</th>
+                                <th>Assunto</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -192,7 +192,7 @@ include '../../../estrutura/head.php';
 
                 $.each(JSON.parse(data), function(index, value) {
                     // alert(value.arquivo_caminho);
-                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\">" + value.nome_arquivo + "</a><br/>";
+                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\" target='_blank'>" + value.nome_arquivo + "</a><br/>";
                     cont++;
                 });
                 if (link != "") {
@@ -249,7 +249,7 @@ include '../../../estrutura/head.php';
                 </div>
                
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo:</label>
+                    <label for="recipient-name" class="col-form-label">Assunto:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
                 </div>
                 <div class="form-group">

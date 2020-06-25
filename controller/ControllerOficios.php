@@ -79,7 +79,6 @@ class ControllerOficios
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
-
         $retorno = $salvar->salvarModel($salvar);
         
         if ($retorno == 1) {

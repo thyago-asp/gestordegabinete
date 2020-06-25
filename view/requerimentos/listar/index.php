@@ -133,7 +133,7 @@ include '../../../estrutura/head.php';
                                     <th>Instituicao</th>
                                     <th>Tipo</th>
                                     <th>Data</th>
-                                    <th>Titulo</th>
+                                    <th>Assunto</th>
                                     <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
@@ -145,7 +145,7 @@ include '../../../estrutura/head.php';
                                     <th>Instituicao</th>
                                     <th>Tipo</th>
                                     <th>Data</th>
-                                    <th>Titulo</th>
+                                    <th>Assunto</th>
                                     <th>Status</th>
                                     <th>Ações</th>
                                 </tr>
@@ -257,7 +257,7 @@ include '../../../estrutura/head.php';
                 </div>
             
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo:</label>
+                    <label for="recipient-name" class="col-form-label">Assunto:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
                 </div>
                 <div class="form-group">

@@ -37,37 +37,30 @@ class ControllerRequerimentos
             'xls'
         ];
 
-        $dir = "../bancodedados/arq/";
+        $dir = "../arq/";
 
         $arqNome = [];
         $arqLocal = [];
-        $tdsArquivos = null;
+        $tdsArquivos = [];
         $qtdArquivos = count($arq['arquivos']['name']);
 
         $cont = 0;
         while ($cont < $qtdArquivos) {
-
+           //echo $arq['arquivos']['name'][$cont];
             $arqExtencao = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_EXTENSION);
             $arqNome[] = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_FILENAME);
-            if (in_array($arqExtencao, $extencoes)) {
+           if (in_array($arqExtencao, $extencoes)) {
 
                 $temp = $arq['arquivos']['tmp_name'][$cont];
                 $novoNome = uniqid() . ".$arqExtencao";
                 $dirImg = $dir . $novoNome;
-                
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
 
-                $cont++;
-            } else {
-
-                return "arquivo invalido";
             }
-            $arqLocal[] = $dirImg;
             $cont++;
         }
-
-        return ($tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome]);
+        return $tdsArquivos[] = ["local" => $arqLocal, "nome" => $arqNome];
     }
 
     function salvarRequerimentos()
@@ -84,6 +77,7 @@ class ControllerRequerimentos
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
         $arq = $this->arquivos($_FILES);
+
         if($arq == false) {
             header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }

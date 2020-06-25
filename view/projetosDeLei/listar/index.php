@@ -29,7 +29,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">New message</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Arquivos projetos de lei</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,7 +50,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">New message</h5>
+                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos projetos de lei</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,7 +133,7 @@ include '../../../estrutura/head.php';
                                 <th>Instituição</th>
                                 <th>Nome do contato</th>
                                 <th>Data de cadastro</th>
-                                <th>Titulo</th>
+                                <th>Assunto</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -145,7 +145,7 @@ include '../../../estrutura/head.php';
                                 <th>Instituição</th>
                                 <th>Nome do contato</th>
                                 <th>Data de cadastro</th>
-                                <th>Titulo</th>
+                                <th>Assunto</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
@@ -257,7 +257,7 @@ include '../../../estrutura/head.php';
                 
                 <label>Endereco</label>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo:</label>
+                    <label for="recipient-name" class="col-form-label">Assunto:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo">
                 </div>
                 <div class="form-group">

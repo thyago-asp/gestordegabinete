@@ -87,7 +87,7 @@ if ($url == "emendaconstitucional") {
 
                     </div>
                 </div>
-                <label class="form-label">Titulo</label>
+                <label class="form-label">Assunto</label>
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" class="form-control" name="titulo" id="titulo" required >
