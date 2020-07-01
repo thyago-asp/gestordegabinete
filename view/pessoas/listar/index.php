@@ -20,7 +20,9 @@ if (isset($_GET['excluir'])) {
 <?php
 $pagina = "sub3";
 include '../../../estrutura/head.php';
+
 ?>
+
 
 <body id="page-top">
     <!-- modal inicio -->
@@ -38,9 +40,6 @@ include '../../../estrutura/head.php';
                     <div class="modal-body">
 
                         <input type="hidden" id="idt_pessoa" name="n_idt_pessoa_editado">
-
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -69,6 +68,38 @@ include '../../../estrutura/head.php';
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTirarFotoEditar" tabindex="-1" role="dialog" aria-labelledby="modalTirarFotoEditarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTirarFotoEditarLabel">Editar foto da pessoa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" enctype="multipart/form-data" id="formularioEditarFoto" method="post">
+                    <div class="modal-body">
+                        <div class="area">
+                            <video autoplay="true" id="webCamera">
+                            </video>
+
+                            <input type="hidden" id="base_img" name="base_img" />
+                            <!-- <button type="button" onclick="takeSnapShot()">Tirar foto e salvar</button> -->
+
+                            <img id="imagemConvertida" />
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
                     </div>
                 </form>
             </div>
@@ -115,10 +146,10 @@ include '../../../estrutura/head.php';
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Telefone</th>
+                                <th>Telefone(s)</th>
                                 <th>Data de nascimento</th>
                                 <th>Cidade</th>
-                                <th>Estado</th>
+
                                 <th>Categoria</th>
                                 <th>ações</th>
                             </tr>
@@ -126,11 +157,11 @@ include '../../../estrutura/head.php';
                         <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>Telefone</th>
+                                <th>Telefone(s)</th>
                                 <th>Bairro</th>
                                 <th>Endereço</th>
                                 <th>Cidade</th>
-                                <th>Estado</th>
+
                                 <th>ações</th>
                             </tr>
                         </tfoot>
@@ -165,9 +196,15 @@ include '../../../estrutura/head.php';
     <!-- bootstrap core JS-->
     <?php
     include '../../../estrutura/importJS.php';
+
     ?>
+    <script src="../../../js/jquery.mask.min.js"></script>
     <script>
+
+
         $('#modalEdicao').on('show.bs.modal', function(event) {
+
+
             var button = $(event.relatedTarget) // Button that triggered the modal
             // var idt_pessoa = button.data('idt_pessoa')
             // Extract info from data-* attributes
@@ -176,6 +213,8 @@ include '../../../estrutura/head.php';
             var idtPessoa = button.data('idt_pessoa');
             var email = button.data('email')
             var telefone = button.data('telefone');
+            var telefone2 = button.data('telefone2');
+            var telefone3 = button.data('telefone3');
             var fkIdtEndereco = button.data('t_endereco_idt_endereco');
             // pessoa fisica
             var cpf = button.data('cpf');
@@ -218,25 +257,31 @@ include '../../../estrutura/head.php';
 
             if (idtPF >= 1) {
                 $("#formularioEnviar .modal-body").html(` 
-                   
+                <div class="card">
+                                                
+                                                <div class="card-body  text-center">
+                                                    <img id="imagemConvertidaEditar" width="100px" />
+                                                 <!--   <button type="button" class="btn btn-warning w-100" data-toggle="modal" data-target="#modalTirarFotoEditar">
+                                                        Registrar pela câmera
+                                                    </button> -->
+                                                    <input type="hidden" id="caminhoDaFotoTiradaEditada" name="caminhoDaFotoTiradaEditada" />
+                                                </div>
+                                            </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Nome pessoa:</label>
                             <input type="text" class="form-control" id="n_nome_editado" name="n_nome_editado">
                         </div>
-                        <div class="form-group">
-                            <div class="pb-3 w-25">
-                                <img class="w-100" id="imagem">
-                            </div>
-                            <input type="hidden" id="manterImg" name="manterImg"> 
-                            <input type="file" class="form-control" id="n_arquivo_editado" name="imagem">
-                        </div>
+                   
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">E-mail:</label>
                             <input type="text" class="form-control" id="n_email_editado" name="n_email_editado">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Telefone:</label>
-                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
+                        <input type="tel" class="form-control" id="n_telefone_editado" name="n_telefone_editado" maxlength="15" placeholder="1° - 00 99999-9999">
+                            <label for="recipient-name" class="col-form-label">Telefone 2:</label>
+                            <input type="tel" class="form-control" id="n_telefone_editado2" name="n_telefone_editado2" maxlength="15" placeholder="2° - 00 99999-9999">
+                            <label for="recipient-name" class="col-form-label">Telefone 3:</label>
+                            <input type="tel" class="form-control" id="n_telefone_editado3" name="n_telefone_editado3" maxlength="15" placeholder="3° - 00 99999-9999">
                         </div>
                         <label class="form-label">Sexo</label>
                         <div class="form-group">
@@ -268,15 +313,15 @@ include '../../../estrutura/head.php';
                                 </select>
                             </div>
                         </div>
-                        <label>Endereco</label>
+                         <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">CEP:</label>
+                            <input type="text" class="form-control" id="n_cep_editado" name="n_cep_editado">
+                        </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Logradouro:</label>
                             <input type="text" class="form-control" id="n_logradouro_editado" name="n_logradouro_editado">
                         </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">CEP:</label>
-                            <input type="text" class="form-control" id="n_cep_editado" name="n_cep_editado">
-                        </div>
+                       
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Bairro:</label>
                             <input type="text" class="form-control" id="n_bairro_editado" name="n_bairro_editado">
@@ -302,6 +347,7 @@ include '../../../estrutura/head.php';
                         <input type="hidden" id="fkEndereco" name="n_fkEndereco_editado">
                         <input type="hidden" id="idtPF" name="n_idtPF_editado">
                         <input type="hidden" id="fkIdtPessoa" name="n_fkIdtPessoa_editado">
+                      
                 `)
                 $('#formularioEnviar').attr('action', '../../../controller/ControllerPessoaFisica.php?acao=alterar')
 
@@ -325,8 +371,14 @@ include '../../../estrutura/head.php';
                             <input type="text" class="form-control" id="n_cnpj_editado" name="n_cnpj_editado">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Telefone:</label>
-                            <input type="text" class="form-control" id="n_telefone_editado" name="n_telefone_editado">
+                        <label for="recipient-name" class="col-form-label">Telefone 1:</label>
+                            <input type="tel" class="form-control" id="n_telefone_editado" name="n_telefone_editado" maxlength="15" placeholder="1° - 00 99999-9999">
+                            <label for="recipient-name" class="col-form-label">Telefone 2:</label>
+                            <input type="tel" class="form-control" id="n_telefone_editado2" name="n_telefone_editado2" maxlength="15" placeholder="2° - 00 99999-9999">
+                            <label for="recipient-name" class="col-form-label">Telefone 3:</label>
+                            <input type="tel" class="form-control" id="n_telefone_editado3" name="n_telefone_editado3" maxlength="15" placeholder="3° - 00 99999-9999">
+
+                            
                         </div>
                         <label>Endereco</label>
                         <div class="form-group">
@@ -365,11 +417,44 @@ include '../../../estrutura/head.php';
                         <input type="hidden" id="idtEndereco" name="idtEndereco">
                         <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
                         <input type="hidden" id="fkEndereco" name="fkEndereco">
-                `)
+                     
+    `)
                 $('#formularioEnviar').attr('action', '../../../controller/ControllerPessoaJuridica.php?acao=alterar')
             }
             // seta os valores do modal
+            $("#n_telefone_editado").mask('(##)# ####-####');
+            $("#n_telefone_editado2").mask('(##)# ####-####');
+            $("#n_telefone_editado3").mask('(##)# ####-####');
 
+            $("#n_cpf_editado").mask("###.###.###-##");
+            $("#n_cep_editado").mask("#####-###")
+       
+            $("#n_cep_editado").blur(function() {
+                var cep = $(this).val().replace(/\D/g, "");
+
+                if (cep != "") {
+                    console.log(cep);
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+                        // console.log(dados);
+                        if (!("erro" in dados)) {
+
+
+                            $('#n_logradouro_editado').val(dados.logradouro);
+                            // $('#logradouroF').val(dados.bairro);
+                            $('#n_bairro_editado').val(dados.bairro);
+                            $('#n_cidade_editado').val(dados.localidade);
+                            $('#n_estado_editado').val(dados.uf);
+
+                        }
+
+                    }).fail((e) => {
+                        alert("CEP NÃO ENCONTRADO");
+                    });
+
+                }
+
+            });
+            
             var idSexo = "";
             // pessoa fisica / pessoa
 
@@ -381,18 +466,19 @@ include '../../../estrutura/head.php';
 
             modal.find('#n_nome_editado').val(nome);
             modal.find('#n_email_editado').val(email);
-            modal.find('#n_telefone_editado').val(telefone);
+            modal.find('#n_telefone_editado').val(telefone)
+
+            modal.find('#n_telefone_editado2').val(telefone2);
+            modal.find('#n_telefone_editado3').val(telefone3);
             modal.find(`#n_${idSexo}_editado`).prop('checked', true);
             modal.find('#n_cpf_editado').val(cpf);
             modal.find('#n_categoria_editado').val(categoria);
-            modal.find('#imagem').attr('src', img);
+            modal.find('#imagemConvertidaEditar').attr('src', img);
 
-            modal.find('#manterImg').val(img);
-
+            modal.find('#caminhoDaFotoTiradaEditada').val(img);
+            console.log(nascimento);
             var data = (nascimento);
-            //    var dataFormatada = data.split("/").reverse().join('-')
-
-
+             var dataFormatada = data.split("/").reverse().join('-')
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
@@ -401,7 +487,7 @@ include '../../../estrutura/head.php';
 
 
             // estado
-            modal.find('#n_nascimento_editado').val(data);
+            modal.find('#n_nascimento_editado').val(dataFormatada);
             modal.find('#n_logradouro_editado').val(endereco);
             modal.find('#n_complemento_editado').val(complemento);
             modal.find('#n_numero_editado').val(numero);
@@ -445,22 +531,22 @@ include '../../../estrutura/head.php';
 
             if (idtPf >= 1) {
                 $('#formularioExcluir .modal-body').html(`
-                    <label id="texto_excluir"></label>
-                    <input type="hidden" id="idtPessoa" name="idtPessoa">
-                    <input type="hidden" id="idtPf" name="idtPf">
-                    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
-                    <input type="hidden" id="idtEndereco" name="idtEndereco">
-                    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
-                `);
+    <label id="texto_excluir"></label>
+    <input type="hidden" id="idtPessoa" name="idtPessoa">
+    <input type="hidden" id="idtPf" name="idtPf">
+    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
+    <input type="hidden" id="idtEndereco" name="idtEndereco">
+    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
+    `);
                 $('#formularioExcluir').attr('action', '../../../controller/ControllerPessoaFisica.php?acao=excluir')
             } else {
                 $('#formularioExcluir .modal-body').html(`
-                    <label id="texto_excluir"></label>
-                    <input type="hidden" id="idtPessoa" name="idtPessoa">
-                    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
-                    <input type="hidden" id="idtEndereco" name="idtEndereco">
-                    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
-                `);
+    <label id="texto_excluir"></label>
+    <input type="hidden" id="idtPessoa" name="idtPessoa">
+    <input type="hidden" id="fkIdtEndereco" name="fkIdtEndereco">
+    <input type="hidden" id="idtEndereco" name="idtEndereco">
+    <input type="hidden" id="fkIdtPessoa" name="fkIdtPessoa">
+    `);
                 $('#formularioExcluir').attr('action', '../../../controller/ControllerPessoaJuridica.php?acao=excluir')
             }
             var modal = $(this)

@@ -51,9 +51,9 @@ class ControllerPessoasVisitas
 
     function autoCompleteListagem()
     {
-        $listar = (new PessoaFisica())->listarM();
-        $listarPF = (new PessoaJuridica())->listarM();
-        return $listagem = [$listar, $listarPF];
+
+        $lista = (new ModelPessoaVisita())->listarCidades();
+        return $lista;
     }
 
     function atualizar()
@@ -75,6 +75,12 @@ class ControllerPessoasVisitas
             header('location: /view/pessoas/visitalistar?cad=sucesso');
         }
     }
+
+    function listarPessoas(){
+        $lista = (new ModelPessoaVisita())->listarPessoas();
+        return $lista;
+    }
+
     function listar()
     {
         $visita = new ModelPessoaVisita();

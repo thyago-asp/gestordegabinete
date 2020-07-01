@@ -17,7 +17,7 @@ class PessoaJuridica
     //put your code here
 
     // t_endereco
-   
+
     private $cep;
     private $bairro;
     private $cidade;
@@ -44,7 +44,7 @@ class PessoaJuridica
     private $fkEndereco;
     private $fkIdtPessoa;
     private $id;
-  
+
     // metodos magicos do php
     // __get retorna o atributo
     function __get($atributo)
@@ -59,12 +59,12 @@ class PessoaJuridica
 
     function cadastroM($pj)
     {
-        try{
-                // abre a conexao com o banco de dados
-        $con = Conexao::abrirConexao();
+        try {
+            // abre a conexao com o banco de dados
+            $con = Conexao::abrirConexao();
 
 
-        $query = "INSERT INTO t_endereco(endereco, cep, bairro, complemento, numero, cidade, estado)
+            $query = "INSERT INTO t_endereco(endereco, cep, bairro, complemento, numero, cidade, estado)
                     VALUES (:logradouro, :cep, :bairro, :complemento, :numero, :cidade, :estado);
                   INSERT INTO t_pessoa(nome, telefone, email, t_endereco_idt_endereco) 
                     VALUES (:nome, :telefone, :email, LAST_INSERT_ID()); 
@@ -72,46 +72,45 @@ class PessoaJuridica
                     VALUES (LAST_INSERT_ID(), :cnpj, :nome_fantasia, :atividade);
                  ";
 
-        // prepara a query 
-        $stmt = $con->prepare($query);
+            // prepara a query 
+            $stmt = $con->prepare($query);
 
-        // tabela t_endereco
-        $stmt->bindValue(':logradouro', $this->__get('logradouro'));
-        $stmt->bindValue(':cep', $this->__get('cep'));
-        $stmt->bindValue(':bairro', $this->__get('bairro'));
-        $stmt->bindValue(':complemento', $this->__get('complemento'));
-        $stmt->bindValue(':numero', $this->__get('numero'));
-        $stmt->bindValue(':cidade', $this->__get('cidade'));
-        $stmt->bindValue(':estado', $this->__get('estado'));
-       
+            // tabela t_endereco
+            $stmt->bindValue(':logradouro', $this->__get('logradouro'));
+            $stmt->bindValue(':cep', $this->__get('cep'));
+            $stmt->bindValue(':bairro', $this->__get('bairro'));
+            $stmt->bindValue(':complemento', $this->__get('complemento'));
+            $stmt->bindValue(':numero', $this->__get('numero'));
+            $stmt->bindValue(':cidade', $this->__get('cidade'));
+            $stmt->bindValue(':estado', $this->__get('estado'));
 
-        // passa os parametros para a query, primeiro parametro depois valor
-        // tabela t_pessoa
-        $stmt->bindValue(':nome', $this->__get('nome'));
-        $stmt->bindValue(':telefone', $this->__get('telefone'));
-        $stmt->bindValue(':email', $this->__get('email'));
-        
-        // // tabela t_pessoa_uridica
-        $stmt->bindValue(':cnpj', $this->__get('cnpj'));
-        $stmt->bindValue(':nome_fantasia', $this->__get('fantasia'));
-        $stmt->bindValue(':atividade', $this->__get('atividade'));
 
-        // por fim executa a query
-        return $stmt->execute();
-    } catch (PDOException $e) {
-       print_r($e->getMessage());
-   }
+            // passa os parametros para a query, primeiro parametro depois valor
+            // tabela t_pessoa
+            $stmt->bindValue(':nome', $this->__get('nome'));
+            $stmt->bindValue(':telefone', $this->__get('telefone'));
+            $stmt->bindValue(':email', $this->__get('email'));
 
+            // // tabela t_pessoa_uridica
+            $stmt->bindValue(':cnpj', $this->__get('cnpj'));
+            $stmt->bindValue(':nome_fantasia', $this->__get('fantasia'));
+            $stmt->bindValue(':atividade', $this->__get('atividade'));
+
+            // por fim executa a query
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
     }
 
     function listarM()
     {
         $con = Conexao::abrirConexao();
-        $query = "SELECT p.*, e.*, pj.* FROM t_pessoa_juridica AS pj 
-                    INNER JOIN t_endereco AS e
-                    INNER JOIN t_pessoa AS p
-                        on (pj.t_pessoa_idt_pessoa = p.t_endereco_idt_endereco 
-                            AND e.idt_endereco = pj.t_pessoa_idt_pessoa)
+        $query = "select p.*, pj.*, ende.* from t_pessoa as p 
+        inner join t_pessoa_juridica as pj
+        inner join t_endereco as ende
+        on pj.t_pessoa_idt_pessoa = p.idt_pessoa
+        and ende.idt_endereco = p.t_endereco_idt_endereco
                 ";
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -137,7 +136,7 @@ class PessoaJuridica
         $stmt = $con->prepare($query);
 
         // tabela t_endereco
-       
+
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':bairro', $this->__get('bairro'));
         $stmt->bindValue(':logradouro', $this->__get('logradouro'));
@@ -154,8 +153,8 @@ class PessoaJuridica
         // tabela t_pessoaJuridica
         $stmt->bindValue(':cnpj', $this->__get('cnpj'));
         $stmt->bindValue(':nomeFantasia', $this->__get('nomeFantasia'));
-        $stmt->bindValue(':atividade', $this->__get('atividade'));   
-       
+        $stmt->bindValue(':atividade', $this->__get('atividade'));
+
         // ids e chaves estrangeiras
         $stmt->bindValue(':idtEndereco', $this->__get('idtEndereco'));
         $stmt->bindValue(':fkIdtEndereco', $this->__get('fkEndereco'));

@@ -2,114 +2,94 @@
 require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaFisica.php";
 require  "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoaJuridica.php";
 
+
 // instancia do controller de PJ
-$tabelaJuridica = (new ControllerPessoaJuridica())->listarTodosJuridico();
+$listaPessoaJuridica = (new ControllerPessoaJuridica())->listarTodosJuridico();
 
 // instancia do controller de PF
-$tab = (new ControllerPessoaFisica())->listarPF();
+$listaPessoaFisica = (new ControllerPessoaFisica())->listarPF();
 
-// criacao de um array com os dados de ambas as tabelas
-$tabela = [$tabelaJuridica, $tab];
+// monta os registros das pessoas fisicas
+foreach ($listaPessoaFisica as $pf) {
+?>
+  <tr>
+    <td><?php echo $pf->nome ?></td>
+    <td>
+      <ol type="a">
+        <?php
 
-// foreach dentro de outro para remover o primeiro indice do array
-// e deixar percorrer a partir das informacoes que interessam
+        if ($pf->telefone != "") {
+        ?><li><?php echo $pf->telefone ?></li><?php
+                                              }
+        if ($pf->telefone2 != "") {
+          ?><li><?php echo $pf->telefone2 ?></li><?php
+            }
 
-foreach ($tabela as $chave => $valor) :
+            if ($pf->telefone3 != "") {
+              ?><li><?php echo $pf->telefone3 ?></li><?php
+              }
 
-  foreach ($valor as $chave => $inf) :
-   
-    ?>
+                ?>
+      </ol>
+    </td>
+    <td><?php echo $pf->nascimento ?></td>
+    <td><?php echo $pf->cidade ?></td>
 
-    <tr>
-      <td><?php echo $inf['nome'] ?></td>
-      <td><?php echo $inf['telefone'] ?></td>
-      <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
-      <td><?php echo $inf['data_nascimento'] ?></td>
-      <?php } else { ?>
-        <td class="text-center"><?php echo " PJ - Não tem data de nascimento" ?></td>
-      <?php } ?>
-      <td><?php echo $inf['cidade'] ?></td>
-      <td><?php echo $inf['estado'] ?></td>
-      <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
-      <td><?php echo $inf['categoria'] ?></td>
-      <?php } else { ?>
-        <td class="text-center"><?php echo " PJ - Não tem categoria " ?></td>
-      <?php } ?>
-      <td class="text-center">
-        <div class="btn-group text-center" role="group" aria-label="Button group">
-          <!-- Botão editar -->
-          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao"
-                  <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
-                  
-                    data-nome="<?php echo $inf['nome'] ?>"
-                    data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>" 
-                    data-email="<?php echo $inf['email'] ?>"
-                    data-t_endereco_idt_endereco="<?php echo $inf['t_endereco_idt_endereco'] ?>" 
-                    data-idt_endereco="<?php echo $inf['idt_endereco'] ?>"
-                    data-cep="<?php echo $inf['cep'] ?>"
-                    data-complemento="<?php echo $inf['complemento'] ?>"
-                    data-idt_pessoa_fisica="<?php echo $inf['idt_pessoa_fisica'] ?>"
-                    data-cpf="<?php echo $inf['cpf'] ?>" 
-                    data-nascimento="<?php echo $inf['data_nascimento']?>"
-                    data-sexo="<?php echo $inf['sexo'] ?>" 
-                    data-categoria="<?php echo $inf['categoria'] ?>"
-                    data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>"  
-                    data-telefone="<?php echo $inf['telefone'] ?>" 
-                    data-numero="<?php echo $inf['numero'] ?>"
-                    data-endereco="<?php echo $inf['endereco'] ?>" 
-                    data-bairro="<?php echo $inf['bairro'] ?>" 
-                    data-cidade="<?php echo $inf['cidade'] ?>"
-                    data-estado="<?php echo $inf['estado'] ?>"
-                    data-arquivo="../../<?php echo $inf['arquivo'] ?>"
+    <td><?php echo $pf->categoria ?></td>
 
-                  <?php } else { ?>
-                    
-                    data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>"
-                    data-nome="<?php echo $inf['nome'] ?>"
-                    data-telefone="<?php echo $inf['telefone'] ?>"
-                    data-email="<?php echo $inf['email'] ?>"
-                    data-t_endereco_idt_endereco="<?php echo  $inf['t_endereco_idt_endereco'] ?>"
-                    data-idt_endereco="<?php echo $inf['idt_endereco'] ?>"
-                    data-endereco="<?php echo $inf['endereco'] ?>"
-                    data-cep="<?php echo $inf['cep'] ?>"
-                    data-complemento="<?php echo $inf['complemento'] ?>"
-                    data-numero="<?php echo $inf['numero'] ?>"
-                    data-cidade="<?php echo $inf['cidade'] ?>"
-                    data-estado="<?php echo $inf['estado'] ?>"
-                    data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>"
-                    data-cnpj="<?php echo $inf['cnpj'] ?>"
-                    data-bairro="<?php echo $inf['bairro'] ?>"
-                    data-nome_fantasia="<?php echo $inf['nome_fantasia'] ?>"
-                    data-atividade="<?php echo $inf['atividade'] ?>"
-                  
-                  <?php } ?>
-                  ><i class="fa fa-th-list" aria-hidden="true"></i></button>
-          <!-- Botão excluir -->
-          <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" 
-          <?php if(array_key_exists("idt_pessoa_fisica", $inf)) {?>
-              
-                  data-idt_pessoa_fisica="<?php echo $inf['idt_pessoa_fisica'] ?>"
-                  data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>" 
-                  data-nome="<?php echo $inf['nome'] ?>"
-                  data-idt_endereco="<?php echo $inf['idt_endereco'] ?>"
-                  data-t_endereco_idt_endereco="<?php echo $inf['t_endereco_idt_endereco'] ?>"
-                  data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>"  
-                
-                  
-                <?php } else { ?>
-                  
-                  data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>"
-                  data-nome="<?php echo $inf['nome'] ?>"
-                  data-t_endereco_idt_endereco="<?php echo  $inf['t_endereco_idt_endereco'] ?>"
-                  data-idt_endereco="<?php echo $inf['idt_endereco'] ?>"
-                  data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>"
-        
-                
-                <?php } ?>
-                  >Excluir</button>
+    <td class="text-center">
+      <div class="btn-group text-center" role="group" aria-label="Button group">
+        <!-- Botão editar -->
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-nome="<?php echo $pf->nome ?>" data-idt_pessoa="<?php echo $pf->idt_pessoa ?>" data-email="<?php echo $pf->email ?>" data-t_endereco_idt_endereco="<?php echo $pf->t_endereco_idt_endereco ?>" data-idt_endereco="<?php echo $pf->idt_endereco ?>" data-cep="<?php echo $pf->cep ?>" data-complemento="<?php echo $pf->complemento ?>" data-idt_pessoa_fisica="<?php echo $pf->idt_pessoa_fisica ?>" data-cpf="<?php echo $pf->cpf ?>" data-nascimento="<?php echo $pf->nascimento ?>" data-sexo="<?php echo $pf->sexo ?>" data-categoria="<?php echo $pf->categoria ?>" data-t_pessoa_idt_pessoa="<?php echo $pf->t_pessoa_idt_pessoa ?>" data-telefone="<?php echo $pf->telefone ?>" data-telefone2="<?php echo $pf->telefone2 ?>" data-telefone3="<?php echo $pf->telefone3 ?>" data-numero="<?php echo $pf->numero ?>" data-endereco="<?php echo $pf->endereco ?>" data-bairro="<?php echo $pf->bairro ?>" data-cidade="<?php echo $pf->cidade ?>" data-estado="<?php echo $pf->estado ?>" data-arquivo="../../<?php echo $pf->arquivo ?>"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+        <!-- Botão excluir -->
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-idt_pessoa_fisica="<?php echo $pf->idt_pessoa_fisica ?>" data-idt_pessoa="<?php echo $pf->idt_pessoa ?>" data-nome="<?php echo $pf->nome ?>" data-idt_endereco="<?php echo $pf->idt_endereco ?>" data-t_endereco_idt_endereco="<?php echo $pf->t_endereco_idt_endereco ?>" data-t_pessoa_idt_pessoa="<?php echo $pf->t_pessoa_idt_pessoa ?>">Excluir</button>
 
-        </div>
-      </td>
-    </tr>
-  <?php endforeach;
-endforeach;
+      </div>
+    </td>
+  </tr>
+<?php
+}
+
+// monta os registros das pessoas juridicas
+foreach ($listaPessoaJuridica as $inf) {
+?>
+
+  <tr>
+    <td><?php echo $inf['nome'] ?></td>
+    <td>
+      <ol type="a">
+        <?php
+        $cont = 1;
+        while ($cont <= 3) {
+
+          if ($cont == 1) {
+        ?><li><?php echo $inf['telefone'] ?></li><?php
+                                                  } else {
+                                                    if ($inf['telefone' . $cont] != "") {
+                                                    ?><li><?php echo $inf['telefone' . $cont] ?></li><?php
+                                                            }
+                                                          }
+                                                          $cont++;
+                                                        }
+                                                              ?>
+      </ol>
+    </td>
+
+    <td class="text-center"><?php echo " PJ - Não tem data de nascimento" ?></td>
+
+    <td><?php echo $inf['cidade'] ?></td>
+
+    <td class="text-center"><?php echo " PJ - Não tem categoria " ?></td>
+
+    <td class="text-center">
+      <div class="btn-group text-center" role="group" aria-label="Button group">
+        <!-- Botão editar -->
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>" data-nome="<?php echo $inf['nome'] ?>" data-telefone="<?php echo $inf['telefone'] ?>" data-telefone2="<?php echo $inf['telefone2'] ?>" data-telefone3="<?php echo $inf['telefone3'] ?>" data-email="<?php echo $inf['email'] ?>" data-t_endereco_idt_endereco="<?php echo  $inf['t_endereco_idt_endereco'] ?>" data-idt_endereco="<?php echo $inf['idt_endereco'] ?>" data-endereco="<?php echo $inf['endereco'] ?>" data-cep="<?php echo $inf['cep'] ?>" data-complemento="<?php echo $inf['complemento'] ?>" data-numero="<?php echo $inf['numero'] ?>" data-cidade="<?php echo $inf['cidade'] ?>" data-estado="<?php echo $inf['estado'] ?>" data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>" data-cnpj="<?php echo $inf['cnpj'] ?>" data-bairro="<?php echo $inf['bairro'] ?>" data-nome_fantasia="<?php echo $inf['nome_fantasia'] ?>" data-atividade="<?php echo $inf['atividade'] ?>" ?><i class="fa fa-th-list" aria-hidden="true"></i></button>
+        <!-- Botão excluir -->
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-idt_pessoa="<?php echo $inf['idt_pessoa'] ?>" data-nome="<?php echo $inf['nome'] ?>" data-t_endereco_idt_endereco="<?php echo  $inf['t_endereco_idt_endereco'] ?>" data-idt_endereco="<?php echo $inf['idt_endereco'] ?>" data-t_pessoa_idt_pessoa="<?php echo $inf['t_pessoa_idt_pessoa'] ?>" ?>>Excluir</button>
+
+      </div>
+    </td>
+  </tr>
+<?php
+}

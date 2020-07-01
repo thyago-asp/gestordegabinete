@@ -1,25 +1,33 @@
 <?php
 
 require_once "{$_SERVER['DOCUMENT_ROOT']}/controller/ControllerPessoasVisitas.php";
-$lista = (new ControllerPessoasVisitas())->autoCompleteListagem();
+$listaCidades = (new ControllerPessoasVisitas())->autoCompleteListagem();
+$listaPessoas = (new ControllerPessoasVisitas())->listarPessoas();
 ?>
 <div>
     <label for="nome">Nome visitante</label>
-    <select class="form-control" id="visitas" name="nome">
+    <select class="form-control" id="visitas" name="nome" aria-describedby="emailHelp">
         <option value=""></option>
         <?php
-        foreach ($lista[0] as $key => $value) : ?>
-            <option value="<?php echo $value['nome'] ?>"><?php echo $value['nome'] ?></option>
+        foreach($listaPessoas as $item){
+           
+        ?>
+            <option value="<?php echo $item->nome ?>"><?php echo $item->nome ?></option>
         <?php
-        endforeach; ?>
+        }
+        ?>
     </select>
+    <small id="emailHelp" class="form-text text-muted"><a href="/view/pessoas/cadastrar">Clique aqui para cadastar uma nova pessoa</a></small>
     <label for="cidade">Cidade</label>
     <select class="form-control" name="cidade" id="cidade">
         <option value=""></option>
         <?php
-        foreach ($lista[0] as $key => $value) : ?>
-            <option value="<?php echo $value['cidade'] ?>"><?php echo $value['cidade'] ?></option>
+        foreach($listaCidades as $item){
+           
+        ?>
+            <option value="<?php echo $item->cidade ?>"><?php echo $item->cidade ?></option>
         <?php
-        endforeach; ?>
+        }
+        ?>
     </select>
 </div>

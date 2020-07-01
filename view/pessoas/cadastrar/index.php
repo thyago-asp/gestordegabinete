@@ -15,11 +15,44 @@ include '../../../estrutura/head.php';
 
 ?>
 <style>
-   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+    .custom-file-input:lang(pt)~.custom-file-label::after {
         content: "Selecione um arquivo" !important;
     }
 </style>
+
 <body id="page-top">
+    <div class="modal fade" id="modalTirarFoto" tabindex="-1" role="dialog" aria-labelledby="modalTirarFotoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTirarFotoLabel">Tirar foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" enctype="multipart/form-data" id="formularioEnviar" method="post">
+                    <div class="modal-body">
+                        <div class="area">
+                            <video autoplay="true" id="webCamera">
+                            </video>
+
+                            <input type="hidden" id="base_img" name="base_img" />
+                            <button type="button" onclick="takeSnapShot()">Tirar foto e salvar</button>
+
+                            <img id="imagemConvertida" />
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -81,23 +114,44 @@ include '../../../estrutura/head.php';
 
                                                 </div>
                                             </div>
-                                            <label class="form-label" for="telefoneF">Telefone</label>
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <input type="tel" class="form-control" id="telefoneF" maxlength="15" name="telefoneF" placeholder="00 99999-9999" required>
-
+                                            <label class="form-label" for="telefoneF">Telefone(s)</label>
+                                            <div class="row clearfix">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                        <input type="tel" class="form-control" id="telefoneF" maxlength="15" name="telefoneF" placeholder="1° - 00 99999-9999" required>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                        <input type="tel" class="form-control" id="telefoneF2" maxlength="15" name="telefoneF2" placeholder="2° - 00 99999-9999" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                        <input type="tel" class="form-control" id="telefoneF3" maxlength="15" name="telefoneF3" placeholder="3° - 00 99999-9999" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
+
                                             <label class="form-label" for="cpf">CPF</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="14" name="CPF" required>
+                                                    <input type="tel" class="form-control" id="cpf" placeholder="000.000.000-00" maxlength="14" name="CPF">
 
                                                 </div>
                                             </div>
                                             <label class="form-label">Sexo</label>
                                             <div class="form-group">
-                                                <input type="radio" name="sexo" value="masculino" id="male" class="with-gap">
+                                                <input type="radio" name="sexo" value="masculino" id="male" class="with-gap" required>
                                                 <label for="male">Masculino</label>
                                                 <input type="radio" name="sexo" value="feminino" id="female" class="with-gap">
                                                 <label for="female" class="m-l-20">Feminino</label>
@@ -105,7 +159,7 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="nascimento">Data de nascimento</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="date" class="form-control date" id="nascimento" name="nascimento" required placeholder="Ex: 30/07/2016">
+                                                    <input type="date" class="form-control date" id="nascimento" name="nascimento" placeholder="Ex: 30/07/2016">
                                                 </div>
                                             </div>
                                             <label class="form-label" for="cepF">Endereço</label>
@@ -183,23 +237,18 @@ include '../../../estrutura/head.php';
                                             </div>
 
 
-                                            <div class="pt-3">
-                                                <div class="input-group mb-3">
-                                                    <div class="custom-file">
-                                                        <input type="file" name="imagem" id="imagemPF" class="custom-file-input">
-                                                        <span class="custom-file-label" for="imagemPF" id="nomeArq" aria-describedby="imagemPF">Selecione um arquivo</span>
-                                                    </div>
-                                                    <!-- <div class="input-group-append">
-                        <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
-                    </div> -->
+                                            <br>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Registrar imagem da pessoa
                                                 </div>
-                                                <!-- <div class="form-group">
-
-                                                    <div class="form-line">
-                                                        <input type="file">
-                                                    </div>
-
-                                                </div> -->
+                                                <div class="card-body text-white bg-secondary text-center">
+                                                    <img id="imagemConvertidaSalva" width="200px" />
+                                                    <button type="button" class="btn btn-warning w-100" data-toggle="modal" data-target="#modalTirarFoto">
+                                                        Registrar pela câmera
+                                                    </button>
+                                                    <input type="hidden" id="caminhoDaFotoTirada" name="caminhoDaFotoTirada" />
+                                                </div>
                                             </div>
 
                                         </div>
@@ -264,7 +313,7 @@ include '../../../estrutura/head.php';
                                         <label class="form-label" for="telefoneJ">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="14" required placeholder="00 9999-9999">
+                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="15" required placeholder="00 9999-9999">
 
                                             </div>
                                         </div>
@@ -374,16 +423,29 @@ include '../../../estrutura/head.php';
     ?>
     <script src="../../../js/jquery.mask.min.js"></script>
     <script>
+        
+        $('#modalTirarFoto').on('show.bs.modal', function(e) {
+            loadCamera();
+        });
+
+        $('#modalTirarFoto').on('hidden.bs.modal', function(e) {
+            var video = document.querySelector("#webCamera");
+            //As opções abaixo são necessárias para o funcionamento correto no iOS
+            video.setAttribute('autoplay', 'false');
+        });
+
         $(document).ready(() => {
 
             $('#imagemPF').on('change', function() {
                 var nomeArq = $(this)[0].files[0].name;
-                
+
                 $('#nomeArq').text(nomeArq);
             });
             // let a = $("#imagemPF").change().val();
             // console.log(a);
             $("#telefoneF").mask('(##)# ####-####');
+            $("#telefoneF2").mask('(##)# ####-####');
+            $("#telefoneF3").mask('(##)# ####-####');
             $("#cpf").mask("###.###.###-##");
             $("#cepF").mask("#####-###")
             $("#telefoneJ").mask('(##)# ####-####');
@@ -418,7 +480,7 @@ include '../../../estrutura/head.php';
                 var cep = $(this).val().replace(/\D/g, "");
 
                 if (cep != "") {
-                    console.log(cep);
+                  //  console.log(cep);
                     $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
 
                         if (!("erro" in dados)) {

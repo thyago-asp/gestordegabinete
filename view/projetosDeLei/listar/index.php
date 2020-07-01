@@ -61,7 +61,7 @@ include '../../../estrutura/head.php';
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                        
                     </div>
                 </form>
             </div>
