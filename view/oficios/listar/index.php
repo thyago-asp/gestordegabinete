@@ -21,6 +21,11 @@ if (isset($_GET['excluir'])) {
 $pagina = "sub3";
 include '../../../estrutura/head.php';
 ?>
+<style>
+    .custom-file-input:lang(pt)~.custom-file-label::after {
+        content: "Selecione um arquivo" !important;
+    }
+</style>
 
 <body id="page-top">
     <!-- modal inicio -->
@@ -203,6 +208,8 @@ include '../../../estrutura/head.php';
             });
         });
         $('#modalEdicao').on('show.bs.modal', function(event) {
+
+
             var button = $(event.relatedTarget) // Button that triggered the modal
 
 
@@ -269,6 +276,18 @@ include '../../../estrutura/head.php';
                         </select>
                     </div>
                 </div>
+
+                <label>Arquivos</label>
+                <div class="input-group mb-3">
+                    <div class="custom-file" lang="pt">
+                        <input type="file"name="arquivos[]" multiple id="arquivosE" class="custom-file-input">
+                        
+                        <label class="custom-file-label" for="arquivosE"  id="nomeArqe" aria-describedby="inputGroupFileAddon02"></label>
+
+                    </div>
+                   
+                </div>
+                <label  id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
                 <input type="hidden" id="tipo" name="tipo">
                 <input type="hidden" id="idtofi" name="idtofi">
             `)
@@ -285,9 +304,26 @@ include '../../../estrutura/head.php';
             modal.find('#descricao').val(descricao);
             modal.find('#tipo').val(tipo);
             modal.find('#idtofi').val(idtofi);
-       
-            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
 
+            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
+            $('#arquivosE').on('change', function() {
+              
+                var nomeArqe = $(this)[0].files[0].name;
+               
+                var i = 0;
+                var a = [];
+                var nomes = "";
+                while (i < $(this)[0].files.length) {
+
+                    a[i] = $(this)[0].files[i].name;
+                        nomes += (i+1) + " - " + a[i];
+                        nomes += "<br/>";
+                    i++
+                }
+                $('#listaNomes').html(nomes);
+                $('#nomeArqe').text($(this)[0].files.length + " arquivos adicionados");
+               
+            });
         });
 
         $('#modalExcluir').on('show.bs.modal', function(event) {
@@ -298,7 +334,7 @@ include '../../../estrutura/head.php';
             var numDoc = button.data('numdoc');
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            console.log(idtofi);
+
             $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
                     <input type="hidden" id="idtofi" name="idtofi">

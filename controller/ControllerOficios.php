@@ -101,6 +101,8 @@ class ControllerOficios
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtofi']);
 
+        $atualizar->__set('arquivos', $this->arquivos($_FILES));
+
         $retorno = $atualizar->atualizarModel();
 
         if ($retorno == 1) {

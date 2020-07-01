@@ -161,9 +161,27 @@ class ModelOficios
             $stmt->bindValue(':status', $this->__get('status'));
             $stmt->bindValue(':idt', $this->__get('idt'));
 
-            return $stmt->execute();
+            $retorno = $stmt->execute();
+           
+            if ($retorno > 0) {
+                $ultimoId = $this->__get('idt');
+                
+                for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
+                    $query = "INSERT INTO t_arquivos_oficios(arquivo_caminho, nome_arquivo, t_oficios_idt_oficios) 
+                VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
+
+                    $stmt = $con->prepare($query);
+                   
+                    $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':ultimoid', $ultimoId);
+
+                    $stmt->execute();
+                }
+            }
+            return 1;
         } catch (PDOException $e) {
-            print_r($e->getCode());
+            print_r($e->getMessage());
         }
     }
 
