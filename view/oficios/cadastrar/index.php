@@ -9,11 +9,11 @@ $pagina = "sub3";
 include '../../../estrutura/head.php';
 ?>
 <style>
-    
-   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+    .custom-file-input:lang(pt)~.custom-file-label::after {
         content: "Selecione um arquivo" !important;
     }
 </style>
+
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -65,13 +65,21 @@ include '../../../estrutura/head.php';
 
         var i = 0;
         var a = [];
+        var nomes = "";
         while (i < $(this)[0].files.length) {
+
             a[i] = $(this)[0].files[i].name;
+            nomes += (i + 1) + " - " + a[i];
+            nomes += "<br/>";
             i++
-
         }
-
-        $('#nomeArq').text(a);
+        $('#listaNomes').html(nomes);
+    
+        if ($(this)[0].files.length > 1) {
+            $('#nomeArq').text($(this)[0].files.length + " arquivos adicionados");
+        } else {
+            $('#nomeArq').text($(this)[0].files.length + " arquivo adicionado");
+        }
     });
 </script>
 

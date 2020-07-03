@@ -147,7 +147,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                         <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
                     </div> -->
                 </div>
-
+                <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>

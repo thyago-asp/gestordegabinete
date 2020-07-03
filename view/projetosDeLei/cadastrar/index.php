@@ -22,10 +22,10 @@ include '../../../estrutura/head.php';
                 <?php include '../../../estrutura/barratopo.php'; ?>
                 <!-- Begin Page Content -->
 
-             
-                   <?php include '../../../estrutura/projetosDeLei.php'; ?>
 
-             
+                <?php include '../../../estrutura/projetosDeLei.php'; ?>
+
+
             </div>
 
 
@@ -54,19 +54,27 @@ include '../../../estrutura/head.php';
 
 </body>
 <script>
-     $('#arquivos').on('change', function() {
-                var nomeArq = $(this)[0].files[0].name;
-               
-                var i = 0;
-                var a = [];
-                while (i < $(this)[0].files.length) {
-                    a[i] = $(this)[0].files[i].name;
-                    i++
-                
-                }
-                
-                $('#nomeArq').text(a);
-            });
+    $('#arquivos').on('change', function() {
+        var nomeArq = $(this)[0].files[0].name;
 
+        var i = 0;
+        var a = [];
+        var nomes = "";
+        while (i < $(this)[0].files.length) {
+
+            a[i] = $(this)[0].files[i].name;
+            nomes += (i + 1) + " - " + a[i];
+            nomes += "<br/>";
+            i++
+        }
+        $('#listaNomes').html(nomes);
+    
+        if ($(this)[0].files.length > 1) {
+            $('#nomeArq').text($(this)[0].files.length + " arquivos adicionados");
+        } else {
+            $('#nomeArq').text($(this)[0].files.length + " arquivo adicionado");
+        }
+    });
 </script>
+
 </html>
