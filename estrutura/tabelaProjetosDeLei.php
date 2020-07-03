@@ -37,10 +37,9 @@ foreach ($lista_projetodelei as $projetodelei) :
         case "emendaConstitucional":
             $tipo = "Emenda constitucional";
             break;
+    }
 
-        }
 
-       
 ?>
 
     <tr>
@@ -50,16 +49,20 @@ foreach ($lista_projetodelei as $projetodelei) :
         <td><?php echo $tipo ?></td>
         <td><?php echo $projetodelei['data_cad_doc'] ?></td>
         <td><?php echo $projetodelei['titulo'] ?></td>
-        <td><?php echo $status?></td>
+        <td><?php echo $status ?></td>
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos" data-idtpro="<?php echo $projetodelei['idt_projetosdelei'] ?>">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                <i class="fa fa-file-alt" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idtpro="<?php echo $projetodelei['idt_projetosdelei'] ?>" data-numDoc="<?php echo $projetodelei['numDoc'] ?>" data-solicitante="<?php echo $projetodelei['solicitante'] ?>" data-instituicao="<?php echo $projetodelei['instituicao'] ?>" data-nomeContato="<?php echo $projetodelei['nome_de_contato'] ?>" data-dataDoc="<?php echo $projetodelei['data_cad_doc'] ?>" data-tipo="<?php echo $projetodelei['tipo'] ?>" data-titulo="<?php echo $projetodelei['titulo'] ?>" data-descricao="<?php echo $projetodelei['descricao'] ?>" data-status="<?php echo $projetodelei['status'] ?>"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idtpro="<?php echo $projetodelei['idt_projetosdelei'] ?>" data-numDoc="<?php echo $projetodelei['numDoc'] ?>" data-cidade="<?php echo $projetodelei['t_emendas_orcamentarias_idt_emendas_orcamentarias'] ?>" data-solicitante="<?php echo $projetodelei['solicitante'] ?>" data-instituicao="<?php echo $projetodelei['instituicao'] ?>" data-nomeContato="<?php echo $projetodelei['nome_de_contato'] ?>" data-dataDoc="<?php echo $projetodelei['data_cad_doc'] ?>" data-tipo="<?php echo $projetodelei['tipo'] ?>" data-titulo="<?php echo $projetodelei['titulo'] ?>" data-descricao="<?php echo $projetodelei['descricao'] ?>" data-status="<?php echo $projetodelei['status'] ?>">
+                <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                </button>
                 <!-- Botão excluir -->
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $projetodelei['numDoc'] ?>" data-idtpro="<?php echo $projetodelei['idt_projetosdelei'] ?>" data-tipo="<?php echo $projetodelei['tipo'] ?>">Excluir</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $projetodelei['numDoc'] ?>" data-idtpro="<?php echo $projetodelei['idt_projetosdelei'] ?>" data-tipo="<?php echo $projetodelei['tipo'] ?>">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
             </div>
         </td>
     </tr>

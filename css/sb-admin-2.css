@@ -127,6 +127,9 @@ rea{
 	background-color: #068c84;
 	text-align: center;
 }
+#dataTable td{
+    font-size: 12px;
+}
 
 .area .caminho-imagem a{
 	color: white;

@@ -57,11 +57,11 @@ foreach ($lista as $requerimento) {
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <!-- Botão editar -->
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos" data-idtreq="<?php echo $requerimento['idt_requerimentos'] ?>">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                <i class="fa fa-file-alt" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idtReq="<?php echo $requerimento['idt_requerimentos'] ?>" data-numDoc="<?php echo $requerimento['numDoc'] ?>" data-solicitante="<?php echo $requerimento['solicitante'] ?>" data-instituicao="<?php echo $requerimento['instituicao'] ?>" data-nomeContato="<?php echo $requerimento['nome_de_contato'] ?>" data-dataDoc="<?php echo $requerimento['data_cad_doc'] ?>" data-tipo="<?php echo $requerimento['tipo'] ?>" data-titulo="<?php echo $requerimento['titulo'] ?>" data-descricao="<?php echo $requerimento['descricao'] ?>" data-status="<?php echo $requerimento['status'] ?>"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idtReq="<?php echo $requerimento['idt_requerimentos'] ?>" data-numDoc="<?php echo $requerimento['numDoc'] ?>" data-solicitante="<?php echo $requerimento['solicitante'] ?>" data-instituicao="<?php echo $requerimento['instituicao'] ?>" data-cidade="<?php echo $requerimento['t_emendas_orcamentarias_idt_emendas_orcamentarias'] ?>" data-nomeContato="<?php echo $requerimento['nome_de_contato'] ?>" data-dataDoc="<?php echo $requerimento['data_cad_doc'] ?>" data-tipo="<?php echo $requerimento['tipo'] ?>" data-titulo="<?php echo $requerimento['titulo'] ?>" data-descricao="<?php echo $requerimento['descricao'] ?>" data-status="<?php echo $requerimento['status'] ?>"> <i class="fa fa-pencil-alt" aria-hidden="true"></i></button>
                 <!-- Botão excluir -->
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $requerimento['numDoc'] ?>" data-idtreq="<?php echo $requerimento['idt_requerimentos'] ?>" data-tipo="<?php echo $requerimento['tipo'] ?>">Excluir</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $requerimento['numDoc'] ?>" data-idtreq="<?php echo $requerimento['idt_requerimentos'] ?>" data-tipo="<?php echo $requerimento['tipo'] ?>"> <i class="fa fa-trash" aria-hidden="true"></i></button>
 
             </div>
         </td>

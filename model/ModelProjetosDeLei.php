@@ -11,6 +11,7 @@ class ModelProjetosDeLei
     private $titulo;
     private $tipo;
     private $data;
+    private $cidade;
     private $descricao;
     private $status;
     private $localArquivos;
@@ -60,9 +61,9 @@ class ModelProjetosDeLei
         try {
             $con = Conexao::abrirConexao();
             $query = "INSERT INTO t_projetosdelei(numDoc, solicitante, instituicao, 
-                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
+                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
-                    :data_cad_doc, :tipo, :titulo, :descricao, :status)";
+                    :data_cad_doc, :tipo, :titulo, :descricao, :t_emendas_orcamentarias_idt_emendas_orcamentarias,:status)";
 
             $stmt = $con->prepare($query);
 
@@ -72,6 +73,7 @@ class ModelProjetosDeLei
             $stmt->bindValue(':data_cad_doc', $this->__get('data'));
             $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
             $stmt->bindValue(':tipo', $this->__get('tipo'));
+            $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $this->__get('cidade'));
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
@@ -104,7 +106,9 @@ class ModelProjetosDeLei
     {
         $con = Conexao::abrirConexao();
 
-        $query = "select * from t_projetosdelei";
+        $query = "SELECT pro.*, emenda.cidade, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_projetosdelei as pro
+        left join t_emendas_orcamentarias as emenda
+        on emenda.idt_emendas_orcamentarias = pro.t_emendas_orcamentarias_idt_emendas_orcamentarias";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -146,7 +150,7 @@ class ModelProjetosDeLei
             $query = "UPDATE t_projetosdelei 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
-                      descricao = :descricao, status = :status  
+                      descricao = :descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias = :cidade, status = :status  
                   WHERE idt_projetosdelei = :idt";
 
             $stmt = $con->prepare($query);
@@ -156,13 +160,31 @@ class ModelProjetosDeLei
             $stmt->bindValue(':instituicao', $this->__get('instituicao'));
             $stmt->bindValue(':data_cad_doc', $this->__get('data'));
             $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-        
+            $stmt->bindValue(':cidade', $this->__get('cidade'));        
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
             $stmt->bindValue(':idt', $this->__get('idt'));
+            
+            $retorno = $stmt->execute();
+           
+            if ($retorno > 0) {
+                $ultimoId = $this->__get('idt');
+                
+                for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
+                    $query = "INSERT INTO t_arquivos_projetodelei(arquivo_caminho, nome_arquivo, t_projetosdelei_idt_projetosdelei) 
+                VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
 
-            return $stmt->execute();
+                    $stmt = $con->prepare($query);
+                   
+                    $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':ultimoid', $ultimoId);
+
+                    $stmt->execute();
+                }
+            }
+            return 1;
         } catch (PDOException $e) {
             print_r($e->getMessage());
         }

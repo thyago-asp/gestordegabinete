@@ -71,6 +71,7 @@ class ControllerOficios
         $salvar->__set('solicitante', $_POST['solicitante']);
         $salvar->__set('instituicao', $_POST['instituicao']);
         $salvar->__set('nomeContato', $_POST['nomeContato']);
+        $salvar->__set('cidade', $_POST['cidade']);
         $salvar->__set('titulo', $_POST['titulo']);
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
@@ -97,6 +98,7 @@ class ControllerOficios
         $atualizar->__set('titulo', $_POST['titulo']);
         $atualizar->__set('data', $_POST['dataDocumento']);
         $atualizar->__set('descricao', $_POST['descricao']);
+        $atualizar->__set('cidade', $_POST['cidade']);
         $atualizar->__set('status', $_POST['status']);
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtofi']);

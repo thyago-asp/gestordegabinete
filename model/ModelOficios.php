@@ -9,6 +9,7 @@ class ModelOficios
     private $instituicao;
     private $nomeContato;
     private $titulo;
+    private $cidade;
     private $tipo;
     private $data;
     private $descricao;
@@ -57,12 +58,13 @@ class ModelOficios
 
     function salvarModel()
     {
+
         try {
             $con = Conexao::abrirConexao();
             $query = "INSERT INTO t_oficios(numDoc, solicitante, instituicao, 
-                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
+                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
-                    :data_cad_doc, :tipo, :titulo, :descricao, :status)";
+                    :data_cad_doc, :tipo, :titulo, :descricao, :t_emendas_orcamentarias_idt_emendas_orcamentarias, :status)";
 
             $stmt = $con->prepare($query);
 
@@ -71,13 +73,14 @@ class ModelOficios
             $stmt->bindValue(':instituicao', $this->__get('instituicao'));
             $stmt->bindValue(':data_cad_doc', $this->__get('data'));
             $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
+            $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $this->__get('cidade'));
             $stmt->bindValue(':tipo', $this->__get('tipo'));
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
 
             $retorno = $stmt->execute();
-
+           
             if ($retorno > 0) {
                 $ultimoId = $con->lastInsertId();
 
@@ -96,14 +99,16 @@ class ModelOficios
             }
             return 1;
         } catch (PDOException $e) {
-            print_r($e->getCode());
+            print_r($e->getMessage());
         }
     }
     function listarOficios()
     {
         $con = Conexao::abrirConexao();
 
-        $query = "select * from t_oficios";
+        $query = "SELECT ofi.*, emenda.cidade, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_oficios as ofi
+        left join t_emendas_orcamentarias as emenda
+        on emenda.idt_emendas_orcamentarias = ofi.t_emendas_orcamentarias_idt_emendas_orcamentarias";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -145,7 +150,7 @@ class ModelOficios
             $query = "UPDATE t_oficios 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
-                      descricao = :descricao, status = :status  
+                      descricao = :descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias = :cidade, status = :status  
                   WHERE tipo = :tipo AND idt_oficios = :idt";
 
             $stmt = $con->prepare($query);
@@ -157,6 +162,7 @@ class ModelOficios
             $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
             $stmt->bindValue(':tipo', $this->__get('tipo'));
             $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':cidade', $this->__get('cidade'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
             $stmt->bindValue(':idt', $this->__get('idt'));

@@ -72,6 +72,7 @@ class ControllerRequerimentos
         $salvar->__set('instituicao', $_POST['instituicao']);
         $salvar->__set('nomeContato', $_POST['nomeContato']);
         $salvar->__set('titulo', $_POST['titulo']);
+        $salvar->__set('cidade', $_POST['cidade']);
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
@@ -101,9 +102,12 @@ class ControllerRequerimentos
         $atualizar->__set('data', $_POST['dataDocumento']);
         $atualizar->__set('descricao', $_POST['descricao']);
         $atualizar->__set('status', $_POST['status']);
+        $atualizar->__set('cidade', $_POST['cidade']);
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtReq']);
 
+        $atualizar->__set('arquivos', $this->arquivos($_FILES));
+        
         $retorno = $atualizar->atualizarModel();
 
         if ($retorno == 1) {
@@ -112,9 +116,9 @@ class ControllerRequerimentos
     }
     function listarRequerimentos()
     {
-        $lista = (new ModelRequerimentos())->listarModel();
+        $lista = (new ModelRequerimentos())->listarRequerimentos();
 
-        if (isset($lista[0]['nomearquivo'])) {
+        /*if (isset($lista[0]['nomearquivo'])) {
 
             foreach ($lista as $key => $value) {
 
@@ -130,11 +134,9 @@ class ControllerRequerimentos
                 ];
 
                 array_push($lista[$key], $a);
-            }
+            }*/
             return $lista;
-        } else {
-            return $lista;
-        }
+        
     }
     function deletarRequerimentos()
     {

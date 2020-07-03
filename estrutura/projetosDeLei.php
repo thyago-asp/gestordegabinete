@@ -4,6 +4,8 @@
     }
 </style>
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerEmendasOrcamentarias.php');
+
 $status = '';
 if (isset($_GET['cadastrar'])) {
     $status = $_GET['cadastrar'];
@@ -33,7 +35,7 @@ if ($url == "emendaconstitucional") {
     $input = "emendaConstitucional";
 }
 
-
+$listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
 ?>
 <?php if ($status == "sucesso") : ?>
     <div class="alert alert-success text-center" role="alert">
@@ -85,6 +87,24 @@ if ($url == "emendaconstitucional") {
                     <div class="form-line">
                         <input type="text" class="form-control" name="nomeContato" id="nomeContato" required >
 
+                    </div>
+                </div>
+                <label class="form-label">Cidade</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        
+                        <select class="form-control" id="cidade" name="cidade">
+                            <option value=""> Selecione uma cidade </option>
+                            <?php
+
+                            foreach ($listaCidades as $cidade) {
+                            ?>
+                                <option value="<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></option>
+                            <?php
+                            }
+                            ?>
+
+                        </select>
                     </div>
                 </div>
                 <label class="form-label">Assunto</label>

@@ -47,12 +47,12 @@ foreach ($lista as $oficio) :
         <td class="text-center">
             <div class="btn-group text-center" role="group" aria-label="Button group">
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modalArquivos" data-idtofi="<?php echo $oficio['idt_oficios'] ?>">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                <i class="fa fa-file-alt" aria-hidden="true"></i>
                 </button>
                 <!-- Botão editar -->
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdicao" data-idtofi="<?php echo $oficio['idt_oficios'] ?>" data-numDoc="<?php echo $oficio['numDoc'] ?>" data-solicitante="<?php echo $oficio['solicitante'] ?>" data-instituicao="<?php echo $oficio['instituicao'] ?>" data-nomeContato="<?php echo $oficio['nome_de_contato'] ?>" data-dataDoc="<?php echo $oficio['data_cad_doc'] ?>" data-tipo="<?php echo $oficio['tipo'] ?>" data-titulo="<?php echo $oficio['titulo'] ?>" data-descricao="<?php echo $oficio['descricao'] ?>" data-status="<?php echo $oficio['status'] ?>"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                <button class="btn btn-primary" type="button" data-cidade="<?php echo $oficio['t_emendas_orcamentarias_idt_emendas_orcamentarias'] ?>"  data-toggle="modal" data-target="#modalEdicao" data-idtofi="<?php echo $oficio['idt_oficios'] ?>" data-numDoc="<?php echo $oficio['numDoc'] ?>" data-solicitante="<?php echo $oficio['solicitante'] ?>" data-instituicao="<?php echo $oficio['instituicao'] ?>" data-nomeContato="<?php echo $oficio['nome_de_contato'] ?>" data-dataDoc="<?php echo $oficio['data_cad_doc'] ?>" data-tipo="<?php echo $oficio['tipo'] ?>" data-titulo="<?php echo $oficio['titulo'] ?>" data-descricao="<?php echo $oficio['descricao'] ?>" data-status="<?php echo $oficio['status'] ?>"> <i class="fa fa-pencil-alt" aria-hidden="true"></i></button>
                 <!-- Botão excluir -->
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $oficio['numDoc'] ?>" data-idtofi="<?php echo $oficio['idt_oficios'] ?>" data-tipo="<?php echo $oficio['tipo'] ?>">Excluir</button>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalExcluir" data-numDoc="<?php echo $oficio['numDoc'] ?>" data-idtofi="<?php echo $oficio['idt_oficios'] ?>" data-tipo="<?php echo $oficio['tipo'] ?>"> <i class="fa fa-trash" aria-hidden="true"></i></button>
 
             </div>
         </td>

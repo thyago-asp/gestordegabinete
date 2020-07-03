@@ -9,6 +9,7 @@ class ModelRequerimentos
     private $instituicao;
     private $nomeContato;
     private $titulo;
+    private $cidade;
     private $tipo;
     private $data;
     private $descricao;
@@ -60,9 +61,9 @@ class ModelRequerimentos
         try {
             $con = Conexao::abrirConexao();
             $query = "INSERT INTO t_requerimentos(numDoc, solicitante, instituicao, 
-                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, status) 
+                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias, status) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
-                    :data_cad_doc, :tipo, :titulo, :descricao, :status)";
+                    :data_cad_doc, :tipo, :titulo, :descricao, :t_emendas_orcamentarias_idt_emendas_orcamentarias, :status)";
 
             $stmt = $con->prepare($query);
 
@@ -74,6 +75,7 @@ class ModelRequerimentos
             $stmt->bindValue(':tipo', $requerimento->__get('tipo'));
             $stmt->bindValue(':titulo', $requerimento->__get('titulo'));
             $stmt->bindValue(':descricao', $requerimento->__get('descricao'));
+            $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $requerimento->__get('cidade'));
             $stmt->bindValue(':status', $requerimento->__get('status'));
 
 
@@ -97,14 +99,16 @@ class ModelRequerimentos
             }
             return 1;
         } catch (PDOException $e) {
-            print_r($e->getCode());
+            print_r($e->getMessage());
         }
     }
 
     function listarRequerimentos(){
         $con = Conexao::abrirConexao();
 
-        $query = "SELECT *, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_requerimentos";
+        $query = "SELECT req.*, emenda.cidade, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_requerimentos as req
+        left join t_emendas_orcamentarias as emenda
+        on emenda.idt_emendas_orcamentarias = req.t_emendas_orcamentarias_idt_emendas_orcamentarias";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -145,7 +149,7 @@ class ModelRequerimentos
             $query = "UPDATE t_requerimentos 
                   SET numDoc = :numDoc, solicitante = :solicitante, instituicao = :instituicao,
                       data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
-                      descricao = :descricao, status = :status  
+                      descricao = :descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias = :cidade, status = :status  
                   WHERE tipo = :tipo AND idt_requerimentos = :idt";
 
             $stmt = $con->prepare($query);
@@ -158,12 +162,31 @@ class ModelRequerimentos
             $stmt->bindValue(':tipo', $this->__get('tipo'));
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->bindValue(':cidade', $this->__get('cidade'));
             $stmt->bindValue(':status', $this->__get('status'));
             $stmt->bindValue(':idt', $this->__get('idt'));
 
-            return $stmt->execute();
+            $retorno = $stmt->execute();
+           
+            if ($retorno > 0) {
+                $ultimoId = $this->__get('idt');
+                
+                for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
+                    $query = "INSERT INTO t_arquivos_requerimentos(arquivo_caminho, nome_arquivo, t_requerimentos_idt_requerimentos) 
+                VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
+
+                    $stmt = $con->prepare($query);
+                   
+                    $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':ultimoid', $ultimoId);
+
+                    $stmt->execute();
+                }
+            }
+            return 1;
         } catch (PDOException $e) {
-            print_r($e->getCode());
+            print_r($e->getMessage());
         }
     }
     function arqExcluir($idt)
