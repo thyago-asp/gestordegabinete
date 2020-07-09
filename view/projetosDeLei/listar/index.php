@@ -6,7 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerEmendasOrcamenta
 $status = "";
 
 if (isset($_GET['atualizar'])) {
-    $msg = "atualizado";
+    $msg = "atualizar";
     $status = $_GET['atualizar'];
 }
 if (isset($_GET['excluir'])) {
@@ -36,7 +36,7 @@ include '../../../estrutura/head.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEdicaoLabel">Arquivos projetos de lei</h5>
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar projetos de lei</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,13 +93,13 @@ include '../../../estrutura/head.php';
                         </div>
                         <label>Status</label>
                         <div class="form-group">
-                          
-                                <select name="status" id="status" class="form-control show-tick ">
-                                    <option value="aberto">Aberto</option>
-                                    <option value="aguardando informações">Aguardando informações</option>
-                                    <option value="concluido">Concluido</option>
-                                </select>
-                         
+
+                            <select name="status" id="status" class="form-control show-tick ">
+                                <option value="aberto">Aberto</option>
+                                <option value="aguardando informações">Aguardando informações</option>
+                                <option value="concluido">Concluido</option>
+                            </select>
+
                         </div>
 
                         <label>Arquivos</label>
@@ -114,6 +114,26 @@ include '../../../estrutura/head.php';
                             </div>
                         </div>
                         <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
+                        <label class="form-label">Adicionar comentario</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <table class="table" id="tabela_comentarios">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Comentario</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                            </tbody>
+                        </table>
 
                         <input type="hidden" id="tipo" name="tipo">
                         <input type="hidden" id="idtpro" name="idtpro">
@@ -121,6 +141,27 @@ include '../../../estrutura/head.php';
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalExcluirComentario" tabindex="-1" role="dialog" aria-labelledby="modalExcluirComentarioLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirComentarioLabel">Excluir comentario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerProjetosDeLei.php?acao=deletarComentario" id="formularioExcluir" method="post">
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
                 </form>
             </div>
@@ -185,8 +226,8 @@ include '../../../estrutura/head.php';
                 <!-- mensagem de sucesso e erro -->
                 <?php if ($status == "sucesso") : ?>
                     <div class="alert alert-success text-center" role="alert">
-
-                        <strong>Projeto de lei <?php echo $msg ?> com sucesso.</strong>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Sucesso ao <?php echo $msg ?>.
                     </div>
                 <?php elseif ($status == "erro") : ?>
                     <div class="alert alert-danger text-center" role="alert">
@@ -328,6 +369,22 @@ include '../../../estrutura/head.php';
             modal.find('#idtpro').val(idtpro);
             modal.find('#status').val(status);
 
+            $.post('/view/projetosDeLei/call_comentarios_projetosdelei.php', {
+                idprojetosdelei: idtpro
+            }, function(data) {
+                var linha = "";
+               
+                $.each(JSON.parse(data), function(index, value) {
+                    linha += "<tr>";
+                    linha += "<td><label>"+value["data"]+"</label></td>";
+                    linha += "<td><label>"+value["comentario"]+"</label></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtpro=" + value["idt_comentarios_projetosdelei"] + "> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";                    
+                });
+              
+                $('#tabela_comentarios tbody').html(linha);
+            });
+
             $('#arquivosE').on('change', function() {
 
                 var nomeArqe = $(this)[0].files[0].name;
@@ -374,6 +431,26 @@ include '../../../estrutura/head.php';
 
 
         });
+
+        $('#modalExcluirComentario').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+
+                var idtpro = button.data('idtpro')
+
+                $('#formularioExcluir .modal-body').html(`
+                    <label id="texto_excluir"></label>
+                    <input type="hidden" id="idtpro" name="idtpro">
+                  
+                `);
+
+
+                var modal = $(this)
+                modal.find('.modal-title').text('Confirmar exclusão')
+                modal.find('#texto_excluir').text("Tem certeza que deseja excluir o comentario do sistema ?")
+
+                modal.find('#idtpro').val(idtpro);
+
+            });
     </script>
 </body>
 

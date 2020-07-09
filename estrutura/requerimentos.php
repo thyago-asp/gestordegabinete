@@ -85,7 +85,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <label class="form-label">Cidade</label>
                 <div class="form-group">
                     <div class="form-line">
-                        
+
                         <select class="form-control" id="cidade" name="cidade">
                             <option value=""> Selecione uma cidade </option>
                             <?php
@@ -137,6 +137,12 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                         <label class="custom-file-label" for="arquivos" id="nomeArq" aria-describedby="inputGroupFileAddon02">Selecione um arquivo</label>
                     </div>
 
+                </div>
+                <label class="form-label">Adicionar um comentario</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                    </div>
                 </div>
                 <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">

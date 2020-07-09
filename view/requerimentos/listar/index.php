@@ -28,6 +28,7 @@ include '../../../estrutura/head.php';
         content: "Selecione um arquivo" !important;
     }
 </style>
+
 <body id="page-top">
     <!-- modal inicio -->
 
@@ -92,25 +93,47 @@ include '../../../estrutura/head.php';
                         </div>
                         <label>Status</label>
                         <div class="form-group">
-                           
-                                <select name="status" id="status" class="form-control show-tick ">
-                                    <option value="aberto">Aberto</option>
-                                    <option value="aguardando">Aguardando informações</option>
-                                    <option value="concluido">Concluido</option>
-                                </select>
+
+                            <select name="status" id="status" class="form-control show-tick ">
+                                <option value="aberto">Aberto</option>
+                                <option value="aguardando">Aguardando informações</option>
+                                <option value="concluido">Concluido</option>
+                            </select>
                         </div>
                         <label>Arquivos</label>
                         <div class="row clearfix">
-                        <div class="col-sm-12">
-                            <div class="custom-file" lang="pt">
-                                <input type="file" name="arquivos[]" multiple id="arquivosE" class="custom-file-input">
+                            <div class="col-sm-12">
+                                <div class="custom-file" lang="pt">
+                                    <input type="file" name="arquivos[]" multiple id="arquivosE" class="custom-file-input">
 
-                                <label class="custom-file-label" for="arquivosE" id="nomeArqe" aria-describedby="inputGroupFileAddon02"></label>
+                                    <label class="custom-file-label" for="arquivosE" id="nomeArqe" aria-describedby="inputGroupFileAddon02"></label>
 
+                                </div>
                             </div>
                         </div>
-                        </div>
                         <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
+                        <label class="form-label">Adicionar comentario</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <table class="table" id="tabela_comentarios">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Comentario</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                            </tbody>
+                        </table>
+
                         <input type="hidden" id="tipo" name="tipo">
                         <input type="hidden" id="idtReq" name="idtReq">
                     </div>
@@ -122,6 +145,29 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalExcluirComentario" tabindex="-1" role="dialog" aria-labelledby="modalExcluirComentarioLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirComentarioLabel">Excluir comentario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerRequerimentos.php?acao=deletarComentario" id="formularioExcluir" method="post">
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalArquivos" tabindex="-1" role="dialog" aria-labelledby="modalArquivosLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -319,6 +365,40 @@ include '../../../estrutura/head.php';
 
             modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
 
+            $.post('/view/requerimentos/call_comentarios_requerimentos.php', {
+                idrequerimento: idtReq
+            }, function(data) {
+                var linha = "";
+
+                $.each(JSON.parse(data), function(index, value) {
+                    linha += "<tr>";
+                    linha += "<td><label>" + value["data"] + "</label></td>";
+                    linha += "<td><label>" + value["comentario"] + "</label></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtreq=" + value["idt_comentarios_requerimentos"] + "> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";
+                });
+
+                $('#tabela_comentarios tbody').html(linha);
+            });
+            $('#modalExcluirComentario').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+
+                var idtreq = button.data('idtreq')
+
+                $('#formularioExcluir .modal-body').html(`
+                    <label id="texto_excluir"></label>
+                    <input type="hidden" id="idtreq" name="idtreq">
+                  
+                `);
+
+
+                var modal = $(this)
+                modal.find('.modal-title').text('Confirmar exclusão')
+                modal.find('#texto_excluir').text("Tem certeza que deseja excluir o comentario do sistema ?")
+
+                modal.find('#idtreq').val(idtreq);
+
+            });
             $('#arquivosE').on('change', function() {
 
                 var nomeArqe = $(this)[0].files[0].name;

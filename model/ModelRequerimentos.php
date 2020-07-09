@@ -80,10 +80,10 @@ class ModelRequerimentos
 
 
             $retorno = $stmt->execute();
-           
+
             if ($retorno > 0) {
                 $ultimoId = $con->lastInsertId();
-               
+
                 for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
                     $query = "INSERT INTO t_arquivos_requerimentos(arquivo_caminho, nome_arquivo, t_requerimentos_idt_requerimentos) 
                     VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
@@ -91,11 +91,24 @@ class ModelRequerimentos
                     $stmt = $con->prepare($query);
 
                     $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
-                    $stmt->bindValue(':nome_arquivo',$this->__get('arquivos')['nome'][$j]);
+                    $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
                     $stmt->bindValue(':ultimoid', $ultimoId);
 
                     $stmt->execute();
                 }
+
+
+                $query = "INSERT INTO t_comentarios_requerimentos(comentario, data, t_requerimentos_idt_requerimentos) 
+                VALUES (:comentario, :data, :ultimoid)";
+
+                $stmt = $con->prepare($query);
+
+                $stmt->bindValue(':comentario', $this->__get('comentario'));
+                date_default_timezone_set('America/Sao_Paulo');
+                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                $stmt->bindValue(':ultimoid', $ultimoId);
+
+                $stmt->execute();
             }
             return 1;
         } catch (PDOException $e) {
@@ -103,7 +116,8 @@ class ModelRequerimentos
         }
     }
 
-    function listarRequerimentos(){
+    function listarRequerimentos()
+    {
         $con = Conexao::abrirConexao();
 
         $query = "SELECT req.*, emenda.cidade, DATE_FORMAT(data_cad_doc, '%d/%m/%Y') AS data_cad_doc FROM t_requerimentos as req
@@ -167,22 +181,34 @@ class ModelRequerimentos
             $stmt->bindValue(':idt', $this->__get('idt'));
 
             $retorno = $stmt->execute();
-           
+
             if ($retorno > 0) {
                 $ultimoId = $this->__get('idt');
-                
+
                 for ($j = 0; $j < count($this->__get('arquivos')['local']); $j++) {
                     $query = "INSERT INTO t_arquivos_requerimentos(arquivo_caminho, nome_arquivo, t_requerimentos_idt_requerimentos) 
                 VALUES (:arquivo_caminho, :nome_arquivo, :ultimoid)";
 
                     $stmt = $con->prepare($query);
-                   
+
                     $stmt->bindValue(':arquivo_caminho', $this->__get('arquivos')['local'][$j]);
                     $stmt->bindValue(':nome_arquivo', $this->__get('arquivos')['nome'][$j]);
                     $stmt->bindValue(':ultimoid', $ultimoId);
 
                     $stmt->execute();
                 }
+
+                $query = "INSERT INTO t_comentarios_requerimentos(comentario, data, t_requerimentos_idt_requerimentos) 
+                VALUES (:comentario, :data, :ultimoid)";
+
+                $stmt = $con->prepare($query);
+
+                $stmt->bindValue(':comentario', $this->__get('comentario'));
+                date_default_timezone_set('America/Sao_Paulo');
+                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                $stmt->bindValue(':ultimoid', $ultimoId);
+
+                $stmt->execute();
             }
             return 1;
         } catch (PDOException $e) {
@@ -207,20 +233,38 @@ class ModelRequerimentos
     }
     function deletarModel()
     {
-        try{
-        $con = Conexao::abrirConexao();
-        $this->arqExcluir($this->__get('idt'));
+        try {
+            $con = Conexao::abrirConexao();
+            $this->arqExcluir($this->__get('idt'));
 
-        $query = "DELETE FROM t_requerimentos
+            $query = "DELETE FROM t_requerimentos
                     WHERE idt_requerimentos = :idt";
 
-        $stmt = $con->prepare($query);
+            $stmt = $con->prepare($query);
 
-        $stmt->bindValue(':idt', $this->__get('idt'));
- 
+            $stmt->bindValue(':idt', $this->__get('idt'));
 
-        return $stmt->execute();
-         } catch (PDOException $e) {
+            $result = $stmt->execute();
+            return $result;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
+    function deletarComentario()
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "DELETE FROM `t_comentarios_requerimentos` WHERE idt_comentarios_requerimentos = :idt";
+
+            $stmt = $con->prepare($query);
+
+            $stmt->bindValue(':idt', $this->__get('idt'));
+
+            $result = $stmt->execute();
+
+            return $result;
+        } catch (PDOException $e) {
             print_r($e->getMessage());
         }
     }

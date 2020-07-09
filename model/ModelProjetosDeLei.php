@@ -14,6 +14,7 @@ class ModelProjetosDeLei
     private $cidade;
     private $descricao;
     private $status;
+    private $comentario;
     private $localArquivos;
     private $nomeArquivos;
 
@@ -95,6 +96,19 @@ class ModelProjetosDeLei
 
                     $stmt->execute();
                 }
+
+                
+                $query = "INSERT INTO t_comentarios_projetosdelei(comentario, data, t_projetosdelei_idt_projetosdelei) 
+                VALUES (:comentario, :data, :ultimoid)";
+
+                $stmt = $con->prepare($query);
+
+                $stmt->bindValue(':comentario', $this->__get('comentario'));
+                date_default_timezone_set('America/Sao_Paulo');
+                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                $stmt->bindValue(':ultimoid', $ultimoId);
+
+                $stmt->execute();
             }
             return 1;
         } catch (PDOException $e) {
@@ -183,6 +197,19 @@ class ModelProjetosDeLei
 
                     $stmt->execute();
                 }
+
+                $query = "INSERT INTO t_comentarios_projetosdelei(comentario, data, t_projetosdelei_idt_projetosdelei) 
+                VALUES (:comentario, :data, :ultimoid)";
+
+                $stmt = $con->prepare($query);
+
+                $stmt->bindValue(':comentario', $this->__get('comentario'));
+                date_default_timezone_set('America/Sao_Paulo');
+                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                $stmt->bindValue(':ultimoid', $ultimoId);
+
+                $stmt->execute();
+
             }
             return 1;
         } catch (PDOException $e) {
@@ -220,6 +247,25 @@ class ModelProjetosDeLei
          
 
             return $stmt->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
+
+    function deletarComentario()
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "DELETE FROM `t_comentarios_projetosdelei` WHERE idt_comentarios_projetosdelei = :idt";
+
+            $stmt = $con->prepare($query);
+
+            $stmt->bindValue(':idt', $this->__get('idt'));
+
+            $result = $stmt->execute();
+
+            return $result;
         } catch (PDOException $e) {
             print_r($e->getMessage());
         }

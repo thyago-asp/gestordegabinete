@@ -17,6 +17,10 @@ if (isset($_GET['acao'])) {
         case 'deletar':
             (new ControllerProjetosDeLei())->deletarProjetosDeLei();
             break;
+
+        case 'deletarComentario':
+            (new ControllerProjetosDeLei())->deletarComentario();
+            break;
     }
 }
 
@@ -31,7 +35,7 @@ class ControllerProjetosDeLei
             'pdf',
             'doc',
             'docx',
-            'png', 
+            'png',
             'jpg',
             'xlsx',
             'xls'
@@ -56,8 +60,6 @@ class ControllerProjetosDeLei
                 $dirImg = $dir . $novoNome;
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
-
-                
             }
             $cont++;
         }
@@ -79,6 +81,7 @@ class ControllerProjetosDeLei
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
+        $salvar->__set('comentario', $_POST['comentario']);
 
         $salvar->__set('arquivos', $this->arquivos($_FILES));
 
@@ -103,6 +106,7 @@ class ControllerProjetosDeLei
         $atualizar->__set('cidade', $_POST['cidade']);
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtpro']);
+        $atualizar->__set('comentario', $_POST['comentario']);
         $atualizar->__set('arquivos', $this->arquivos($_FILES));
         $retorno = $atualizar->atualizarModel();
 
@@ -126,6 +130,19 @@ class ControllerProjetosDeLei
 
         $retorno = $deletar->deletarModel($deletar);
         if ($retorno == 1) {
+            header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
+    }
+
+    function deletarComentario()
+    {
+
+        $deletar = new ModelProjetosDeLei();
+
+        $deletar->__set('idt', $_POST['idtpro']);
+
+        $retorno = $deletar->deletarComentario($deletar);
+        if ($retorno) {
             header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
         }
     }

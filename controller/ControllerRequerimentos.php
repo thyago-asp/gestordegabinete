@@ -18,6 +18,9 @@ if (isset($_GET['acao'])) {
         case 'deletar':
             (new ControllerRequerimentos())->deletarRequerimentos();
             break;
+        case 'deletarComentario':
+            (new ControllerRequerimentos())->deletarComentario();
+            break;
     }
 }
 
@@ -31,7 +34,7 @@ class ControllerRequerimentos
             'pdf',
             'doc',
             'docx',
-            'png', 
+            'png',
             'jpg',
             'xlsx',
             'xls'
@@ -46,17 +49,16 @@ class ControllerRequerimentos
 
         $cont = 0;
         while ($cont < $qtdArquivos) {
-           //echo $arq['arquivos']['name'][$cont];
+            //echo $arq['arquivos']['name'][$cont];
             $arqExtencao = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_EXTENSION);
             $arqNome[] = pathinfo(strtolower($arq['arquivos']['name'][$cont]), PATHINFO_FILENAME);
-           if (in_array($arqExtencao, $extencoes)) {
+            if (in_array($arqExtencao, $extencoes)) {
 
                 $temp = $arq['arquivos']['tmp_name'][$cont];
                 $novoNome = uniqid() . ".$arqExtencao";
                 $dirImg = $dir . $novoNome;
                 move_uploaded_file($temp, $dirImg);
                 $arqLocal[] = $dirImg;
-
             }
             $cont++;
         }
@@ -77,12 +79,13 @@ class ControllerRequerimentos
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
         $salvar->__set('tipo', $_POST['tipo']);
+        $salvar->__set('comentario', $_POST['comentario']);
         $arq = $this->arquivos($_FILES);
 
-        if($arq == false) {
+        if ($arq == false) {
             header("location: /view/requerimentos/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
-    
+
         $salvar->__set('arquivos', $arq);
 
         $retorno = $salvar->salvarModel($salvar);
@@ -105,9 +108,9 @@ class ControllerRequerimentos
         $atualizar->__set('cidade', $_POST['cidade']);
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtReq']);
-
+        $atualizar->__set('comentario', $_POST['comentario']);
         $atualizar->__set('arquivos', $this->arquivos($_FILES));
-        
+
         $retorno = $atualizar->atualizarModel();
 
         if ($retorno == 1) {
@@ -118,25 +121,8 @@ class ControllerRequerimentos
     {
         $lista = (new ModelRequerimentos())->listarRequerimentos();
 
-        /*if (isset($lista[0]['nomearquivo'])) {
 
-            foreach ($lista as $key => $value) {
-
-                $nome = explode(',', $value['nomearquivo']);
-                $idarquivo = explode(',', $value['idarquivo']);
-                $fkprojetosdelei = explode(',', $value['fkrequerimentos']);
-                $link = explode(',', $value['caminho_arquivo']);
-                $a['arquivos'] = [
-                    "nome" => $nome,
-                    "idArquivo" => $idarquivo,
-                    "fkArquivo" => $fkprojetosdelei,
-                    "linkArq" => $link
-                ];
-
-                array_push($lista[$key], $a);
-            }*/
-            return $lista;
-        
+        return $lista;
     }
     function deletarRequerimentos()
     {
@@ -146,7 +132,22 @@ class ControllerRequerimentos
         $deletar->__set('idt', $_POST['idtReq']);
         $deletar->__set('tipo', $_POST['tipo']);
 
-        $deletar->deletarModel($deletar);
+        $retorno = $deletar->deletarModel($deletar);
+
+        if ($retorno) {
+            header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
+    }
+
+    function deletarComentario()
+    {
+
+        $deletar = new ModelRequerimentos();
+
+        $deletar->__set('idt', $_POST['idtreq']);
+
+        $deletar->deletarComentario($deletar);
+
         header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
     }
 }
