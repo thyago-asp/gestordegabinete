@@ -102,7 +102,7 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="nome">Nome completo</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" id="nome" class="form-control" name="nome" required>
+                                                    <input type="text" id="nome" class="form-control" name="nome" >
 
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@ include '../../../estrutura/head.php';
                                             <label class="form-label" for="email">Email</label>
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" >
 
                                                 </div>
                                             </div>
@@ -119,7 +119,7 @@ include '../../../estrutura/head.php';
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                        <input type="tel" class="form-control" id="telefoneF" maxlength="15" name="telefoneF" placeholder="1° - 00 99999-9999" required>
+                                                        <input type="tel" class="form-control" id="telefoneF" maxlength="15" name="telefoneF" placeholder="1° - 00 99999-9999" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,7 +127,7 @@ include '../../../estrutura/head.php';
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                        <input type="tel" class="form-control" id="telefoneF2" maxlength="15" name="telefoneF2" placeholder="2° - 00 99999-9999" required>
+                                                        <input type="tel" class="form-control" id="telefoneF2" maxlength="15" name="telefoneF2" placeholder="2° - 00 99999-9999" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,7 +135,7 @@ include '../../../estrutura/head.php';
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                        <input type="tel" class="form-control" id="telefoneF3" maxlength="15" name="telefoneF3" placeholder="3° - 00 99999-9999" required>
+                                                        <input type="tel" class="form-control" id="telefoneF3" maxlength="15" name="telefoneF3" placeholder="3° - 00 99999-9999" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,7 +151,7 @@ include '../../../estrutura/head.php';
                                             </div>
                                             <label class="form-label">Sexo</label>
                                             <div class="form-group">
-                                                <input type="radio" name="sexo" value="masculino" id="male" class="with-gap" required>
+                                                <input type="radio" name="sexo" value="masculino" id="male" class="with-gap" >
                                                 <label for="male">Masculino</label>
                                                 <input type="radio" name="sexo" value="feminino" id="female" class="with-gap">
                                                 <label for="female" class="m-l-20">Feminino</label>
@@ -226,6 +226,7 @@ include '../../../estrutura/head.php';
                                                         <option value="">-- Selecione uma categoria --</option>
                                                         <option value="dep.estadual">Deputados estadual</option>
                                                         <option value="dep.federal">Deputado federal</option>
+                                                        <option value="sec.estado">Secretário do estado</option>
                                                         <option value="familia">Família</option>
                                                         <option value="lideranca">Liderança</option>
                                                         <option value="geral">Geral</option>
@@ -306,14 +307,14 @@ include '../../../estrutura/head.php';
                                         <label class="form-label" for="emailJ">E-mail</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="email" class="form-control" name="emailJ" id="emailJ" required placeholder="exemplo@email.com">
+                                                <input type="email" class="form-control" name="emailJ" id="emailJ"  placeholder="exemplo@email.com">
 
                                             </div>
                                         </div>
                                         <label class="form-label" for="telefoneJ">Telefone</label>
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="15" required placeholder="00 9999-9999">
+                                                <input type="text" class="form-control" name="telefoneJ" id="telefoneJ" maxlength="15"  placeholder="00 9999-9999">
 
                                             </div>
                                         </div>

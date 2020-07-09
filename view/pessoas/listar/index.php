@@ -200,8 +200,6 @@ include '../../../estrutura/head.php';
     ?>
     <script src="../../../js/jquery.mask.min.js"></script>
     <script>
-
-
         $('#modalEdicao').on('show.bs.modal', function(event) {
 
 
@@ -305,6 +303,7 @@ include '../../../estrutura/head.php';
                                     <option value="">-- Selecione uma categoria --</option>
                                     <option value="dep.estadual">Deputados estadual</option>
                                     <option value="dep.federal">Deputado federal</option>
+                                    <option value="sec.estado">Secretário do estado</option>
                                     <option value="familia">Família</option>
                                     <option value="lideranca">Liderança</option>
                                     <option value="geral">Geral</option>
@@ -428,7 +427,7 @@ include '../../../estrutura/head.php';
 
             $("#n_cpf_editado").mask("###.###.###-##");
             $("#n_cep_editado").mask("#####-###")
-       
+
             $("#n_cep_editado").blur(function() {
                 var cep = $(this).val().replace(/\D/g, "");
 
@@ -454,7 +453,7 @@ include '../../../estrutura/head.php';
                 }
 
             });
-            
+
             var idSexo = "";
             // pessoa fisica / pessoa
 
@@ -478,7 +477,7 @@ include '../../../estrutura/head.php';
             modal.find('#caminhoDaFotoTiradaEditada').val(img);
             console.log(nascimento);
             var data = (nascimento);
-             var dataFormatada = data.split("/").reverse().join('-')
+            var dataFormatada = data.split("/").reverse().join('-')
 
             // pessoa Juridica
             modal.find('#n_cnpj_editado').val(cnpj);
