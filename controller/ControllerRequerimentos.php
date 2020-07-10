@@ -78,9 +78,9 @@ class ControllerRequerimentos
         $salvar->__set('nomeContato', $_POST['nomeContato']);
         $salvar->__set('titulo', $_POST['titulo']);
         if($_POST['cidade'] == ""){
-            $salvar->__set('cidade', $_POST['cidade']);
-        }else{
             $salvar->__set('cidade', null);
+        }else{
+            $salvar->__set('cidade', $_POST['cidade']);
         }
         
         $salvar->__set('data', $_POST['dataPedido']);
@@ -113,7 +113,11 @@ class ControllerRequerimentos
         $atualizar->__set('data', $_POST['dataDocumento']);
         $atualizar->__set('descricao', $_POST['descricao']);
         $atualizar->__set('status', $_POST['status']);
-        $atualizar->__set('cidade', $_POST['cidade']);
+        if($_POST['cidade'] == ""){
+            $atualizar->__set('cidade', null);
+        }else{
+            $atualizar->__set('cidade', $_POST['cidade']);
+        }
         $atualizar->__set('tipo', $_POST['tipo']);
         $atualizar->__set('idt', $_POST['idtReq']);
         $atualizar->__set('comentario', $_POST['comentario']);

@@ -79,7 +79,7 @@ class ModelOficios
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
-          
+
             $retorno = $stmt->execute();
 
             if ($retorno > 0) {
@@ -97,18 +97,19 @@ class ModelOficios
 
                     $stmt->execute();
                 }
-
-                $query = "INSERT INTO t_comentarios_oficios(comentario, data, t_oficios_idt_oficios) 
+                if ($this->__get('comentario') != "") {
+                    $query = "INSERT INTO t_comentarios_oficios(comentario, data, t_oficios_idt_oficios) 
                 VALUES (:comentario, :data, :ultimoid)";
 
-                $stmt = $con->prepare($query);
+                    $stmt = $con->prepare($query);
 
-                $stmt->bindValue(':comentario', $this->__get('comentario'));
-                date_default_timezone_set('America/Sao_Paulo');
-                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
-                $stmt->bindValue(':ultimoid', $ultimoId);
+                    $stmt->bindValue(':comentario', $this->__get('comentario'));
+                    date_default_timezone_set('America/Sao_Paulo');
+                    $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                    $stmt->bindValue(':ultimoid', $ultimoId);
 
-                $stmt->execute();
+                    $stmt->execute();
+                }
             }
             return 1;
         } catch (PDOException $e) {
@@ -197,17 +198,20 @@ class ModelOficios
 
                     $stmt->execute();
                 }
-                $query = "INSERT INTO t_comentarios_oficios(comentario, data, t_oficios_idt_oficios) 
+
+                if ($this->__get('comentario') != "") {
+                    $query = "INSERT INTO t_comentarios_oficios(comentario, data, t_oficios_idt_oficios) 
                 VALUES (:comentario, :data, :ultimoid)";
 
-                $stmt = $con->prepare($query);
+                    $stmt = $con->prepare($query);
 
-                $stmt->bindValue(':comentario', $this->__get('comentario'));
-                date_default_timezone_set('America/Sao_Paulo');
-                $stmt->bindValue(':data', date('Y-m-d H:i:s'));
-                $stmt->bindValue(':ultimoid', $ultimoId);
+                    $stmt->bindValue(':comentario', $this->__get('comentario'));
+                    date_default_timezone_set('America/Sao_Paulo');
+                    $stmt->bindValue(':data', date('Y-m-d H:i:s'));
+                    $stmt->bindValue(':ultimoid', $ultimoId);
 
-                $stmt->execute();
+                    $stmt->execute();
+                }
             }
             return 1;
         } catch (PDOException $e) {

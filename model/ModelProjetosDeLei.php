@@ -97,7 +97,7 @@ class ModelProjetosDeLei
                     $stmt->execute();
                 }
 
-                
+                if ($this->__get('comentario') != "") {
                 $query = "INSERT INTO t_comentarios_projetosdelei(comentario, data, t_projetosdelei_idt_projetosdelei) 
                 VALUES (:comentario, :data, :ultimoid)";
 
@@ -109,6 +109,7 @@ class ModelProjetosDeLei
                 $stmt->bindValue(':ultimoid', $ultimoId);
 
                 $stmt->execute();
+                }
             }
             return 1;
         } catch (PDOException $e) {
@@ -197,7 +198,7 @@ class ModelProjetosDeLei
 
                     $stmt->execute();
                 }
-
+                if ($this->__get('comentario') != "") {
                 $query = "INSERT INTO t_comentarios_projetosdelei(comentario, data, t_projetosdelei_idt_projetosdelei) 
                 VALUES (:comentario, :data, :ultimoid)";
 
@@ -209,6 +210,7 @@ class ModelProjetosDeLei
                 $stmt->bindValue(':ultimoid', $ultimoId);
 
                 $stmt->execute();
+                }
 
             }
             return 1;
