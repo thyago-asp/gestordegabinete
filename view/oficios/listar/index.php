@@ -12,7 +12,6 @@ if (isset($_GET['atualizar'])) {
 if (isset($_GET['excluir'])) {
     $msg = "excluir";
     $status = $_GET['excluir'];
-    
 }
 
 
@@ -121,12 +120,12 @@ include '../../../estrutura/head.php';
                                 <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
                             </div>
                         </div>
-                        <table class="table" id="tabela_comentarios">
+                        <table class="table table-bordered table-hover" id="tabela_comentarios">
                             <thead>
                                 <tr>
                                     <th>Data</th>
                                     <th>Comentario</th>
-                                    <th>Excluir</th>      
+                                    <th>Excluir</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,6 +145,61 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalArquivos" tabindex="-1" role="dialog" aria-labelledby="modalArquivosLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos oficios</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" id="tabela_arquivos">
+                        <thead>
+                            <tr>
+
+                                <th>Arquivo</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalExcluirAnexo" tabindex="-1" role="dialog" aria-labelledby="modalExcluirAnexoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirAnexoLabel">Excluir anexo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerOficios.php?acao=deletarAnexo" id="formularioExcluirAnexo" method="post">
+                    <div class="modal-body">
+                        <label id="texto_excluir"></label>
+                        <input type="hidden" id="idtofi" name="idtofi">
+                        <input type="hidden" id="caminho_arquivo" name="caminho_arquivo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="modalExcluirLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -157,7 +211,7 @@ include '../../../estrutura/head.php';
                 </div>
                 <form action="../../../controller/ControllerOficios.php?acao=deletar" id="formularioExcluir" method="post">
                     <div class="modal-body">
-
+                    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -188,25 +242,7 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalArquivos" tabindex="-1" role="dialog" aria-labelledby="modalArquivosLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalArquivosLabel">Arquivos oficios</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="link_arquivos"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    
     <!-- Modal fim -->
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -298,22 +334,25 @@ include '../../../estrutura/head.php';
         $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var idtofi = button.data('idtofi')
+
             $.post('/view/oficios/call_oficios.php', {
                 idoficios: idtofi
             }, function(data) {
-                img = "";
-                var cont = 1;
-                var link = "";
+                var linha = "";
 
                 $.each(JSON.parse(data), function(index, value) {
-                    // alert(value.arquivo_caminho);
-                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\" target='_blank'>" + value.nome_arquivo + "</a><br/>";
-                    cont++;
+
+                    linha += "<tr>";
+                    linha += "<td><a href='./../../" + value["arquivo_caminho"] + "' target='_blank'>" + value["nome_arquivo"] + "</a></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirAnexo\" data-nome=" + value["nome_arquivo"] + " data-caminho_arquivo=" + value["arquivo_caminho"] +" data-idtofi=" + value["idarquivos"] + "><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";
+
                 });
-                if (link != "") {
-                    $("#modalArquivos #link_arquivos").html(link);
+
+                if (linha != "") {
+                    $("#tabela_arquivos tbody").html(linha);
                 } else {
-                    $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
+                    $("#tabela_arquivos tbody").html("Nenhum documento cadastrado.");
                 }
             });
         });
@@ -334,7 +373,7 @@ include '../../../estrutura/head.php';
             var titulo = button.data('titulo')
             var cidade = button.data('cidade')
             var descricao = button.data('descricao')
-           
+
             var status = button.data('status');
 
             var atividade = button.data('atividade');
@@ -344,7 +383,7 @@ include '../../../estrutura/head.php';
             var modal = $(this)
 
             // seta os valores do modal
-          
+
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
             modal.find('#instituicao').val(instituicao);
@@ -358,7 +397,7 @@ include '../../../estrutura/head.php';
             modal.find('#idtofi').val(idtofi);
 
             modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
-           
+
             $.post('/view/oficios/call_comentarios_oficios.php', {
                 idoficios: idtofi
             }, function(data) {
@@ -366,12 +405,12 @@ include '../../../estrutura/head.php';
 
                 $.each(JSON.parse(data), function(index, value) {
                     linha += "<tr>";
-                    linha += "<td><label>"+value["data"]+"</label></td>";
-                    linha += "<td><label>"+value["comentario"]+"</label></td>";
-                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtofi="+value["idt_comentarios_oficios"]+"> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
-                    linha += "</tr>";                    
+                    linha += "<td><label>" + formatDate(value["data"]) + "</label></td>";
+                    linha += "<td><label>" + value["comentario"] + "</label></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtofi=" + value["idt_comentarios_oficios"] + "> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";
                 });
-                
+
                 $('#tabela_comentarios tbody').html(linha);
             });
 
@@ -394,6 +433,23 @@ include '../../../estrutura/head.php';
 
             });
         });
+
+        $('#modalExcluirAnexo').on('show.bs.modal', function(event) {
+           
+           var button = $(event.relatedTarget)
+
+           var caminho = button.data('caminho_arquivo')
+           var nome = button.data('nome')
+           var idtofi = button.data('idtofi')
+
+           var modal = $(this)
+           modal.find('.modal-title').text('Confirmar exclusão')
+           modal.find('#texto_excluir').text("Tem certeza que deseja excluir o arquivo do sistema ?")
+           modal.find('#caminho_arquivo').val(caminho);
+           modal.find('#idtofi').val(idtofi);
+
+       });
+
 
         $('#modalExcluir').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -436,9 +492,9 @@ include '../../../estrutura/head.php';
             var modal = $(this)
             modal.find('.modal-title').text('Confirmar exclusão')
             modal.find('#texto_excluir').text("Tem certeza que deseja excluir o comentario do sistema ?")
-         
+
             modal.find('#idtofi').val(idtofi);
-         
+
         });
     </script>
 </body>

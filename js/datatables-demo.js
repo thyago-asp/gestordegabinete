@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#dataTable').DataTable({
         "language": {
 
-            "sEmptyTable": "Não foi encontrado nenhum registo",
+            "sEmptyTable": "Não foi encontrado nenhum registro",
             "sLoadingRecords": "A carregar...",
             "sProcessing": "A processar...",
             "sLengthMenu": "Mostrar _MENU_ registos",

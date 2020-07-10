@@ -1,5 +1,5 @@
 <style>
-   .custom-file-input:lang(pt) ~ .custom-file-label::after {
+    .custom-file-input:lang(pt)~.custom-file-label::after {
         content: "Selecione um arquivo" !important;
     }
 </style>
@@ -60,7 +60,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="tel" id="documento" name="documento" class="form-control" >
+                            <input type="tel" id="documento" name="documento" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="tel" id="solicitante" name="solicitante" class="form-control" >
+                            <input type="tel" id="solicitante" name="solicitante" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" id="instituicao" name="instituicao" class="form-control" >
+                            <input type="text" id="instituicao" name="instituicao" class="form-control">
                         </div>
                     </div>
 
@@ -85,14 +85,14 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <label class="form-label">Nome do contato</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <input type="text" class="form-control" name="nomeContato" id="nomeContato" required >
+                        <input type="text" class="form-control" name="nomeContato" id="nomeContato" required>
 
                     </div>
                 </div>
                 <label class="form-label">Cidade</label>
                 <div class="form-group">
                     <div class="form-line">
-                        
+
                         <select class="form-control" id="cidade" name="cidade">
                             <option value=""> Selecione uma cidade </option>
                             <?php
@@ -110,7 +110,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <label class="form-label">Assunto</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <input type="text" class="form-control" name="titulo" id="titulo" required >
+                        <input type="text" class="form-control" name="titulo" id="titulo" required>
 
                     </div>
                 </div>
@@ -124,7 +124,7 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <label>Descrição</label>
                 <div class="form-group">
                     <div class="form-line">
-                        <textarea class="form-control" rows="3" id="descricao" name="descricao" ></textarea>
+                        <textarea class="form-control" rows="3" id="descricao" name="descricao"></textarea>
 
                     </div>
                 </div>
@@ -139,21 +139,22 @@ $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
                 <label>Arquivos</label>
                 <div class="input-group mb-3">
                     <div class="custom-file" lang="pt">
-                        <input type="file"name="arquivos[]" placeholder="teste" multiple id="arquivos" class="custom-file-input">
-                        
-                        <label  class="custom-file-label" for="arquivos"  id="nomeArq"aria-describedby="inputGroupFileAddon02">Selecione um arquivo</label>
+                        <input type="file" name="arquivos[]" placeholder="teste" multiple id="arquivos" class="custom-file-input">
+
+                        <label class="custom-file-label" for="arquivos" id="nomeArq" aria-describedby="inputGroupFileAddon02">Selecione um arquivo</label>
                     </div>
                     <!-- <div class="input-group-append">
                         <span class="input-group-text" id="inputGroupFileAddon02">Selecionar</span>
                     </div> -->
                 </div>
+                <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label><br>
                 <label class="form-label">Adicionar um comentario</label>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
-                            </div>
-                        </div>
-                <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                    </div>
+                </div>
+               
                 <input type="hidden" name="tipo" value="<?php echo $input ?>">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success w-100">Cadastrar</button>

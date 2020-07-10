@@ -119,7 +119,7 @@ include '../../../estrutura/head.php';
                             </div>
                         </div>
 
-                        <table class="table" id="tabela_comentarios">
+                        <table class="table table-bordered table-hover" id="tabela_comentarios">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -179,12 +179,49 @@ include '../../../estrutura/head.php';
                 </div>
 
                 <div class="modal-body">
-                    <div id="link_arquivos"></div>
+
+                    <table class="table table-bordered" id="tabela_arquivos">
+                        <thead>
+                            <tr>
+
+                                <th>Arquivo</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalExcluirAnexo" tabindex="-1" role="dialog" aria-labelledby="modalExcluirAnexoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirAnexoLabel">Excluir anexo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerRequerimentos.php?acao=deletarAnexo" id="formularioExcluirAnexo" method="post">
+                    <div class="modal-body">
+                        <label id="texto_excluir"></label>
+                        <input type="hidden" id="idtreq" name="idtreq">
+                        <input type="hidden" id="caminho_arquivo" name="caminho_arquivo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -300,25 +337,26 @@ include '../../../estrutura/head.php';
     <script>
         $('#modalArquivos').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-
             var idtreq = button.data('idtreq')
 
             $.post('/view/requerimentos/call_requerimentos.php', {
                 idrequerimento: idtreq
             }, function(data) {
-                img = "";
-                var cont = 1;
-                var link = "";
+                var linha = "";
 
                 $.each(JSON.parse(data), function(index, value) {
-                    // alert(value.arquivo_caminho);
-                    link += cont + " - <a href='./../../" + value.arquivo_caminho + "' target='_blank'>" + value.nome_arquivo + "</a><br/>";
-                    cont++;
+
+                    linha += "<tr>";
+                    linha += "<td><a href='./../../" + value["arquivo_caminho"] + "' target='_blank'>" + value["nome_arquivo"] + "</a></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirAnexo\" data-nome=" + value["nome_arquivo"] + " data-caminho_arquivo=" + value["arquivo_caminho"] +" data-idtreq=" + value["idarquivos"] + "><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";
+
                 });
-                if (link != "") {
-                    $("#modalArquivos #link_arquivos").html(link);
+
+                if (linha != "") {
+                    $("#tabela_arquivos tbody").html(linha);
                 } else {
-                    $("#modalArquivos #link_arquivos").html("Nenhum documento cadastrado.");
+                    $("#tabela_arquivos tbody").html("Nenhum documento cadastrado.");
                 }
 
             });
@@ -372,7 +410,7 @@ include '../../../estrutura/head.php';
 
                 $.each(JSON.parse(data), function(index, value) {
                     linha += "<tr>";
-                    linha += "<td><label>" + value["data"] + "</label></td>";
+                    linha += "<td><label>" + formatDate(value["data"]) + "</label></td>";
                     linha += "<td><label>" + value["comentario"] + "</label></td>";
                     linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtreq=" + value["idt_comentarios_requerimentos"] + "> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
                     linha += "</tr>";
@@ -380,6 +418,7 @@ include '../../../estrutura/head.php';
 
                 $('#tabela_comentarios tbody').html(linha);
             });
+
             $('#modalExcluirComentario').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget)
 
@@ -399,6 +438,9 @@ include '../../../estrutura/head.php';
                 modal.find('#idtreq').val(idtreq);
 
             });
+
+
+
             $('#arquivosE').on('change', function() {
 
                 var nomeArqe = $(this)[0].files[0].name;
@@ -417,6 +459,22 @@ include '../../../estrutura/head.php';
                 $('#nomeArqe').text($(this)[0].files.length + " arquivos adicionados");
 
             });
+
+        });
+
+        $('#modalExcluirAnexo').on('show.bs.modal', function(event) {
+           
+            var button = $(event.relatedTarget)
+
+            var caminho = button.data('caminho_arquivo')
+            var nome = button.data('nome')
+            var idtreq = button.data('idtreq')
+
+            var modal = $(this)
+            modal.find('.modal-title').text('Confirmar exclusão')
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o arquivo do sistema ?")
+            modal.find('#caminho_arquivo').val(caminho);
+            modal.find('#idtreq').val(idtreq);
 
         });
 

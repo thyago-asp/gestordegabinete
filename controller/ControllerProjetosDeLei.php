@@ -21,6 +21,9 @@ if (isset($_GET['acao'])) {
         case 'deletarComentario':
             (new ControllerProjetosDeLei())->deletarComentario();
             break;
+        case 'deletarAnexo':
+            (new ControllerProjetosDeLei())->deletarAnexo();
+            break;
     }
 }
 
@@ -144,6 +147,23 @@ class ControllerProjetosDeLei
         $retorno = $deletar->deletarComentario($deletar);
         if ($retorno) {
             header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
+    }
+
+    
+    function deletarAnexo()
+    {
+
+        $deletar = new ModelProjetosDeLei();
+
+        $deletar->__set('idt', $_POST['idtpro']);
+        $caminho_arquivo = $_POST['caminho_arquivo'];
+        $retorno = $deletar->deletarAnexo($deletar);
+
+        if ($retorno) {
+            if (unlink($caminho_arquivo)) {
+                header("location: /view/projetosDeLei/listar?pg={$_POST['tipo']}&excluir=sucesso");
+            }
         }
     }
 }

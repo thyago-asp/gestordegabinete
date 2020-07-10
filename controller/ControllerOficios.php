@@ -21,6 +21,9 @@ if (isset($_GET['acao'])) {
         case 'deletarComentario':
             (new ControllerOficios())->deletarComentarioOficios();
             break;
+        case 'deletarAnexo':
+            (new ControllerOficios())->deletarAnexo();
+            break;
     }
 }
 
@@ -147,6 +150,24 @@ class ControllerOficios
 
         if ($retorno == 1) {
             header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
+        }
+    }
+
+    
+    function deletarAnexo()
+    {
+
+        $deletar = new ModelOficios();
+
+        $deletar->__set('idt', $_POST['idtofi']);
+        $caminho_arquivo = $_POST['caminho_arquivo'];
+
+        $retorno = $deletar->deletarAnexo($deletar);
+
+        if ($retorno) {
+            if (unlink($caminho_arquivo)) {
+                header("location: /view/oficios/listar?pg={$_POST['tipo']}&excluir=sucesso");
+            }
         }
     }
 }

@@ -21,6 +21,9 @@ if (isset($_GET['acao'])) {
         case 'deletarComentario':
             (new ControllerRequerimentos())->deletarComentario();
             break;
+        case 'deletarAnexo':
+            (new ControllerRequerimentos())->deletarAnexo();
+            break;
     }
 }
 
@@ -74,7 +77,12 @@ class ControllerRequerimentos
         $salvar->__set('instituicao', $_POST['instituicao']);
         $salvar->__set('nomeContato', $_POST['nomeContato']);
         $salvar->__set('titulo', $_POST['titulo']);
-        $salvar->__set('cidade', $_POST['cidade']);
+        if($_POST['cidade'] == ""){
+            $salvar->__set('cidade', $_POST['cidade']);
+        }else{
+            $salvar->__set('cidade', null);
+        }
+        
         $salvar->__set('data', $_POST['dataPedido']);
         $salvar->__set('descricao', $_POST['descricao']);
         $salvar->__set('status', $_POST['status']);
@@ -149,5 +157,22 @@ class ControllerRequerimentos
         $deletar->deletarComentario($deletar);
 
         header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+    }
+
+    function deletarAnexo()
+    {
+
+        $deletar = new ModelRequerimentos();
+
+        $deletar->__set('idt', $_POST['idtreq']);
+        $caminho_arquivo = $_POST['caminho_arquivo'];
+        $retorno = $deletar->deletarAnexo($deletar);
+
+        if ($retorno) {
+            if (unlink($caminho_arquivo)) {
+
+                header("location: /view/requerimentos/listar?pg={$_POST['tipo']}&excluir=sucesso");
+            }
+        }
     }
 }

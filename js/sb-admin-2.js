@@ -129,3 +129,9 @@ function takeSnapShot() {
 
   sendSnapShot(dataURI); //Gerar Imagem e Salvar Caminho no Banco
 }
+
+function formatDate(data) {
+            
+  return (data.substr(0, 10).split('-').reverse().join('/') + " - " + data.substr(11, 19));
+
+}

@@ -120,7 +120,7 @@ include '../../../estrutura/head.php';
                                 <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
                             </div>
                         </div>
-                        <table class="table" id="tabela_comentarios">
+                        <table class="table table-bordered table-hover" id="tabela_comentarios">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -176,13 +176,46 @@ include '../../../estrutura/head.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../../../controller/ControllerProjetosDeLei.php?acao=atualizar" enctype="multipart/form-data" id="formularioArquivos" method="post">
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <table class="table table-bordered" id="tabela_arquivos">
+                        <thead>
+                            <tr>
 
+                                <th>Arquivo</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalExcluirAnexo" tabindex="-1" role="dialog" aria-labelledby="modalExcluirAnexoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirAnexoLabel">Excluir anexo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerProjetosDeLei.php?acao=deletarAnexo" id="formularioExcluirAnexo" method="post">
+                    <div class="modal-body">
+                        <label id="texto_excluir"></label>
+                        <input type="hidden" id="idtpro" name="idtpro">
+                        <input type="hidden" id="caminho_arquivo" name="caminho_arquivo">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
                 </form>
             </div>
@@ -312,21 +345,39 @@ include '../../../estrutura/head.php';
             $.post('/view/projetosDeLei/call_projetosdelei.php', {
                 idprojetosdelei: idtProj
             }, function(data) {
-                img = "";
-                var cont = 1;
-                var link = "";
+                var linha = "";
 
                 $.each(JSON.parse(data), function(index, value) {
-                    // alert(value.arquivo_caminho);
-                    link += cont + " - <a href=\"../../" + value.arquivo_caminho + "\" target='_blank'>" + value.nome_arquivo + "</a><br/>";
-                    cont++;
+
+                    linha += "<tr>";
+                    linha += "<td><a href='./../../" + value["arquivo_caminho"] + "' target='_blank'>" + value["nome_arquivo"] + "</a></td>";
+                    linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirAnexo\" data-nome=" + value["nome_arquivo"] + " data-caminho_arquivo=" + value["arquivo_caminho"] + " data-idtpro=" + value["idarquivos"] + "><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
+                    linha += "</tr>";
+
                 });
-                if (link != "") {
-                    $("#formularioArquivos .modal-body").html(link);
+
+                if (linha != "") {
+                    $("#tabela_arquivos tbody").html(linha);
                 } else {
-                    $("#formularioArquivos .modal-body").html("Nenhum documento cadastrado.");
+                    $("#tabela_arquivos tbody").html("Nenhum documento cadastrado.");
                 }
             });
+
+        });
+
+        $('#modalExcluirAnexo').on('show.bs.modal', function(event) {
+
+            var button = $(event.relatedTarget)
+
+            var caminho = button.data('caminho_arquivo')
+            var nome = button.data('nome')
+            var idtpro = button.data('idtpro')
+
+            var modal = $(this)
+            modal.find('.modal-title').text('Confirmar exclusão')
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o arquivo do sistema ?")
+            modal.find('#caminho_arquivo').val(caminho);
+            modal.find('#idtpro').val(idtpro);
 
         });
 
@@ -373,15 +424,16 @@ include '../../../estrutura/head.php';
                 idprojetosdelei: idtpro
             }, function(data) {
                 var linha = "";
-               
+
                 $.each(JSON.parse(data), function(index, value) {
+
                     linha += "<tr>";
-                    linha += "<td><label>"+value["data"]+"</label></td>";
-                    linha += "<td><label>"+value["comentario"]+"</label></td>";
+                    linha += "<td><label>" + formatDate(value["data"]) + "</label></td>";
+                    linha += "<td><label>" + value["comentario"] + "</label></td>";
                     linha += "<td><button class=\"btn btn-danger\" type=\"button\" data-toggle=\"modal\" data-target=\"#modalExcluirComentario\" data-idtpro=" + value["idt_comentarios_projetosdelei"] + "> <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td>";
-                    linha += "</tr>";                    
+                    linha += "</tr>";
                 });
-              
+
                 $('#tabela_comentarios tbody').html(linha);
             });
 
@@ -433,24 +485,24 @@ include '../../../estrutura/head.php';
         });
 
         $('#modalExcluirComentario').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
+            var button = $(event.relatedTarget)
 
-                var idtpro = button.data('idtpro')
+            var idtpro = button.data('idtpro')
 
-                $('#formularioExcluir .modal-body').html(`
+            $('#formularioExcluir .modal-body').html(`
                     <label id="texto_excluir"></label>
                     <input type="hidden" id="idtpro" name="idtpro">
-                  
+
                 `);
 
 
-                var modal = $(this)
-                modal.find('.modal-title').text('Confirmar exclusão')
-                modal.find('#texto_excluir').text("Tem certeza que deseja excluir o comentario do sistema ?")
+            var modal = $(this)
+            modal.find('.modal-title').text('Confirmar exclusão')
+            modal.find('#texto_excluir').text("Tem certeza que deseja excluir o comentario do sistema ?")
 
-                modal.find('#idtpro').val(idtpro);
+            modal.find('#idtpro').val(idtpro);
 
-            });
+        });
     </script>
 </body>
 

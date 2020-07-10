@@ -270,4 +270,23 @@ class ModelProjetosDeLei
             print_r($e->getMessage());
         }
     }
+
+    function deletarAnexo()
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "DELETE FROM `t_arquivos_projetodelei` WHERE idarquivos = :idt";
+
+            $stmt = $con->prepare($query);
+
+            $stmt->bindValue(':idt', $this->__get('idt'));
+
+            $result = $stmt->execute();
+
+            return $result;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
 }
