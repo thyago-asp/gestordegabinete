@@ -159,48 +159,83 @@ include '../../../estrutura/head.php';
                         <div class="row" style="margin-top: 20px;">
                             <div class="col-lg-6">
                                 <?php
-
-
+                                //Busco quais são os anos que estão nos registros das emendas dessa cidade
+                                $listaAnosRegistrados = array();
                                 for ($i = 0; $i < count($listaRecursos); $i++) {
+                                    $listaAnosRegistrados[] = explode("-", $listaRecursos[$i]->data_cad_doc)[0];
+                                }
+                                
+                                // Tiramos os anos repedidos e com a função array_values regulariazamos os 
+                                // index da lista
+                                $anos = array_values(array_unique($listaAnosRegistrados));
+                                arsort($anos);
+                                // Para cada ano  teremos um accordion
+                                for ($i = 0; $i < count($anos); $i++) {
+                                    $ano = array_values($anos)[$i];
 
-                                    $listaItensRecursos = $emendas->buscarItensRecursos($listaRecursos[$i]->idt_recursos);
+                                    // Verifico quanto que deu o total de recursos para o ano.
                                     $valorTotal = 0;
-                                    for ($k = 0; $k < count($listaItensRecursos); $k++) {
-                                        $valorTotal = $valorTotal + $listaItensRecursos[$k]->valor;
+                                    for ($k = 0; $k < count($listaRecursos); $k++) {
+                                        if ($ano == explode("-", $listaRecursos[$k]->data_cad_doc)[0]) {
+                                            $valorTotal = $valorTotal + $listaRecursos[$k]->valor;
+                                        }
                                     }
-                                    // print_r($listaItensRecursos);
+
                                 ?> <div id="accordion">
                                         <div class="card card_accordion">
                                             <div class="card-header cartao-recursos" id="headingOne">
                                                 <h5 class="mb-0">
-                                                    <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapse<?php echo $listaRecursos[$i]->ano ?>" aria-expanded="true" aria-controls="collapseOne">
-                                                        Recursos - <?php echo $listaRecursos[$i]->ano ?> - <?php echo " R$ ", number_format($valorTotal, 2, ",", "."); ?>
+                                                    <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapse<?php echo $ano ?>" aria-expanded="true" aria-controls="collapseOne">
+                                                        Recursos - <?php echo $ano ?> - <?php echo " R$ ", number_format($valorTotal, 2, ",", "."); ?>
                                                     </button>
                                                 </h5>
                                             </div>
 
-                                            <div id="collapse<?php echo $listaRecursos[$i]->ano ?>" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div id="collapse<?php echo $ano ?>" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">Tipo</th>
-                                                                <th scope="col">Destino</th>
-                                                                <th scope="col">Protcolo</th>
-                                                                <th scope="col">Valor</th>
+                                                                <th class="font_titulo_cidades" scope="col">Tipo</th>
+                                                                <th class="font_titulo_cidades" scope="col">Protocolo</th>
+                                                                <th class="font_titulo_cidades" scope="col">Destino</th>
+                                                                <th class="font_titulo_cidades" scope="col">Valor</th>
+                                                                <th class="font_titulo_cidades" scope="col">Assunto</th>
+                                                                <th class="font_titulo_cidades" scope="col">Status</th>
+                                                                <th class="font_titulo_cidades" scope="col">Data</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                                                            for ($j = 0; $j < count($listaItensRecursos); $j++) {
+                                                            // Percorremos todos os recursos cadastrados, e com isso, separamos os recursos 
+                                                            // do no especifico do laço atual.
+                                                            for ($j = 0; $j < count($listaRecursos); $j++) {
+                                                                if ($ano == explode("-", $listaRecursos[$j]->data_cad_doc)[0]) {
+
+                                                                    switch ($listaRecursos[$j]->tipo_emenda) {
+                                                                        case "emenda_federal":
+                                                                            $tipo_emenda = "Emenda Federal";
+                                                                            break;
+                                                                        case "emenda_estadual":
+                                                                            $tipo_emenda = "Emenda Estadual";
+                                                                            break;
+                                                                        case "emenda_municipal":
+                                                                            $tipo_emenda = "Emenda Municipal";
+                                                                            break;
+                                                                
+                                                                    }
                                                             ?>
-                                                                <tr>
-                                                                    <td><?php echo $listaItensRecursos[$j]->tipo ?></th>
-                                                                    <td><?php echo $listaItensRecursos[$j]->destino ?></td>
-                                                                    <td><?php echo $listaItensRecursos[$j]->protocolo ?></td>
-                                                                    <td>R$ <?php echo number_format($listaItensRecursos[$j]->valor, 2, ",", "."); ?></td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td class="font_cidades"><?php echo $tipo_emenda ?></th>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->numDoc ?></td>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->beneficiario ?></td>
+                                                                        <td class="font_cidades">R$ <?php echo number_format($listaRecursos[$j]->valor, 2, ",", "."); ?></td>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->titulo ?></td>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->status?></td>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->data_cad_doc ?></td>
+                                                                    </tr>
                                                             <?php
+                                                                }
                                                             }
                                                             ?>
                                                         </tbody>
@@ -211,6 +246,8 @@ include '../../../estrutura/head.php';
                                     </div>
 
                                 <?php
+
+
                                 }
 
                                 ?>
@@ -240,12 +277,12 @@ include '../../../estrutura/head.php';
 
                                                         for ($i = 0; $i < sizeof($lista); $i++) {
                                                         ?>
-                                                        <tr>
-                                                            <td><label><?php echo date('d-m-Y', strtotime($lista[$i]["data"])) ?></label></td>
-                                                       
-                                                       
-                                                            <td><label><?php echo $lista[$i]["comentario"] ?></label></td>
-                                                      </tr>
+                                                            <tr>
+                                                                <td><label><?php echo date('d-m-Y', strtotime($lista[$i]["data"])) ?></label></td>
+
+
+                                                                <td><label><?php echo $lista[$i]["comentario"] ?></label></td>
+                                                            </tr>
                                                         <?php
                                                         }
                                                         ?>
@@ -300,14 +337,23 @@ include '../../../estrutura/head.php';
                                         </div>
 
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><label class="descricao">Presidente: </label> <?php echo " ", $estruturaPartido[0]->presidente ?></li>
+                                            <!--<li class="list-group-item"><label class="descricao">Presidente: </label> <?php echo " ", $estruturaPartido[0]->presidente ?></li>
                                             <li class="list-group-item"><label class="descricao">Vice-presidente: </label><?php echo " ", $estruturaPartido[0]->vice_presidente ?></li>
                                             <li class="list-group-item"><label class="descricao">Secretário: </label><?php echo " ", $estruturaPartido[0]->secretario ?></li>
                                             <li class="list-group-item"><label class="descricao">2° Secretário: </label><?php echo " ", $estruturaPartido[0]->segundo_secretario ?></li>
                                             <li class="list-group-item"><label class="descricao">Tesoureiro: </label><?php echo " ", $estruturaPartido[0]->tesoureiro ?></li>
                                             <li class="list-group-item"><label class="descricao">2° Tesoureiro: </label><?php echo " ", $estruturaPartido[0]->segundo_tesoureiro ?></li>
                                             <li class="list-group-item"><label class="descricao">Vogal: </label><?php echo " ", $estruturaPartido[0]->vogal ?></li>
-                                            <li class="list-group-item"><label class="descricao">Tel. do Presidente: </label><?php echo " ", $estruturaPartido[0]->contato_presidente ?></li>
+                                            <li class="list-group-item"><label class="descricao">Tel. do Presidente: </label><?php echo " ", $estruturaPartido[0]->contato_presidente ?></li>-->
+
+                                            <li class="list-group-item"><label class="descricao">Presidente: </label> </li>
+                                            <li class="list-group-item"><label class="descricao">Vice-presidente: </label></li>
+                                            <li class="list-group-item"><label class="descricao">Secretário: </label></li>
+                                            <li class="list-group-item"><label class="descricao">2° Secretário: </label></li>
+                                            <li class="list-group-item"><label class="descricao">Tesoureiro: </label></li>
+                                            <li class="list-group-item"><label class="descricao">2° Tesoureiro: </label></li>
+                                            <li class="list-group-item"><label class="descricao">Vogal: </label></li>
+                                            <li class="list-group-item"><label class="descricao">Tel. do Presidente: </label></li>
                                         </ul>
                                     </div>
                                 </div>

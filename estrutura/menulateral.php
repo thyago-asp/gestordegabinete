@@ -39,12 +39,22 @@
             </div>
         </div>
     </li>
-
     <li class="nav-item">
-        <a class="nav-link" href="/view/emendasOrcamentarias/">
-            <i class="fas fa-th-list"></i>
-            <span>Emendas orçamentarias</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmendas" aria-expanded="true" aria-controls="collapsePessoas">
+            <i class="fas fa-user-friends"></i>
+            <span>Emendas orçamentarias</span>
+        </a>
+        <div id="collapseEmendas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu emendas</h6>
+                <a class="collapse-item" href="/view/emendasOrcamentarias/">Emendas Orçamentarias</a>
+                <a class="collapse-item" href="/view/emendasOrcamentarias/cadastrar/">Cadastrar emenda</a>
+                <a class="collapse-item" href="/view/emendasOrcamentarias/listar/">Listar emendas</a>
+              
+            </div>
+        </div>
     </li>
+
 
     <li class="nav-item">
         <a class="nav-link" href="/view/agenda/">
