@@ -94,7 +94,17 @@ include '../../../estrutura/head.php';
                             <label for="recipient-name" class="col-form-label">Nome do contato:</label>
                             <input type="text" class="form-control" id="nomeContato" name="nomeContato">
                         </div>
-
+                        <label class="form-label">Valor</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input type="number" class="form-control" name="valor" id="valor">
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Assunto:</label>
                             <input type="text" class="form-control" id="titulo" name="titulo">
@@ -386,6 +396,7 @@ include '../../../estrutura/head.php';
             var tipo_emenda = button.data('tipo_emenda')
             var numDoc = button.data('numdoc')
             var solicitante = button.data('solicitante')
+            var valor = button.data('valor')
             var beneficiario = button.data('beneficiario')
             var cidade = button.data('cidade')
             var nomeContato = button.data('nomecontato')
@@ -407,6 +418,7 @@ include '../../../estrutura/head.php';
             modal.find('#tipo_emenda').val(tipo_emenda);
             modal.find('#documento').val(numDoc);
             modal.find('#solicitante').val(solicitante);
+            modal.find('#valor').val(valor);
             modal.find('#beneficiario').val(beneficiario);
             modal.find('#cidade').val(cidade);
             modal.find(`#nomeContato`).val(nomeContato);
@@ -520,6 +532,7 @@ include '../../../estrutura/head.php';
             modal.find('#idteme').val(idteme);
 
         });
+        
     </script>
 </body>
 

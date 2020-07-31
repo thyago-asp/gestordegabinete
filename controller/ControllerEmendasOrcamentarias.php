@@ -119,6 +119,7 @@ class ControllerEmendasOrcamentarias
         $atualizar->__set('solicitante', $_POST['solicitante']);
         $atualizar->__set('beneficiario', $_POST['beneficiario']);
         $atualizar->__set('nomeContato', $_POST['nomeContato']);
+        $atualizar->__set('valor', $_POST['valor']);
         // Titulo = Assunto
         $atualizar->__set('titulo', $_POST['titulo']);
         $atualizar->__set('data', $_POST['dataDocumento']);

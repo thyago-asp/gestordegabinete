@@ -372,7 +372,7 @@ class ModelEmendasOrcamentarias
             $con = Conexao::abrirConexao();
             $query = "UPDATE t_emendas 
                   SET tipo_emenda = :tipo_emenda, numDoc = :numDoc, solicitante = :solicitante, beneficiario = :beneficiario,
-                      data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, titulo = :titulo,
+                      data_cad_doc = :data_cad_doc, nome_de_contato = :nome_de_contato, valor = :valor, titulo = :titulo,
                       descricao = :descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias = :cidade, status = :status  
                   WHERE idt_emendas = :idt";
 
@@ -384,7 +384,7 @@ class ModelEmendasOrcamentarias
             $stmt->bindValue(':beneficiario', $this->__get('beneficiario'));
             $stmt->bindValue(':data_cad_doc', $this->__get('data'));
             $stmt->bindValue(':nome_de_contato', $this->__get('nomeContato'));
-            
+            $stmt->bindValue(':valor', $this->__get('valor'));
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':cidade', $this->__get('cidade'));
