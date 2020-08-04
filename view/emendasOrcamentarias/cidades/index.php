@@ -56,7 +56,154 @@ include '../../../estrutura/head.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalExcluirVisita" tabindex="-1" role="dialog" aria-labelledby="modalExcluirVisita" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirVisitaLabel">Excluir Visita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerEmendasOrcamentarias.php?acao=deletarVisita" id="formularioExcluir" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" name="idCidadeRegistro" id="idCidadeRegistro">
+                        <input type="hidden" name="idVisitaHidden" id="idVisitaHidden">
+                        <div class="form-group row">
+                            <label>Tem certeza que deseja excluir o registro da visita ?</label>
 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEdicao" tabindex="-1" role="dialog" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEdicaoLabel">Editar emendas orçamentarias</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../../../controller/ControllerEmendasOrcamentarias.php?acao=atualizarEmenda" enctype="multipart/form-data" id="formularioEnviar" method="post">
+                    <div class="modal-body">
+                        <label>Tipo de emenda</label>
+                        <div class="form-group">
+
+                            <select name="tipo_emenda" id="tipo_emenda" class="form-control show-tick ">
+                                <option value="emenda_federal">Emenda Federal</option>
+                                <option value="emenda_estadual">Emenda Estadual</option>
+                                <option value="emenda_municipal">Emenda Municipal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Numero documento solicitado:</label>
+                            <input type="text" class="form-control" id="documento" name="documento">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Solicitante (Origem):</label>
+                            <input type="text" class="form-control" id="solicitante" name="solicitante">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Beneficiario:</label>
+                            <input type="text" class="form-control" id="beneficiario" name="beneficiario">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Cidade</label>
+                            <div class="form-group">
+                                <div class="form-line">
+
+                                    <select class="form-control" id="cidade" name="cidade">
+                                        <option value=""> Selecione uma cidade </option>
+                                        <?php
+
+                                        foreach ($listaCidades as $cidade) {
+                                        ?>
+                                            <option value="<?php echo $cidade->idt_emendas_orcamentarias ?>"><?php echo $cidade->cidade ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nome do contato:</label>
+                            <input type="text" class="form-control" id="nomeContato" name="nomeContato">
+                        </div>
+                        <label class="form-label">Valor</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="valor" id="valor">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Assunto:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Data do documento:</label>
+                            <input type="date" class="form-control" id="dataDocumento" name="dataDocumento">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Descrição:</label>
+                            <textarea type="text" class="form-control" id="descricao" name="descricao"></textarea>
+                        </div>
+                        <label>Status</label>
+                        <div class="form-group">
+
+                            <select name="status" id="status" class="form-control show-tick ">
+                                <option value="solicitado">Solicitado</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="pago">Pago</option>
+                            </select>
+                        </div>
+
+                        <label id="listaNomes" aria-describedby="inputGroupFileAddon02"></label>
+                        <label class="form-label">Adicionar comentario</label>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <table class="table table-bordered table-hover" id="tabela_comentarios">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Comentario</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                            </tbody>
+                        </table>
+
+                        <input type="hidden" id="tipo" name="tipo">
+                        <input type="hidden" id="idteme" name="idteme">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -164,7 +311,7 @@ include '../../../estrutura/head.php';
                                 for ($i = 0; $i < count($listaRecursos); $i++) {
                                     $listaAnosRegistrados[] = explode("-", $listaRecursos[$i]->data_cad_doc)[0];
                                 }
-                                
+
                                 // Tiramos os anos repedidos e com a função array_values regulariazamos os 
                                 // index da lista
                                 $anos = array_values(array_unique($listaAnosRegistrados));
@@ -193,7 +340,7 @@ include '../../../estrutura/head.php';
 
                                             <div id="collapse<?php echo $ano ?>" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body">
-                                                    <table class="table">
+                                                    <table class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr>
                                                                 <th class="font_titulo_cidades" scope="col">Tipo</th>
@@ -222,16 +369,15 @@ include '../../../estrutura/head.php';
                                                                         case "emenda_municipal":
                                                                             $tipo_emenda = "Emenda Municipal";
                                                                             break;
-                                                                
                                                                     }
                                                             ?>
                                                                     <tr>
                                                                         <td class="font_cidades"><?php echo $tipo_emenda ?></th>
-                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->numDoc ?></td>
+                                                                        <td class="font_cidades"><button class="btn font_titulo_cidades" type="button" data-toggle="modal" data-target="#modalEdicao" data-idteme="<?php echo $listaRecursos[$j]->idt_emendas ?>" data-tipo_emenda="<?php echo $listaRecursos[$j]->tipo_emenda ?>" data-numDoc="<?php echo $listaRecursos[$j]->numDoc ?>" data-solicitante="<?php echo $listaRecursos[$j]->solicitante ?>" data-beneficiario="<?php echo $listaRecursos[$j]->beneficiario ?>" data-cidade="<?php echo $listaRecursos[$j]->t_emendas_orcamentarias_idt_emendas_orcamentarias ?>" data-nomeContato="<?php echo $listaRecursos[$j]->nome_de_contato ?>" data-dataDoc="<?php echo $listaRecursos[$j]->data_cad_doc ?>" data-tipo="<?php echo $listaRecursos[$j]->tipo ?>" data-titulo="<?php echo $listaRecursos[$j]->titulo ?>" data-descricao="<?php echo $listaRecursos[$j]->descricao ?>" data-status="<?php echo $listaRecursos[$j]->status ?>" data-valor="<?php echo $listaRecursos[$j]->valor ?>"><?php echo $listaRecursos[$j]->numDoc ?></button></td>
                                                                         <td class="font_cidades"><?php echo $listaRecursos[$j]->beneficiario ?></td>
                                                                         <td class="font_cidades">R$ <?php echo number_format($listaRecursos[$j]->valor, 2, ",", "."); ?></td>
                                                                         <td class="font_cidades"><?php echo $listaRecursos[$j]->titulo ?></td>
-                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->status?></td>
+                                                                        <td class="font_cidades"><?php echo $listaRecursos[$j]->status ?></td>
                                                                         <td class="font_cidades"><?php echo $listaRecursos[$j]->data_cad_doc ?></td>
                                                                     </tr>
                                                             <?php
@@ -307,27 +453,29 @@ include '../../../estrutura/head.php';
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#modalRegistrar" data-cidade="<?php echo $idCidade ?>" id="registrarVisita"> Registrar visita</button>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="titulo-data-visita">Data de visita</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        for ($j = 0; $j < count($listaVisitas); $j++) {
-                                        ?>
+                                <form action="" method="post">
+                                    <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#modalRegistrar" data-cidade="<?php echo $idCidade ?>" id="registrarVisita"> Registrar visita</button>
+                                    <table class="table table-bordered ">
+                                        <thead>
                                             <tr>
-                                                <td style="text-align: center"><?php echo date('d-m-Y', strtotime($listaVisitas[$j]->data)) ?></td>
-
+                                                <th class="titulo-data-visita font_titulo_cidades">Data de visita</th>
+                                                <th class="titulo-data-visita font_titulo_cidades">Excluir</th>
                                             </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            for ($j = 0; $j < count($listaVisitas); $j++) {
+                                            ?>
+                                                <tr>
+                                                    <td class="font_cidades" style="text-align: center"><?php echo date('d-m-Y', strtotime($listaVisitas[$j]->data)) ?> </td>
+                                                    <td><button class="btn font_titulo_cidades" type="button" data-toggle="modal" data-target="#modalExcluirVisita" data-idvisita="<?php echo $listaVisitas[$j]->idt_visita_cidade ?>" data-idcidade="<?php echo $listaVisitas[$j]->t_emendas_orcamentarias_idt_emendas_orcamentarias ?>"> <i class="fa fa-trash " style="color: red" aria-hidden="true"></i></button></td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                             <div class="col-lg-4">
                                 <div class="card">
@@ -415,6 +563,7 @@ include '../../../estrutura/head.php';
             data = `${ano}-${mes}-${dia}`
             $("#idDataVisita").val(data);
         });
+
         $("#modalRegistrar").on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // Extract info from data-* attributes
@@ -425,6 +574,102 @@ include '../../../estrutura/head.php';
 
 
         });
+
+        $("#modalExcluirVisita").on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            // Extract info from data-* attributes
+            var idVisita = button.data('idvisita')
+            var idCidade = button.data('idcidade')
+            $("#idVisitaHidden").val(idVisita)
+            $("#idCidadeRegistro").val(idCidade)
+
+        });
+
+        $('#modalEdicao').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            // data parametros
+            var idteme = button.data('idteme')
+            var tipo_emenda = button.data('tipo_emenda')
+            var numDoc = button.data('numdoc')
+            var solicitante = button.data('solicitante')
+            var valor = button.data('valor')
+            var beneficiario = button.data('beneficiario')
+            var cidade = button.data('cidade')
+            var nomeContato = button.data('nomecontato')
+            var dataDoc = button.data('datadoc')
+            var tipo = button.data('tipo')
+            var titulo = button.data('titulo')
+            var descricao = button.data('descricao')
+
+            var status = button.data('status')
+            //console.log(status);
+            var atividade = button.data('atividade');
+
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            var valorNovo = valor.toLocaleString('pt-br', {
+                minimumFractionDigits: 2
+            })
+
+            // seta os valores do modal
+            modal.find('#tipo_emenda').val(tipo_emenda);
+            modal.find('#documento').val(numDoc);
+            modal.find('#solicitante').val(solicitante);
+            modal.find('#valor').val(valorNovo);
+            modal.find('#beneficiario').val(beneficiario);
+            modal.find('#cidade').val(cidade);
+            modal.find(`#nomeContato`).val(nomeContato);
+
+            modal.find('#titulo').val(titulo);
+            var dataFormatada = dataDoc.split('/').reverse().join('-');
+            modal.find('#dataDocumento').val(dataFormatada);
+            modal.find('#descricao').val(descricao);
+            modal.find('#tipo').val(tipo);
+            modal.find('#idteme').val(idteme);
+
+            modal.find('#status option[value=' + status + ']').attr('selected', 'selected');
+
+            $.post('/view/emendasOrcamentarias/call_comentarios_emendas.php', {
+                idemendas: idteme
+            }, function(data) {
+                var linha = "";
+
+                $.each(JSON.parse(data), function(index, value) {
+                    linha += "<tr>";
+                    linha += "<td><label>" + formatDate(value["data"]) + "</label></td>";
+                    linha += "<td><label>" + value["comentario"] + "</label></td>";
+                    linha += "</tr>";
+                });
+
+                $('#tabela_comentarios tbody').html(linha);
+            });
+        });
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // Strip all characters but numerical ones.
+            number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function(n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }
     </script>
 
 </body>

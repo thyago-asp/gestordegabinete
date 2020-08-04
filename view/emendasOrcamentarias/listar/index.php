@@ -21,6 +21,10 @@ if (isset($_GET['excluirComentario'])) {
     $msg = "excluir comentario da emenda orcamentaria";
     $status = $_GET['excluirComentario'];
 }
+if (isset($_GET['excluirVisita'])) {
+    $msg = "excluir visita da emenda orcamentaria";
+    $status = $_GET['excluirVisita'];
+}
 $listaCidades = (new ControllerEmendasOrcamentarias)->listarCidades();
 
 ?>

@@ -205,6 +205,25 @@ class ModelEmendasOrcamentarias
         }
     }
 
+    function deletarVisita()
+    {
+        try {
+            $con = Conexao::abrirConexao();
+
+            $query = "DELETE FROM `t_visita_cidade` WHERE idt_visita_cidade = :idVisita";
+
+            $stmt = $con->prepare($query);
+
+            $stmt->bindValue(':idVisita', $this->__get('idVisita'));
+
+            $result = $stmt->execute();
+
+            return $result;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
+
     public function pesquisarCidade($cidade)
     {
         $con = Conexao::abrirConexao();
