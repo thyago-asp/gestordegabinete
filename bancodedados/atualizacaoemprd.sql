@@ -152,3 +152,57 @@ ADD CONSTRAINT `fk_t_comentarios_emendas_t_emendas1`
   REFERENCES `fesper35_deputados`.`t_emendas` (`idt_emendas`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+
+
+
+-- MySQL Workbench Synchronization
+-- Generated: 2020-08-17 14:46
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Thyago
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+ALTER TABLE `fesper35_deputados`.`t_requerimentos` 
+ADD COLUMN `data_insert` DATETIME NULL DEFAULT NULL AFTER `t_emendas_orcamentarias_idt_emendas_orcamentarias`,
+ADD COLUMN `data_update` DATETIME NULL DEFAULT NULL AFTER `data_insert`;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- MySQL Workbench Synchronization
+-- Generated: 2020-08-17 14:52
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Thyago
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+ALTER TABLE `fesper35_deputados`.`t_emendas` 
+ADD COLUMN `data_insert` DATETIME NULL DEFAULT NULL AFTER `t_emendas_orcamentarias_idt_emendas_orcamentarias`;
+
+ALTER TABLE `fesper35_deputados`.`t_oficios` 
+ADD COLUMN `data_insert` DATETIME NULL DEFAULT NULL AFTER `t_emendas_orcamentarias_idt_emendas_orcamentarias`;
+
+ALTER TABLE `fesper35_deputados`.`t_projetosdelei` 
+ADD COLUMN `data_insert` DATETIME NULL DEFAULT NULL AFTER `t_emendas_orcamentarias_idt_emendas_orcamentarias`,
+ADD COLUMN `t_projetosdeleicol` VARCHAR(45) NULL DEFAULT NULL AFTER `data_insert`;
+
+ALTER TABLE `fesper35_deputados`.`t_requerimentos` 
+CHANGE COLUMN `data_insert` `data_insert` DATETIME NULL DEFAULT NULL ;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

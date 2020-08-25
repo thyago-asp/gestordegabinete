@@ -179,4 +179,13 @@ class ControllerRequerimentos
             }
         }
     }
+
+    function buscarUltimoRegistro(){
+        $registro = new ModelRequerimentos();
+
+        return $registro->buscarUltimoRegistro();
+
+    }
+
+    
 }

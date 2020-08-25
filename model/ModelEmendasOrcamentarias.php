@@ -45,14 +45,50 @@ class ModelEmendasOrcamentarias
         return $this->$atributo;
     }
 
+    function buscarUltimoRegistro(){
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_emendas order by data_insert DESC LIMIT 1;";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function buscarValorDocumentos(){
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT sum(valor) as valor FROM t_emendas where YEAR(data_cad_doc) = YEAR(now())";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function buscarQuantidadeDocumentos(){
+        $con = Conexao::abrirConexao();
+
+        $query = "select (count(*) + (select count(*) from t_emendas where MONTH(data_cad_doc) = MONTH(now())) + (select count(*) from t_projetosdelei where MONTH(data_cad_doc) = MONTH(now())) + (select count(*) from t_requerimentos where MONTH(data_cad_doc) = MONTH(now()))) as somatotal from t_oficios where MONTH(data_cad_doc) = MONTH(now())";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     function salvarModel($emenda)
     {
         try {
             $con = Conexao::abrirConexao();
             $query = "INSERT INTO t_emendas(tipo_emenda, numDoc, solicitante, beneficiario, 
-                    nome_de_contato, valor, titulo, data_cad_doc, descricao, status, t_emendas_orcamentarias_idt_emendas_orcamentarias) 
+                    nome_de_contato, valor, titulo, data_cad_doc, descricao, status, t_emendas_orcamentarias_idt_emendas_orcamentarias, data_insert) 
                   VALUES (:tipo_emenda, :numDoc, :solicitante, :beneficiario, :nome_de_contato, 
-                  :valor, :titulo, :data_cad_doc, :descricao, :status, :t_emendas_orcamentarias_idt_emendas_orcamentarias)";
+                  :valor, :titulo, :data_cad_doc, :descricao, :status, :t_emendas_orcamentarias_idt_emendas_orcamentarias, :data_insert)";
 
             $stmt = $con->prepare($query);
             $stmt->bindValue(':tipo_emenda', $emenda->__get('tipo_emenda'));
@@ -66,6 +102,8 @@ class ModelEmendasOrcamentarias
             $stmt->bindValue(':descricao', $emenda->__get('descricao'));
             $stmt->bindValue(':status', $emenda->__get('status'));
             $stmt->bindValue(':t_emendas_orcamentarias_idt_emendas_orcamentarias', $emenda->__get('cidade'));
+            date_default_timezone_set('America/Sao_Paulo');
+            $stmt->bindValue(':data_insert', date('Y-m-d H:i:s'));
 
             $retorno = $stmt->execute();
 

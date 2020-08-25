@@ -183,7 +183,7 @@ include '../../../estrutura/head.php';
                                 <tr>
                                     <th>Data</th>
                                     <th>Comentario</th>
-
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -609,10 +609,8 @@ include '../../../estrutura/head.php';
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
-            var valorNovo = valor.toLocaleString('pt-br', {
-                minimumFractionDigits: 2
-            })
-
+            var valorNovo = valor.toLocaleString('pt-br', {minimumFractionDigits: 2})
+          
             // seta os valores do modal
             modal.find('#tipo_emenda').val(tipo_emenda);
             modal.find('#documento').val(numDoc);
@@ -670,6 +668,7 @@ include '../../../estrutura/head.php';
             }
             return s.join(dec);
         }
+        
     </script>
 
 </body>

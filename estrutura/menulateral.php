@@ -12,7 +12,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="/view/main/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Painel</span></a>
     </li>
 
     <!-- Divider -->

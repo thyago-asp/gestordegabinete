@@ -45,6 +45,18 @@ class ModelOficios
         $stmt->execute();
     }
 
+    function buscarUltimoRegistro(){
+        $con = Conexao::abrirConexao();
+
+        $query = "SELECT * FROM t_oficios order by data_insert DESC LIMIT 1;";
+
+        $stmt = $con->prepare($query);
+
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     function selecionarId()
     {
         $con = Conexao::abrirConexao();
@@ -63,9 +75,9 @@ class ModelOficios
         try {
             $con = Conexao::abrirConexao();
             $query = "INSERT INTO t_oficios(numDoc, solicitante, instituicao, 
-                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias, status) 
+                    nome_de_contato, data_cad_doc, tipo, titulo, descricao, t_emendas_orcamentarias_idt_emendas_orcamentarias, status, data_insert) 
                   VALUES (:numDoc, :solicitante, :instituicao, :nome_de_contato, 
-                    :data_cad_doc, :tipo, :titulo, :descricao, :t_emendas_orcamentarias_idt_emendas_orcamentarias, :status)";
+                    :data_cad_doc, :tipo, :titulo, :descricao, :t_emendas_orcamentarias_idt_emendas_orcamentarias, :status, :data_insert)";
 
             $stmt = $con->prepare($query);
 
@@ -79,6 +91,8 @@ class ModelOficios
             $stmt->bindValue(':titulo', $this->__get('titulo'));
             $stmt->bindValue(':descricao', $this->__get('descricao'));
             $stmt->bindValue(':status', $this->__get('status'));
+            date_default_timezone_set('America/Sao_Paulo');
+            $stmt->bindValue(':data_insert', date('Y-m-d H:i:s'));
 
             $retorno = $stmt->execute();
 

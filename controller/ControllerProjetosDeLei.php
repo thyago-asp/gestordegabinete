@@ -98,6 +98,15 @@ class ControllerProjetosDeLei
             header("location: /view/projetosDeLei/cadastrar?pg={$_POST['tipo']}&cadastrar=sucesso");
         }
     }
+
+    function buscarUltimoRegistro(){
+        $registro = new ModelProjetosDeLei();
+
+        return $registro->buscarUltimoRegistro();
+
+    }
+
+
     function atualizarProjetosDeLei()
     {
 

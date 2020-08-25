@@ -45,10 +45,10 @@ if (isset($_REQUEST["acao"])) {
             (new ControllerEmendasOrcamentarias())->deletarComentario();
             break;
 
-            case 'deletarVisita':
+        case 'deletarVisita':
 
-                (new ControllerEmendasOrcamentarias())->deletarVisita();
-                break;
+            (new ControllerEmendasOrcamentarias())->deletarVisita();
+            break;
     }
 }
 
@@ -97,6 +97,26 @@ class ControllerEmendasOrcamentarias
 
         header("location: /view/emendasOrcamentarias/listar/?excluirComentario=sucesso");
     }
+    function buscarUltimoRegistro()
+    {
+        $registro = new ModelEmendasOrcamentarias();
+
+        return $registro->buscarUltimoRegistro();
+    }
+
+    function buscarValorDocumentos(){
+        $registro = new ModelEmendasOrcamentarias();
+
+        return $registro->buscarValorDocumentos();
+
+    }
+
+    function buscarQuantidadeDocumentos(){
+        $registro = new ModelEmendasOrcamentarias();
+
+        return $registro->buscarQuantidadeDocumentos();
+
+    }
 
     function deletarVisita()
     {
@@ -108,8 +128,8 @@ class ControllerEmendasOrcamentarias
         $deletar->__set('idVisita', $_POST['idVisitaHidden']);
 
         $deletar->deletarVisita($deletar);
-       
-        header("location: /view/emendasOrcamentarias/cidades/?id=". $_REQUEST['idCidadeRegistro'] ."&excluirVisita=sucesso");
+
+        header("location: /view/emendasOrcamentarias/cidades/?id=" . $_REQUEST['idCidadeRegistro'] . "&excluirVisita=sucesso");
     }
 
 

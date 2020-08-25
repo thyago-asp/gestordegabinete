@@ -3553,6 +3553,9 @@ input[type="button"].btn-block {
     
 }
 
+.card_main{ 
+    padding: 1.25rem;
+}
 .font_cidades{
     font-size: 9px;
 }

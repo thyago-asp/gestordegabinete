@@ -97,6 +97,14 @@ class ControllerOficios
             header("location: /view/oficios/cadastrar?pg={$_POST['pagina']}&cadastrar=sucesso");
         }
     }
+
+    function buscarUltimoRegistro(){
+        $registro = new ModelOficios();
+
+        return $registro->buscarUltimoRegistro();
+
+    }
+
     function atualizarOficios()
     {
 
