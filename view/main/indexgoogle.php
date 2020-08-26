@@ -251,7 +251,7 @@ $geral = new ControllerGeral();
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <table class="table table-bordered"  width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th>Resumo</th>
@@ -261,7 +261,7 @@ $geral = new ControllerGeral();
                                             </thead>
 
                                             <tbody>
-
+                                                
 
 
                                                 <?php
@@ -282,20 +282,20 @@ $geral = new ControllerGeral();
                                                 $events = $results->getItems();
 
                                                 if (empty($events)) {
-                                                    print "Nenhum evento criado.\n";
+                                                    print "No upcoming events found.\n";
                                                 } else {
                                                     // print "Upcoming events:\n";
                                                     foreach ($events as $event) {
                                                         $start = $event->start->dateTime;
                                                         $final = $event->end->dateTime;
 
-
+                                                       
 
                                                         if (empty($start)) {
                                                             $start = $event->start->date;
                                                             $dateStart = new DateTime($start);
                                                             $start = $dateStart->format('d-m-Y');
-                                                        } else {
+                                                        }else{
                                                             $dateStart = new DateTime($start);
                                                             $start = $dateStart->format('d-m-Y H:i:s');
                                                         }
@@ -304,21 +304,19 @@ $geral = new ControllerGeral();
                                                             $final = $event->end->date;
                                                             $dateFinal = new DateTime($final);
                                                             $final = $dateFinal->format('d-m-Y');
-                                                        } else {
+                                                        }else{
                                                             $dateFinal = new DateTime($final);
                                                             $final = $dateFinal->format('d-m-Y H:i:s');
                                                         }
-
+                                                        
 
                                                 ?>
                                                         <tr>
-                                                            <td class="font12 text-center"><?php echo $event->getSummary() ?></td>
-
-                                                            <td class="font9 text-center"><?php echo $start ?> <br>
-                                                                <hr> <?php echo $final ?></td>
+                                                            <td><?php echo $event->getSummary() ?></td>
+                                                            <td><?php echo $start ?> <br> <?php echo $final?></td>
                                                         </tr>
                                                 <?php
-
+                                                       
                                                     }
                                                 }
                                                 ?>

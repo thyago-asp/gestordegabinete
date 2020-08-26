@@ -131,6 +131,7 @@ rea{
     font-size: 12px;
 }
 
+
 .area .caminho-imagem a{
 	color: white;
 	text-decoration: none;
@@ -1903,7 +1904,13 @@ pre code {
 .table-responsive > .table-bordered {
     border: 0;
 }
+.font12{
+font-size: 10.5px;
+}
 
+.font9{
+    font-size: 10.5px;
+    }
 .form-control {
     display: block;
     width: 100%;

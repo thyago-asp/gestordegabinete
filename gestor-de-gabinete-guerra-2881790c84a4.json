@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gestor-de-gabinete-guerra",
+  "private_key_id": "2881790c84a4b9b127a643b45c64d00b9b3fa1c4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNTX8lIzTZyIfg\nkx/VBANo7ojpFTspHuNDkKIc7nUS5nIOCawusPFBZH2DKlqd3imZTRYsndaM7/BO\nJLmmiC3q8mTjZpqi1Z3ptQuv8SxddJNSeNSD80KeB8Y8prF0zKcjzWLSPunSpzT6\nu1VJVlOmZTC9KLLFhF1S5EwTNatpd2YMJxCVFYKQvuezgKNjwjgdWXHgLR0AS70D\nqvovG8O1PKxtr6kQssnQZT089zZZOMaohlvdSB5enbf7w/TR1E5c9uz/kFt+xhfA\nrFz/+32h1aLMIy2zFGjLSDX17VA+dvoyaPDv2/esgwTpSmR5U6SK2FjIMEjamR19\nxmEL+mIJAgMBAAECggEASkt7shBSDWf0yA/l6pvnsf70e8jrnl9npek+yVJ/+oV7\ni9nzPfhZbi00AJYAsfWWPzx2xFGgNWOVJmpC5uGMIGR0nxhf6IJ+gXc7kgGoaO+J\nasSAP3n2RyMQGZ3HRTnUWG/4jZYn3swUr5HAdOgxIFupLiL+wty6OweUAjWfYOwm\npFXcArH/Ry6p/iEtYTITssWBPtn0aFc/U/VTQbfkIp2yoI/euY4FeH0+VWYcBe6/\n2DE8/UR1XeJT6u5xkGqp6y1/+t8JACKFPsiiSJO9ID2/2iV8EJJ4os6Q42twTLvi\nP3heH8j2IOBp9sdj/lf5DaYXGwNA10igTB+Ph2smmwKBgQD11KFI5I921FNth3xW\nScCuF3K6dExAOYxdyMOyerFQ9CC+t0Ly0/L/QLQJNnM5Ze7rM4lGtRaAp1Cp7Gzn\n5OthlZFuma0ct9gqt/FOvc7JnxHLkChc7MNMho31HDBZjeDV53oEctRI0DdDhvrI\nhvDz4Q8fqFY0ylRX2YwceHqUTwKBgQDVy6wulZu3JqP42AJilrjsKO/ag8prJJXD\nl5M9X886yVYH7chYjNK2kgQauO18W+GPm2HxAdvfAZshnbz/AKDcAadLFtukYXrq\nUOsDc4Ua8bpNl/FFbTttlrkqmTfEPcnZ+JPxryQa4+6t0UgzkIwoMlNLR3OqMwVV\ndHnI18EWJwKBgQC01TnjVgZWoi/QpVaIXu524dbKY5xnri2cG4AhfXGMHFkuEb8U\nw2a/74fAMyaldV8/8wQrWDB6aRnENZ+TIekoOo7lrfQS6QYBvpeqlaNU20eK17tp\nR90OIPix8o96gQyALSurtBCGk2vjp5o5AlKjA85NOlZXtPJAQU547wM0rwKBgQCn\njOwOwh775WOCJL+Rxi98nQSEit57I3vfgo3Y/poopxsuMZLemtaUUFC5JI6x9EwM\nwKh8OYm39sk+CiHQ8wwd/4m9VleiNucedXYJCWKaYDEymE50q4t0cjgBg3xp5kan\n9aD0Ot8f19v5Ctf72V+OLQqMJ54lF8EpXJQI69Wd5wKBgF1ElvFcoDRbB3Ocuya2\nhI9eCkqw0kyXFVrmjCBoSdjJ3AjWxxWmq5yqZ4lz7bZftj8Fdz+X8P3VgiKL/yu7\n7NhIQjyMQPhhfVAkjl7usCx2U+94Kdhc1oJSk77VxAgW1dj5BGL4fj9whGgqeazR\nvCVREcC96N7+5mm+FDrteALB\n-----END PRIVATE KEY-----\n",
+  "client_email": "teste-guerra@gestor-de-gabinete-guerra.iam.gserviceaccount.com",
+  "client_id": "100640707682334309349",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/teste-guerra%40gestor-de-gabinete-guerra.iam.gserviceaccount.com"
+}
