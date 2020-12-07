@@ -6,7 +6,7 @@ require_once("../../controller/ControllerOficios.php");
 require_once("../../controller/ControllerProjetosDeLei.php");
 require_once("../../controller/ControllerEmendasOrcamentarias.php");
 require_once("../../controller/ControllerGeral.php");
-require_once("../../google.php");
+//require_once("../../google.php");
 
 $primeiro_acesso = "";
 $retorno_alterarSenha = "";
@@ -262,66 +262,6 @@ $geral = new ControllerGeral();
 
                                             <tbody>
 
-
-
-                                                <?php
-                                                // Get the API client and construct the service object.
-
-                                                $client = getClient();
-                                                $service = new Google_Service_Calendar($client);
-
-                                                // Print the next 10 events on the user's calendar.
-                                                $calendarId = 'primary';
-                                                $optParams = array(
-                                                    'maxResults' => 10,
-                                                    'orderBy' => 'startTime',
-                                                    'singleEvents' => true,
-                                                    'timeMin' => date('c'),
-                                                );
-                                                $results = $service->events->listEvents($calendarId, $optParams);
-                                                $events = $results->getItems();
-
-                                                if (empty($events)) {
-                                                    print "Nenhum evento criado.\n";
-                                                } else {
-                                                    // print "Upcoming events:\n";
-                                                    foreach ($events as $event) {
-                                                        $start = $event->start->dateTime;
-                                                        $final = $event->end->dateTime;
-
-
-
-                                                        if (empty($start)) {
-                                                            $start = $event->start->date;
-                                                            $dateStart = new DateTime($start);
-                                                            $start = $dateStart->format('d-m-Y');
-                                                        } else {
-                                                            $dateStart = new DateTime($start);
-                                                            $start = $dateStart->format('d-m-Y H:i:s');
-                                                        }
-
-                                                        if (empty($final)) {
-                                                            $final = $event->end->date;
-                                                            $dateFinal = new DateTime($final);
-                                                            $final = $dateFinal->format('d-m-Y');
-                                                        } else {
-                                                            $dateFinal = new DateTime($final);
-                                                            $final = $dateFinal->format('d-m-Y H:i:s');
-                                                        }
-
-
-                                                ?>
-                                                        <tr>
-                                                            <td class="font12 text-center"><?php echo $event->getSummary() ?></td>
-
-                                                            <td class="font9 text-center"><?php echo $start ?> <br>
-                                                                <hr> <?php echo $final ?></td>
-                                                        </tr>
-                                                <?php
-
-                                                    }
-                                                }
-                                                ?>
                                             </tbody>
                                         </table>
                                     </div>

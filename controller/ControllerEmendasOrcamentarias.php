@@ -104,18 +104,18 @@ class ControllerEmendasOrcamentarias
         return $registro->buscarUltimoRegistro();
     }
 
-    function buscarValorDocumentos(){
+    function buscarValorDocumentos()
+    {
         $registro = new ModelEmendasOrcamentarias();
 
         return $registro->buscarValorDocumentos();
-
     }
 
-    function buscarQuantidadeDocumentos(){
+    function buscarQuantidadeDocumentos()
+    {
         $registro = new ModelEmendasOrcamentarias();
 
         return $registro->buscarQuantidadeDocumentos();
-
     }
 
     function deletarVisita()
@@ -124,12 +124,15 @@ class ControllerEmendasOrcamentarias
         $deletar = new ModelEmendasOrcamentarias();
 
 
-        $deletar->__set('idCidade', $_POST['idCidadeRegistro']);
+
         $deletar->__set('idVisita', $_POST['idVisitaHidden']);
 
-        $deletar->deletarVisita($deletar);
+        $retorno = $deletar->deletarVisita($deletar);
 
-        header("location: /view/emendasOrcamentarias/cidades/?id=" . $_REQUEST['idCidadeRegistro'] . "&excluirVisita=sucesso");
+        
+        if ($retorno) {
+            header("location: /view/emendasOrcamentarias/cidades/?id=" . $_REQUEST['idCidadeRegistro'] . "&excluirVisita=sucesso");
+        }
     }
 
 

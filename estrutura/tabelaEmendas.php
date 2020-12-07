@@ -49,6 +49,7 @@ foreach ($lista as $emenda) {
         <td><?php echo " R$ ", number_format($emenda['valor'], 2, ",", "."); ?></td>
         <td><?php echo $emenda['titulo'] ?></td>
         <td><?php echo $status ?></td>
+        <td><?php echo $emenda["cidade"] ?></td>
         <td><?php echo $emenda['data_cad_doc'] ?></td>
         
         

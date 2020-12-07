@@ -1,14 +1,12 @@
 <?php
 session_start();
-//require_once("../../estrutura/controleLogin.php");
+//require_once("../../../estrutura/controleLogin.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . '/controller/ControllerEmendasOrcamentarias.php');
 $status = "";
+$idCidade = "";
 if (isset($_REQUEST["id"])) {
     // Verifico se o retorno do cadastro do usuario deu certo.
-
     $idCidade = $_REQUEST["id"];
-
-    // echo $idCidade;
 }
 if (isset($_REQUEST["cad"])) {
     $status = $_REQUEST["cad"];
@@ -17,6 +15,9 @@ if (isset($_REQUEST["r"])) {
     $status = $_REQUEST["r"];
 }
 
+if (isset($_GET["excluirVisita"])) {
+    $status = $_GET["excluirVisita"];
+}
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +30,7 @@ include '../../../estrutura/head.php';
 ?>
 
 <body id="page-top">
-    <div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrar" aria-hidden="true">
+    <!-- <div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="modalRegistrar" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,22 +56,23 @@ include '../../../estrutura/head.php';
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="modal fade" id="modalExcluirVisita" tabindex="-1" role="dialog" aria-labelledby="modalExcluirVisita" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalExcluirVisitaLabel">Excluir Visita</h5>
+                    <h5 class="modal-title" id="modalExcluirVisitaLabel">Excluir comentario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="../../../controller/ControllerEmendasOrcamentarias.php?acao=deletarVisita" id="formularioExcluir" method="post">
                     <div class="modal-body">
-                        <input type="hidden" name="idCidadeRegistro" id="idCidadeRegistro">
-                        <input type="hidden" name="idVisitaHidden" id="idVisitaHidden">
+
+                        <input type="hidden" name="idCidadeRegistro" id="idCidadeRegistro" />
+                        <input type="hidden" name="idVisitaHidden" id="idVisitaHidden" />
                         <div class="form-group row">
-                            <label>Tem certeza que deseja excluir o registro da visita ?</label>
+                            <label>Tem certeza que deseja excluir o comentario ?</label>
 
                         </div>
                     </div>
@@ -183,7 +185,7 @@ include '../../../estrutura/head.php';
                                 <tr>
                                     <th>Data</th>
                                     <th>Comentario</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -226,21 +228,28 @@ include '../../../estrutura/head.php';
 
                 <!-- CONTEUDO PRINCIPAL DA PAGINA -->
                 <div class="container-fluid">
-                    <?php if ($status == "sucesso") : ?>
-                        <div class="alert alert-success text-center" role="alert">
-                            Registro de data salvo com sucesso.
-                        </div>
-                    <?php elseif ($status == "erro") : ?>
+                    <?php  if ($status == "erro") { ?>
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>Erro no registro verifique os campos!</strong>
                         </div>
-                    <?php elseif ($status == "comentarioSucesso") : ?>
+                    <?php } else if ($status == "comentarioSucesso") { ?>
                         <div class="alert alert-success text-center" role="alert">
-                            Comentario adicionado com sucesso
+                        Comentário adicionado com sucesso
                         </div>
-                    <?php endif; ?>
+                    <?php } else if ($status == "sucesso") {
+                    ?>
+
+                        <div class="alert alert-success text-center" role="alert">
+                            Comentário excluido com sucesso
+                        </div>
+
                     <?php
+                    }
+
+
+
+
                     $emendas = new ControllerEmendasOrcamentarias();
 
                     $listaCidades = $emendas->buscarCidades($idCidade);
@@ -255,7 +264,7 @@ include '../../../estrutura/head.php';
                             <label id="campo_regiao"><?php echo $listaCidades[0]->regiao; ?></label> </br>
                             <label id="distancia_capital">Distância da capital: </label> <?php echo $listaCidades[0]->distancia_capital; ?> Km
                         </div>
-                        <div class="row">
+                        <div class="row mt-10">
 
 
                             <div class="col col-sm-6">
@@ -304,7 +313,7 @@ include '../../../estrutura/head.php';
                         </div>
 
                         <div class="row" style="margin-top: 20px;">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <?php
                                 //Busco quais são os anos que estão nos registros das emendas dessa cidade
                                 $listaAnosRegistrados = array();
@@ -402,7 +411,7 @@ include '../../../estrutura/head.php';
                                         <div class="card-header cartao-recursos" id="headingOne">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link texto-cartao-recursos" data-toggle="collapse" data-target="#collapseComentario" aria-expanded="true" aria-controls="collapseOne">
-                                                    Comentarios
+                                                    Visitas
                                                 </button>
                                             </h5>
                                         </div>
@@ -413,6 +422,7 @@ include '../../../estrutura/head.php';
                                                         <tr>
                                                             <th>Data</th>
                                                             <th>Comentario</th>
+                                                            <th>Excluir</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -428,6 +438,8 @@ include '../../../estrutura/head.php';
 
 
                                                                 <td><label><?php echo $lista[$i]["comentario"] ?></label></td>
+
+                                                                <td><button class="btn font_titulo_cidades" type="button" data-toggle="modal" data-target="#modalExcluirVisita" data-idvisita="<?php echo $lista[$i]["idt_comentarios_emenda"] ?>" data-idcidade="<?php echo $idCidade ?>"> <i class="fa fa-trash " style="color: red" aria-hidden="true"></i></button></td>
                                                             </tr>
                                                         <?php
                                                         }
@@ -436,8 +448,16 @@ include '../../../estrutura/head.php';
                                                     </tbody>
                                                 </table>
                                                 <hr />
+                                                <label class="b">Registrar visita</label>
+                                                <hr />
                                                 <form method="post" action="/controller/ControllerEmendasOrcamentarias.php?acao=comentario">
                                                     <input type="hidden" name="idEmenda" value="<?php echo $idCidade ?>">
+                                                    <div class="form-group row">
+                                                        <label for="example-date-input" class="col-4 col-form-label">Data da visita</label>
+                                                        <div class="col-8">
+                                                            <input class="form-control" type="date" value="" name="idDataVisita" id="idDataVisita" required>
+                                                        </div>
+                                                    </div>
                                                     <label class="form-label">Adicionar um comentario</label>
                                                     <div class="form-group form-float">
                                                         <div class="form-line">
@@ -452,7 +472,7 @@ include '../../../estrutura/head.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2">
+                            <!-- <div class="col-lg-6">
                                 <form action="" method="post">
                                     <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#modalRegistrar" data-cidade="<?php echo $idCidade ?>" id="registrarVisita"> Registrar visita</button>
                                     <table class="table table-bordered ">
@@ -476,16 +496,16 @@ include '../../../estrutura/head.php';
                                         </tbody>
                                     </table>
                                 </form>
-                            </div>
-                            <div class="col-lg-4">
+                            </div> -->
+                            <!-- <div class="col-lg-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header cartao-recursos texto-cartao-recursos">
                                             Estrutura do Partido - PSL
                                         </div>
 
-                                        <ul class="list-group list-group-flush">
-                                            <!--<li class="list-group-item"><label class="descricao">Presidente: </label> <?php echo " ", $estruturaPartido[0]->presidente ?></li>
+                                        <ul class="list-group list-group-flush"> -->
+                            <!--<li class="list-group-item"><label class="descricao">Presidente: </label> <?php echo " ", $estruturaPartido[0]->presidente ?></li>
                                             <li class="list-group-item"><label class="descricao">Vice-presidente: </label><?php echo " ", $estruturaPartido[0]->vice_presidente ?></li>
                                             <li class="list-group-item"><label class="descricao">Secretário: </label><?php echo " ", $estruturaPartido[0]->secretario ?></li>
                                             <li class="list-group-item"><label class="descricao">2° Secretário: </label><?php echo " ", $estruturaPartido[0]->segundo_secretario ?></li>
@@ -493,7 +513,7 @@ include '../../../estrutura/head.php';
                                             <li class="list-group-item"><label class="descricao">2° Tesoureiro: </label><?php echo " ", $estruturaPartido[0]->segundo_tesoureiro ?></li>
                                             <li class="list-group-item"><label class="descricao">Vogal: </label><?php echo " ", $estruturaPartido[0]->vogal ?></li>
                                             <li class="list-group-item"><label class="descricao">Tel. do Presidente: </label><?php echo " ", $estruturaPartido[0]->contato_presidente ?></li>-->
-
+                            <!-- 
                                             <li class="list-group-item"><label class="descricao">Presidente: </label> </li>
                                             <li class="list-group-item"><label class="descricao">Vice-presidente: </label></li>
                                             <li class="list-group-item"><label class="descricao">Secretário: </label></li>
@@ -505,7 +525,7 @@ include '../../../estrutura/head.php';
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                 </div>
             <?php
@@ -578,10 +598,11 @@ include '../../../estrutura/head.php';
         $("#modalExcluirVisita").on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             // Extract info from data-* attributes
-            var idVisita = button.data('idvisita')
-            var idCidade = button.data('idcidade')
-            $("#idVisitaHidden").val(idVisita)
-            $("#idCidadeRegistro").val(idCidade)
+            var idvisita = button.data('idvisita')
+            var idcidade = button.data('idcidade')
+
+            $("#idVisitaHidden").val(idvisita)
+            $("#idCidadeRegistro").val(idcidade)
 
         });
 
@@ -609,8 +630,10 @@ include '../../../estrutura/head.php';
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
-            var valorNovo = valor.toLocaleString('pt-br', {minimumFractionDigits: 2})
-          
+            var valorNovo = valor.toLocaleString('pt-br', {
+                minimumFractionDigits: 2
+            })
+
             // seta os valores do modal
             modal.find('#tipo_emenda').val(tipo_emenda);
             modal.find('#documento').val(numDoc);
@@ -668,7 +691,6 @@ include '../../../estrutura/head.php';
             }
             return s.join(dec);
         }
-        
     </script>
 
 </body>

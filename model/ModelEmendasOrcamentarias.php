@@ -243,12 +243,18 @@ class ModelEmendasOrcamentarias
         }
     }
 
+    /**
+     * deletarVisita exclui o registro da visita de cada cidade que foi feito junto a um comentario, 
+     * que aparece na pagina da emenda orçamentaria.
+     * @return void
+     * 
+     */
     function deletarVisita()
     {
         try {
             $con = Conexao::abrirConexao();
-
-            $query = "DELETE FROM `t_visita_cidade` WHERE idt_visita_cidade = :idVisita";
+            
+            $query = "DELETE FROM `t_comentarios_emenda` WHERE idt_comentarios_emenda = :idVisita";
 
             $stmt = $con->prepare($query);
 

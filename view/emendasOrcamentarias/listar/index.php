@@ -315,6 +315,7 @@ include '../../../estrutura/head.php';
                                     <th>Valor</th>
                                     <th>Assunto</th>
                                     <th>Status</th>
+                                    <th>Cidade</th>
                                     <th>Data</th>
                                     <th>Ações</th>
                                 </tr>
@@ -327,6 +328,7 @@ include '../../../estrutura/head.php';
                                     <th>Valor</th>
                                     <th>Assunto</th>
                                     <th>Status</th>
+                                    <th>Cidade</th>
                                     <th>Data</th>
                                     <th>Ações</th>
                                 </tr>

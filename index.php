@@ -50,7 +50,7 @@ if (isset($_REQUEST["r"])) {
 
         <img src="../img/Logo-GestorDeGabinete.png" id="img-gestor-gabinete" />
 
-    </div>
+    </div> 
     <div class="container">
 
         <!-- Outer Row -->

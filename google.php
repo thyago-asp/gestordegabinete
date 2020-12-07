@@ -46,7 +46,7 @@ function getClient()
             // Check to see if there was an error.
             if (array_key_exists('error', $accessToken)) {
                 throw new Exception(join(', ', $accessToken));
-            }
+            }   
         }
         // Save the token to a file.
         if (!file_exists(dirname($tokenPath))) {

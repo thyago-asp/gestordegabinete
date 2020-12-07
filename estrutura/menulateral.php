@@ -64,7 +64,7 @@
 
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="/view/requerimentos" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
+        <a class="nav-link collapsed" href="/view/requerimentos/" data-toggle="collapse" data-target="#collapseReq" aria-expanded="true" aria-controls="collapseReq">
             <i class="fas fa-fw fa-folder"></i>
             <span>Requerimentos</span>
         </a>
