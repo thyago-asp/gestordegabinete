@@ -162,7 +162,7 @@ include '../../../estrutura/head.php';
                                 <th>Endereço</th>
                                 <th>Cidade</th>
 
-                                <th>ações</th>
+                                <th>Ações</th>
                             </tr>
                         </tfoot>
                         <tbody>

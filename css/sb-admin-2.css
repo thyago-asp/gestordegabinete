@@ -217,8 +217,10 @@ rea{
     text-align: center;
 }
 .fundo_login{
-    background-image: url('../img/fundo.jpg');
+/*    background-image: url('../img/fundoX.jpg');*/
+    background-image: url('../img/cwb01.png');
     background-repeat: no-repeat;
+    background-position-x: center;
     background-size:100%;
     bottom: 0;
     color: black;
@@ -253,9 +255,9 @@ rea{
     width: 20%;
 }
 
-.div-gestor-gabinete{
+/*.div-gestor-gabinete{
     background-color: rgba(255, 255, 255, 0.51);
-}
+}*/
 
 .card-login-img{
     background-color:rgba(0, 0, 0, 1);
@@ -11205,4 +11207,10 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
     width: 100%;
+}
+
+.footerPagInicial{
+    width: 100%;
+    background-color: white;
+    margin-bottom: 200;
 }

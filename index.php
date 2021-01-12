@@ -48,9 +48,13 @@ if (isset($_REQUEST["r"])) {
 <body class="fundo_login">
     <div class="justify-content-center div-gestor-gabinete">
 
-        <img src="../img/Logo-GestorDeGabinete.png" id="img-gestor-gabinete" />
+        <img src="../img/Logo-GestorDeGabinete-101220.png" id="img-gestor-gabinete" />
 
     </div> 
+    <div style="float:right;">
+        instagram/gestor
+        <br />www.gestordegabinete.com.br
+    </div>
     <div class="container">
 
         <!-- Outer Row -->
@@ -71,7 +75,7 @@ if (isset($_REQUEST["r"])) {
                                 if ($erro == 1) {
                                 ?>
                                     <div class="alert alert-danger text-center h8" role="alert">
-                                        Usuario ou senha incorreto.
+                                        Usuário ou senha incorretos.
                                     </div>
 
                                 <?php
@@ -101,7 +105,6 @@ if (isset($_REQUEST["r"])) {
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -114,7 +117,12 @@ if (isset($_REQUEST["r"])) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <footer>
+        <div class="footerPagInicial">
+            <h6>versão 3.2.00</h6>
+            <h6>Copyright © 2020 - Todos os direitos reservados - Desenvolvido por Fesper</h6>
+        </div>
+    </footer>
 </body>
 
 </html>

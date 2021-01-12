@@ -77,7 +77,7 @@ $geral = new ControllerGeral();
                             <input type="password" class="form-control" name="senha1" id="senha1" onkeyup="validarSenha()">
                         </div>
                         <div class="form-group">
-                            <label for="">Repita a nova senha</label>
+                            <label for="">Digite novamente a nova senha</label>
                             <input type="password" class="form-control" name="senha2" id="senha2" onkeyup="validarSenha()">
                         </div>
                     </div>
@@ -122,7 +122,7 @@ $geral = new ControllerGeral();
                     ?>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Painel</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-tachometer-alt"></i> Painel</h1>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
@@ -170,7 +170,7 @@ $geral = new ControllerGeral();
                                 <div class="card-body card_main">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Próximos aniversários</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -220,7 +220,7 @@ $geral = new ControllerGeral();
                                         <div class="progress mb-4">
                                             <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h4 class="small font-weight-bold">Emendas orçamentarias - <a href="../emendasOrcamentarias/listar"><?php echo $eme["numDoc"] ?></a> - <?php echo $geral->limita_caracteres($eme["titulo"], 40) ?><span id="status" class="float-right"><?php echo $eme["status"] ?></span></h4>
+                                        <h4 class="small font-weight-bold">Emendas Orçamentárias - <a href="../emendasOrcamentarias/listar"><?php echo $eme["numDoc"] ?></a> - <?php echo $geral->limita_caracteres($eme["titulo"], 40) ?><span id="status" class="float-right"><?php echo $eme["status"] ?></span></h4>
                                         <div class="progress mb-4">
                                             <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
@@ -255,7 +255,7 @@ $geral = new ControllerGeral();
                                             <thead>
                                                 <tr>
                                                     <th>Resumo</th>
-                                                    <th>Horario</th>
+                                                    <th>Horário</th>
 
                                                 </tr>
                                             </thead>

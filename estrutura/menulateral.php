@@ -1,8 +1,7 @@
 <ul class="navbar-nav bg-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
-
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view/main">
-        <img style="width: 100%" src="/img/Logo-GestorDeGabinete.png" />
+        <img style="width: 100%" src="/img/Logo-GestorDeGabinete-101220.png" />
     </a>
 
     <!-- Divider -->
@@ -32,17 +31,17 @@
         <div id="collapsePessoas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu pessoas</h6>
-                <a class="collapse-item" href="/view/pessoas/cadastrar">Cadastrar pessoa</a>
-                <a class="collapse-item" href="/view/pessoas/listar">Listar pessoas</a>
-                <a class="collapse-item" href="/view/pessoas/visitas">Cadastrar visitas</a>
-                <a class="collapse-item" href="/view/pessoas/visitalistar">Listar visitas</a>
+                <a class="collapse-item" href="/view/pessoas/cadastrar">Cadastrar Pessoa</a>
+                <a class="collapse-item" href="/view/pessoas/listar">Listar Pessoas</a>
+                <a class="collapse-item" href="/view/pessoas/visitas">Cadastrar Visita</a>
+                <a class="collapse-item" href="/view/pessoas/visitalistar">Listar Visitas</a>
             </div>
         </div>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmendas" aria-expanded="true" aria-controls="collapsePessoas">
-            <i class="fas fa-user-friends"></i>
-            <span>Emendas orçamentarias</span>
+            <i class="fas fa-map-signs"></i>
+            <span>Emendas Orçamentarias</span>
         </a>
         <div id="collapseEmendas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
